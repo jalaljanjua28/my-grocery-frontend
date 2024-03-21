@@ -47,6 +47,7 @@
 
 <script>
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+
 export default {
   props: {
     items: {

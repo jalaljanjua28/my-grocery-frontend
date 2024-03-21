@@ -85,9 +85,9 @@ body {
   margin-bottom: 50px;
 }
 .el-input__inner {
-  background-color: grey;
+  background-color: dimgrey;
   box-sizing: border-box;
-  color: #606266;
+  color: white;
   display: inline-block;
   height: 41px;
   line-height: -5px;
@@ -329,52 +329,7 @@ strong {
   color: #2196f3;
   font-weight: bold;
 }
-.offer-item {
-  display: flex;
-  flex-direction: column;
-  background: #add8e6de;
-  border-radius: 8px;
-  border: inset;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 10px;
-}
-.offer-item-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-.offer-item-content {
-  padding: 16px;
-}
-.offer-item-title {
-  color: #475669;
-  font-size: 16px;
-  opacity: 0.75;
-  margin: 0;
-}
-.offer-item-description {
-  margin: 8px 0;
-}
-.offer-item-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.offer-item-price {
-  color: #475669;
-  font-size: 14px;
-}
-.offer-item-offer {
-  color: red;
-  font-size: 12px;
-}
-.order-page {
-  height: 100%;
-}
-.order-table {
-  margin-top: 20px;
-}
+
 .add-item-title {
   text-align: center;
   font-size: 24px;
@@ -383,7 +338,6 @@ strong {
 .el-form-item {
   margin-bottom: 15px;
 }
-
 .add-item-container {
   width: 100%;
   margin: 0 auto;
@@ -641,19 +595,7 @@ strong {
   strong {
     font-size: 10px;
   }
-  /* h4 {
-    font-weight: bolder;
-    font-size: 10px;
-    font: bolder;
-    display: flex;
-    justify-content: center;
-    color: black;
-  } */
-  /* h3 {
-    font-size: 10px;
-    font: bolder;
-    color: black;
-  } */
+
   .el-icon-goods {
     font-size: xx-large !important;
     background: none !important;
@@ -742,9 +684,9 @@ strong {
   .el-col-8 {
     width: 100%;
   }
-  .offer-item {
+  /* .offer-item {
     margin: 0;
-  }
+  } */
   .logo-text {
     display: none;
   }
