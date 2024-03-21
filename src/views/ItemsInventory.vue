@@ -149,7 +149,7 @@
           plain
           >Add Item</el-button
         >
-        <el-dialog :visible.sync="dialogVisible" title="Add Item" width="60%">
+        <el-dialog :visible.sync="dialogVisible" title="Add Item" width="90%">
           <add-items @item-added="closeDialog" />
         </el-dialog>
       </div>
@@ -166,6 +166,8 @@ import DeleteAllMasterNonExpired from "../components/Data-resources/DeleteItems/
 import DeleteAllShopping from "../components/Data-resources/DeleteItems/DeleteAllShopping.vue";
 import DeleteAllMasterExpired from "../components/Data-resources/DeleteItems/DeleteAllMasterExpired.vue";
 import ShoppingList from "../components/Data-resources/ProductList/ShoppingList.vue";
+
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
 
 export default {
   components: {
@@ -220,16 +222,13 @@ export default {
       this.dialogVisible = false;
     },
     master_expired() {
-      fetch(
-        "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/get-master-expired",
-        {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(baseUrl + "/api/get-master-expired", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -291,16 +290,13 @@ export default {
         });
     },
     shopping_list() {
-      fetch(
-        "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/get-shopping-list",
-        {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(baseUrl + "/api/get-shopping-list", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -366,16 +362,13 @@ export default {
     },
 
     master_nonexpired() {
-      fetch(
-        "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/get-master-nonexpired",
-        {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(baseUrl + "/api/get-master-nonexpired", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => {
           if (response.ok) {
             return response.json();

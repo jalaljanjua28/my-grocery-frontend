@@ -15,7 +15,6 @@
                 slot="prepend"
                 placeholder="Choose Food Waste Reduction Suggestions"
                 v-model="selectedValue"
-                class="select"
               >
                 <el-option
                   v-for="option in foodReductionOptions"
@@ -218,7 +217,6 @@
               @change="gptFoodWaste()"
             >
               <el-select
-                class="select"
                 slot="prepend"
                 placeholder="Choose Mood Changer Suggestions"
                 v-model="selectedValue"
@@ -270,6 +268,8 @@
 </template>
 
 <script>
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+
 export default {
   data() {
     return {
@@ -343,7 +343,14 @@ export default {
     async jsonEthicalSuggestions() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/ethical-eating-suggestion-using-json"
+          baseUrl + "/api/ethical-eating-suggestion-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -366,20 +373,17 @@ export default {
         this.loading = true;
 
         // Make the fetch request to generate ethical suggestions
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/ethical-eating-suggestion-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/ethical-eating-suggestion-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
 
         // Fetch the generated suggestions
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/ethical-eating-suggestion-using-json"
+          baseUrl + "/api/ethical-eating-suggestion-using-json"
         );
         const data = await response.json();
         this.ethicalEatingSuggestions = data.ethical_eating_list;
@@ -397,7 +401,14 @@ export default {
     async jsonFunFacts() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/get-fun-facts-using-json"
+          baseUrl + "/api/get-fun-facts-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -415,19 +426,14 @@ export default {
       try {
         // Set loading to true to display the loading indicator
         this.loading = true;
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/get-fun-facts-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
-        const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/get-fun-facts-using-gpt"
-        );
+        await fetch(baseUrl + "/api/get-fun-facts-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+        const response = await fetch(baseUrl + "/api/get-fun-facts-using-gpt");
         const data = await response.json();
         this.funFacts = data.Fun_Facts;
         this.loading = false;
@@ -439,9 +445,13 @@ export default {
     },
     async jsonCookingTips() {
       try {
-        const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/cooking-tips-using-json"
-        );
+        const response = await fetch(baseUrl + "/api/cooking-tips-using-json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -469,19 +479,14 @@ export default {
       try {
         // Set loading to true to display the loading indicator
         this.loading = true;
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/cooking-tips-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
-        const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/cooking-tips-using-gpt"
-        );
+        await fetch(baseUrl + "/api/cooking-tips-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+        const response = await fetch(baseUrl + "/api/cooking-tips-using-gpt");
         const data = await response.json();
         this.cookingTips = data.Cooking_Tips;
         this.loading = false;
@@ -495,7 +500,14 @@ export default {
     async jsonFoodWaste() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/food-waste-reduction-using-json"
+          baseUrl + "/api/food-waste-reduction-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -521,18 +533,15 @@ export default {
         const user_input =
           this.selectedOption ||
           "Suggest a recipe that helps reduce food waste";
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/food-waste-reduction-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user_input }),
-          }
-        );
+        await fetch(baseUrl + "/api/food-waste-reduction-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_input }),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/food-waste-reduction-using-json"
+          baseUrl + "/api/food-waste-reduction-using-json"
         );
         const data = await response.json();
         this.foodWasteReductionSuggestions =
@@ -551,7 +560,14 @@ export default {
     async jsonCurrentTrends() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/current-trends-using-json"
+          baseUrl + "/api/current-trends-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
         );
 
         if (!response.ok) {
@@ -580,19 +596,14 @@ export default {
       try {
         // Set loading to true to display the loading indicator
         this.loading = true;
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/current-trends-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
-        const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/current-trends-using-gpt"
-        );
+        await fetch(baseUrl + "/api/current-trends-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+        const response = await fetch(baseUrl + "/api/current-trends-using-gpt");
         const data = await response.json();
         this.currentTrends = data.Current_Trends;
         this.loading = false;
@@ -605,7 +616,14 @@ export default {
       try {
         // Make the API request
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/food-handling-advice-using-json"
+          baseUrl + "/api/food-handling-advice-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
         );
 
         // Check if the response is successful (status code 200)
@@ -635,18 +653,15 @@ export default {
       try {
         // Set loading to true to display the loading indicator
         this.loading = true;
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/food-handling-advice-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/food-handling-advice-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/food-handling-advice-using-gpt"
+          baseUrl + "/api/food-handling-advice-using-gpt"
         );
         const data = await response.json();
         this.handlingadvice = data.food_handling_advice;
@@ -659,9 +674,13 @@ export default {
     async jsonMoodChanger() {
       try {
         // Make the API request
-        const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/mood-changer-using-json"
-        );
+        const response = await fetch(baseUrl + "/api/mood-changer-using-json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
 
         // Check if the response is successful (status code 200)
         if (!response.ok) {
@@ -690,20 +709,15 @@ export default {
 
         const user_mood =
           this.selectedOption || "Sad, I'm feeling tired, I'm going to bed";
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/mood-changer-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user_mood }),
-          }
-        );
+        await fetch(baseUrl + "/api/mood-changer-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_mood }),
+        });
         // Send a GET request to retrieve unique recipes data
-        const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/mood-changer-using-json"
-        );
+        const response = await fetch(baseUrl + "/api/mood-changer-using-json");
         const data = await response.json();
         console.log(data);
         this.moodChangerSuggestions = data.Mood_Changer;

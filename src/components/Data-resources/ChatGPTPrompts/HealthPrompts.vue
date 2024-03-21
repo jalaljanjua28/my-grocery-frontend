@@ -265,6 +265,8 @@
 </template>
 
 <script>
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+
 export default {
   data() {
     return {
@@ -280,7 +282,6 @@ export default {
     };
   },
   mounted() {
-    // Call the API endpoints to get data
     this.getAllergyInformation();
     this.getHealthierAlternatives();
     this.getHealthyEatingAdvice();
@@ -293,7 +294,7 @@ export default {
     async getAllergyInformation() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/allergy-information-using-json",
+          baseUrl + "/api/allergy-information-using-json",
           {
             method: "GET",
             headers: {
@@ -319,18 +320,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/allergy-information-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/allergy-information-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/allergy-information-using-gpt",
+          baseUrl + "/api/allergy-information-using-gpt",
           {
             method: "GET",
             headers: {
@@ -355,7 +353,13 @@ export default {
     async getHealthierAlternatives() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthier-alternatives-using-json"
+          baseUrl + "/api/healthier-alternatives-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         if (!response.ok) {
@@ -386,18 +390,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthier-alternatives-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/healthier-alternatives-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthier-alternatives-using-gpt",
+          baseUrl + "/api/healthier-alternatives-using-gpt",
           {
             method: "GET",
             headers: {
@@ -427,7 +428,13 @@ export default {
     async getHealthyEatingAdvice() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthy-eating-advice-using-json"
+          baseUrl + "/api/healthy-eating-advice-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         if (!response.ok) {
@@ -457,18 +464,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthy-eating-advice-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/healthy-eating-advice-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthy-eating-advice-using-gpt",
+          baseUrl + "/api/healthy-eating-advice-using-gpt",
           {
             method: "GET",
             headers: {
@@ -501,7 +505,13 @@ export default {
     async getHealthyItemsUsage() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthy-items-usage-using-json"
+          baseUrl + "/api/healthy-items-usage-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         if (!response.ok) {
@@ -531,18 +541,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthy-items-usage-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/healthy-items-usage-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/healthy-items-usage-using-gpt",
+          baseUrl + "/api/healthy-items-usage-using-gpt",
           {
             method: "GET",
             headers: {
@@ -572,7 +579,13 @@ export default {
     async getHealthIncompatabilties() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/health_incompatibilities_using_json"
+          baseUrl + "/api/health_incompatibilities_using_json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         if (!response.ok) {
@@ -605,18 +618,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/health_incompatibilities_using_gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/health_incompatibilities_using_gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/health_incompatibilities_using_gpt",
+          baseUrl + "/api/health_incompatibilities_using_gpt",
           {
             method: "GET",
             headers: {
@@ -649,7 +659,13 @@ export default {
     async getNutritionalAnalysis() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/nutritional-analysis-using-json"
+          baseUrl + "/api/nutritional-analysis-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         if (!response.ok) {
@@ -682,18 +698,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/nutritional-analysis-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/nutritional-analysis-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/nutritional-analysis-using-gpt",
+          baseUrl + "/api/nutritional-analysis-using-gpt",
           {
             method: "GET",
             headers: {
@@ -723,7 +736,13 @@ export default {
     async getNutritionalValue() {
       try {
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/nutritional-value-using-json"
+          baseUrl + "/api/nutritional-value-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
 
         if (!response.ok) {
@@ -753,18 +772,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/nutritional-value-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/nutritional-value-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         const response = await fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/nutritional-value-using-gpt",
+          baseUrl + "/api/nutritional-value-using-gpt",
           {
             method: "GET",
             headers: {

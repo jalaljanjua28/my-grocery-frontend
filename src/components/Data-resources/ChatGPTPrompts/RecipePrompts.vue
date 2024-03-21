@@ -202,7 +202,10 @@
     </el-card>
   </div>
 </template>
+
 <script>
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+
 export default {
   data() {
     return {
@@ -256,7 +259,14 @@ export default {
     async getFusionSuggestions() {
       try {
         const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/fusion-cuisine-suggestions-using-json"
+          baseUrl + "/api/fusion-cuisine-suggestions-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
         );
         const data = await response.json();
         this.fusionSuggestions = data.Fusion_Cuisine_Suggestions;
@@ -272,20 +282,17 @@ export default {
         const user_input = this.selectedOption1 || "Italian and Japanese";
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/fusion-cuisine-suggestion-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user_input }),
-          }
-        );
+        await fetch(baseUrl + "/api/fusion-cuisine-suggestion-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_input }),
+        });
 
         // Retrieve data from the Fusion_Cuisine_Suggestions.json file
         const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/fusion-cuisine-suggestions-using-json"
+          baseUrl + "/api/fusion-cuisine-suggestions-using-json"
         );
         const data = await response.json();
         this.fusionSuggestions = data.Fusion_Cuisine_Suggestions;
@@ -298,7 +305,7 @@ export default {
       try {
         // Retrieve data from the Fusion_Cuisine_Suggestions.json file
         const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/user-defined-dish-using-json",
+          baseUrl + "/api/user-defined-dish-using-json",
           {
             method: "GET",
             headers: {
@@ -320,18 +327,15 @@ export default {
         const user_dish = this.selectedOption2 || "Sweet dish";
 
         // // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/user-defined-dish-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user_dish }),
-          }
-        );
+        await fetch(baseUrl + "/api/user-defined-dish-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_dish }),
+        });
         const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/user-defined-dish-using-json"
+          baseUrl + "/api/user-defined-dish-using-json"
         );
         const data = await response.json();
         this.definedDishes = data.User_Defined_Dish;
@@ -345,7 +349,13 @@ export default {
       try {
         // Send a GET request to retrieve unique recipes data
         const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/unique-recipes-using-json"
+          baseUrl + "/api/unique-recipes-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
         const data = await response.json();
         console.log(data);
@@ -363,19 +373,16 @@ export default {
         const unique_recipe = this.selectedOption3 || "banana rice apple";
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/unique-recipes-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ unique_recipe }),
-          }
-        );
+        await fetch(baseUrl + "/api/unique-recipes-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ unique_recipe }),
+        });
         // Send a GET request to retrieve unique recipes data
         const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/unique-recipes-using-json"
+          baseUrl + "/api/unique-recipes-using-json"
         );
         const data = await response.json();
         console.log(data);
@@ -392,7 +399,13 @@ export default {
       try {
         // Send a GET request to retrieve diet schedule data
         const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/diet-schedule-using-json"
+          baseUrl + "/api/diet-schedule-using-json",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
         const data = await response.json();
         console.log(data);
@@ -408,20 +421,15 @@ export default {
         this.loading = true;
 
         // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/diet-schedule-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
+        await fetch(baseUrl + "/api/diet-schedule-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
         // Send a GET request to retrieve diet schedule data
-        const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/diet-schedule-using-gpt"
-        );
+        const response = await fetch(baseUrl + "/api/diet-schedule-using-gpt");
         const data = await response.json();
         console.log(data);
         this.dietSchedule = data.Diet_Schedule;
@@ -436,9 +444,12 @@ export default {
     async getGeneratedRecipes() {
       try {
         // Send a GET request to retrieve generated recipes data
-        const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/recipes-using-json"
-        );
+        const response = await fetch(baseUrl + "/api/recipes-using-json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         console.log(data);
         this.generatedRecipes = data.recipes;
@@ -451,19 +462,14 @@ export default {
     async Generated_Recipes() {
       try {
         this.loading = true;
-        await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/recipes-using-gpt",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        );
-        const response = await fetch(
-          " https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/recipes-using-gpt"
-        );
+        await fetch(baseUrl + "/api/recipes-using-gpt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+        const response = await fetch(baseUrl + "/api/recipes-using-gpt");
         const data = await response.json();
         console.log(data);
         this.generatedRecipes = data.Generated_Recipes;

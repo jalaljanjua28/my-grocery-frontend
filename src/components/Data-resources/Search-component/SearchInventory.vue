@@ -1,27 +1,29 @@
 <template>
   <div style="">
-    <el-input
-      placeholder="Please input"
-      v-model="searchQuery"
-      class="input-with-select"
-      @change="searchItems"
-    >
+    <div style="display: flex; align-items: center">
       <el-select v-model="select" slot="prepend" placeholder="Select">
         <el-option label="Not Expired" value="1"></el-option>
         <el-option label="Expired" value="2"></el-option>
         <el-option label="Shopping List" value="3"></el-option>
       </el-select>
+      <el-input
+        placeholder="Please input"
+        v-model="searchQuery"
+        class="input-with-select"
+        @change="searchItems"
+      >
+      </el-input>
       <el-button
+        style=""
         slot="append"
         icon="el-icon-search"
         @click="dialogTableVisible = true"
       ></el-button>
-    </el-input>
-
+    </div>
     <el-dialog
       title="Search Inventory"
       :visible.sync="dialogTableVisible"
-      width="65%"
+      width="90%"
     >
       <div v-if="dialogTableVisible">
         <el-table :data="filteredItems">
@@ -90,6 +92,8 @@
 </template>
 
 <script>
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+
 export default {
   data() {
     return {
@@ -120,16 +124,13 @@ export default {
   },
   methods: {
     addItem(itemToAdd) {
-      fetch(
-        "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/addItem/master-expired",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ itemName: itemToAdd.name }),
-        }
-      )
+      fetch(baseUrl + "/api/addItem/master-expired", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ itemName: itemToAdd.name }),
+      })
         .then((response) => response.json())
         .then((data) => {
           this.$message({
@@ -149,16 +150,13 @@ export default {
     },
     deleteItem(itemToDelete) {
       // Send a request to your backend to delete the item by its name
-      fetch(
-        "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/removeItem/master-non-expired",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ itemName: itemToDelete.name }),
-        }
-      )
+      fetch(baseUrl + "/api/removeItem/master-non-expired", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ itemName: itemToDelete.name }),
+      })
         .then((response) => {
           if (response.status === 200) {
             this.$message({
@@ -253,7 +251,22 @@ export default {
 </script>
 
 <style scoped>
-.el-input-group {
-  width: 100% !important;
+.el-button {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: black;
+  text-align: center;
+  box-sizing: border-box;
+  outline: 0;
+  margin: 0;
+  transition: 0.1s;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: x-large;
 }
 </style>

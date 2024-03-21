@@ -4,7 +4,7 @@
       <el-col :span="12">
         <el-dropdown>
           <span class="el-dropdown-link">
-            Menu <i class="el-icon-menu"></i>
+            <i class="el-icon-menu"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <router-link to="/account-page" style="text-decoration: none"
