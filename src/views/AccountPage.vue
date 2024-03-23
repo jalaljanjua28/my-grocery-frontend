@@ -3,7 +3,7 @@
     <router-link to="/" style="text-decoration: none">
       <el-page-header content="Account Page"> </el-page-header>
     </router-link>
-    <el-card>
+    <el-main class="main-content">
       <el-container class="account-page">
         <el-header style="height: 0px">
           <h1 class="header-title">My Account</h1>
@@ -27,7 +27,7 @@
           </el-form>
         </el-main>
       </el-container>
-    </el-card>
+    </el-main>
   </div>
 </template>
 

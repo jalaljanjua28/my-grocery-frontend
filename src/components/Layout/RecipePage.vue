@@ -3,7 +3,7 @@
     <router-link to="/" style="text-decoration: none">
       <el-page-header content="Recipes"> </el-page-header>
     </router-link>
-    <el-card>
+    <el-main class="main-content">
       <div class="nav-buttons">
         <router-link to="items-inventory" class="router_link">
           <el-button type="primary" size="x-small" plain>Items</el-button>
@@ -15,7 +15,7 @@
         </router-link>
       </div>
       <recipe-prompt></recipe-prompt>
-    </el-card>
+    </el-main>
   </div>
 </template>
 <script>

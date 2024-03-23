@@ -3,7 +3,7 @@
     <router-link to="/" style="text-decoration: none">
       <el-page-header content="Shopping Cart"> </el-page-header>
     </router-link>
-    <el-card>
+    <el-main class="main-content">
       <el-container class="account-page">
         <el-header>
           <h1 class="header-title">Enter Items</h1>
@@ -67,7 +67,7 @@
           </el-col>
         </el-row>
       </el-container>
-    </el-card>
+    </el-main>
   </div>
 </template>
 

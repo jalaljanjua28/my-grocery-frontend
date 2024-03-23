@@ -3,7 +3,7 @@
     <router-link to="/" style="text-decoration: none">
       <el-page-header content="FAQs"> </el-page-header>
     </router-link>
-    <el-card style="margin-top: 20px">
+    <el-main class="main-content" style="margin-top: 20px">
       <el-container>
         <el-header>FAQs</el-header>
         <el-main>
@@ -19,7 +19,7 @@
           </el-collapse>
         </el-main>
       </el-container>
-    </el-card>
+    </el-main>
   </div>
 </template>
 

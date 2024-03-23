@@ -4,7 +4,7 @@
       <el-page-header content="About us"> </el-page-header>
     </router-link>
     <el-container class="profile-page">
-      <el-main>
+      <el-main class="main-content">
         <el-row :gutter="20" style="margin-top: 30px">
           <el-col :span="12">
             <el-card class="profile-card">

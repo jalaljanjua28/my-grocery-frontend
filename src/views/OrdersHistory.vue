@@ -3,7 +3,7 @@
     <router-link to="/" style="text-decoration: none">
       <el-page-header content="Order History"> </el-page-header>
     </router-link>
-    <el-card>
+    <el-main class="main-content">
       <el-container class="order-page">
         <el-header>
           <h1 class="header-title">My Orders</h1>
@@ -34,7 +34,7 @@
           </el-table>
         </el-main>
       </el-container>
-    </el-card>
+    </el-main>
   </div>
 </template>
 
@@ -68,4 +68,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-card__body,
+.el-main {
+  padding: 0px;
+}
+</style>

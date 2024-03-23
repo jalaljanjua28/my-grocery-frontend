@@ -4,14 +4,7 @@
       <el-page-header content="Barcode Scan"> </el-page-header>
     </router-link>
 
-    <el-card
-      style="
-        margin-top: 20px;
-        font-family: 'Inter', sans-serif;
-        border-radius: 20px;
-        background-color: #ffffffc9;
-      "
-    >
+    <el-main class="main-content">
       <el-upload
         class="upload-demo"
         action="https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/image-process-upload-create"
@@ -39,7 +32,7 @@
       <div v-if="completionStatus" class="status">
         Image Upload/Process Successful
       </div>
-    </el-card>
+    </el-main>
   </div>
 </template>
 

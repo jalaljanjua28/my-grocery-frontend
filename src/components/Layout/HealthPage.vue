@@ -4,7 +4,7 @@
       <el-page-header content="Health Page"> </el-page-header>
     </router-link>
 
-    <el-card>
+    <el-main class="main-content">
       <div class="nav-buttons">
         <router-link to="items-inventory" class="router_link">
           <el-button type="primary" size="x-small" plain>Items</el-button>
@@ -20,7 +20,7 @@
         </router-link>
       </div>
       <health-prompt></health-prompt>
-    </el-card>
+    </el-main>
   </div>
 </template>
 

@@ -3,7 +3,7 @@
     <router-link to="/" style="text-decoration: none">
       <el-page-header content="Items Inventory"> </el-page-header>
     </router-link>
-    <el-card>
+    <el-main class="main-content">
       <div class="nav-buttons">
         <router-link to="/recipes-page" class="router_link">
           <el-button type="warning" size="x-small" plain>Recipes</el-button>
@@ -14,146 +14,158 @@
           >
         </router-link>
       </div>
-      <search-inventory
-        :ExpiredFood="Food_expired"
-        :ExpiredNonFood="NonFood_expired"
-        :NonExpiredFood="Food_nonexpired"
-        :NonExpiredNonFood="NonFood_nonexpired"
-        :itemsFood="Food"
-        :itemsNonFood="NonFood"
-      />
-      <el-tabs
-        :tab-position="tabPosition"
-        style="height: auto"
-        v-model="outerActiveTab"
-        @tab-click="handleOuterTabClick"
-      >
-        <!-- Non - Expired Tab -->
-        <el-tab-pane name="a" label="Non Expired"
-          ><span slot="label" class="el-tabs__label" style="font-size: x-large"
-            ><i class="el-icon-success" style=""></i> Non Expired</span
-          >
-          <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
-            <el-tab-pane name="1" label="Food"
-              ><span
-                slot="label"
-                class="el-tabs__sublabel"
-                style="font-size: large"
-                ><i class="el-icon-food" style=""></i> Food</span
-              >
-              <div>
-                <non-expired-list
-                  :items="Food_nonexpired"
-                  @item-deleted="handleItemDeleted()"
-                ></non-expired-list>
-              </div>
-            </el-tab-pane>
-            <el-tab-pane name="2" label="Not Food">
-              <span
-                slot="label"
-                class="el-tabs__sublabel"
-                style="font-size: large"
-                ><i class="el-icon-bicycle" style=""></i> Non Food</span
-              >
-              <div>
-                <non-expired-list
-                  :items="NonFood_nonexpired"
-                  @item-deleted="handleItemDeleted()"
-                ></non-expired-list>
-              </div>
-            </el-tab-pane>
-          </el-tabs>
-          <delete-all-master-non-expired></delete-all-master-non-expired>
-        </el-tab-pane>
-        <!-- Expired Tab -->
-        <el-tab-pane name="b" label="Expired"
-          ><span slot="label" class="el-tabs__label" style="font-size: x-large"
-            ><i class="el-icon-error" style=""></i> Expired</span
-          >
-          <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
-            <el-tab-pane name="3" label="Food"
-              ><span
-                slot="label"
-                class="el-tabs__sublabel"
-                style="font-size: large"
-                ><i class="el-icon-food" style=""></i> Food</span
-              >
-              <div>
-                <expired-list
-                  :items="Food_expired"
-                  @item-deleted="handleItemDeleted"
-                ></expired-list>
-              </div>
-            </el-tab-pane>
-            <el-tab-pane name="4" label="Not Food">
-              <span
-                slot="label"
-                class="el-tabs__sublabel"
-                style="font-size: large"
-                ><i class="el-icon-bicycle" style=""></i> Non Food</span
-              >
-              <div>
-                <expired-list
-                  :items="NonFood_expired"
-                  @item-deleted="handleItemDeleted()"
-                ></expired-list>
-              </div>
-            </el-tab-pane>
-          </el-tabs>
-          <delete-all-master-expired></delete-all-master-expired>
-        </el-tab-pane>
-        <!-- Shopping List Tab -->
-        <el-tab-pane name="c" label="Shopping"
-          ><span slot="label" class="el-tabs__label" style="font-size: x-large"
-            ><i class="el-icon-s-claim" style=""></i> Shopping List</span
-          >
-          <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
-            <el-tab-pane name="5" label="Food"
-              ><span
-                slot="label"
-                class="el-tabs__sublabel"
-                style="font-size: large"
-                ><i class="el-icon-food" style=""></i> Food</span
-              >
-              <div>
-                <shopping-list
-                  :items="Food"
-                  @item-deleted="handleItemDeleted()"
-                ></shopping-list>
-              </div>
-            </el-tab-pane>
-            <el-tab-pane name="6" label="Not Food">
-              <span
-                slot="label"
-                class="el-tabs__sublabel"
-                style="font-size: large"
-                ><i class="el-icon-bicycle" style=""></i> Non Food</span
-              >
-              <div>
-                <shopping-list
-                  :items="NonFood"
-                  @item-deleted="handleItemDeleted()"
-                ></shopping-list>
-              </div>
-            </el-tab-pane>
-          </el-tabs>
-          <delete-all-shopping></delete-all-shopping>
-        </el-tab-pane>
-      </el-tabs>
-      <div>
-        <el-button
-          type="primary"
-          icon="el-icon-plus"
-          size="small"
-          @click="openDialog"
-          plain
-          >Add Item</el-button
+      <el-card>
+        <search-inventory
+          :ExpiredFood="Food_expired"
+          :ExpiredNonFood="NonFood_expired"
+          :NonExpiredFood="Food_nonexpired"
+          :NonExpiredNonFood="NonFood_nonexpired"
+          :itemsFood="Food"
+          :itemsNonFood="NonFood"
+        />
+        <el-tabs
+          :tab-position="tabPosition"
+          style="height: auto"
+          v-model="outerActiveTab"
+          @tab-click="handleOuterTabClick"
         >
-        <el-dialog :visible.sync="dialogVisible" title="Add Item" width="90%">
-          <add-items @item-added="closeDialog" />
-        </el-dialog>
-      </div>
-    </el-card>
+          <!-- Non - Expired Tab -->
+          <el-tab-pane name="a" label="Non Expired"
+            ><span
+              slot="label"
+              class="el-tabs__label"
+              style="font-size: x-large"
+              ><i class="el-icon-success" style=""></i> Non Expired</span
+            >
+            <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
+              <el-tab-pane name="1" label="Food"
+                ><span
+                  slot="label"
+                  class="el-tabs__sublabel"
+                  style="font-size: large"
+                  ><i class="el-icon-food" style=""></i> Food</span
+                >
+                <div>
+                  <non-expired-list
+                    :items="Food_nonexpired"
+                    @item-deleted="handleItemDeleted()"
+                  ></non-expired-list>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane name="2" label="Not Food">
+                <span
+                  slot="label"
+                  class="el-tabs__sublabel"
+                  style="font-size: large"
+                  ><i class="el-icon-bicycle" style=""></i> Non Food</span
+                >
+                <div>
+                  <non-expired-list
+                    :items="NonFood_nonexpired"
+                    @item-deleted="handleItemDeleted()"
+                  ></non-expired-list>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+            <delete-all-master-non-expired></delete-all-master-non-expired>
+          </el-tab-pane>
+          <!-- Expired Tab -->
+          <el-tab-pane name="b" label="Expired"
+            ><span
+              slot="label"
+              class="el-tabs__label"
+              style="font-size: x-large"
+              ><i class="el-icon-error" style=""></i> Expired</span
+            >
+            <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
+              <el-tab-pane name="3" label="Food"
+                ><span
+                  slot="label"
+                  class="el-tabs__sublabel"
+                  style="font-size: large"
+                  ><i class="el-icon-food" style=""></i> Food</span
+                >
+                <div>
+                  <expired-list
+                    :items="Food_expired"
+                    @item-deleted="handleItemDeleted"
+                  ></expired-list>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane name="4" label="Not Food">
+                <span
+                  slot="label"
+                  class="el-tabs__sublabel"
+                  style="font-size: large"
+                  ><i class="el-icon-bicycle" style=""></i> Non Food</span
+                >
+                <div>
+                  <expired-list
+                    :items="NonFood_expired"
+                    @item-deleted="handleItemDeleted()"
+                  ></expired-list>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+            <delete-all-master-expired></delete-all-master-expired>
+          </el-tab-pane>
+          <!-- Shopping List Tab -->
+          <el-tab-pane name="c" label="Shopping"
+            ><span
+              slot="label"
+              class="el-tabs__label"
+              style="font-size: x-large"
+              ><i class="el-icon-s-claim" style=""></i> Shopping List</span
+            >
+            <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
+              <el-tab-pane name="5" label="Food"
+                ><span
+                  slot="label"
+                  class="el-tabs__sublabel"
+                  style="font-size: large"
+                  ><i class="el-icon-food" style=""></i> Food</span
+                >
+                <div>
+                  <shopping-list
+                    :items="Food"
+                    @item-deleted="handleItemDeleted()"
+                  ></shopping-list>
+                </div>
+              </el-tab-pane>
+              <el-tab-pane name="6" label="Not Food">
+                <span
+                  slot="label"
+                  class="el-tabs__sublabel"
+                  style="font-size: large"
+                  ><i class="el-icon-bicycle" style=""></i> Non Food</span
+                >
+                <div>
+                  <shopping-list
+                    :items="NonFood"
+                    @item-deleted="handleItemDeleted()"
+                  ></shopping-list>
+                </div>
+              </el-tab-pane>
+            </el-tabs>
+            <delete-all-shopping></delete-all-shopping>
+          </el-tab-pane>
+        </el-tabs>
+        <div>
+          <el-button
+            type="primary"
+            icon="el-icon-plus"
+            size="small"
+            @click="openDialog"
+            plain
+            >Add Item</el-button
+          >
+          <el-dialog :visible.sync="dialogVisible" title="Add Item" width="90%">
+            <add-items @item-added="closeDialog" />
+          </el-dialog>
+          <frequency-list></frequency-list>
+        </div>
+      </el-card>
+    </el-main>
   </div>
 </template>
 
@@ -166,6 +178,7 @@ import DeleteAllMasterNonExpired from "../components/Data-resources/DeleteItems/
 import DeleteAllShopping from "../components/Data-resources/DeleteItems/DeleteAllShopping.vue";
 import DeleteAllMasterExpired from "../components/Data-resources/DeleteItems/DeleteAllMasterExpired.vue";
 import ShoppingList from "../components/Data-resources/ProductList/ShoppingList.vue";
+import FrequencyList from "../components/Data-resources/ProductList/FrequencyList.vue";
 
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
 
@@ -179,6 +192,7 @@ export default {
     DeleteAllMasterNonExpired,
     DeleteAllShopping,
     DeleteAllMasterExpired,
+    FrequencyList,
   },
   data() {
     return {

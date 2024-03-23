@@ -265,8 +265,17 @@ export default {
   margin: 0;
   transition: 0.1s;
   font-weight: 500;
-  padding: 10px 20px;
+  padding: 10px 6px;
   border-radius: 4px;
-  font-size: x-large;
+  font-size: xx-large;
 }
+/* .el-select {
+  display: inline-block;
+  position: relative;
+  margin-right: 0px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+} */
 </style>
