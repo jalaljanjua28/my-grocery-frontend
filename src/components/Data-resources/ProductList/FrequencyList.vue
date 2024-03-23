@@ -1,39 +1,3 @@
-<!-- <template>
-  <div>
-    <el-select v-model="interval" placeholder="Select interval">
-      <el-option label="Biweekly" value="biweekly"></el-option>
-      <el-option label="Monthly" value="monthly"></el-option>
-      <el-option label="Today" value="today"></el-option>
-    </el-select>
-    <el-button type="primary" @click="fetchItemFrequency"
-      >Fetch Item Frequency</el-button
-    >
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      interval: "biweekly",
-    };
-  },
-  methods: {
-    async fetchItemFrequency() {
-      try {
-        const response = await fetch(
-          `/api/item-frequency?interval=${this.interval}`
-        );
-        const data = await response.json();
-
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-  },
-};
-</script> -->
 <template>
   <div>
     <el-select v-model="interval" placeholder="Select interval">
