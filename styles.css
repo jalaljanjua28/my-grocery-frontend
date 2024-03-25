@@ -77,14 +77,13 @@ body {
 .el-card {
   border-radius: 0px !important;
   border: 2px solid black;
-  /* background-color: #ffffffc9; */
   overflow: hidden;
   color: #303133;
   transition: 0.3s;
   margin-bottom: 50px;
 }
 .el-input__inner {
-  background-color: dimgrey;
+  background-color: black;
   box-sizing: border-box;
   color: white;
   display: inline-block;
@@ -108,15 +107,6 @@ body {
   width: 1px;
   white-space: nowrap;
 }
-/* .el-select {
-  display: inline-block;
-  position: relative;
-  margin-right: 0px;
-  margin-left: 10px;
-  font-weight: bold;
-  color: black;
-  width: 43%;
-} */
 .el-input {
   font-size: 20px;
 }
@@ -158,18 +148,18 @@ body {
 }
 h4 {
   font-weight: bolder;
-  font-size: 16px;
+  font-size: 14px;
   display: flex;
   justify-content: center;
   color: black;
 }
 
 p {
-  font-size: 15px;
+  font-size: 14px;
   color: black;
 }
 strong {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: bolder;
   color: black;
 }
@@ -187,7 +177,7 @@ strong {
   margin-top: 24px !important;
 }
 .logo-text {
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: bolder;
   color: black;
   width: -moz-max-content;
@@ -377,8 +367,7 @@ strong {
   box-sizing: border-box;
   border-bottom: none;
 }
-
-.el-tabs {
+carousel .el-tabs {
   background-color: transparent !important;
 }
 .el-tabs__label {
@@ -656,25 +645,25 @@ strong {
     font-size: 10px;
   }
 }
+
 @media screen and (min-width: 440px) {
   .footer2 {
     display: none;
   }
 }
 @media screen and (max-width: 600px) {
-  .el-carousel__container {
-    height: 350px !important;
-  }
   .el-col-8 {
     width: 100%;
   }
-
+  .el-carousel__container {
+    height: 320px !important;
+  }
   .logo-text {
     display: none;
   }
   @media screen and (max-width: 350px) {
     .el-carousel__container {
-      height: 400px !important;
+      height: 450px !important;
     }
   }
 }

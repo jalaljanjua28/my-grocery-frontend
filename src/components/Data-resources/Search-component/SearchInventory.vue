@@ -269,13 +269,4 @@ export default {
   border-radius: 4px;
   font-size: xx-large;
 }
-/* .el-select {
-  display: inline-block;
-  position: relative;
-  margin-right: 0px;
-  margin-left: 10px;
-  font-weight: bold;
-  color: black;
-  width: 100%;
-} */
 </style>
