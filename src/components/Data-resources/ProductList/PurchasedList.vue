@@ -6,7 +6,7 @@
           <img
             :src="scope.row.image"
             :alt="scope.row.name"
-            style="width: 120px"
+            style="width: 100%"
           />
         </template>
       </el-table-column>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "http://127.0.0.1:8081";
 
 export default {
   props: {

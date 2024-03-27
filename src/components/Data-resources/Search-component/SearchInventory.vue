@@ -12,18 +12,18 @@
         class="input-with-select"
         @change="searchItems"
       >
+        <el-button
+          style="color: white"
+          slot="append"
+          icon="el-icon-search"
+          @click="dialogTableVisible = true"
+        ></el-button>
       </el-input>
-      <el-button
-        style=""
-        slot="append"
-        icon="el-icon-search"
-        @click="dialogTableVisible = true"
-      ></el-button>
     </div>
     <el-dialog
       title="Search Inventory"
       :visible.sync="dialogTableVisible"
-      width="90%"
+      width="100%"
     >
       <div v-if="dialogTableVisible">
         <el-table :data="filteredItems">
@@ -33,7 +33,7 @@
               <img
                 :src="scope.row.image"
                 :alt="scope.row.name"
-                style="max-width: 100px"
+                style="max-width: 100%"
               />
             </template>
           </el-table-column>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "http://127.0.0.1:8081";
 
 export default {
   data() {
@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     addItem(itemToAdd) {
-      fetch(baseUrl + "/api/addItem/master-expired", {
+      fetch(baseUrl + "/api/addItem/master-nonexpired", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -251,22 +251,8 @@ export default {
 </script>
 
 <style scoped>
-.el-button {
-  display: inline-block;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  color: black;
-  text-align: center;
-  box-sizing: border-box;
-  outline: 0;
-  margin: 0;
-  transition: 0.1s;
-  font-weight: 500;
-  padding: 10px 6px;
-  border-radius: 4px;
-  font-size: xx-large;
+.el-button.is-circle {
+  padding: 2px !important;
+  border-radius: 100% !important;
 }
 </style>
