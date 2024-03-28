@@ -451,6 +451,13 @@ strong {
   max-width: 100% !important;
   font-size: 12px !important;
 }
+.el-select .el-input .el-select__caret {
+  color: white;
+  font-size: 20px;
+  transition: transform 0.3s;
+  transform: rotateZ(180deg);
+  cursor: pointer;
+}
 @media screen and (max-width: 400px) {
   .joke-card {
     font-size: large;

@@ -268,7 +268,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "http://localhost:8081";
 
 export default {
   data() {
