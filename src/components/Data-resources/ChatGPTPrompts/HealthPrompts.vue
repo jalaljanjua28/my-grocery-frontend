@@ -28,7 +28,13 @@
               </div>
               <el-button
                 type="info"
-                @click="getNewAllergyInformation()"
+                @click="
+                  fetchData(
+                    'gpt',
+                    '/api/allergy-information-using-gpt',
+                    'AllergyInformation'
+                  )
+                "
                 :loading="loading"
                 plain
                 >Generate Prompt</el-button
@@ -36,7 +42,6 @@
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Healthier Eating Alternatives Section -->
         <el-collapse-item title="Healthier Eating Alternatives">
           <div>
@@ -66,7 +71,13 @@
                 </div>
                 <el-button
                   type="info"
-                  @click="getNewHealthierAlternatives()"
+                  @click="
+                    fetchData(
+                      'gpt',
+                      '/api/healthier-alternatives-using-gpt',
+                      'alternatives'
+                    )
+                  "
                   :loading="loading"
                   plain
                   >Generate Prompt
@@ -75,7 +86,6 @@
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Healthy Eating Advice Section -->
         <el-collapse-item title="Healthy Eating Advice">
           <div>
@@ -102,7 +112,13 @@
               </div>
               <el-button
                 type="info"
-                @click="getNewHealthyEatingAdvice()"
+                @click="
+                  fetchData(
+                    'gpt',
+                    '/api/healthy-eating-advice-using-gpt',
+                    'eatingAdviceList'
+                  )
+                "
                 :loading="loading"
                 plain
               >
@@ -111,7 +127,52 @@
             </div>
           </div>
         </el-collapse-item>
-
+        <!-- Health Advice Section -->
+        <el-collapse-item title="Health Advice">
+          <div>
+            <div>
+              <div v-if="loading" class="loading-indicator">
+                <el-spinner></el-spinner>
+              </div>
+              <div v-if="healthAdviceList.length === 0" class="health-loading">
+                Loading...
+              </div>
+              <div v-if="healthAdviceList.length > 0 && !loading">
+                <div v-for="(advice, index) in healthAdviceList" :key="index">
+                  <div slot="header" class="clearfix">
+                    <span>Advice {{ index + 1 }}</span>
+                  </div>
+                  <div>
+                    <p><strong>Prompt:</strong> {{ advice.Prompt }}</p>
+                    <p>
+                      <strong>Health Advice:</strong>
+                      {{ advice["Health Advice"] }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div v-if="!healthAdviceList">
+                <el-alert title="No Advice" type="info" show-icon>
+                  No health available.
+                </el-alert>
+              </div>
+              <el-button
+                type="info"
+                @click="
+                  fetchData(
+                    'gpt',
+                    '/api/health-advice-using-gpt',
+                    'healthAdviceList'
+                  )
+                "
+                :loading="loading"
+                plain
+              >
+                Generate Prompt
+              </el-button>
+            </div>
+          </div>
+        </el-collapse-item>
         <!-- Healthy Items Usage Suggestions Section -->
         <el-collapse-item title="Healthy Items Usage">
           <div>
@@ -137,7 +198,13 @@
               </div>
               <el-button
                 type="info"
-                @click="getNewHealthyItemsUsage()"
+                @click="
+                  fetchData(
+                    'gpt',
+                    '/api/healthy-items-usage-using-gpt',
+                    'suggestions'
+                  )
+                "
                 :loading="loading"
                 plain
                 >Generate Prompt</el-button
@@ -145,7 +212,6 @@
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Health Incompatabilities Section -->
         <el-collapse-item title="Health Incompatibilities">
           <div>
@@ -176,7 +242,13 @@
               </div>
               <el-button
                 type="info"
-                @click="getNewHealthIncompatabilties"
+                @click="
+                  fetchData(
+                    'gpt',
+                    '/api/health-incompatabilities-suggestions-using-gpt',
+                    'healthIncompatibilities'
+                  )
+                "
                 :loading="loading"
                 plain
                 >Generate Prompt</el-button
@@ -184,7 +256,6 @@
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Nutritional Analysis Section -->
         <el-collapse-item title="Nutritional Analysis">
           <div>
@@ -216,14 +287,19 @@
             </div>
             <el-button
               type="info"
-              @click="getNewNutritionalAnalysis"
+              @click="
+                fetchData(
+                  'gpt',
+                  '/api/nutritional-analysis-using-gpt',
+                  'nutritionalAnalysis'
+                )
+              "
               :loading="loading"
               plain
               >Generate Prompt</el-button
             >
           </div>
         </el-collapse-item>
-
         <!-- Nutritional Value Section -->
         <el-collapse-item title="Nutritional Value">
           <div>
@@ -251,7 +327,13 @@
               </div>
               <el-button
                 type="info"
-                @click="getNewNutritionalValue"
+                @click="
+                  fetchData(
+                    'gpt',
+                    '/api/nutritional-value-suggestions-using-gpt',
+                    'nutritionalValue'
+                  )
+                "
                 :loading="loading"
                 plain
                 >Generate Prompt</el-button
@@ -277,530 +359,104 @@ export default {
       healthIncompatibilities: [],
       nutritionalAnalysis: [],
       nutritionalValue: [],
+      healthAdviceList: [],
       loading: false,
       error: false,
     };
   },
-  mounted() {
-    this.getAllergyInformation();
-    this.getHealthierAlternatives();
-    this.getHealthyEatingAdvice();
-    this.getHealthyItemsUsage();
-    this.getHealthIncompatabilties();
-    this.getNutritionalAnalysis();
-    this.getNutritionalValue();
+  async mounted() {
+    try {
+      await this.fetchData(
+        "json",
+        "/api/allergy-information-using-json",
+        "AllergyInformation"
+      );
+      await this.fetchData(
+        "json",
+        "/api/healthier-alternatives-using-json",
+        "alternatives"
+      );
+      await this.fetchData(
+        "json",
+        "/api/food-waste-reduction-using-json",
+        "foodWasteReductionSuggestions"
+      );
+      await this.fetchData(
+        "json",
+        "/api/healthy-eating-advice-using-json",
+        "eatingAdviceList"
+      );
+      await this.fetchData(
+        "json",
+        "/api/healthy-items-usage-using-json",
+        "suggestions"
+      );
+      await this.fetchData(
+        "json",
+        "/api/health_incompatibilities_using_json",
+        "healthIncompatibilities"
+      );
+      await this.fetchData(
+        "json",
+        "/api/nutritional-analysis-using-json",
+        "nutritionalAnalysis"
+      );
+      await this.fetchData(
+        "json",
+        "/api/nutritional-value-using-json",
+        "nutritionalValue"
+      );
+      await this.fetchData(
+        "json",
+        "/api/health-advice-using-json",
+        "healthAdviceList"
+      );
+    } catch (error) {
+      console.error("Error loading data:", error);
+    }
   },
   methods: {
-    async getAllergyInformation() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/allergy-information-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        console.log("API Response:", response);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Data:", data); // Log the received data
-        this.AllergyInformation = data.allergy_information_list || [];
-        console.log("Allergy_Information", this.AllergyInformation);
-      } catch (error) {
-        console.error("Error fetching allergy information:", error);
-      }
-    },
-
-    async getNewAllergyInformation() {
+    async fetchData(type, endpoint, property) {
       try {
         this.loading = true;
-
-        // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(baseUrl + "/api/allergy-information-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/allergy-information-using-gpt",
-          {
+        let response;
+        if (type === "json") {
+          response = await fetch(baseUrl + endpoint, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
-          }
-        );
-        console.log("API Response:", response);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Data:", data); // Log the received data
-        this.AllergyInformation = data.allergy_information_list || [];
-        this.loading = false;
-        console.log("Allergy_Information", this.AllergyInformation);
-      } catch (error) {
-        console.error("Error fetching allergy information:", error);
-      }
-    },
-
-    async getHealthierAlternatives() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/healthier-alternatives-using-json",
-          {
-            method: "GET",
+          });
+        } else if (type === "gpt") {
+          await fetch(baseUrl + endpoint, {
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        // Corrected property name here
-        if (data && data.Food_Suggestions_With_Alternatives) {
-          this.alternatives = data.Food_Suggestions_With_Alternatives;
-          console.log("Food_Suggestions_With_Alternatives", this.alternatives);
+            body: JSON.stringify({}),
+          });
+          response = await fetch(baseUrl + endpoint);
         } else {
-          this.alternatives = [];
-          console.error("Healthy_alternatives not found in the API response");
+          throw new Error("Invalid request type.");
         }
-      } catch (error) {
-        console.error("Error fetching healthier alternatives:", error);
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async getNewHealthierAlternatives() {
-      try {
-        this.loading = true;
-
-        // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(baseUrl + "/api/healthier-alternatives-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/healthier-alternatives-using-gpt",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        console.log("API Response:", response);
-
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const data = await response.json();
-        console.log("Data:", data); // Log the received data
-
-        this.alternatives = data.Food_Suggestions_With_Alternatives || [];
-        this.loading = false;
-
-        console.log("Healthy_alternatives", this.alternatives);
-      } catch (error) {
-        console.error("Error fetching healthy alternative information:", error);
-      }
-    },
-
-    async getHealthyEatingAdvice() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/healthy-eating-advice-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        if (data && data.Healthy_Eating_Advice) {
-          this.eatingAdviceList = data.Healthy_Eating_Advice;
-          console.log("Healthy_Eating_Advice", this.eatingAdviceList);
+        // Log the entire data object for inspection
+        console.log("Data Received:", data);
+        // Check if the property exists in the data object
+        if (property in data) {
+          this[property] = data[property] || [];
+          console.log(data[property]);
         } else {
-          this.eatingAdviceList = [];
-          console.error("Healthy_Eating_Advice not found in the API response");
+          console.error(
+            `Property '${property}' not found in the server response.`
+          );
         }
-      } catch (error) {
-        console.error("Error fetching healthy eating advice:", error);
-        this.error = true;
-      } finally {
         this.loading = false;
-      }
-    },
-
-    async getNewHealthyEatingAdvice() {
-      try {
-        this.loading = true;
-
-        // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(baseUrl + "/api/healthy-eating-advice-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/healthy-eating-advice-using-gpt",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        console.log("API Response:", response);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data:", data); // Log the received data
-
-        this.eatingAdviceList = data.Healthy_Eating_Advice || [];
-        this.loading = false;
-
-        console.log("Healthy_Eating_Advice", this.eatingAdviceList);
       } catch (error) {
-        console.error(
-          "Error fetching Healthy_Eating_Advice information:",
-          error
-        );
-      }
-    },
-
-    async getHealthyItemsUsage() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/healthy-items-usage-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        if (data && data.Healthy_Items_Usage) {
-          this.suggestions = data.Healthy_Items_Usage;
-          console.log("Healthy_Items_Usage", this.suggestions);
-        } else {
-          this.suggestions = [];
-          console.error("Healthy_Items_Usage not found in the API response");
-        }
-      } catch (error) {
-        console.error("Error fetching healthy items usage suggestions:", error);
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async getNewHealthyItemsUsage() {
-      try {
-        this.loading = true;
-
-        // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(baseUrl + "/api/healthy-items-usage-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/healthy-items-usage-using-gpt",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        console.log("API Response:", response);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data:", data); // Log the received data
-
-        this.suggestions = data.Healthy_Items_Usage || [];
-        this.loading = false;
-
-        console.log("health_incompatabilities", this.suggestions);
-      } catch (error) {
-        console.error("Error fetching health advice information:", error);
-      }
-    },
-
-    async getHealthIncompatabilties() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/health_incompatibilities_using_json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        if (data && data.Health_Incompatibilities) {
-          this.healthIncompatibilities = data.Health_Incompatibilities;
-          console.log("health_incompatabilities", this.healthIncompatibilities);
-        } else {
-          this.healthIncompatibilities = [];
-          console.error("Healthy_Items_Usage not found in the API response");
-        }
-      } catch (error) {
-        console.error(
-          "Error fetching health incompatabilities information:",
-          error
-        );
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async getNewHealthIncompatabilties() {
-      try {
-        this.loading = true;
-
-        // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(baseUrl + "/api/health_incompatibilities_using_gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/health_incompatibilities_using_gpt",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        console.log("API Response:", response);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data:", data); // Log the received data
-
-        this.healthIncompatibilities = data.Health_Incompatibilities || [];
-        this.loading = false;
-
-        console.log("health_incompatabilities", this.healthIncompatibilities);
-      } catch (error) {
-        console.error(
-          "Error fetching health incompatabilities information:",
-          error
-        );
-      }
-    },
-
-    async getNutritionalAnalysis() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/nutritional-analysis-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        if (data && data.Nutritional_Analysis) {
-          this.nutritionalAnalysis = data.Nutritional_Analysis;
-          console.log("Nutritional_Analysis", this.nutritionalAnalysis);
-        } else {
-          this.nutritionalAnalysis = [];
-          console.error("Nutritional Analysis not found in the API response");
-        }
-      } catch (error) {
-        console.error(
-          "Error fetching Nutritional Analysis information:",
-          error
-        );
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async getNewNutritionalAnalysis() {
-      try {
-        this.loading = true;
-
-        // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(baseUrl + "/api/nutritional-analysis-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/nutritional-analysis-using-gpt",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        console.log("API Response:", response);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data:", data); // Log the received data
-
-        this.nutritionalAnalysis = data.Nutritional_Analysis || [];
-        this.loading = false;
-
-        console.log("Nutritional_Analysis", this.nutritionalAnalysis);
-      } catch (error) {
-        console.error("Error Nutritional Analysis information:", error);
-      }
-    },
-
-    async getNutritionalValue() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/nutritional-value-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        if (data && data.nutritional_advice) {
-          this.nutritionalValue = data.nutritional_advice;
-          console.log("Nutritional_Analysis", this.nutritionalValue);
-        } else {
-          this.nutritionalValue = [];
-          console.error("Nutritional Value not found in the API response");
-        }
-      } catch (error) {
-        console.error("Error fetching Nutritional Value information:", error);
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-    },
-
-    async getNewNutritionalValue() {
-      try {
-        this.loading = true;
-
-        // Send a POST request to generate the Fusion_Cuisine_Suggestions.json file
-        await fetch(baseUrl + "/api/nutritional-value-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/nutritional-value-using-gpt",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        console.log("API Response:", response);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Data:", data); // Log the received data
-        this.nutritionalValue = data.nutritional_advice || [];
-        this.loading = false;
-        console.log("nutritional_advice", this.nutritionalValue);
-      } catch (error) {
-        console.error("Error Nutritional Value information:", error);
+        this.error = error.message;
       }
     },
   },

@@ -1,12 +1,7 @@
 <template>
   <div style="">
     <div style="display: flex; align-items: center">
-      <el-select
-        v-model="select"
-        slot="prepend"
-        placeholder="Select"
-        style="width: 30%"
-      >
+      <el-select v-model="select" slot="prepend" placeholder="Select">
         <el-option label="Not Expired" value="1"></el-option>
         <el-option label="Expired" value="2"></el-option>
         <el-option label="Shopping List" value="3"></el-option>
@@ -16,13 +11,9 @@
         v-model="searchQuery"
         class="input-with-select"
         @change="searchItems"
+        suffix-icon="el-icon-search"
+        style="margin-left: 20px"
       >
-        <el-button
-          style="color: white"
-          slot="append"
-          icon="el-icon-search"
-          @click="dialogTableVisible = true"
-        ></el-button>
       </el-input>
     </div>
     <el-dialog
@@ -42,25 +33,21 @@
               />
             </template>
           </el-table-column>
-
           <el-table-column label="Name" prop="name">
             <template slot-scope="scope">
               {{ scope.row.name }}
             </template>
           </el-table-column>
-
           <el-table-column label="Price" prop="price">
             <template slot-scope="scope">
               {{ scope.row.price }}
             </template>
           </el-table-column>
-
           <el-table-column label="Status" prop="status">
             <template slot-scope="scope">
               {{ scope.row.status }}
             </template>
           </el-table-column>
-
           <el-table-column label="Expiry">
             <template slot-scope="scope">
               <span>{{ scope.row.date }}</span>
@@ -69,7 +56,6 @@
               <span v-else>Days_left: {{ scope.row.days_left }}</span>
             </template>
           </el-table-column>
-
           <el-table-column>
             <template slot-scope="scope">
               <el-row style="display: flex; text-align: center">
@@ -113,7 +99,6 @@ export default {
     filteredItemsSearch() {
       // If no category is selected, return an empty array
       if (!this.select) return [];
-
       // Filter items based on the selected category and search query
       return this.filteredItems.filter((item) => {
         if (this.select === "1") {
@@ -189,7 +174,6 @@ export default {
     searchItems() {
       // Get the search query
       const searchValue = this.searchQuery.toLowerCase();
-
       // Filter items based on the search query and the selected option
       let filteredItemsByCategory = [];
       if (this.select === "1") {
@@ -211,7 +195,6 @@ export default {
           ...this.itemsNonFood,
         ];
       }
-
       // Filter items based on the search query and the selected option
       this.filteredItems = filteredItemsByCategory.filter(
         (item) =>
@@ -219,8 +202,8 @@ export default {
           item.status.toLowerCase().includes(searchValue)
       );
       this.searchQuery = "";
+      this.dialogTableVisible = true;
     },
-
     updateFilteredItems() {
       // Concatenate all items based on the selected category
       let allItems = [];
@@ -231,7 +214,6 @@ export default {
       } else if (this.select === "3") {
         allItems = [...this.itemsFood, ...this.itemsNonFood];
       }
-
       // Filter items based on the search query
       this.filteredItems = allItems.filter(
         (item) =>
@@ -240,7 +222,6 @@ export default {
       );
     },
   },
-
   watch: {
     select: "updateFilteredItems",
   },

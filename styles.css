@@ -83,15 +83,28 @@ body {
   margin-bottom: 50px;
 }
 .el-input__inner {
-  background-color: forestgreen;
+  background-color: transparent;
   box-sizing: border-box;
-  color: white;
+  color: black;
+  border: 3px solid black;
   display: inline-block;
   height: 38px;
   outline: 0;
   padding: 0 15px;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
+}
+.el-input__icon {
+  height: 100%;
+  width: 25px;
+  text-align: center;
+  transition: all 0.3s;
+  line-height: 40px;
+  font-size: x-large;
+  color: black;
+}
+.el-color-picker__icon {
+  width: 100% !important;
 }
 .el-input-group__append,
 .el-input-group__prepend {
@@ -106,11 +119,13 @@ body {
   width: 1px;
   white-space: nowrap;
 }
-
-.el-input {
-  font-size: 15px;
+.el-select .el-input .el-select__caret {
+  color: black;
+  font-size: 20px;
+  transition: transform 0.3s;
+  transform: rotateZ(180deg);
+  cursor: pointer;
 }
-
 .el-page-header__left {
   display: flex;
   cursor: pointer;
@@ -141,7 +156,7 @@ body {
   font-size: 20px;
   color: #303133;
   line-height: 1.5;
-  background-color: lightblue;
+  background-color: transparent;
 }
 .el-collapse {
   border-top: none;
@@ -168,6 +183,11 @@ body {
   box-sizing: border-box;
   border-bottom: none;
 }
+.el-autocomplete {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
 h4 {
   font-weight: bolder;
   font-size: 22px;
@@ -175,7 +195,6 @@ h4 {
   justify-content: center;
   color: black;
 }
-
 p {
   font-size: 20px;
   color: black;
@@ -185,11 +204,6 @@ strong {
   font-weight: bolder;
   color: black;
 }
-.loading-indicator {
-  text-align: center;
-  margin-top: 40px;
-}
-
 .suggestion-card {
   width: calc(33.33% - 20px);
   margin: 10px;
@@ -252,7 +266,6 @@ strong {
   outline-width: 0;
   background: silver !important;
 }
-
 .loading-container {
   position: fixed;
   top: 0;
@@ -261,6 +274,11 @@ strong {
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 999;
+}
+.loading-indicator {
+  text-align: center;
+  margin-top: 40px;
+  background-color: black;
 }
 .loading-content {
   position: absolute;
@@ -344,7 +362,6 @@ strong {
   color: #2196f3;
   font-weight: bold;
 }
-
 .add-item-title {
   text-align: center;
   font-size: 24px;
@@ -360,10 +377,6 @@ strong {
   display: flex;
   margin-left: -27px;
 }
-.el-form-item__label {
-  line-height: 65px;
-}
-
 .el-tabs {
   background-color: transparent !important;
 }
@@ -399,25 +412,20 @@ strong {
   border-collapse: collapse;
   margin-top: 10px;
 }
-
 .item-row {
   border: 1px solid #ccc;
 }
-
 .item-image {
   width: 100px;
   padding: 10px;
 }
-
 .item-image img {
   max-width: 100%;
   height: auto;
 }
-
 .item-details {
   padding: 10px;
 }
-
 .item-name,
 .item-price,
 .item-status,
@@ -426,7 +434,6 @@ strong {
 .item-expiry {
   margin-bottom: 10px;
 }
-
 .item-table {
   width: 100%;
   border-collapse: collapse;
@@ -445,13 +452,6 @@ strong {
   width: 100% !important;
   max-width: 100% !important;
   font-size: 12px !important;
-}
-.el-select .el-input .el-select__caret {
-  color: white;
-  font-size: 20px;
-  transition: transform 0.3s;
-  transform: rotateZ(180deg);
-  cursor: pointer;
 }
 @media screen and (max-width: 400px) {
   .joke-card {
@@ -504,11 +504,9 @@ strong {
   .account-page {
     height: 100%;
   }
-
   .header-title {
     text-align: center;
   }
-
   .account-form {
     padding: 20px;
   }
@@ -549,7 +547,6 @@ strong {
     max-width: 100% !important;
     font-size: 12px !important;
   }
-
   .el-tabs__label {
     font-size: large !important;
   }
@@ -561,7 +558,6 @@ strong {
     font-size: 12px;
     border-radius: 3px;
   }
-
   p {
     font-size: 10px;
   }
@@ -571,7 +567,6 @@ strong {
   strong {
     font-size: 10px;
   }
-
   .el-icon-goods {
     font-size: xx-large !important;
     background: none !important;
@@ -612,7 +607,6 @@ strong {
     font-size: 20px;
     color: black;
   }
-
   .el-collapse-item__header {
     display: flex;
     align-items: center;
@@ -649,7 +643,11 @@ strong {
     font-size: 10px;
   }
 }
-
+@media screen and (max-width: 350px) {
+  .el-carousel__container {
+    height: 450px !important;
+  }
+}
 @media screen and (min-width: 440px) {
   .footer2 {
     display: none;
@@ -664,10 +662,5 @@ strong {
   }
   .logo-text {
     display: none;
-  }
-  @media screen and (max-width: 350px) {
-    .el-carousel__container {
-      height: 450px !important;
-    }
   }
 }

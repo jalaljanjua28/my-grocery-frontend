@@ -179,8 +179,11 @@ import DeleteAllShopping from "../components/Data-resources/DeleteItems/DeleteAl
 import DeleteAllMasterExpired from "../components/Data-resources/DeleteItems/DeleteAllMasterExpired.vue";
 import ShoppingList from "../components/Data-resources/ProductList/ShoppingList.vue";
 import FrequencyList from "../components/Data-resources/ProductList/FrequencyList.vue";
-
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+import {
+  fetchMasterExpiredData,
+  fetchShoppingListData,
+  fetchMasterNonexpiredData,
+} from "@/plugins/Dataservice.js";
 
 export default {
   components: {
@@ -210,12 +213,25 @@ export default {
       dialogData: {}, // Data to pass to the Add Item component
     };
   },
-  mounted() {
-    this.master_nonexpired();
-    this.shopping_list();
-    this.master_expired();
+  async mounted() {
+    try {
+      // Fetch master expired data
+      const { Food_expired, NonFood_expired } = await fetchMasterExpiredData();
+      this.Food_expired = Food_expired;
+      this.NonFood_expired = NonFood_expired;
+      // Fetch shopping list data
+      const { Food, NonFood } = await fetchShoppingListData();
+      this.Food = Food;
+      this.NonFood = NonFood;
+      // Fetch master nonexpired data
+      const { Food_nonexpired, NonFood_nonexpired } =
+        await fetchMasterNonexpiredData();
+      this.Food_nonexpired = Food_nonexpired;
+      this.NonFood_nonexpired = NonFood_nonexpired;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   },
-
   created() {
     // Retrieve the active tab from local storage on page load
     const storedOuterTab = localStorage.getItem("activeOuterTab");
@@ -234,215 +250,6 @@ export default {
     },
     closeDialog() {
       this.dialogVisible = false;
-    },
-    master_expired() {
-      fetch(baseUrl + "/api/get-master-expired", {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Failed to fetch data.");
-          }
-        })
-        .then((data) => {
-          try {
-            const base64Data = data.data;
-            const binaryData = new Uint8Array(
-              [...atob(base64Data)].map((char) => char.charCodeAt(0))
-            );
-
-            const textDecoder = new TextDecoder();
-            const decodedData = textDecoder.decode(binaryData);
-
-            const parsedData = JSON.parse(decodedData);
-
-            const Food = parsedData.Food.filter(
-              (item) => item.Name !== "TestFNE"
-            );
-            const NonFood = parsedData.Not_Food.filter(
-              (item) => item.Name !== "TestFNE"
-            );
-
-            for (const id in Food) {
-              const item = {
-                id: parseInt(id),
-                name: Food[id].Name,
-                image: Food[id].Image,
-                date: Food[id].Date,
-                expiry: Food[id].Expiry_Date,
-                price: Food[id].Price,
-                status: Food[id].Status,
-              };
-              Food[id] = item;
-            }
-
-            for (const id in NonFood) {
-              const item = {
-                id: parseInt(id),
-                name: NonFood[id].Name,
-                image: NonFood[id].Image,
-                date: NonFood[id].Date,
-                price: NonFood[id].Price,
-                status: NonFood[id].Status,
-              };
-              NonFood[id] = item;
-            }
-            this.Food_expired = Food;
-            this.NonFood_expired = NonFood;
-          } catch (error) {
-            console.error("Error:", error);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    },
-    shopping_list() {
-      fetch(baseUrl + "/api/get-shopping-list", {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Failed to fetch data.");
-          }
-        })
-        .then((data) => {
-          try {
-            const base64Data = data.data;
-            const binaryData = new Uint8Array(
-              [...atob(base64Data)].map((char) => char.charCodeAt(0))
-            );
-
-            const textDecoder = new TextDecoder();
-            const decodedData = textDecoder.decode(binaryData);
-
-            const parsedData = JSON.parse(decodedData);
-
-            const Food = parsedData.Food.filter(
-              (item) => item.Name !== "TestFNE"
-            );
-            const NonFood = parsedData.Not_Food.filter(
-              (item) => item.Name !== "TestFNE"
-            );
-
-            for (const id in Food) {
-              const item = {
-                id: parseInt(id),
-                name: Food[id].Name,
-                image: Food[id].Image,
-                date: Food[id].Date,
-                expiry: Food[id].Expiry_Date,
-                price: Food[id].Price,
-                status: Food[id].Status,
-                days_left: Food[id].Days_Until_Expiry,
-              };
-              Food[id] = item;
-            }
-
-            for (const id in NonFood) {
-              const item = {
-                id: parseInt(id),
-                name: NonFood[id].Name,
-                image: NonFood[id].Image,
-                date: NonFood[id].Date,
-                price: NonFood[id].Price,
-                status: NonFood[id].Status,
-                days_left: NonFood[id].Days_Until_Expiry,
-              };
-              NonFood[id] = item;
-            }
-
-            this.Food = Food;
-            this.NonFood = NonFood;
-          } catch (error) {
-            console.error("Error:", error);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    },
-
-    master_nonexpired() {
-      fetch(baseUrl + "/api/get-master-nonexpired", {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Failed to fetch data.");
-          }
-        })
-        .then((data) => {
-          try {
-            const base64Data = data.data;
-            const binaryData = new Uint8Array(
-              [...atob(base64Data)].map((char) => char.charCodeAt(0))
-            );
-
-            const textDecoder = new TextDecoder();
-            const decodedData = textDecoder.decode(binaryData);
-            const parsedData = JSON.parse(decodedData);
-
-            const Food = parsedData.Food.filter(
-              (item) => item.Name !== "TestFNE"
-            );
-            const NonFood = parsedData.Not_Food.filter(
-              (item) => item.Name !== "TestFNE"
-            );
-
-            for (const id in Food) {
-              const item = {
-                id: parseInt(id),
-                name: Food[id].Name,
-                image: Food[id].Image,
-                date: Food[id].Date,
-                expiry: Food[id].Expiry_Date,
-                price: Food[id].Price,
-                status: Food[id].Status,
-                days_left: Food[id].Days_Until_Expiry,
-              };
-              Food[id] = item;
-            }
-
-            for (const id in NonFood) {
-              const item = {
-                id: parseInt(id),
-                name: NonFood[id].Name,
-                image: NonFood[id].Image,
-                date: NonFood[id].Date,
-                price: NonFood[id].Price,
-                status: NonFood[id].Status,
-                days_left: NonFood[id].Days_Until_Expiry,
-              };
-              NonFood[id] = item;
-            }
-            this.Food_nonexpired = Food;
-            this.NonFood_nonexpired = NonFood;
-          } catch (error) {
-            console.error("Error:", error);
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
     },
     handleItemDeleted(itemToDelete) {
       this.items = this.items.filter((item) => item !== itemToDelete);

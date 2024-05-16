@@ -5,30 +5,9 @@
         <!-- Food Waste Reduction Suggestions Section -->
         <el-collapse-item title="Food Waste Reduction Suggestions">
           <div>
-            <el-input
-              placeholder="Enter Food Waste Reduction Suggestion"
-              v-model="user_input"
-              class="input-with-select"
-              @change="gptFoodWaste()"
-            >
-              <el-select
-                slot="prepend"
-                placeholder="Choose Food Waste Reduction Suggestions"
-                v-model="selectedValue"
-              >
-                <el-option
-                  v-for="option in foodReductionOptions"
-                  :key="option"
-                  :label="option"
-                  :value="option"
-                ></el-option>
-              </el-select>
-            </el-input>
-            <!-- Loading indicator -->
             <div v-if="loading" class="loading-indicator">
               <el-spinner></el-spinner>
             </div>
-
             <div v-if="displayWasteReduction && !loading">
               <div
                 v-for="(suggestion, index) in foodWasteReductionSuggestions"
@@ -41,17 +20,8 @@
                 </p>
               </div>
             </div>
-            <el-button
-              @click="gptFoodWaste()"
-              :loading="loading"
-              type="info"
-              plain
-            >
-              Generate Prompt
-            </el-button>
           </div>
         </el-collapse-item>
-
         <!-- Ethical Eating Suggestions Section -->
         <el-collapse-item title="Ethical Eating Suggestions">
           <div>
@@ -59,7 +29,6 @@
             <div v-if="loading" class="loading-indicator">
               <el-spinner></el-spinner>
             </div>
-
             <div v-if="displayEthicalSuggestions && !loading">
               <!-- Display generated suggestions -->
               <div
@@ -76,7 +45,13 @@
                 </p>
               </div>
               <el-button
-                @click="gptEthicalSuggestions()"
+                @click="
+                  fetchData(
+                    'gpt',
+                    '/api/ethical-eating-suggestion-using-gpt',
+                    'ethicalEatingSuggestions'
+                  )
+                "
                 :loading="loading"
                 type="info"
                 plain
@@ -87,7 +62,6 @@
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Fun Facts Section -->
         <el-collapse-item title="Fun Facts">
           <div>
@@ -112,7 +86,9 @@
             }}</el-alert>
           </div>
           <el-button
-            @click="gptFunFacts()"
+            @click="
+              fetchData('gpt', '/api/get-fun-facts-using-gpt', 'funFacts')
+            "
             :loading="loading"
             type="info"
             plain
@@ -121,7 +97,6 @@
             Generate Prompt
           </el-button>
         </el-collapse-item>
-
         <!-- Cooking Tips Section -->
         <el-collapse-item title="Cooking Tips">
           <div>
@@ -139,7 +114,9 @@
               </el-alert>
             </div>
             <el-button
-              @click="gptCookingTips()"
+              @click="
+                fetchData('gpt', '/api/cooking-tips-using-gpt', 'cookingTips')
+              "
               :loading="loading"
               type="info"
               plain
@@ -148,7 +125,6 @@
             </el-button>
           </div>
         </el-collapse-item>
-
         <!-- Current Trends Section -->
         <el-collapse-item title="Current Trends">
           <div>
@@ -166,7 +142,13 @@
               </el-alert>
             </div>
             <el-button
-              @click="gptCurrentTrends()"
+              @click="
+                fetchData(
+                  'gpt',
+                  '/api/current-trends-using-gpt',
+                  'currentTrends'
+                )
+              "
               :loading="loading"
               type="info"
               plain
@@ -175,7 +157,6 @@
             </el-button>
           </div>
         </el-collapse-item>
-
         <!-- Food Handling  Section -->
         <el-collapse-item title="Food Handling Advice">
           <div>
@@ -197,7 +178,13 @@
               </el-alert>
             </div>
             <el-button
-              @click="gptFoodHandling()"
+              @click="
+                fetchData(
+                  'gpt',
+                  '/api/food-handling-advice-using-gpt',
+                  'handlingadvice'
+                )
+              "
               :loading="loading"
               type="info"
               plain
@@ -206,30 +193,9 @@
             </el-button>
           </div>
         </el-collapse-item>
-
         <!-- Mood Changer Section -->
         <el-collapse-item title="Mood Changer Suggestion">
           <div>
-            <el-input
-              placeholder="Enter Mood Changer"
-              v-model="user_mood"
-              class="input-with-select"
-              @change="gptFoodWaste()"
-            >
-              <el-select
-                slot="prepend"
-                placeholder="Choose Mood Changer Suggestions"
-                v-model="selectedValue"
-              >
-                <el-option
-                  v-for="option in moodChangeOptions"
-                  :key="option"
-                  :label="option"
-                  :value="option"
-                ></el-option>
-              </el-select>
-            </el-input>
-            <!-- Loading indicator -->
             <div v-if="loading" class="loading-indicator">
               <el-spinner></el-spinner>
             </div>
@@ -253,13 +219,6 @@
                 No Mood Changer Suggestion available.
               </el-alert>
             </div>
-            <el-button
-              @click="gptMoodChanger()"
-              :loading="loading"
-              type="info"
-              plain
-              >Generate Prompt
-            </el-button>
           </div>
         </el-collapse-item>
       </div>
@@ -273,34 +232,6 @@ const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
 export default {
   data() {
     return {
-      foodReductionOptions: [
-        "Suggest a recipe that helps reduce food waste.",
-        "Provide tips on reducing food waste in the kitchen.",
-        "Recommend creative ways to repurpose leftover ingredients.",
-        "Share ideas for sustainable meal planning to minimize food waste.",
-        "How can I use vegetable scraps to create flavorful broths or stocks?",
-        "Give suggestions on preserving fruits and vegetables to extend their shelf life.",
-        "What are some zero-waste cooking techniques for a more sustainable kitchen?",
-        "Share innovative ways to use overripe fruits in desserts or snacks.",
-        "Provide tips on storing fresh herbs to prevent them from going bad.",
-        "Suggest ways to use stale bread to avoid food waste.",
-        "What are some composting tips for kitchen waste?",
-        "Give ideas for reusing glass jars and containers to reduce packaging waste.",
-        "How can I repurpose coffee grounds in a sustainable way?",
-        "Provide tips on reducing food packaging waste during grocery shopping.",
-        "Suggest recipes that incorporate commonly discarded parts of vegetables.",
-        "Give ideas for reducing food waste at social events and gatherings.",
-        "How can I creatively use leftover pasta or rice?",
-        "Provide tips on portion control to minimize food leftovers.",
-        "Suggest ways to repurpose citrus peels in cooking or cleaning.",
-        "What are some sustainable alternatives for single-use kitchen items?",
-      ],
-      moodChangeOptions: [
-        "Sad, depressed, angry, or upset",
-        "Happy, content, relaxed, or calm",
-        "Angry, upset, or frustrated",
-        "Exuberant, excited, or energetic",
-      ],
       funFacts: [],
       cookingTips: [],
       currentTrends: [],
@@ -309,415 +240,100 @@ export default {
       ethicalEatingSuggestions: [],
       foodWasteReductionSuggestions: [],
       moodChangerSuggestions: [],
-      displayMood: "false",
-      displayEthicalSuggestions: "false",
-      displayCookingTips: "false",
-      displayCurrentTrends: "false",
-      displayWasteReduction: "false",
-      displayFunFacts: "false",
-      displayFoodHandling: "false",
+      displayMood: "true",
+      displayEthicalSuggestions: "true",
+      displayCookingTips: "true",
+      displayCurrentTrends: "true",
+      displayWasteReduction: "true",
+      displayFunFacts: "true",
+      displayFoodHandling: "true",
       loading: false,
       error: false,
-      selectedOption: null,
-      user_mood: "",
-      user_input: "",
-      selectedValue: "",
-      errorMessage: "",
     };
   },
   async mounted() {
     try {
-      await this.jsonEthicalSuggestions();
-      await this.jsonFunFacts();
-      await this.jsonFoodWaste();
-      await this.jsonFoodHandling();
-      await this.jsonCurrentTrends();
-      await this.jsonCookingTips();
-      await this.jsonMoodChanger();
+      await this.fetchData(
+        "json",
+        "/api/ethical-eating-suggestion-using-json",
+        "ethicalEatingSuggestions"
+      );
+      await this.fetchData("json", "/api/get-fun-facts-using-json", "funFacts");
+      await this.fetchData(
+        "json",
+        "/api/food-waste-reduction-using-json",
+        "foodWasteReductionSuggestions"
+      );
+      await this.fetchData(
+        "json",
+        "/api/food-handling-advice-using-json",
+        "handlingadvice"
+      );
+      await this.fetchData(
+        "json",
+        "/api/current-trends-using-json",
+        "currentTrends"
+      );
+      await this.fetchData(
+        "json",
+        "/api/cooking-tips-using-json",
+        "cookingTips"
+      );
+      await this.fetchData(
+        "json",
+        "/api/mood-changer-using-json",
+        "moodChangerSuggestions"
+      );
     } catch (error) {
       console.error("Error loading data:", error);
     }
   },
-
   methods: {
-    async jsonEthicalSuggestions() {
+    async fetchData(type, endpoint, property) {
       try {
-        const response = await fetch(
-          baseUrl + "/api/ethical-eating-suggestion-using-json",
-          {
+        this.loading = true;
+        let response;
+        if (type === "json") {
+          response = await fetch(baseUrl + endpoint, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
-          }
-        );
+          });
+        } else if (type === "gpt") {
+          await fetch(baseUrl + endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          });
+          response = await fetch(baseUrl + endpoint);
+        } else {
+          throw new Error("Invalid request type.");
+        }
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json();
-        this.ethicalEatingSuggestions = data.ethical_eating_list;
-        this.error = null;
 
-        // Debugging: Log the data received
+        const data = await response.json();
+
+        // Log the entire data object for inspection
         console.log("Data Received:", data);
-      } catch (error) {
-        console.error("Error fetching suggestions:", error);
-        this.error = "Error fetching suggestions. Please try again.";
-      }
-      this.displayEthicalSuggestions = true;
-    },
-    async gptEthicalSuggestions() {
-      try {
-        // Set loading to true to display the loading indicator
-        this.loading = true;
 
-        // Make the fetch request to generate ethical suggestions
-        await fetch(baseUrl + "/api/ethical-eating-suggestion-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-
-        // Fetch the generated suggestions
-        const response = await fetch(
-          baseUrl + "/api/ethical-eating-suggestion-using-json"
-        );
-        const data = await response.json();
-        this.ethicalEatingSuggestions = data.ethical_eating_list;
-
-        // Set loading back to false after receiving the response
-        this.loading = false;
-
-        console.log("Ethical_Suggestions:", this.ethicalEatingSuggestions);
-      } catch (error) {
-        // Handle any errors
-        this.error = error.message;
-      }
-    },
-
-    async jsonFunFacts() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/get-fun-facts-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Full Response:", data);
-        this.funFacts = data.Fun_Facts || [];
-      } catch (error) {
-        console.error("Error fetching fun facts:", error);
-        this.errorMessage = "Error fetching fun facts. Please try again.";
-      }
-      this.displayFunFacts = true;
-    },
-    async gptFunFacts() {
-      try {
-        // Set loading to true to display the loading indicator
-        this.loading = true;
-        await fetch(baseUrl + "/api/get-fun-facts-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(baseUrl + "/api/get-fun-facts-using-gpt");
-        const data = await response.json();
-        this.funFacts = data.Fun_Facts;
-        this.loading = false;
-
-        console.log("Fun_Facts:", this.funFacts);
-      } catch (error) {
-        this.error = error.message;
-      }
-    },
-    async jsonCookingTips() {
-      try {
-        const response = await fetch(baseUrl + "/api/cooking-tips-using-json", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        if (data && data.Cooking_Tips) {
-          this.cookingTips = data.Cooking_Tips;
-          console.log("Cooking Tips", this.cookingTips);
+        // Check if the property exists in the data object
+        if (property in data) {
+          this[property] = data[property] || [];
+          console.log(data[property]);
         } else {
-          this.cookingTips = [];
-          console.error("Cooking Tips not found in the API response");
+          console.error(
+            `Property '${property}' not found in the server response.`
+          );
         }
-      } catch (error) {
-        console.error("Error fetching cooking tips:", error);
-        this.error = true;
-      } finally {
         this.loading = false;
-      }
-      this.displayCookingTips = true;
-    },
-    async gptCookingTips() {
-      try {
-        // Set loading to true to display the loading indicator
-        this.loading = true;
-        await fetch(baseUrl + "/api/cooking-tips-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(baseUrl + "/api/cooking-tips-using-gpt");
-        const data = await response.json();
-        this.cookingTips = data.Cooking_Tips;
-        this.loading = false;
-
-        console.log("Cooking_Tips:", this.cookingTips);
       } catch (error) {
         this.error = error.message;
-      }
-    },
-
-    async jsonFoodWaste() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/food-waste-reduction-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Full Response:", data);
-        this.foodWasteReductionSuggestions =
-          data.Food_Waste_Reduction_Suggestions || [];
-      } catch (error) {
-        console.error(
-          "Error fetching food waste reduction suggestions:",
-          error
-        );
-        this.errorMessage =
-          "Error fetching food waste reduction suggestions. Please try again.";
-      }
-      this.displayWasteReduction = true;
-    },
-    async gptFoodWaste() {
-      try {
-        this.loading = true;
-
-        const user_input =
-          this.selectedOption ||
-          "Suggest a recipe that helps reduce food waste";
-        await fetch(baseUrl + "/api/food-waste-reduction-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user_input }),
-        });
-        const response = await fetch(
-          baseUrl + "/api/food-waste-reduction-using-json"
-        );
-        const data = await response.json();
-        this.foodWasteReductionSuggestions =
-          data.Food_Waste_Reduction_Suggestions;
-        this.loading = false;
-
-        console.log(
-          "Food_Waste_Reduction_Suggestions:",
-          this.foodWasteReductionSuggestions
-        );
-      } catch (error) {
-        this.error = error.message;
-      }
-    },
-
-    async jsonCurrentTrends() {
-      try {
-        const response = await fetch(
-          baseUrl + "/api/current-trends-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("Data", data);
-
-        if (data && data.Current_Trends) {
-          this.currentTrends = data.Current_Trends;
-          console.log("Current Trends", this.currentTrends);
-        } else {
-          this.currentTrends = [];
-          console.error("Current Trends not found in the API response");
-        }
-      } catch (error) {
-        console.error("Error fetching current trends:", error);
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-      this.displayCurrentTrends = true;
-    },
-    async gptCurrentTrends() {
-      try {
-        // Set loading to true to display the loading indicator
-        this.loading = true;
-        await fetch(baseUrl + "/api/current-trends-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(baseUrl + "/api/current-trends-using-gpt");
-        const data = await response.json();
-        this.currentTrends = data.Current_Trends;
-        this.loading = false;
-        console.log("Current_Trends:", this.currentTrends);
-      } catch (error) {
-        this.error = error.message;
-      }
-    },
-    async jsonFoodHandling() {
-      try {
-        // Make the API request
-        const response = await fetch(
-          baseUrl + "/api/food-handling-advice-using-json",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        // Check if the response is successful (status code 200)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        // Parse the JSON response
-        const data = await response.json();
-
-        // Check if the response contains the expected property
-        if (data && data.food_handling_advice) {
-          this.handlingadvice = data.food_handling_advice;
-        } else {
-          this.handlingadvice = [];
-          console.error("food_handling_advice not found in the API response");
-        }
-      } catch (error) {
-        console.error("Error fetching food handling advice:", error);
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-      this.displayFoodHandling = true;
-    },
-    async gptFoodHandling() {
-      try {
-        // Set loading to true to display the loading indicator
-        this.loading = true;
-        await fetch(baseUrl + "/api/food-handling-advice-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(
-          baseUrl + "/api/food-handling-advice-using-gpt"
-        );
-        const data = await response.json();
-        this.handlingadvice = data.food_handling_advice;
-        this.loading = false;
-        console.log("food_handling_advice:", this.handlingadvice);
-      } catch (error) {
-        this.error = error.message;
-      }
-    },
-    async jsonMoodChanger() {
-      try {
-        // Make the API request
-        const response = await fetch(baseUrl + "/api/mood-changer-using-json", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        // Check if the response is successful (status code 200)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        // Parse the JSON response
-        const data = await response.json();
-        // Check if the response contains the expected property
-        if (data && data.Mood_Changer) {
-          this.moodChangerSuggestions = data.Mood_Changer;
-        } else {
-          this.moodChangerSuggestions = [];
-          console.error("Mood_Changer not found in the API response");
-        }
-      } catch (error) {
-        console.error("Error fetching Mood_Changer:", error);
-        this.error = true;
-      } finally {
-        this.loading = false;
-      }
-      this.displayMood = true;
-    },
-    async gptMoodChanger() {
-      try {
-        this.loading = true;
-
-        const user_mood =
-          this.selectedOption || "Sad, I'm feeling tired, I'm going to bed";
-        await fetch(baseUrl + "/api/mood-changer-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user_mood }),
-        });
-        // Send a GET request to retrieve unique recipes data
-        const response = await fetch(baseUrl + "/api/mood-changer-using-json");
-        const data = await response.json();
-        console.log(data);
-        this.moodChangerSuggestions = data.Mood_Changer;
-        this.loading = false;
-        console.log("Mood Changer:", this.moodChangerSuggestions);
-      } catch (error) {
-        console.error("Error fetching mood changer:", error);
       }
     },
   },
