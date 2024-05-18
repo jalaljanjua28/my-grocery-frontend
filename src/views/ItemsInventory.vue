@@ -235,10 +235,7 @@ export default {
   created() {
     // Retrieve the active tab from local storage on page load
     const storedOuterTab = localStorage.getItem("activeOuterTab");
-    console.log(storedOuterTab);
     const storedInnerTab = localStorage.getItem("activeInnerTab");
-    console.log(storedInnerTab);
-
     if (storedOuterTab && storedInnerTab) {
       this.outerActiveTab = storedOuterTab;
       this.innerActiveTab = storedInnerTab;

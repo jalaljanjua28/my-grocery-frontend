@@ -316,12 +316,9 @@ export default {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const data = await response.json();
-
         // Log the entire data object for inspection
         console.log("Data Received:", data);
-
         // Check if the property exists in the data object
         if (property in data) {
           this[property] = data[property] || [];
@@ -340,4 +337,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-button {
+  margin-top: 10px;
+}
+</style>

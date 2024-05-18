@@ -53,6 +53,7 @@ export async function fetchMasterNonexpiredData() {
         "Content-Type": "application/json",
       },
     });
+
     if (!response.ok) {
       throw new Error("Failed to fetch data.");
     }
@@ -67,7 +68,7 @@ export async function fetchMasterNonexpiredData() {
 }
 export async function fetchPurchasedListData() {
   try {
-    const response = await fetch(baseUrl + "/api/get-purchased-list", {
+    const response = await fetch(baseUrl + "/api/get-purchase-list", {
       method: "GET",
       mode: "cors",
       headers: {
@@ -95,6 +96,7 @@ function processData(data) {
     const textDecoder = new TextDecoder();
     const decodedData = textDecoder.decode(binaryData);
     const parsedData = JSON.parse(decodedData);
+
     // Process Food data
     const Food = parsedData.Food.filter((item) => item.Name !== "TestFNE").map(
       (item, index) => ({

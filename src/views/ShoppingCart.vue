@@ -8,25 +8,27 @@
         <el-header>
           <h1 class="header-title">Enter Items</h1>
         </el-header>
-        <el-form class="account-form" :model="newItem">
-          <el-form-item label="Item Name">
-            <el-input v-model="newItem.name" />
-          </el-form-item>
-          <el-form-item label="Category">
-            <el-input v-model="newItem.category" />
-          </el-form-item>
-          <el-form-item label="Description">
-            <el-input v-model="newItem.description" />
-          </el-form-item>
-          <el-form-item label="Price">
-            <el-input v-model="newItem.price" type="number" />
-          </el-form-item>
-          <el-form-item>
-            <el-button class="el-button" type="primary" @click="addItem" plain
-              >Add Item</el-button
-            >
-          </el-form-item>
-        </el-form>
+        <el-card>
+          <el-form class="account-form" :model="newItem">
+            <el-form-item label="Item Name">
+              <el-input v-model="newItem.name" />
+            </el-form-item>
+            <el-form-item label="Category">
+              <el-input v-model="newItem.category" />
+            </el-form-item>
+            <el-form-item label="Description">
+              <el-input v-model="newItem.description" />
+            </el-form-item>
+            <el-form-item label="Price">
+              <el-input v-model="newItem.price" type="number" />
+            </el-form-item>
+            <el-form-item>
+              <el-button class="el-button" type="primary" @click="addItem" plain
+                >Add Item</el-button
+              >
+            </el-form-item>
+          </el-form>
+        </el-card>
         <el-header>
           <h1 class="header-title">Items Cart</h1>
         </el-header>

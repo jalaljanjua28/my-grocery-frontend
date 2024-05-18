@@ -66,7 +66,7 @@ body {
   border: 2px solid;
 }
 .el-button--danger.is-plain {
-  border: 3px solid !important;
+  border: 2px solid;
 }
 .el-button--small {
   padding: 6px 10px;
@@ -77,16 +77,31 @@ body {
 .el-card {
   border-radius: 0px !important;
   border: 2px solid black;
+  background-color: darkcyan !important;
   overflow: hidden;
   color: #303133;
   transition: 0.3s;
   margin-bottom: 50px;
 }
+.el-input {
+  position: relative;
+  font-size: 15px;
+  width: 100%;
+}
+.el-select {
+  width: 124px;
+  font-size: 12px;
+  color: white;
+}
+.input-with-select .el-input-group__prepend {
+  background-color: darkcyan;
+  border: 2px solid white;
+}
 .el-input__inner {
-  background-color: transparent;
+  background-color: darkcyan;
   box-sizing: border-box;
   color: black;
-  border: 3px solid black;
+  border: 2px solid white;
   display: inline-block;
   height: 38px;
   outline: 0;
@@ -94,6 +109,7 @@ body {
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
 }
+/* 
 .el-input__icon {
   height: 100%;
   width: 25px;
@@ -102,30 +118,18 @@ body {
   line-height: 40px;
   font-size: x-large;
   color: black;
-}
-.el-color-picker__icon {
+} */
+/* .el-color-picker__icon {
   width: 100% !important;
 }
-.el-input-group__append,
-.el-input-group__prepend {
-  background-color: darkgreen;
-  color: #909399;
-  vertical-align: middle;
-  display: table-cell;
-  position: relative;
-  border: 1px solid #dcdfe6;
-  border-radius: 4px;
-  padding: 0 20px;
-  width: 1px;
-  white-space: nowrap;
-}
-.el-select .el-input .el-select__caret {
+ */
+/* .el-select .el-input .el-select__caret {
   color: black;
   font-size: 20px;
   transition: transform 0.3s;
   transform: rotateZ(180deg);
   cursor: pointer;
-}
+} */
 .el-page-header__left {
   display: flex;
   cursor: pointer;
@@ -168,7 +172,7 @@ body {
   height: 33px;
   line-height: 53px;
   background-color: transparent;
-  color: #303133;
+  color: white;
   cursor: pointer;
   border-bottom: 2px solid black;
   font-size: 20px;
@@ -190,17 +194,18 @@ body {
 }
 h4 {
   font-weight: bolder;
-  font-size: 22px;
+  font-size: 25px;
   display: flex;
   justify-content: center;
   color: black;
 }
+
 p {
   font-size: 20px;
-  color: black;
+  color: white;
 }
 strong {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bolder;
   color: black;
 }
@@ -240,9 +245,10 @@ strong {
   font-size: xx-large;
 }
 .el-dropdown-menu__item {
-  line-height: 61px;
-  font-size: 20px;
+  line-height: 40px;
+  font-size: 17px;
   padding: 10px 30px;
+  color: white;
 }
 .el-dropdown-menu__item i {
   margin-right: 18px;
@@ -252,9 +258,9 @@ strong {
   top: 0;
   left: 0;
   z-index: 10;
-  padding: 10px 0;
+  padding: 0px 0;
   margin: 5px 0;
-  background-color: #fff;
+  background-color: darkcyan;
   border: 1px solid #ebeef5;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -320,7 +326,7 @@ strong {
 }
 .joke-card {
   font-size: x-large;
-  color: black;
+  color: white;
   font-weight: bolder;
 }
 .social-icons i {
@@ -352,7 +358,7 @@ strong {
   height: 100%;
 }
 .header-title {
-  text-align: center;
+  padding: 0 0px;
 }
 .account-form {
   padding: 20px;
@@ -376,6 +382,17 @@ strong {
   padding: 9px;
   display: flex;
   margin-left: -27px;
+}
+.el-tabs__item {
+  padding: 0 20px;
+  height: 40px;
+  box-sizing: border-box;
+  line-height: 40px;
+  display: inline-block;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
 }
 .el-tabs {
   background-color: transparent !important;
@@ -453,10 +470,25 @@ strong {
   max-width: 100% !important;
   font-size: 12px !important;
 }
+.el-form-item__label {
+  text-align: right;
+  vertical-align: middle;
+  float: left;
+  font-size: 14px;
+  color: white;
+  line-height: 40px;
+  padding: 0 12px 0 0;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 350px) {
+  .el-carousel__container {
+    height: 450px !important;
+  }
+}
 @media screen and (max-width: 400px) {
   .joke-card {
     font-size: large;
-    color: black;
+    color: white;
     font-weight: bolder;
   }
   .el-dropdown-select {
@@ -504,9 +536,11 @@ strong {
   .account-page {
     height: 100%;
   }
+
   .header-title {
     text-align: center;
   }
+
   .account-form {
     padding: 20px;
   }
@@ -534,6 +568,8 @@ strong {
   }
   .el-button--danger.is-plain {
     width: 100%;
+    margin-bottom: 10px;
+    margin-left: 0px !important;
   }
   .input-with-select {
     width: 100%;
@@ -547,6 +583,7 @@ strong {
     max-width: 100% !important;
     font-size: 12px !important;
   }
+
   .el-tabs__label {
     font-size: large !important;
   }
@@ -560,12 +597,15 @@ strong {
   }
   p {
     font-size: 10px;
+    color: white;
   }
   h {
     font-size: 10px !important;
+    color: black;
   }
   strong {
     font-size: 10px;
+    color: black;
   }
   .el-icon-goods {
     font-size: xx-large !important;
@@ -643,24 +683,22 @@ strong {
     font-size: 10px;
   }
 }
-@media screen and (max-width: 350px) {
-  .el-carousel__container {
-    height: 450px !important;
-  }
-}
 @media screen and (min-width: 440px) {
   .footer2 {
     display: none;
   }
 }
 @media screen and (max-width: 600px) {
+  .searchDev {
+    display: none !important;
+  }
+  .el-select > .el-input {
+    display: none !important;
+  }
   .el-col-8 {
     width: 100%;
   }
   .el-carousel__container {
     height: 320px !important;
-  }
-  .logo-text {
-    display: none;
   }
 }

@@ -42,7 +42,7 @@ export default {
           price: "$8",
           offer: "Buy One Get One Free",
           image:
-            "https://th.bing.com/th/id/OIP.wQPb9T5vnEfWeZBbPCuQuAHaE8?rs=1&pid=ImgDetMain",
+            "https://th.bing.com/th?id=OIF.B%2fQ4bME2%2bVyKb7EwhTEW4Q&rs=1&pid=ImgDetMain",
         },
         {
           id: 3,
@@ -81,6 +81,7 @@ export default {
   justify-content: center;
   padding: 20px;
 }
+
 .offer-item-image {
   width: 200px;
   height: 200px;
@@ -88,27 +89,33 @@ export default {
   border-radius: 50%;
   margin-bottom: 20px;
 }
+
 .offer-item-content {
   text-align: center;
 }
+
 .offer-item-title {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
+
 .offer-item-description {
   font-size: 12px;
   margin-bottom: 10px;
 }
+
 .offer-item-details {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .offer-item-price {
   font-size: 12px;
   font-weight: bold;
 }
+
 .offer-item-offer {
   font-size: 12px;
   color: #2ecc71;
@@ -116,7 +123,7 @@ export default {
 .offer-item {
   display: flex;
   flex-direction: column;
-  background: #add8e6de;
+  background: darkcyan;
   border-radius: 8px;
   border: inset;
   overflow: hidden;
@@ -142,6 +149,7 @@ export default {
     font-size: 11px;
     margin-bottom: 10px;
   }
+
   .offer-item-image {
     width: 150px;
     height: 100px;

@@ -1,20 +1,21 @@
 <template>
   <div style="">
     <div style="display: flex; align-items: center">
-      <el-select v-model="select" slot="prepend" placeholder="Select">
-        <el-option label="Not Expired" value="1"></el-option>
-        <el-option label="Expired" value="2"></el-option>
-        <el-option label="Shopping List" value="3"></el-option>
-      </el-select>
-      <el-input
-        placeholder="Please input"
-        v-model="searchQuery"
-        class="input-with-select"
-        @change="searchItems"
-        suffix-icon="el-icon-search"
-        style="margin-left: 20px"
-      >
-      </el-input>
+      <div>
+        <el-input
+          placeholder="Please input"
+          v-model="searchQuery"
+          class="input-with-select"
+          @change="searchItems"
+          suffix-icon="el-icon-search"
+        >
+          <el-select v-model="select" slot="prepend" placeholder="Select">
+            <el-option label="Not Expired" value="1"></el-option>
+            <el-option label="Expired" value="2"></el-option>
+            <el-option label="Shopping List" value="3"></el-option>
+          </el-select>
+        </el-input>
+      </div>
     </div>
     <el-dialog
       title="Search Inventory"

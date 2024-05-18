@@ -20,7 +20,6 @@
           <span>{{ scope.row.expiry }}</span>
         </template>
       </el-table-column>
-
       <el-table-column width="100%">
         <template slot-scope="scope">
           <el-row>
@@ -47,7 +46,6 @@
 
 <script>
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
-
 export default {
   props: {
     items: {
@@ -61,7 +59,6 @@ export default {
       selectOptions: [],
     };
   },
-
   methods: {
     addItem(itemToAdd) {
       const userConfirmed = confirm("Are you sure you want to add items?");
@@ -106,7 +103,6 @@ export default {
               console.log(`Item '${itemToDelete.name}' deleted successfully.`);
               this.$emit("item-deleted", itemToDelete);
               alert("Item Deleted successfully!");
-
               setTimeout(() => {
                 location.reload();
               }, 2000);
