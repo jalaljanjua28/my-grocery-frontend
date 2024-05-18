@@ -35,7 +35,17 @@
         <p class="joke-card">
           {{ joke["Food Joke"] }}
         </p>
-        <el-button :loading="loading" type="info" @click="gptJokes()" plain
+        <el-button
+          :loading="loading"
+          type="info"
+          @click="
+            fetchData(
+              'gpt',
+              '/api/https://my-grocery-app-hlai3cv5za-uc.a.run.app',
+              'jokes'
+            )
+          "
+          plain
           >Generate Prompt</el-button
         >
       </el-card>
@@ -90,7 +100,7 @@ import {
 } from "@/plugins/Dataservice.js";
 import SearchInventory from "../Data-resources/Search-component/SearchInventory.vue";
 
-const baseUrl = "http://127.0.0.1:8081";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
 
 export default {
   components: {
@@ -115,7 +125,7 @@ export default {
   },
   async mounted() {
     try {
-      await this.jsonJokes();
+      await this.fetchData("json", "/api/get-jokes-using-json", "jokes");
       const { Food_nonexpired, NonFood_nonexpired } =
         await fetchPurchasedListData();
       this.Food_nonexpired = Food_nonexpired;
@@ -127,11 +137,6 @@ export default {
       const { Food, NonFood } = await fetchShoppingListData();
       this.Food = Food;
       this.NonFood = NonFood;
-      // Fetch master nonexpired data
-      // const { Food_nonexpired, NonFood_nonexpired } =
-      //   await fetchMasterNonexpiredData();
-      // this.Food_nonexpired = Food_nonexpired;
-      // this.NonFood_nonexpired = NonFood_nonexpired;
     } catch (error) {
       console.error("Error loading data:", error);
     }
@@ -148,71 +153,6 @@ export default {
     }
   },
   methods: {
-    // purchased_list() {
-    //   fetch(baseUrl + "/api/get-purchase-list", {
-    //     method: "GET",
-    //     mode: "cors",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //     .then((response) => {
-    //       if (response.ok) {
-    //         return response.json();
-    //       } else {
-    //         throw new Error("Failed to fetch data.");
-    //       }
-    //     })
-    //     .then((data) => {
-    //       try {
-    //         const base64Data = data.data;
-    //         const binaryData = new Uint8Array(
-    //           [...atob(base64Data)].map((char) => char.charCodeAt(0))
-    //         );
-    //         const textDecoder = new TextDecoder();
-    //         const decodedData = textDecoder.decode(binaryData);
-    //         const parsedData = JSON.parse(decodedData);
-    //         const Food = parsedData.Food.filter(
-    //           (item) => item.Name !== "TestFNE"
-    //         );
-    //         const NonFood = parsedData.Not_Food.filter(
-    //           (item) => item.Name !== "TestFNE"
-    //         );
-    //         for (const id in Food) {
-    //           const item = {
-    //             id: parseInt(id),
-    //             name: Food[id].Name,
-    //             image: Food[id].Image,
-    //             date: Food[id].Date,
-    //             expiry: Food[id].Expiry_Date,
-    //             price: Food[id].Price,
-    //             status: Food[id].Status,
-    //             days_left: Food[id].Days_Until_Expiry,
-    //           };
-    //           Food[id] = item;
-    //         }
-    //         for (const id in NonFood) {
-    //           const item = {
-    //             id: parseInt(id),
-    //             name: NonFood[id].Name,
-    //             image: NonFood[id].Image,
-    //             date: NonFood[id].Date,
-    //             price: NonFood[id].Price,
-    //             status: NonFood[id].Status,
-    //             days_left: NonFood[id].Days_Until_Expiry,
-    //           };
-    //           NonFood[id] = item;
-    //         }
-    //         this.Food_nonexpired = Food;
-    //         this.NonFood_nonexpired = NonFood;
-    //       } catch (error) {
-    //         console.error("Error:", error);
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error:", error);
-    //     });
-    // },
     handleItemDeleted(itemToDelete) {
       this.items = this.items.filter((item) => item !== itemToDelete);
       // You can access the deleted item and target tab name here
@@ -229,46 +169,91 @@ export default {
       localStorage.setItem("activeOuterTab", tab.name);
       console.log("Outer Tab: " + this.outerActiveTab);
     },
-    async jsonJokes() {
-      // Make a request to your backend endpoint
-      fetch(baseUrl + "/api/jokes-using-json")
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.jokes) {
-            this.jokes = data.jokes;
-          } else {
-            this.errorMessage = "Error retrieving jokes.";
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          this.errorMessage = "Error retrieving jokes.";
-        });
-      this.displayJokes = true;
-    },
-    async gptJokes() {
+    async fetchData(type, endpoint, property) {
       try {
         this.loading = true;
-        await fetch(baseUrl + "/api/jokes-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({}),
-        });
-        const response = await fetch(baseUrl + "/api/jokes-using-gpt");
+        let response;
+        if (type === "json") {
+          response = await fetch(baseUrl + endpoint, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+        } else if (type === "gpt") {
+          await fetch(baseUrl + endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          });
+          response = await fetch(baseUrl + endpoint);
+        } else {
+          throw new Error("Invalid request type.");
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
-        this.jokes = data.jokes;
+        // Log the entire data object for inspection
+        console.log("Data Received:", data);
+        // Check if the property exists in the data object
+        if (property in data) {
+          this[property] = data[property] || [];
+          console.log(data[property]);
+        } else {
+          console.error(
+            `Property '${property}' not found in the server response.`
+          );
+        }
         this.loading = false;
-        console.log("Jokes:", this.jokes);
-        this.user_input = "";
       } catch (error) {
         this.error = error.message;
       }
     },
+    // async jsonJokes() {
+    //   // Make a request to your backend endpoint
+    //   fetch(baseUrl + "/api/jokes-using-json")
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       if (data.jokes) {
+    //         this.jokes = data.jokes;
+    //       } else {
+    //         this.errorMessage = "Error retrieving jokes.";
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error:", error);
+    //       this.errorMessage = "Error retrieving jokes.";
+    //     });
+    //   this.displayJokes = true;
+    // },
+    // async gptJokes() {
+    //   try {
+    //     this.loading = true;
+    //     await fetch(baseUrl + "/api/jokes-using-gpt", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({}),
+    //     });
+    //     const response = await fetch(baseUrl + "/api/jokes-using-gpt");
+    //     const data = await response.json();
+    //     this.jokes = data.jokes;
+    //     this.loading = false;
+    //     console.log("Jokes:", this.jokes);
+    //     this.user_input = "";
+    //   } catch (error) {
+    //     this.error = error.message;
+    //   }
+    // },
   },
 };
 </script>
+
 <style scoped>
 .el-page-header {
   display: none !important;

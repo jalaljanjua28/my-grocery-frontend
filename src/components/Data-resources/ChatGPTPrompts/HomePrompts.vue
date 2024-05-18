@@ -312,7 +312,6 @@ export default {
         } else {
           throw new Error("Invalid request type.");
         }
-
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

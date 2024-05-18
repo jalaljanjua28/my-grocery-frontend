@@ -22,7 +22,6 @@
               </div>
             </div>
           </el-collapse-item>
-
           <!-- User Defined Dish Section -->
           <el-collapse-item title="User Defined Dish">
             <div>
@@ -36,7 +35,6 @@
               </div>
             </div>
           </el-collapse-item>
-
           <!-- Unique Recipe Section -->
           <el-collapse-item title="Unique Recipe">
             <div>
@@ -54,7 +52,6 @@
               </div>
             </div>
           </el-collapse-item>
-
           <!-- Diet Schedule Section -->
           <el-collapse-item title="Diet Schedule">
             <div>
@@ -89,7 +86,6 @@
               >
             </div>
           </el-collapse-item>
-
           <!-- Generated Recipes Section -->
           <el-collapse-item title="Generated Recipes">
             <div>
