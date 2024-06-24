@@ -4,6 +4,7 @@
 
 <script>
 import axios from "axios";
+import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
 
 // Create a custom Axios instance with a progress event
 const axiosInstance = axios.create();
@@ -18,30 +19,31 @@ export default {
   },
 
   methods: {
-    uploadImageProcessDummy(dummyFile = null) {
+    async uploadImageProcessDummy(dummyFile = null) {
       const fileToUpload = dummyFile || this.selectedFile;
       console.log("File to upload:", fileToUpload);
 
       if (fileToUpload) {
         const formData = new FormData();
         formData.append("file", fileToUpload);
-
-        // Use the custom Axios instance with a progress event
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          throw new Error("User not authenticated");
+        }
+        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+        console.log("idToken", idToken);
         axiosInstance
           .post("/image-process-upload-create", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${idToken}`,
             },
           })
           .then((response) => {
-            console.log(response.data);
-            this.showStatus = false;
-            this.completionStatus = true;
+            console.log("Response data:", response.data);
           })
           .catch((error) => {
-            console.log(error);
-            this.showStatus = false;
-            this.completionStatus = false;
+            console.log("Error:", error);
             if (error.response) {
               console.log("Response Status:", error.response.status);
               console.log("Response Data:", error.response.data);
@@ -50,7 +52,9 @@ export default {
             }
           });
       } else {
-        this.$message.error("Please select a file to upload.");
+        console.error(
+          "Please select a file to upload and ensure you are logged in."
+        );
       }
     },
     simulateUpload() {

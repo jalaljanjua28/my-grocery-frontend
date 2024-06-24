@@ -8,11 +8,13 @@ import AboutUs from "../views/AboutUs";
 import ItemsInventory from "../views/ItemsInventory";
 import AccountPage from "../views/AccountPage";
 import OrdersHistory from "../views/OrdersHistory";
-import RecipePage from "../components/Layout/RecipePage";
+import RecipePage from "../views/RecipePage";
 import FAQPage from "../views/FAQs";
 import BarcodeScan from "../views/BarcodeScan";
-import Search from "../components/Data-resources/Search-component/SearchInventory.vue";
-import HealthPage from "../components/Layout/HealthPage.vue";
+import Search from "../components/SearchInventory.vue";
+import HealthPage from "../views/HealthPage.vue";
+import UserDefinedPrompt from "../components/UserDefinedPrompts.vue";
+import FirebaseAuth from "../components/LoginSignup.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,11 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/SignIn",
+    name: "Firebase",
+    component: FirebaseAuth,
   },
   {
     path: "/shopping-cart",
@@ -77,6 +84,11 @@ const routes = [
     path: "/health-page",
     name: "health",
     component: HealthPage,
+  },
+  {
+    path: "/user-defined-prompt",
+    name: "prompt",
+    component: UserDefinedPrompt,
   },
 ];
 

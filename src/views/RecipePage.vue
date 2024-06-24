@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import RecipePrompt from "../Data-resources/ChatGPTPrompts/RecipePrompts.vue";
+import RecipePrompt from "../components/RecipePrompts.vue";
 export default {
   components: {
     RecipePrompt,

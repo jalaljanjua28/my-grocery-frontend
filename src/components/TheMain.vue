@@ -1,3 +1,4 @@
+s
 <template>
   <div>
     <el-main class="main-content">
@@ -10,7 +11,7 @@
 
 <script>
 import BarcodeDummy from "@/views/BarcodeDummy.vue";
-import HomePage from "./HomePage.vue";
+import HomePage from "../views/HomePage.vue";
 
 export default {
   components: {

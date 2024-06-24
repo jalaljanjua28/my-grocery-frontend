@@ -38,6 +38,7 @@
 
 <script>
 import axios from "axios";
+import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
 
 // Create a custom Axios instance with a progress event
 const axiosInstance = axios.create();
@@ -68,20 +69,26 @@ export default {
       }
     },
 
-    uploadImageProcess() {
+    async uploadImageProcess() {
       if (this.selectedFile) {
         this.showStatus = true;
         this.completionStatus = false;
         this.uploadProgress = 0;
-
         const formData = new FormData();
         formData.append("file", this.selectedFile);
-
+        console.log("FormData before sending:", formData.get("file"));
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          throw new Error("User not authenticated");
+        }
+        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+        console.log("idToken", idToken);
         // Use the custom Axios instance with a progress event
         axiosInstance
           .post("/image-process-upload-create", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${idToken}`,
             },
             onUploadProgress: (progressEvent) => {
               this.uploadProgress = Math.round(

@@ -4,8 +4,9 @@
       <el-col
         :span="12"
         style="display: flex; flex-direction: row; align-items: center"
-      >
-        <el-button><i class="el-icon-s-custom"></i></el-button>
+        ><router-link to="/SignIn" style="text-decoration: none">
+          <el-button><i class="el-icon-s-custom"></i></el-button>
+        </router-link>
         <el-dropdown>
           <span class="el-dropdown-link">
             <i class="el-icon-s-grid"></i>

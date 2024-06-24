@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import HealthPrompt from "../Data-resources/ChatGPTPrompts/HealthPrompts.vue";
+import HealthPrompt from "../components/HealthPrompts.vue";
 export default {
   components: {
     HealthPrompt,

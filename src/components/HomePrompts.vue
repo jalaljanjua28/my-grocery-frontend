@@ -74,10 +74,10 @@
                 :key="index"
                 :body-style="{ height: 'auto' }"
               >
-                <div>
+                <p>
                   <strong>Food Items:</strong>
                   {{ fact["Food Item"] }}
-                </div>
+                </p>
                 <p><strong>Fun Facts:</strong> {{ fact["Fun Facts"] }}</p>
               </div>
             </div>
@@ -165,7 +165,7 @@
             </div>
             <div v-if="displayFoodHandling && !loading">
               <div v-for="(item, index) in handlingadvice" :key="index">
-                <div><strong>Food Items:</strong> {{ item["Food Item"] }}</div>
+                <p><strong>Food Items:</strong> {{ item["Food Item"] }}</p>
                 <p>
                   <strong>Handling Advice:</strong>
                   {{ item["Handling Advice"] }}
@@ -227,6 +227,9 @@
 </template>
 
 <script>
+import { auth } from "../Firebase.js";
+import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
+
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
 
 export default {
@@ -249,48 +252,74 @@ export default {
       displayFoodHandling: "true",
       loading: false,
       error: false,
+      currentUser: null,
+      errorMessage: null,
     };
   },
   async mounted() {
-    try {
-      await this.fetchData(
-        "json",
-        "/api/ethical-eating-suggestion-using-json",
-        "ethicalEatingSuggestions"
-      );
-      await this.fetchData("json", "/api/get-fun-facts-using-json", "funFacts");
-      await this.fetchData(
-        "json",
-        "/api/food-waste-reduction-using-json",
-        "foodWasteReductionSuggestions"
-      );
-      await this.fetchData(
-        "json",
-        "/api/food-handling-advice-using-json",
-        "handlingadvice"
-      );
-      await this.fetchData(
-        "json",
-        "/api/current-trends-using-json",
-        "currentTrends"
-      );
-      await this.fetchData(
-        "json",
-        "/api/cooking-tips-using-json",
-        "cookingTips"
-      );
-      await this.fetchData(
-        "json",
-        "/api/mood-changer-using-json",
-        "moodChangerSuggestions"
-      );
-    } catch (error) {
-      console.error("Error loading data:", error);
-    }
+    // Check authentication state
+    this.checkAuthState();
   },
   methods: {
+    async checkAuthState() {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          this.currentUser = user;
+          console.log("User is logged in:", user.email);
+          // Fetch data only after user is authenticated
+          try {
+            await this.fetchData(
+              "json",
+              "/api/ethical-eating-suggestion-using-json",
+              "ethicalEatingSuggestions"
+            );
+            await this.fetchData(
+              "json",
+              "/api/get-fun-facts-using-json",
+              "funFacts"
+            );
+            await this.fetchData(
+              "json",
+              "/api/food-waste-reduction-using-json",
+              "foodWasteReductionSuggestions"
+            );
+            await this.fetchData(
+              "json",
+              "/api/food-handling-advice-using-json",
+              "handlingadvice"
+            );
+            await this.fetchData(
+              "json",
+              "/api/current-trends-using-json",
+              "currentTrends"
+            );
+            await this.fetchData(
+              "json",
+              "/api/cooking-tips-using-json",
+              "cookingTips"
+            );
+            await this.fetchData(
+              "json",
+              "/api/mood-changer-using-json",
+              "moodChangerSuggestions"
+            );
+          } catch (error) {
+            console.error("Error loading data:", error);
+          }
+        } else {
+          console.log("No user is logged in");
+          this.currentUser = null;
+        }
+      });
+    },
     async fetchData(type, endpoint, property) {
       try {
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          throw new Error("User not authenticated");
+        }
+        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+        console.log("idToken", idToken);
         this.loading = true;
         let response;
         if (type === "json") {
@@ -298,6 +327,7 @@ export default {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
             },
           });
         } else if (type === "gpt") {
@@ -305,10 +335,15 @@ export default {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
             },
             body: JSON.stringify({}),
           });
-          response = await fetch(baseUrl + endpoint);
+          response = await fetch(baseUrl + endpoint, {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          });
         } else {
           throw new Error("Invalid request type.");
         }
@@ -316,9 +351,7 @@ export default {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        // Log the entire data object for inspection
         console.log("Data Received:", data);
-        // Check if the property exists in the data object
         if (property in data) {
           this[property] = data[property] || [];
           console.log(data[property]);
@@ -329,7 +362,9 @@ export default {
         }
         this.loading = false;
       } catch (error) {
-        this.error = error.message;
+        this.errorMessage = error.message;
+        console.error("Error in fetchData:", error);
+        this.loading = false;
       }
     },
   },
