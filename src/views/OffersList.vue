@@ -81,7 +81,6 @@ export default {
   justify-content: center;
   padding: 20px;
 }
-
 .offer-item-image {
   width: 200px;
   height: 200px;
@@ -89,33 +88,27 @@ export default {
   border-radius: 50%;
   margin-bottom: 20px;
 }
-
 .offer-item-content {
   text-align: center;
 }
-
 .offer-item-title {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-
 .offer-item-description {
   font-size: 12px;
   margin-bottom: 10px;
 }
-
 .offer-item-details {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .offer-item-price {
   font-size: 12px;
   font-weight: bold;
 }
-
 .offer-item-offer {
   font-size: 12px;
   color: #2ecc71;
@@ -144,12 +137,10 @@ export default {
     font-weight: bold;
     margin-bottom: 10px;
   }
-
   .offer-item-description {
     font-size: 11px;
     margin-bottom: 10px;
   }
-
   .offer-item-image {
     width: 150px;
     height: 100px;
