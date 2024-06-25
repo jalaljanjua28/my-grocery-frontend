@@ -1,31 +1,29 @@
-s
 <template>
   <div>
     <el-main class="main-content">
       <home-page></home-page>
       <br />
-      <barcode-dummy class="barcode" ref="BarcodeDummy" />
+      <dummy-component class="barcode" ref="DummyComponent" />
     </el-main>
   </div>
 </template>
 
 <script>
-import BarcodeDummy from "@/views/BarcodeDummy.vue";
 import HomePage from "../views/HomePage.vue";
+import DummyComponent from "@/components/DummyComponent.vue";
 
 export default {
   components: {
-    BarcodeDummy,
+    DummyComponent,
     HomePage,
   },
   data() {
     return {};
   },
-  mounted() {
-    this.$refs.BarcodeDummy.simulateUpload();
-    console.log("simulateUpload function triggered in BarcodeDummy.vue");
+  async mounted() {
+    this.$refs.DummyComponent.simulateUpload();
+    console.log("simulateUpload function triggered in DummyComponent.vue");
   },
-  methods: {},
 };
 </script>
 

@@ -38,13 +38,7 @@
         <el-button
           :loading="loading"
           type="info"
-          @click="
-            fetchData(
-              'gpt',
-              '/api/https://my-grocery-app-hlai3cv5za-uc.a.run.app',
-              'jokes'
-            )
-          "
+          @click="fetchData('gpt', '/api/http://127.0.0.1:8081', 'jokes')"
           plain
           >Generate Prompt</el-button
         >
@@ -100,9 +94,8 @@ import {
 } from "@/plugins/Dataservice.js";
 import SearchInventory from "../components/SearchInventory.vue";
 import { auth } from "../Firebase.js";
-import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
 
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "http://127.0.0.1:8081";
 
 export default {
   components: {
@@ -128,8 +121,6 @@ export default {
   },
   async mounted() {
     try {
-      await this.checkAuth();
-      await this.jsonJokes();
       const { Food_nonexpired, NonFood_nonexpired } =
         await fetchPurchasedListData();
       this.Food_nonexpired = Food_nonexpired;
@@ -140,6 +131,7 @@ export default {
       const { Food, NonFood } = await fetchShoppingListData();
       this.Food = Food;
       this.NonFood = NonFood;
+      await this.jsonJokes();
     } catch (error) {
       console.error("Error loading data:", error);
     }
@@ -156,16 +148,6 @@ export default {
     }
   },
   methods: {
-    checkAuth() {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          this.currentUser = user;
-          console.log("User is logged in:", user);
-        } else {
-          console.log("No user is logged in");
-        }
-      });
-    },
     handleItemDeleted(itemToDelete) {
       this.items = this.items.filter((item) => item !== itemToDelete);
       // You can access the deleted item and target tab name here
