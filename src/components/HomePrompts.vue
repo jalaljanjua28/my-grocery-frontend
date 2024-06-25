@@ -36,8 +36,10 @@
                 :key="index"
               >
                 <div>
-                  <strong>Ingredients:</strong>
-                  {{ group["Group of Items"].join(", ") }}
+                  <p>
+                    <strong>Ingredients:</strong>
+                    {{ group["Group of Items"].join(", ") }}
+                  </p>
                 </div>
                 <p>
                   <strong>Ethical Eating Suggestions:</strong>
@@ -230,7 +232,7 @@
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
 
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "http://127.0.0.1:8081";
 
 export default {
   data() {
