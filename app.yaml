@@ -14,4 +14,4 @@ env_variables:
   storageBucket: "my-grocery-home.appspot.com",
   messagingSenderId: "888361723877",
   appId: "1:888361723877:web:930792430b39fbd20df10c",
-  measurementId: "G-QNMK83BJ7K",
+  measurementId: "G-QNMK83BJ7K"
