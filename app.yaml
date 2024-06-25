@@ -8,10 +8,10 @@ handlers:
     upload: dist/index.html
 
 env_variables:
-  VUE_APP_FIREBASE_API_KEY: "AIzaSyD9DNAvs2Ryd-jTweyv2aF7OHegZN0b8JY"
-  VUE_APP_FIREBASE_AUTH_DOMAIN: "my-grocery-home.firebaseapp.com"
-  VUE_APP_FIREBASE_PROJECT_ID: "my-grocery-home"
-  VUE_APP_FIREBASE_STORAGE_BUCKET: "my-grocery-home.appspot.com"
-  VUE_APP_FIREBASE_MESSAGING_SENDER_ID: "888361723877"
-  VUE_APP_FIREBASE_APP_ID: "1:888361723877:web:930792430b39fbd20df10c"
-  VUE_APP_MEASUREMENT_ID: "G-QNMK83BJ7K"
+  apiKey: "AIzaSyD9DNAvs2Ryd-jTweyv2aF7OHegZN0b8JY",
+  authDomain: "my-grocery-home.firebaseapp.com",
+  projectId: "my-grocery-home",
+  storageBucket: "my-grocery-home.appspot.com",
+  messagingSenderId: "888361723877",
+  appId: "1:888361723877:web:930792430b39fbd20df10c",
+  measurementId: "G-QNMK83BJ7K",
