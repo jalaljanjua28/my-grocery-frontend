@@ -36,8 +36,10 @@
                 :key="index"
               >
                 <div>
-                  <strong>Ingredients:</strong>
-                  {{ group["Group of Items"].join(", ") }}
+                  <p>
+                    <strong>Ingredients:</strong>
+                    {{ group["Group of Items"].join(", ") }}
+                  </p>
                 </div>
                 <p>
                   <strong>Ethical Eating Suggestions:</strong>

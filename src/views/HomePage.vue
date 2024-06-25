@@ -100,7 +100,6 @@ import {
 } from "@/plugins/Dataservice.js";
 import SearchInventory from "../components/SearchInventory.vue";
 import { auth } from "../Firebase.js";
-import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
 
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
 
@@ -128,8 +127,6 @@ export default {
   },
   async mounted() {
     try {
-      await this.checkAuth();
-      await this.jsonJokes();
       const { Food_nonexpired, NonFood_nonexpired } =
         await fetchPurchasedListData();
       this.Food_nonexpired = Food_nonexpired;
@@ -140,6 +137,7 @@ export default {
       const { Food, NonFood } = await fetchShoppingListData();
       this.Food = Food;
       this.NonFood = NonFood;
+      await this.jsonJokes();
     } catch (error) {
       console.error("Error loading data:", error);
     }
@@ -156,16 +154,6 @@ export default {
     }
   },
   methods: {
-    checkAuth() {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          this.currentUser = user;
-          console.log("User is logged in:", user);
-        } else {
-          console.log("No user is logged in");
-        }
-      });
-    },
     handleItemDeleted(itemToDelete) {
       this.items = this.items.filter((item) => item !== itemToDelete);
       // You can access the deleted item and target tab name here
@@ -234,16 +222,6 @@ export default {
           },
           body: JSON.stringify({}),
         });
-        // const response = await fetch(baseUrl + "/api/jokes-using-gpt", {
-        //   method: "GET",
-        //   headers: {
-        //     Authorization: `Bearer ${idToken}`,
-        //   },
-        // });
-
-        // if (!response.ok) {
-        //   throw new Error(`HTTP error! Status: ${response.status}`);
-        // }
         const data = await response.json();
         console.log("Data Received:", data);
         if (data.jokes) {
