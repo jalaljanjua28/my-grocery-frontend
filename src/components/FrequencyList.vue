@@ -29,8 +29,7 @@
 
 <script>
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
-
-const baseUrl = "http://127.0.0.1:8081";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   data() {
@@ -42,11 +41,18 @@ export default {
   },
   methods: {
     async checkFrequency() {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
       try {
-        const response = await fetch(baseUrl + "/api/check-frequency", {
+        const response = await fetch(baseUrl + "/check-frequency", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({ condition: this.condition }),
         });

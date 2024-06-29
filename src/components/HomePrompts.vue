@@ -183,7 +183,7 @@
               @click="
                 fetchData(
                   'gpt',
-                  '/api/food-handling-advice-using-gpt',
+                  '/food-handling-advice-using-gpt',
                   'handlingadvice'
                 )
               "
@@ -231,8 +231,7 @@
 <script>
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
-
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   data() {
@@ -272,37 +271,37 @@ export default {
           try {
             await this.fetchData(
               "json",
-              "/api/ethical-eating-suggestion-using-json",
+              "/ethical-eating-suggestion-using-json",
               "ethicalEatingSuggestions"
             );
             await this.fetchData(
               "json",
-              "/api/get-fun-facts-using-json",
+              "/get-fun-facts-using-json",
               "funFacts"
             );
             await this.fetchData(
               "json",
-              "/api/food-waste-reduction-using-json",
+              "/food-waste-reduction-using-json",
               "foodWasteReductionSuggestions"
             );
             await this.fetchData(
               "json",
-              "/api/food-handling-advice-using-json",
+              "/food-handling-advice-using-json",
               "handlingadvice"
             );
             await this.fetchData(
               "json",
-              "/api/current-trends-using-json",
+              "/current-trends-using-json",
               "currentTrends"
             );
             await this.fetchData(
               "json",
-              "/api/cooking-tips-using-json",
+              "/cooking-tips-using-json",
               "cookingTips"
             );
             await this.fetchData(
               "json",
-              "/api/mood-changer-using-json",
+              "/mood-changer-using-json",
               "moodChangerSuggestions"
             );
           } catch (error) {

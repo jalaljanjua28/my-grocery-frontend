@@ -36,7 +36,8 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   props: {
@@ -49,14 +50,21 @@ export default {
     return {};
   },
   methods: {
-    deleteItem(itemToDelete) {
+    async deleteItem(itemToDelete) {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
       const userConfirmed = confirm("Are you sure you want to delete items?");
       if (userConfirmed) {
         // Send a request to your backend to delete the item by its name
-        fetch(baseUrl + "/api/removeItem/shopping-list", {
+        fetch(baseUrl + "/removeItem/shopping-list", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({ itemName: itemToDelete.name }),
         })

@@ -136,7 +136,7 @@
 </template>
 
 <script>
-const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.apps";
+const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.apps/api";
 import { auth } from "../Firebase.js";
 
 export default {
@@ -257,15 +257,15 @@ export default {
         let endpoint;
 
         if (this.selectedPrompt === "foodWasteReduction") {
-          endpoint = "/api/food-waste-reduction-using-gpt";
+          endpoint = "/food-waste-reduction-using-gpt";
         } else if (this.selectedPrompt === "moodChanger") {
-          endpoint = "/api/mood-changer-using-gpt";
+          endpoint = "/mood-changer-using-gpt";
         } else if (this.selectedPrompt === "cusineSuggestion") {
-          endpoint = "/api/fusion-cuisine-suggestion-using-gpt";
+          endpoint = "/fusion-cuisine-suggestion-using-gpt";
         } else if (this.selectedPrompt === "definedDishes") {
-          endpoint = "/api/user-defined-dish-using-gpt";
+          endpoint = "/user-defined-dish-using-gpt";
         } else if (this.selectedPrompt === "uniqueRecipes") {
-          endpoint = "/api/unique-recipes-using-gpt";
+          endpoint = "/unique-recipes-using-gpt";
         }
 
         if (endpoint) {

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run/api";
 
 import {
   signInWithPopup,
@@ -92,7 +92,7 @@ export default {
         }
         // Send the ID token to the server
         const idToken = await user.getIdToken();
-        await fetch(baseUrl + "/api/set-email-create", {
+        await fetch(baseUrl + "/set-email-create", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export default {
         }
         // Send the ID token to the server
         const idToken = await user.getIdToken();
-        await fetch(baseUrl + "/api/set-email-create", {
+        await fetch(baseUrl + "/set-email-create", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

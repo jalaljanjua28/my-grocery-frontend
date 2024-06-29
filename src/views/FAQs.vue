@@ -5,18 +5,20 @@
     </router-link>
     <el-main class="main-content" style="margin-top: 20px">
       <el-container>
-        <el-header>FAQs</el-header>
+        <el-header>Frequently asked questions</el-header>
         <el-main>
-          <el-collapse v-model="activeName">
-            <el-collapse-item
-              v-for="(item, index) in faqs"
-              :key="index"
-              :title="item.question"
-              :name="index"
-            >
-              {{ item.answer }}
-            </el-collapse-item>
-          </el-collapse>
+          <el-card>
+            <el-collapse v-model="activeName" style="color: black">
+              <el-collapse-item
+                v-for="(item, index) in faqs"
+                :key="index"
+                :title="item.question"
+                :name="index"
+              >
+                {{ item.answer }}
+              </el-collapse-item>
+            </el-collapse>
+          </el-card>
         </el-main>
       </el-container>
     </el-main>
@@ -30,23 +32,90 @@ export default {
       activeName: "",
       faqs: [
         {
-          question: "What is Element UI?",
+          question: "How does the app use ChatGPT for prompts?",
           answer:
-            "Element UI is a Vue-based UI library that provides a set of high-quality UI components.",
+            "The app uses ChatGPT to generate prompts related to food items found in the receipts. This can include recipe suggestions, nutritional information, and more.",
         },
         {
-          question: "How to install Element UI?",
+          question:
+            "How does the app analyze the frequency of items purchased?",
           answer:
-            "You can install Element UI using npm: npm install element-ui.",
+            "The app tracks the items extracted from receipts over time and provides reports on the frequency of specific items purchased. This helps users understand their purchasing habits.",
         },
         {
-          question: "What are the features of Element UI?",
+          question: "Is there a way to view the history of receipts scanned?",
           answer:
-            "Element UI has a wide range of UI components such as Button, Input, Dialog, Tabs, Table, etc.",
+            "Yes, the app maintains a history of all scanned receipts, allowing users to review past purchases and analyze their spending patterns.",
+        },
+        {
+          question: "Can the app categorize the items from the receipts?",
+          answer:
+            "Yes, the app can categorize items based on the extracted text, such as grouping food items by type (e.g., fruits, vegetables, dairy).",
+        },
+        {
+          question: "How accurate is the OCR feature in your app?",
+          answer:
+            "The OCR feature is designed to be highly accurate, using advanced algorithms to recognize and extract text from receipts. However, accuracy can vary depending on the quality of the receipt image.",
+        },
+        {
+          question: "Is the data from receipts stored securely?",
+          answer:
+            "Yes, the app ensures that all extracted data is stored securely, protecting user privacy and confidentiality.",
+        },
+        {
+          question: "Can the app provide insights on spending habits?",
+          answer:
+            "Yes, the app analyzes the extracted data to provide insights on spending habits, such as identifying frequently purchased items and total spending over time.",
+        },
+        {
+          question: "Does the app support multiple languages?",
+          answer:
+            "Currently, the app supports OCR and text extraction primarily in English. Support for additional languages may be added in future updates.",
+        },
+        {
+          question:
+            "What kind of prompts related to food items does the app provide?",
+          answer:
+            "The app provides prompts such as recipe ideas, nutritional information, and suggestions for alternative ingredients based on the items found in the receipts.",
+        },
+        {
+          question:
+            "Can the app integrate with other budgeting or expense tracking tools?",
+          answer:
+            "Integration with other budgeting or expense tracking tools is not currently available but may be considered for future updates.",
+        },
+        {
+          question: "What is the purpose of your app?",
+          answer:
+            "The app uses OCR technology to extract textual data from receipts and displays it. It also uses ChatGPT to provide prompts related to food items and analyzes the frequency of items purchased.",
+        },
+        {
+          question: "How to use the OCR feature in your app?",
+          answer:
+            "You can use the OCR feature by uploading a receipt image. The app will process the image and display the extracted textual data.",
+        },
+        {
+          question: "What are the key features of your app?",
+          answer:
+            "The app offers OCR to extract text from receipts, displays the extracted data, provides ChatGPT prompts related to food items, and analyzes the frequency of items purchased.",
         },
       ],
     };
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+/* .el-collapse-item__header {
+  display: flex;
+  align-items: center;
+  height: 33px;
+  line-height: 53px;
+  background-color: transparent;
+  color: black !important;
+  border-bottom: 2px solid black !important;
+  font-size: 18px;
+  font-weight: 500;
+  transition: border-bottom-color 0.3s;
+  outline: 0;
+} */
+</style>

@@ -73,11 +73,7 @@
               </div>
               <el-button
                 @click="
-                  fetchData(
-                    'gpt',
-                    '/api/diet-schedule-using-gpt',
-                    'dietSchedule'
-                  )
+                  fetchData('gpt', '/diet-schedule-using-gpt', 'dietSchedule')
                 "
                 type="info"
                 plain
@@ -107,7 +103,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/generate-recipe-using-gpt',
+                    '/generate-recipe-using-gpt',
                     'generatedRecipes'
                   )
                 "
@@ -125,7 +121,9 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+import { auth } from "../Firebase.js";
+import { onAuthStateChanged } from "firebase/auth";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   data() {
@@ -144,39 +142,60 @@ export default {
     };
   },
   async mounted() {
-    try {
-      await this.fetchData(
-        "json",
-        "/api/fusion-cuisine-suggestions-using-json",
-        "fusionSuggestions"
-      );
-      await this.fetchData(
-        "json",
-        "/api/user-defined-dishes-using-json",
-        "definedDishes"
-      );
-      await this.fetchData(
-        "json",
-        "/api/unique-recipes-using-json",
-        "uniqueRecipes"
-      );
-      await this.fetchData(
-        "json",
-        "/api/diet-schedule-using-json",
-        "dietSchedule"
-      );
-      await this.fetchData(
-        "json",
-        "/api/generate-recipe-using-json",
-        "generatedRecipes"
-      );
-    } catch (error) {
-      console.error("Error loading data:", error);
-    }
+    // Check authentication state
+    this.checkAuthState();
   },
+
   methods: {
+    checkAuthState() {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          this.currentUser = user;
+          console.log("User is logged in:", user.email);
+          try {
+            await this.fetchData(
+              "json",
+              "/fusion-cuisine-suggestions-using-json",
+              "fusionSuggestions"
+            );
+            await this.fetchData(
+              "json",
+              "/user-defined-dishes-using-json",
+              "definedDishes"
+            );
+            await this.fetchData(
+              "json",
+              "/unique-recipes-using-json",
+              "uniqueRecipes"
+            );
+            await this.fetchData(
+              "json",
+              "/diet-schedule-using-json",
+              "dietSchedule"
+            );
+            await this.fetchData(
+              "json",
+              "/generate-recipe-using-json",
+              "generatedRecipes"
+            );
+          } catch (error) {
+            console.error("Error loading data:", error);
+          }
+        } else {
+          console.log("User is not logged in");
+          this.currentUser = null;
+        }
+      });
+    },
+
     async fetchData(type, endpoint, property) {
       try {
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          throw new Error("User not authenticated");
+        }
+        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+        console.log("idToken", idToken);
         this.loading = true;
         let response;
         if (type === "json") {
@@ -191,6 +210,7 @@ export default {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
             },
             body: JSON.stringify({}),
           });

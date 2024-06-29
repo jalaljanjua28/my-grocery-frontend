@@ -7,9 +7,18 @@
 </template>
 
 <script>
+import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
+
 export default {
   methods: {
-    deleteAllItems() {
+    async deleteAllItems() {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
       // Show a confirmation popup before proceeding
       const userConfirmed = confirm(
         "Are you sure you want to delete all items?"
@@ -17,16 +26,14 @@ export default {
 
       if (userConfirmed) {
         // Make an HTTP POST request to your backend
-        fetch(
-          "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api/deleteAll/master-nonexpired",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({}),
-          }
-        )
+        fetch(baseURL + "/deleteAll/master-nonexpired", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({}),
+        })
           .then((response) => response.json())
           .then((data) => {
             // Handle the response from the server if needed

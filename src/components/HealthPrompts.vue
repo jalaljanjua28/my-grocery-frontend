@@ -31,7 +31,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/allergy-information-using-gpt',
+                    '/allergy-information-using-gpt',
                     'AllergyInformation'
                   )
                 "
@@ -74,7 +74,7 @@
                   @click="
                     fetchData(
                       'gpt',
-                      '/api/healthier-alternatives-using-gpt',
+                      '/healthier-alternatives-using-gpt',
                       'alternatives'
                     )
                   "
@@ -115,7 +115,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/healthy-eating-advice-using-gpt',
+                    '/healthy-eating-advice-using-gpt',
                     'eatingAdviceList'
                   )
                 "
@@ -161,7 +161,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/health-advice-using-gpt',
+                    '/health-advice-using-gpt',
                     'healthAdviceList'
                   )
                 "
@@ -201,7 +201,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/healthy-items-usage-using-gpt',
+                    '/healthy-items-usage-using-gpt',
                     'suggestions'
                   )
                 "
@@ -245,7 +245,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/health-incompatabilities-suggestions-using-gpt',
+                    '/health-incompatabilities-suggestions-using-gpt',
                     'healthIncompatibilities'
                   )
                 "
@@ -290,7 +290,7 @@
               @click="
                 fetchData(
                   'gpt',
-                  '/api/nutritional-analysis-using-gpt',
+                  '/nutritional-analysis-using-gpt',
                   'nutritionalAnalysis'
                 )
               "
@@ -330,7 +330,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/nutritional-value-suggestions-using-gpt',
+                    '/nutritional-value-suggestions-using-gpt',
                     'nutritionalValue'
                   )
                 "
@@ -347,7 +347,9 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
+import { auth } from "../Firebase.js";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default {
   data() {
@@ -365,59 +367,79 @@ export default {
     };
   },
   async mounted() {
-    try {
-      await this.fetchData(
-        "json",
-        "/api/allergy-information-using-json",
-        "AllergyInformation"
-      );
-      await this.fetchData(
-        "json",
-        "/api/healthier-alternatives-using-json",
-        "alternatives"
-      );
-      await this.fetchData(
-        "json",
-        "/api/food-waste-reduction-using-json",
-        "foodWasteReductionSuggestions"
-      );
-      await this.fetchData(
-        "json",
-        "/api/healthy-eating-advice-using-json",
-        "eatingAdviceList"
-      );
-      await this.fetchData(
-        "json",
-        "/api/healthy-items-usage-using-json",
-        "suggestions"
-      );
-      await this.fetchData(
-        "json",
-        "/api/health_incompatibilities_using_json",
-        "healthIncompatibilities"
-      );
-      await this.fetchData(
-        "json",
-        "/api/nutritional-analysis-using-json",
-        "nutritionalAnalysis"
-      );
-      await this.fetchData(
-        "json",
-        "/api/nutritional-value-using-json",
-        "nutritionalValue"
-      );
-      await this.fetchData(
-        "json",
-        "/api/health-advice-using-json",
-        "healthAdviceList"
-      );
-    } catch (error) {
-      console.error("Error loading data:", error);
-    }
+    // Check authentication state
+    this.checkAuthState();
   },
+
   methods: {
+    async checkAuthState() {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          this.currentUser = user;
+          console.log("User is logged in"), user.email;
+          try {
+            await this.fetchData(
+              "json",
+              "/allergy-information-using-json",
+              "AllergyInformation"
+            );
+            await this.fetchData(
+              "json",
+              "/healthier-alternatives-using-json",
+              "alternatives"
+            );
+            await this.fetchData(
+              "json",
+              "/food-waste-reduction-using-json",
+              "foodWasteReductionSuggestions"
+            );
+            await this.fetchData(
+              "json",
+              "/healthy-eating-advice-using-json",
+              "eatingAdviceList"
+            );
+            await this.fetchData(
+              "json",
+              "/healthy-items-usage-using-json",
+              "suggestions"
+            );
+            await this.fetchData(
+              "json",
+              "/health_incompatibilities_using_json",
+              "healthIncompatibilities"
+            );
+            await this.fetchData(
+              "json",
+              "/nutritional-analysis-using-json",
+              "nutritionalAnalysis"
+            );
+            await this.fetchData(
+              "json",
+              "/nutritional-value-using-json",
+              "nutritionalValue"
+            );
+            await this.fetchData(
+              "json",
+              "/health-advice-using-json",
+              "healthAdviceList"
+            );
+          } catch (error) {
+            console.error("Error loading data:", error);
+          }
+        } else {
+          console.log("User is not logged in");
+          this.currentUser = null;
+        }
+      });
+    },
     async fetchData(type, endpoint, property) {
       try {
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          throw new Error("User not authenticated");
+        }
+        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+        console.log("idToken", idToken);
         this.loading = true;
         let response;
         if (type === "json") {
@@ -425,6 +447,7 @@ export default {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
             },
           });
         } else if (type === "gpt") {

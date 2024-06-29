@@ -84,7 +84,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   data() {
@@ -115,7 +115,7 @@ export default {
   },
   methods: {
     addItem(itemToAdd) {
-      fetch(baseUrl + "/api/addItem/master-nonexpired", {
+      fetch(baseUrl + "/addItem/master-nonexpired", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -141,7 +141,7 @@ export default {
     },
     deleteItem(itemToDelete) {
       // Send a request to your backend to delete the item by its name
-      fetch(baseUrl + "/api/removeItem/master-non-expired", {
+      fetch(baseUrl + "/removeItem/master-non-expired", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

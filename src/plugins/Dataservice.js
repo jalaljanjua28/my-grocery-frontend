@@ -1,5 +1,5 @@
 // DataService.js
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -10,7 +10,7 @@ export async function fetchMasterExpiredData() {
         try {
           const idToken = await user.getIdToken(/* forceRefresh */ true);
           console.log("idToken", idToken);
-          const response = await fetch(baseUrl + "/api/get-master-expired", {
+          const response = await fetch(baseUrl + "/get-master-expired-list", {
             method: "GET",
             mode: "cors",
             headers: {
@@ -18,11 +18,9 @@ export async function fetchMasterExpiredData() {
               Authorization: `Bearer ${idToken}`,
             },
           });
-
           if (!response.ok) {
             throw new Error("Failed to fetch data.");
           }
-
           const data = await response.json();
           const processedData = processData(data);
           resolve(processedData);
@@ -36,7 +34,6 @@ export async function fetchMasterExpiredData() {
     });
   });
 }
-
 export async function fetchShoppingListData() {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, async (user) => {
@@ -44,7 +41,7 @@ export async function fetchShoppingListData() {
         try {
           const idToken = await user.getIdToken(/* forceRefresh */ true);
           console.log("idToken", idToken);
-          const response = await fetch(baseUrl + "/api/get-shopping-list", {
+          const response = await fetch(baseUrl + "/get-shopping-list", {
             method: "GET",
             mode: "cors",
             headers: {
@@ -77,19 +74,21 @@ export async function fetchMasterNonexpiredData() {
         try {
           const idToken = await user.getIdToken(/* forceRefresh */ true);
           console.log("idToken", idToken);
-          const response = await fetch(baseUrl + "/api/get-master-nonexpired", {
-            method: "GET",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${idToken}`,
-            },
-          });
+          const response = await fetch(
+            baseUrl + "/get-master-nonexpired-list",
+            {
+              method: "GET",
+              mode: "cors",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${idToken}`,
+              },
+            }
+          );
 
           if (!response.ok) {
             throw new Error("Failed to fetch data.");
           }
-
           const data = await response.json();
           const processedData = processData(data);
           resolve(processedData);
@@ -110,7 +109,7 @@ export async function fetchPurchasedListData() {
         try {
           const idToken = await user.getIdToken(/* forceRefresh */ true);
           console.log("idToken", idToken);
-          const response = await fetch(baseUrl + "/api/get-purchased-list", {
+          const response = await fetch(baseUrl + "/get-purchased-list", {
             method: "GET",
             mode: "cors",
             headers: {
@@ -122,7 +121,6 @@ export async function fetchPurchasedListData() {
           if (!response.ok) {
             throw new Error("Failed to fetch data.");
           }
-
           const data = await response.json();
           const processedData = processData(data);
           resolve(processedData);
@@ -145,7 +143,6 @@ function processData(data) {
     const textDecoder = new TextDecoder();
     const decodedData = textDecoder.decode(binaryData);
     const parsedData = JSON.parse(decodedData);
-
     // Process Food data
     const Food = parsedData.Food.filter((item) => item.Name !== "TestFNE").map(
       (item, index) => ({

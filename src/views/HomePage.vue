@@ -41,7 +41,7 @@
           @click="
             fetchData(
               'gpt',
-              '/api/https://my-grocery-app-hlai3cv5za-uc.a.run.app',
+              '/https://my-grocery-app-hlai3cv5za-uc.a.run.app',
               'jokes'
             )
           "
@@ -101,7 +101,7 @@ import {
 import SearchInventory from "../components/SearchInventory.vue";
 import { auth } from "../Firebase.js";
 
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   components: {
@@ -180,7 +180,7 @@ export default {
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
         console.log("idToken", idToken);
         this.loading = true;
-        const response = await fetch(baseUrl + "/api/jokes-using-json", {
+        const response = await fetch(baseUrl + "/jokes-using-json", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -214,7 +214,7 @@ export default {
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
         console.log("idToken", idToken);
         this.loading = true;
-        const response = await fetch(baseUrl + "/api/jokes-using-gpt", {
+        const response = await fetch(baseUrl + "/jokes-using-gpt", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

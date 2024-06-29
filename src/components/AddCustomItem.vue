@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   data() {
@@ -45,7 +46,13 @@ export default {
     };
   },
   methods: {
-    AddItem() {
+    async AddItem() {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
       const requestData = {
         item_name: this.form.item_name,
         item_price: this.form.item_price,
@@ -54,19 +61,29 @@ export default {
         item_expiry: this.form.item_expiry,
         item_day_left: this.form.item_day_left,
       };
-      axios
-        .post("https://my-grocery-app-hlai3cv5za-uc.a.run.app/api", requestData)
+      fetch(baseURL + "/add-custom-item", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify(requestData),
+      })
         .then((response) => {
-          this.$message({
-            message: "Item Added Successfully",
-            type: "success",
-          });
-          console.log(response.data);
-          this.$emit("item-added", requestData); // Emit an event with the added item data
-          // Introduce a delay of 2000 milliseconds (2 seconds) before reloading the page
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
+          if (response.ok) {
+            this.$message({
+              message: "Item Added Successfully",
+              type: "success",
+            });
+            console.log(response.data);
+            this.$emit("item-added", requestData); // Emit an event with the added item data
+            // Introduce a delay of 2000 milliseconds (2 seconds) before reloading the page
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          } else {
+            throw new Error("Failed to add item");
+          }
         })
         .catch((error) => {
           console.log(error);

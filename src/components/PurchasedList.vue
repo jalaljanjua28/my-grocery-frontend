@@ -33,7 +33,8 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app";
+import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   props: {
@@ -47,13 +48,20 @@ export default {
   },
 
   methods: {
-    addItem(itemToAdd) {
+    async addItem(itemToAdd) {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
       const userConfirmed = confirm("Are you sure you want to add items?");
       if (userConfirmed) {
-        fetch(baseUrl + "/api/addItem/purchase-list", {
+        fetch(baseUrl + "/addItem/purchase-list", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({ itemName: itemToAdd.name }),
         })
@@ -74,15 +82,22 @@ export default {
         }, 2000);
       }
     },
-    deleteItem(itemToDelete) {
+    async deleteItem(itemToDelete) {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
       const userConfirmed = confirm("Are you sure you want to delete items?");
 
       if (userConfirmed) {
         // Send a request to your backend to delete the item by its name
-        fetch(baseUrl + "/api/removeItem/purchase-list", {
+        fetch(baseUrl + "/removeItem/purchase-list", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({ itemName: itemToDelete.name }),
         })
