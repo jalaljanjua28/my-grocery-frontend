@@ -50,7 +50,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/ethical-eating-suggestion-using-gpt',
+                    '/ethical-eating-suggestion-using-gpt',
                     'ethicalEatingSuggestions'
                   )
                 "
@@ -88,9 +88,7 @@
             }}</el-alert>
           </div>
           <el-button
-            @click="
-              fetchData('gpt', '/api/get-fun-facts-using-gpt', 'funFacts')
-            "
+            @click="fetchData('gpt', '/get-fun-facts-using-gpt', 'funFacts')"
             :loading="loading"
             type="info"
             plain
@@ -117,7 +115,7 @@
             </div>
             <el-button
               @click="
-                fetchData('gpt', '/api/cooking-tips-using-gpt', 'cookingTips')
+                fetchData('gpt', '/cooking-tips-using-gpt', 'cookingTips')
               "
               :loading="loading"
               type="info"
@@ -145,11 +143,7 @@
             </div>
             <el-button
               @click="
-                fetchData(
-                  'gpt',
-                  '/api/current-trends-using-gpt',
-                  'currentTrends'
-                )
+                fetchData('gpt', '/current-trends-using-gpt', 'currentTrends')
               "
               :loading="loading"
               type="info"
@@ -231,7 +225,7 @@
 <script>
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   data() {
@@ -244,15 +238,15 @@ export default {
       ethicalEatingSuggestions: [],
       foodWasteReductionSuggestions: [],
       moodChangerSuggestions: [],
-      displayMood: "true",
-      displayEthicalSuggestions: "true",
-      displayCookingTips: "true",
-      displayCurrentTrends: "true",
-      displayWasteReduction: "true",
-      displayFunFacts: "true",
-      displayFoodHandling: "true",
+      displayMood: true,
+      displayEthicalSuggestions: true,
+      displayCookingTips: true,
+      displayCurrentTrends: true,
+      displayWasteReduction: true,
+      displayFunFacts: true,
+      displayFoodHandling: true,
       loading: false,
-      error: false,
+      error: true,
       currentUser: null,
       errorMessage: null,
     };
@@ -321,7 +315,7 @@ export default {
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
         console.log("idToken", idToken);
-        this.loading = true;
+        // this.loading = true;
         let response;
         if (type === "json") {
           response = await fetch(baseUrl + endpoint, {
@@ -340,11 +334,7 @@ export default {
             },
             body: JSON.stringify({}),
           });
-          response = await fetch(baseUrl + endpoint, {
-            headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          });
+          response = await fetch(baseUrl + endpoint);
         } else {
           throw new Error("Invalid request type.");
         }
