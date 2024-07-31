@@ -35,17 +35,7 @@
         <p class="joke-card">
           {{ joke["Food Joke"] }}
         </p>
-        <el-button
-          :loading="loading"
-          type="info"
-          @click="
-            fetchData(
-              'gpt',
-              '/https://my-grocery-app-hlai3cv5za-uc.a.run.app',
-              'jokes'
-            )
-          "
-          plain
+        <el-button :loading="loading" type="info" @click="gptJokes()" plain
           >Generate Prompt</el-button
         >
       </el-card>
