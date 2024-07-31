@@ -50,7 +50,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/api/ethical-eating-suggestion-using-gpt',
+                    '/ethical-eating-suggestion-using-gpt',
                     'ethicalEatingSuggestions'
                   )
                 "
@@ -88,9 +88,7 @@
             }}</el-alert>
           </div>
           <el-button
-            @click="
-              fetchData('gpt', '/api/get-fun-facts-using-gpt', 'funFacts')
-            "
+            @click="fetchData('gpt', '/get-fun-facts-using-gpt', 'funFacts')"
             :loading="loading"
             type="info"
             plain
@@ -117,7 +115,7 @@
             </div>
             <el-button
               @click="
-                fetchData('gpt', '/api/cooking-tips-using-gpt', 'cookingTips')
+                fetchData('gpt', '/cooking-tips-using-gpt', 'cookingTips')
               "
               :loading="loading"
               type="info"
@@ -145,11 +143,7 @@
             </div>
             <el-button
               @click="
-                fetchData(
-                  'gpt',
-                  '/api/current-trends-using-gpt',
-                  'currentTrends'
-                )
+                fetchData('gpt', '/current-trends-using-gpt', 'currentTrends')
               "
               :loading="loading"
               type="info"
