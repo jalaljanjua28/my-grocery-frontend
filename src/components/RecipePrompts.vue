@@ -6,10 +6,10 @@
           <!-- Fusion Suggestions Section -->
           <el-collapse-item title="Food Fusion Suggestions">
             <div>
-              <div v-if="loading" class="loading-indicator">
+              <div v-if="loadingSuggestions" class="loading-indicator">
                 <el-spinner></el-spinner>
               </div>
-              <div v-if="displaySuggestions && !loading">
+              <div v-if="displaySuggestions && !loadingSuggestions">
                 <div
                   v-for="(suggestion, index) in fusionSuggestions"
                   :key="index"
@@ -25,10 +25,10 @@
           <!-- User Defined Dish Section -->
           <el-collapse-item title="User Defined Dish">
             <div>
-              <div v-if="loading" class="loading-indicator">
+              <div v-if="loadingDishes" class="loading-indicator">
                 <el-spinner></el-spinner>
               </div>
-              <div v-if="displayDishes && !loading">
+              <div v-if="displayDishes && !loadingDishes">
                 <div v-for="(fact, index) in definedDishes" :key="index">
                   <p><strong>Fun Facts:</strong> {{ fact["Fun Facts"] }}</p>
                 </div>
@@ -38,10 +38,10 @@
           <!-- Unique Recipe Section -->
           <el-collapse-item title="Unique Recipe">
             <div>
-              <div v-if="loading" class="loading-indicator">
+              <div v-if="loadingRecipes" class="loading-indicator">
                 <el-spinner></el-spinner>
               </div>
-              <div v-if="displayRecipe && !loading">
+              <div v-if="displayRecipe && !loadingRecipes">
                 <div v-for="(recipe, index) in uniqueRecipes" :key="index">
                   <p><strong>Recipe:</strong> {{ recipe["Recipe"] }}</p>
                   <p>
@@ -55,10 +55,10 @@
           <!-- Diet Schedule Section -->
           <el-collapse-item title="Diet Schedule">
             <div>
-              <div v-if="loading" class="loading-indicator">
+              <div v-if="loadingSchedule" class="loading-indicator">
                 <el-spinner></el-spinner>
               </div>
-              <div v-if="displaySchedule && !loading">
+              <div v-if="displaySchedule && !loadingSchedule">
                 <div v-for="(meal, index) in dietSchedule" :key="index">
                   <p slot="header">
                     Meal Number {{ meal["Meal Number"] }} -
@@ -73,11 +73,16 @@
               </div>
               <el-button
                 @click="
-                  fetchData('gpt', '/diet-schedule-using-gpt', 'dietSchedule')
+                  fetchData(
+                    'gpt',
+                    '/diet-schedule-using-gpt',
+                    'dietSchedule',
+                    'loadingSchedule'
+                  )
                 "
                 type="info"
                 plain
-                :loading="loading"
+                :loading="loadingSchedule"
                 >Generate Prompt</el-button
               >
             </div>
@@ -85,10 +90,10 @@
           <!-- Generated Recipes Section -->
           <el-collapse-item title="Generated Recipes">
             <div>
-              <div v-if="loading" class="loading-indicator">
+              <div v-if="loadingGenerated" class="loading-indicator">
                 <el-spinner></el-spinner>
               </div>
-              <div v-if="displayResult && !loading">
+              <div v-if="displayResult && !loadingGenerated">
                 <div v-for="(recipe, index) in generatedRecipes" :key="index">
                   <p slot="header">
                     Group of Items: {{ recipe["Group of Items"].join(", ") }}
@@ -104,12 +109,13 @@
                   fetchData(
                     'gpt',
                     '/generate-recipe-using-gpt',
-                    'generatedRecipes'
+                    'generatedRecipes',
+                    'loadingGenerated'
                   )
                 "
                 type="info"
                 plain
-                :loading="loading"
+                :loading="loadingGenerated"
                 >Generate Prompt</el-button
               >
             </div>
@@ -119,7 +125,6 @@
     </el-card>
   </div>
 </template>
-
 <script>
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
@@ -138,7 +143,11 @@ export default {
       displayRecipe: true,
       displaySchedule: true,
       displayResult: true,
-      loading: false,
+      loadingSuggestions: false,
+      loadingDishes: false,
+      loadingRecipes: false,
+      loadingSchedule: false,
+      loadingGenerated: false,
     };
   },
   async mounted() {
@@ -156,27 +165,32 @@ export default {
             await this.fetchData(
               "json",
               "/fusion-cuisine-suggestions-using-json",
-              "fusionSuggestions"
+              "fusionSuggestions",
+              "loadingSuggestions"
             );
             await this.fetchData(
               "json",
-              "/user-defined-dishes-using-json",
-              "definedDishes"
+              "/user-defined-dish-using-json",
+              "definedDishes",
+              "loadingDishes"
             );
             await this.fetchData(
               "json",
               "/unique-recipes-using-json",
-              "uniqueRecipes"
+              "uniqueRecipes",
+              "loadingRecipes"
             );
             await this.fetchData(
               "json",
               "/diet-schedule-using-json",
-              "dietSchedule"
+              "dietSchedule",
+              "loadingSchedule"
             );
             await this.fetchData(
               "json",
-              "/generate-recipe-using-json",
-              "generatedRecipes"
+              "/recipes-using-json",
+              "generatedRecipes",
+              "loadingGenerated"
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -188,7 +202,7 @@ export default {
       });
     },
 
-    async fetchData(type, endpoint, property) {
+    async fetchData(type, endpoint, property, loadingProperty) {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {
@@ -196,13 +210,14 @@ export default {
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
         console.log("idToken", idToken);
-        this.loading = true;
+        this[loadingProperty] = true;
         let response;
         if (type === "json") {
           response = await fetch(baseUrl + endpoint, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
             },
           });
         } else if (type === "gpt") {
@@ -214,7 +229,11 @@ export default {
             },
             body: JSON.stringify({}),
           });
-          response = await fetch(baseUrl + endpoint);
+          response = await fetch(baseUrl + endpoint, {
+            headers: {
+              Authorization: `Bearer ${idToken}`,
+            },
+          });
         } else {
           throw new Error("Invalid request type.");
         }
@@ -232,18 +251,14 @@ export default {
           console.error(
             `Property '${property}' not found in the server response.`
           );
+          this[property] = []; // Ensure property is set to an empty array if not found
         }
-        this.loading = false;
+        this[loadingProperty] = false;
       } catch (error) {
         this.error = error.message;
+        this[loadingProperty] = false;
       }
     },
   },
 };
 </script>
-
-<style scoped>
-.el-button {
-  margin-top: 10px;
-}
-</style>
