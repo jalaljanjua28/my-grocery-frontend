@@ -96,6 +96,7 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({ email: user.email, idToken }),
         });
@@ -121,6 +122,7 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({ email: user.email, idToken }),
         });
