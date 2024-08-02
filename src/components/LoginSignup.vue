@@ -41,7 +41,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run/api";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 import {
   signInWithPopup,

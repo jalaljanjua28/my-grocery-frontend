@@ -136,7 +136,7 @@
 </template>
 
 <script>
-const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.apps/api";
+const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 import { auth } from "../Firebase.js";
 
 export default {

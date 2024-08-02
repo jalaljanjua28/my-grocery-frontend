@@ -23,11 +23,6 @@ export default {
     // Listen for authentication state changes
     onAuthStateChanged(auth, (user) => {
       this.currentUser = user;
-      if (user) {
-        console.log("User is logged in:", user);
-      } else {
-        console.log("No user is logged in");
-      }
     });
   },
 
@@ -60,12 +55,6 @@ export default {
           })
           .catch((error) => {
             console.log("Error:", error);
-            if (error.response) {
-              console.log("Response Status:", error.response.status);
-              console.log("Response Data:", error.response.data);
-            } else {
-              console.log("Error Message:", error.message);
-            }
           });
       } else {
         console.error(
@@ -85,7 +74,6 @@ export default {
           const dummyFile = new File(["dummy content"], "dummy.jpg", {
             type: "image/jpeg",
           });
-          console.log("Simulating upload with dummy file:", dummyFile);
           this.DummyProcess(dummyFile);
           console.log("simulateUpload function called!");
         }
