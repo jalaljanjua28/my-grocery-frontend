@@ -97,6 +97,9 @@ export default {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${idToken}`,
+            "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
+            "Access-Control-Allow-Methods": "POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type,Authorization",
           },
           body: JSON.stringify({ email: user.email, idToken }),
         });
@@ -123,6 +126,9 @@ export default {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${idToken}`,
+            "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
+            "Access-Control-Allow-Methods": "POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type,Authorization",
           },
           body: JSON.stringify({ email: user.email, idToken }),
         });
