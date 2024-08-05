@@ -84,7 +84,7 @@ export default {
       companyName: "My Grocery Home",
       companyDescription:
         "We are a leading company in the field of technology, providing innovative solutions for our clients.",
-      companyPhone: "051-215-3113",
+      companyPhone: "0334-9553387",
       companyEmail: "jalaljanjua88@gmail.com",
       feedbackForm: {
         name: "",

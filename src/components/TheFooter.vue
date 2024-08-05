@@ -4,25 +4,51 @@
       <div class="container">
         <el-row :gutter="20" style="margin-left: 0px">
           <el-col :span="8">
-            <h4>About Us</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h>About Us</h>
+            <p>
+              We are a leading company in the field of technology, providing
+              innovative solutions for our clients.
+            </p>
           </el-col>
           <el-col :span="8">
-            <h4>Contact</h4>
-            <p>123 Street, City</p>
-            <p>Phone: 123-456-7890</p>
+            <h>Contact</h>
+            <p>House 553, Street 10, F10/2</p>
+            <p>Cell: 0334-9553387</p>
           </el-col>
           <el-col :span="8" class="footer-column">
-            <h4>Follow Us</h4>
-            <p>Linkedin</p>
-            <p>Twitter</p>
-            <p>Facebook</p>
-            <p>Instagram</p>
-
+            <h>Follow Us</h>
+            <p>
+              <a
+                href="https://www.linkedin.com/company/your-company"
+                target="_blank"
+                >LinkedIn</a
+              >
+            </p>
+            <p>
+              <a href="https://twitter.com/your_handle" target="_blank"
+                >Twitter</a
+              >
+            </p>
+            <p>
+              <a href="https://www.facebook.com/your.page" target="_blank"
+                >Facebook</a
+              >
+            </p>
+            <p>
+              <a href="https://www.instagram.com/your_account" target="_blank"
+                >Instagram</a
+              >
+            </p>
             <div class="social-icons">
-              <i class="fab fa-facebook"></i>
-              <i class="fab fa-twitter"></i>
-              <i class="fab fa-instagram"></i>
+              <a href="https://www.facebook.com/your.page" target="_blank"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="https://twitter.com/your_handle" target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://www.instagram.com/your_account" target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
             </div>
           </el-col>
         </el-row>
@@ -69,11 +95,6 @@ export default {
 
 <style scoped>
 p {
-  font-size: 15px;
-  font-weight: 400;
-  display: flex;
-  justify-content: center;
-  font-family: "Inter", sans-serif;
   color: black;
 }
 </style>

@@ -66,8 +66,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.inventory {
-  display: none;
-}
-</style>
+<style scoped></style>
