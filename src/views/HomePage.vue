@@ -234,18 +234,4 @@ export default {
 .el-page-header {
   display: none !important;
 }
-@media screen and (max-width: 600px) {
-  .searchInventory {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
-@media screen and (min-width: 600px) {
-  .searchInventory {
-    display: none;
-  }
-  .el-select {
-    display: none;
-  }
-}
 </style>

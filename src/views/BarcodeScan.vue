@@ -25,6 +25,7 @@
         >
         <div class="el-upload__tip" slot="tip">
           JPG/PNG files with a size less than 500kb
+          <p style="color: red">Use Microsoft Lens for best image quality</p>
         </div>
       </el-upload>
       <div v-if="showStatus" class="status">Image Upload Processing...</div>

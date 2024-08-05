@@ -12,7 +12,7 @@
                 <h1 class="header-title">{{ companyName }}</h1>
               </el-header>
               <div class="profile-card-header">
-                <h2>About Us</h2>
+                <h>About Us</h>
               </div>
               <div class="profile-card-body">
                 <p>{{ companyDescription }}</p>
@@ -22,7 +22,7 @@
           <el-col :span="12">
             <el-card class="profile-card">
               <div class="profile-card-header">
-                <h2>Contact Us</h2>
+                <h>Contact Us</h>
               </div>
               <div class="profile-card-body">
                 <p>Phone: {{ companyPhone }}</p>
@@ -35,7 +35,7 @@
           <el-col :span="24">
             <el-card class="feedback-card">
               <div class="feedback-card-header">
-                <h2>Leave a Feedback</h2>
+                <h>Leave a Feedback</h>
               </div>
               <div class="feedback-card-body">
                 <el-form
@@ -84,7 +84,7 @@ export default {
       companyName: "My Grocery Home",
       companyDescription:
         "We are a leading company in the field of technology, providing innovative solutions for our clients.",
-      companyPhone: "051-215-3113",
+      companyPhone: "0334-9553387",
       companyEmail: "jalaljanjua88@gmail.com",
       feedbackForm: {
         name: "",
