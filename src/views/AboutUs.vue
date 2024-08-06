@@ -5,14 +5,14 @@
     </router-link>
     <el-container class="profile-page">
       <el-main class="main-content">
-        <el-row :gutter="20" style="margin-top: 30px">
+        <el-row :gutter="20">
           <el-col :span="12">
             <el-card class="profile-card">
               <el-header>
-                <h1 class="header-title">{{ companyName }}</h1>
+                <h class="header-title">{{ companyName }}</h>
               </el-header>
               <div class="profile-card-header">
-                <h>About Us</h>
+                <h1>About Us</h1>
               </div>
               <div class="profile-card-body">
                 <p>{{ companyDescription }}</p>
@@ -22,11 +22,11 @@
           <el-col :span="12">
             <el-card class="profile-card">
               <div class="profile-card-header">
-                <h>Contact Us</h>
+                <h1>Contact Us</h1>
               </div>
               <div class="profile-card-body">
-                <p>Phone: {{ companyPhone }}</p>
-                <p>Email: {{ companyEmail }}</p>
+                <p><strong>Phone:</strong> {{ companyPhone }}</p>
+                <p><Strong>Email:</Strong> {{ companyEmail }}</p>
               </div>
             </el-card>
           </el-col>
@@ -35,7 +35,7 @@
           <el-col :span="24">
             <el-card class="feedback-card">
               <div class="feedback-card-header">
-                <h>Leave a Feedback</h>
+                <h1>Leave a Feedback</h1>
               </div>
               <div class="feedback-card-body">
                 <el-form

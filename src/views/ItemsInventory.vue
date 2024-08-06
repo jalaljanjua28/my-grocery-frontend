@@ -14,7 +14,7 @@
           >
         </router-link>
       </div>
-      <el-card>
+      <div class="search-container">
         <search-inventory
           :ExpiredFood="Food_expired"
           :ExpiredNonFood="NonFood_expired"
@@ -23,6 +23,8 @@
           :itemsFood="Food"
           :itemsNonFood="NonFood"
         />
+      </div>
+      <el-card>
         <el-tabs
           :tab-position="tabPosition"
           style="height: auto"
@@ -35,7 +37,7 @@
               slot="label"
               class="el-tabs__label"
               style="font-size: x-large"
-              ><i class="el-icon-success" style=""></i> Non Expired</span
+              ><i class="el-icon-success"></i> Non Expired</span
             >
             <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
               <el-tab-pane name="1" label="Food"
@@ -43,7 +45,7 @@
                   slot="label"
                   class="el-tabs__sublabel"
                   style="font-size: large"
-                  ><i class="el-icon-food" style=""></i> Food</span
+                  ><i class="el-icon-food"></i> Food</span
                 >
                 <div>
                   <non-expired-list
@@ -57,7 +59,7 @@
                   slot="label"
                   class="el-tabs__sublabel"
                   style="font-size: large"
-                  ><i class="el-icon-bicycle" style=""></i> Non Food</span
+                  ><i class="el-icon-bicycle"></i> Non Food</span
                 >
                 <div>
                   <non-expired-list
@@ -75,7 +77,7 @@
               slot="label"
               class="el-tabs__label"
               style="font-size: x-large"
-              ><i class="el-icon-error" style=""></i> Expired</span
+              ><i class="el-icon-error"></i> Expired</span
             >
             <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
               <el-tab-pane name="3" label="Food"
@@ -83,7 +85,7 @@
                   slot="label"
                   class="el-tabs__sublabel"
                   style="font-size: large"
-                  ><i class="el-icon-food" style=""></i> Food</span
+                  ><i class="el-icon-food"></i> Food</span
                 >
                 <div>
                   <expired-list
@@ -97,7 +99,7 @@
                   slot="label"
                   class="el-tabs__sublabel"
                   style="font-size: large"
-                  ><i class="el-icon-bicycle" style=""></i> Non Food</span
+                  ><i class="el-icon-bicycle"></i> Non Food</span
                 >
                 <div>
                   <expired-list
@@ -115,7 +117,7 @@
               slot="label"
               class="el-tabs__label"
               style="font-size: x-large"
-              ><i class="el-icon-s-claim" style=""></i> Shopping List</span
+              ><i class="el-icon-s-claim"></i> Shopping List</span
             >
             <el-tabs v-model="innerActiveTab" @tab-click="handleInnerTabClick">
               <el-tab-pane name="5" label="Food"
@@ -123,7 +125,7 @@
                   slot="label"
                   class="el-tabs__sublabel"
                   style="font-size: large"
-                  ><i class="el-icon-food" style=""></i> Food</span
+                  ><i class="el-icon-food"></i> Food</span
                 >
                 <div>
                   <shopping-list
@@ -137,7 +139,7 @@
                   slot="label"
                   class="el-tabs__sublabel"
                   style="font-size: large"
-                  ><i class="el-icon-bicycle" style=""></i> Non Food</span
+                  ><i class="el-icon-bicycle"></i> Non Food</span
                 >
                 <div>
                   <shopping-list
@@ -266,4 +268,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+</style>

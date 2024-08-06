@@ -76,12 +76,23 @@ body {
 }
 .el-card {
   border-radius: 10px !important;
-  border: 4px solid darkcyan;
+  border: 0px solid darkcyan;
   background-color: darkcyan !important;
   overflow: hidden;
   color: #303133;
   transition: 0.3s;
   margin-bottom: 30px;
+}
+.el-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-basis: auto;
+  box-sizing: border-box;
+  min-width: 0;
+}
+.el-card__body {
+  padding: 10px;
 }
 .el-dropdown-link {
   cursor: pointer;
@@ -94,7 +105,6 @@ body {
   transform-origin: center bottom;
   z-index: 2007;
 }
-
 .el-select-dropdown__item {
   font-size: 12px;
   padding: 0 20px;
@@ -218,7 +228,7 @@ body {
   color: white;
   cursor: pointer;
   border-bottom: 2px solid white;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
@@ -238,15 +248,21 @@ body {
 .response-message {
   margin-top: 10px;
 }
+h1 {
+  color: black;
+  font-size: 20px;
+  font-weight: bolder;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
+}
 h {
   font-weight: bolder;
   font-size: 16px;
   display: flex;
   justify-content: center;
   color: black;
-  margin-top: 20px;
+  margin-top: 35px;
 }
-
 p {
   font-size: 14px;
   color: white;
@@ -284,7 +300,6 @@ strong {
   align-items: center;
   justify-content: space-between;
 }
-
 .loading-container {
   position: fixed;
   top: 0;
@@ -379,6 +394,8 @@ strong {
 .header-title {
   padding: 0 0px;
   text-align: center;
+  font-size: x-large;
+  color: darkred;
 }
 .account-form {
   padding: 20px;
@@ -562,7 +579,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 8px !important;
+    font-size: 7px !important;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
@@ -574,6 +591,24 @@ strong {
   }
 }
 @media screen and (max-width: 400px) {
+  h1 {
+    color: black;
+    font-size: 15px;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .header-title {
+    padding: 0 0px !important;
+    text-align: center;
+    font-size: medium !important;
+    color: darkred;
+  }
+  .el-header {
+    height: 45px !important;
+    padding: 0 0px !important;
+    margin-bottom: 10px !important;
+  }
   .joke-card {
     font-size: large;
     color: white;
@@ -620,10 +655,6 @@ strong {
     height: 100%;
   }
 
-  .header-title {
-    text-align: center;
-  }
-
   .account-form {
     padding: 20px;
   }
@@ -634,7 +665,6 @@ strong {
     min-width: -2px;
     margin-right: 17px;
   }
-
   .input-with-select {
     width: 100%;
   }
@@ -647,7 +677,6 @@ strong {
     max-width: 100% !important;
     font-size: 12px !important;
   }
-
   .el-tabs__label {
     font-size: large !important;
   }
@@ -720,7 +749,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 10px;
+    font-size: 7px;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
@@ -747,7 +776,6 @@ strong {
     font-size: 10px;
   }
 }
-
 @media screen and (max-width: 550px) {
   .searchDev {
     display: none !important;
@@ -790,7 +818,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 13px;
+    font-size: 8px;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;

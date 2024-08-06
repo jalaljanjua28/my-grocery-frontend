@@ -6,10 +6,7 @@
           <!-- Fusion Suggestions Section -->
           <el-collapse-item title="Food Fusion Suggestions">
             <div>
-              <div v-if="loadingSuggestions" class="loading-indicator">
-                <el-spinner></el-spinner>
-              </div>
-              <div v-if="displaySuggestions && !loadingSuggestions">
+              <div v-if="!isLoading">
                 <div
                   v-for="(suggestion, index) in fusionSuggestions"
                   :key="index"
@@ -25,10 +22,7 @@
           <!-- User Defined Dish Section -->
           <el-collapse-item title="User Defined Dish">
             <div>
-              <div v-if="loadingDishes" class="loading-indicator">
-                <el-spinner></el-spinner>
-              </div>
-              <div v-if="displayDishes && !loadingDishes">
+              <div v-if="!isLoading">
                 <div v-for="(fact, index) in definedDishes" :key="index">
                   <p><strong>Fun Facts:</strong> {{ fact["Fun Facts"] }}</p>
                 </div>
@@ -38,10 +32,7 @@
           <!-- Unique Recipe Section -->
           <el-collapse-item title="Unique Recipe">
             <div>
-              <div v-if="loadingRecipes" class="loading-indicator">
-                <el-spinner></el-spinner>
-              </div>
-              <div v-if="displayRecipe && !loadingRecipes">
+              <div v-if="!isLoading">
                 <div v-for="(recipe, index) in uniqueRecipes" :key="index">
                   <p><strong>Recipe:</strong> {{ recipe["Recipe"] }}</p>
                   <p>
@@ -55,10 +46,7 @@
           <!-- Diet Schedule Section -->
           <el-collapse-item title="Diet Schedule">
             <div>
-              <div v-if="loadingSchedule" class="loading-indicator">
-                <el-spinner></el-spinner>
-              </div>
-              <div v-if="displaySchedule && !loadingSchedule">
+              <div v-if="!isLoading">
                 <div v-for="(meal, index) in dietSchedule" :key="index">
                   <p slot="header">
                     Meal Number {{ meal["Meal Number"] }} -
@@ -73,16 +61,11 @@
               </div>
               <el-button
                 @click="
-                  fetchData(
-                    'gpt',
-                    '/diet-schedule-using-gpt',
-                    'dietSchedule',
-                    'loadingSchedule'
-                  )
+                  fetchData('gpt', '/diet-schedule-using-gpt', 'dietSchedule')
                 "
                 type="info"
                 plain
-                :loading="loadingSchedule"
+                :loading="isLoading"
                 >Generate Prompt</el-button
               >
             </div>
@@ -90,13 +73,11 @@
           <!-- Generated Recipes Section -->
           <el-collapse-item title="Generated Recipes">
             <div>
-              <div v-if="loadingGenerated" class="loading-indicator">
-                <el-spinner></el-spinner>
-              </div>
-              <div v-if="displayResult && !loadingGenerated">
+              <div v-if="!isLoading">
                 <div v-for="(recipe, index) in generatedRecipes" :key="index">
                   <p slot="header">
-                    Group of Items: {{ recipe["Group of Items"].join(", ") }}
+                    <strong>Group of Items:</strong>
+                    {{ recipe["Group of Items"].join(", ") }}
                   </p>
                   <p>
                     <strong>Generated Recipe:</strong>
@@ -106,16 +87,11 @@
               </div>
               <el-button
                 @click="
-                  fetchData(
-                    'gpt',
-                    '/generate-recipe-using-gpt',
-                    'generatedRecipes',
-                    'loadingGenerated'
-                  )
+                  fetchData('gpt', '/recipes-using-gpt', 'generatedRecipes')
                 "
                 type="info"
                 plain
-                :loading="loadingGenerated"
+                :loading="isLoading"
                 >Generate Prompt</el-button
               >
             </div>
@@ -138,16 +114,7 @@ export default {
       uniqueRecipes: [],
       dietSchedule: [],
       generatedRecipes: [],
-      displaySuggestions: true,
-      displayDishes: true,
-      displayRecipe: true,
-      displaySchedule: true,
-      displayResult: true,
-      loadingSuggestions: false,
-      loadingDishes: false,
-      loadingRecipes: false,
-      loadingSchedule: false,
-      loadingGenerated: false,
+      isLoading: false,
     };
   },
   async mounted() {
@@ -165,32 +132,27 @@ export default {
             await this.fetchData(
               "json",
               "/fusion-cuisine-suggestions-using-json",
-              "fusionSuggestions",
-              "loadingSuggestions"
+              "fusionSuggestions"
             );
             await this.fetchData(
               "json",
               "/user-defined-dish-using-json",
-              "definedDishes",
-              "loadingDishes"
+              "definedDishes"
             );
             await this.fetchData(
               "json",
               "/unique-recipes-using-json",
-              "uniqueRecipes",
-              "loadingRecipes"
+              "uniqueRecipes"
             );
             await this.fetchData(
               "json",
               "/diet-schedule-using-json",
-              "dietSchedule",
-              "loadingSchedule"
+              "dietSchedule"
             );
             await this.fetchData(
               "json",
               "/recipes-using-json",
-              "generatedRecipes",
-              "loadingGenerated"
+              "generatedRecipes"
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -202,7 +164,7 @@ export default {
       });
     },
 
-    async fetchData(type, endpoint, property, loadingProperty) {
+    async fetchData(type, endpoint, property) {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {
@@ -210,7 +172,7 @@ export default {
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
         console.log("idToken", idToken);
-        this[loadingProperty] = true;
+        this.isLoading = true;
         let response;
         if (type === "json") {
           response = await fetch(baseUrl + endpoint, {
@@ -253,10 +215,10 @@ export default {
           );
           this[property] = []; // Ensure property is set to an empty array if not found
         }
-        this[loadingProperty] = false;
+        this.isLoading = false;
       } catch (error) {
         this.error = error.message;
-        this[loadingProperty] = false;
+        this.isLoading = false;
       }
     },
   },

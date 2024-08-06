@@ -5,10 +5,7 @@
         <!-- Food Waste Reduction Suggestions Section -->
         <el-collapse-item title="Food Waste Reduction Suggestions">
           <div>
-            <div v-if="loadingWasteReduction" class="loading-indicator">
-              <el-spinner></el-spinner>
-            </div>
-            <div v-if="displayWasteReduction && !loadingWasteReduction">
+            <div v-if="!isLoading">
               <div
                 v-for="(suggestion, index) in foodWasteReductionSuggestions"
                 :key="index"
@@ -25,10 +22,7 @@
         <!-- Ethical Eating Suggestions Section -->
         <el-collapse-item title="Ethical Eating Suggestions">
           <div>
-            <div v-if="loadingEthicalSuggestions" class="loading-indicator">
-              <el-spinner></el-spinner>
-            </div>
-            <div v-if="displayEthicalSuggestions && !loadingEthicalSuggestions">
+            <div v-if="!isLoading">
               <div
                 v-for="(group, index) in ethicalEatingSuggestions"
                 :key="index"
@@ -52,7 +46,7 @@
                     'ethicalEatingSuggestions'
                   )
                 "
-                :loading="loadingEthicalSuggestions"
+                :loading="isLoading"
                 type="info"
                 plain
                 style="margin-left: 0px !important"
@@ -65,10 +59,7 @@
         <!-- Fun Facts Section -->
         <el-collapse-item title="Fun Facts">
           <div>
-            <div v-if="loadingFunFacts" class="loading-indicator">
-              <el-spinner></el-spinner>
-            </div>
-            <div v-if="displayFunFacts && !loadingFunFacts">
+            <div v-if="!isLoading">
               <div
                 v-for="(fact, index) in funFacts"
                 :key="index"
@@ -87,7 +78,7 @@
           </div>
           <el-button
             @click="fetchData('gpt', '/get-fun-facts-using-gpt', 'funFacts')"
-            :loading="loadingFunFacts"
+            :loading="isLoading"
             type="info"
             plain
             style="margin-left: 0px !important"
@@ -98,15 +89,12 @@
         <!-- Cooking Tips Section -->
         <el-collapse-item title="Cooking Tips">
           <div>
-            <div v-if="loadingCookingTips" class="loading-indicator">
-              <el-spinner></el-spinner>
-            </div>
-            <div v-if="displayCookingTips && !loadingCookingTips">
+            <div v-if="!isLoading">
               <div v-for="(tip, index) in cookingTips" :key="index">
                 <p><strong>Cooking Tips: </strong>{{ tip["Cooking Tip"] }}</p>
               </div>
             </div>
-            <div v-if="!cookingTips && !loadingCookingTips">
+            <div v-if="cookingTips.length === 0 && !isLoading">
               <el-alert title="No Cooking Tips" type="info" show-icon>
                 No cooking tips available.
               </el-alert>
@@ -115,7 +103,7 @@
               @click="
                 fetchData('gpt', '/cooking-tips-using-gpt', 'cookingTips')
               "
-              :loading="loadingCookingTips"
+              :loading="isLoading"
               type="info"
               plain
             >
@@ -126,15 +114,12 @@
         <!-- Current Trends Section -->
         <el-collapse-item title="Current Trends">
           <div>
-            <div v-if="loadingCurrentTrends" class="loading-indicator">
-              <el-spinner></el-spinner>
-            </div>
-            <div v-if="displayCurrentTrends && !loadingCurrentTrends">
+            <div v-if="!isLoading">
               <div v-for="(trend, index) in currentTrends" :key="index">
                 <p><strong>Current Trends:</strong>{{ trend["Fun Facts"] }}</p>
               </div>
             </div>
-            <div v-if="!currentTrends && !loadingCurrentTrends">
+            <div v-if="currentTrends.length === 0 && !isLoading">
               <el-alert title="No Fun Facts" type="info" show-icon>
                 No current food trends available.
               </el-alert>
@@ -143,7 +128,7 @@
               @click="
                 fetchData('gpt', '/current-trends-using-gpt', 'currentTrends')
               "
-              :loading="loadingCurrentTrends"
+              :loading="isLoading"
               type="info"
               plain
             >
@@ -154,10 +139,7 @@
         <!-- Food Handling  Section -->
         <el-collapse-item title="Food Handling Advice">
           <div>
-            <div v-if="loadingFoodHandling" class="loading-indicator">
-              <el-spinner></el-spinner>
-            </div>
-            <div v-if="displayFoodHandling && !loadingFoodHandling">
+            <div v-if="!isLoading">
               <div v-for="(item, index) in handlingadvice" :key="index">
                 <p><strong>Food Items:</strong> {{ item["Food Item"] }}</p>
                 <p>
@@ -166,7 +148,7 @@
                 </p>
               </div>
             </div>
-            <div v-if="!displayFoodHandling">
+            <div v-if="handlingadvice.length === 0 && !isLoading">
               <el-alert title="No handling Advice" type="info" show-icon>
                 No health handling advice available.
               </el-alert>
@@ -179,7 +161,7 @@
                   'handlingadvice'
                 )
               "
-              :loading="loadingFoodHandling"
+              :loading="isLoading"
               type="info"
               plain
             >
@@ -190,10 +172,7 @@
         <!-- Mood Changer Section -->
         <el-collapse-item title="Mood Changer Suggestion">
           <div>
-            <div v-if="loadingMoodChanger" class="loading-indicator">
-              <el-spinner></el-spinner>
-            </div>
-            <div v-if="displayMood && !loadingMoodChanger">
+            <div v-if="!isLoading">
               <div
                 v-for="(suggestion, index) in moodChangerSuggestions"
                 :key="index"
@@ -204,9 +183,7 @@
                 </p>
               </div>
             </div>
-            <div
-              v-if="moodChangerSuggestions.length === 0 && !loadingMoodChanger"
-            >
+            <div v-if="moodChangerSuggestions.length === 0 && !isLoading">
               <el-alert
                 title="No Mood Changer Suggestion"
                 type="info"
@@ -238,20 +215,7 @@ export default {
       ethicalEatingSuggestions: [],
       foodWasteReductionSuggestions: [],
       moodChangerSuggestions: [],
-      displayMood: true,
-      displayEthicalSuggestions: true,
-      displayCookingTips: true,
-      displayCurrentTrends: true,
-      displayWasteReduction: true,
-      displayFunFacts: true,
-      displayFoodHandling: true,
-      loadingWasteReduction: false,
-      loadingEthicalSuggestions: false,
-      loadingFunFacts: false,
-      loadingCookingTips: false,
-      loadingCurrentTrends: false,
-      loadingFoodHandling: false,
-      loadingMoodChanger: false,
+      isLoading: false,
       error: true,
       currentUser: null,
       errorMessage: null,
@@ -272,44 +236,37 @@ export default {
             await this.fetchData(
               "json",
               "/ethical-eating-suggestion-using-json",
-              "ethicalEatingSuggestions",
-              "loadingEthicalSuggestions"
+              "ethicalEatingSuggestions"
             );
             await this.fetchData(
               "json",
               "/get-fun-facts-using-json",
-              "funFacts",
-              "loadingFunFacts"
+              "funFacts"
             );
             await this.fetchData(
               "json",
               "/food-waste-reduction-using-json",
-              "foodWasteReductionSuggestions",
-              "loadingWasteReduction"
+              "foodWasteReductionSuggestions"
             );
             await this.fetchData(
               "json",
               "/food-handling-advice-using-json",
-              "handlingadvice",
-              "loadingFoodHandling"
+              "handlingadvice"
             );
             await this.fetchData(
               "json",
               "/current-trends-using-json",
-              "currentTrends",
-              "loadingCurrentTrends"
+              "currentTrends"
             );
             await this.fetchData(
               "json",
               "/cooking-tips-using-json",
-              "cookingTips",
-              "loadingCookingTips"
+              "cookingTips"
             );
             await this.fetchData(
               "json",
               "/mood-changer-using-json",
-              "moodChangerSuggestions",
-              "loadingMoodChanger"
+              "moodChangerSuggestions"
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -320,7 +277,7 @@ export default {
         }
       });
     },
-    async fetchData(type, endpoint, property, loadingProperty) {
+    async fetchData(type, endpoint, property) {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {
@@ -328,7 +285,7 @@ export default {
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
         console.log("idToken", idToken);
-        this[loadingProperty] = true;
+        this.isLoading = true;
         let response;
         if (type === "json") {
           response = await fetch(baseUrl + endpoint, {
@@ -369,11 +326,10 @@ export default {
           );
           this[property] = []; // Ensure property is set to an empty array if not found
         }
-        this[loadingProperty] = false;
+        this.isLoading = false;
       } catch (error) {
         this.errorMessage = error.message;
         console.error("Error in fetchData:", error);
-        this[loadingProperty] = false;
       }
     },
   },
