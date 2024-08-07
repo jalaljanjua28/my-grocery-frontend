@@ -5,9 +5,7 @@
     </router-link>
     <el-main class="main-content">
       <el-container class="order-page">
-        <el-header>
-          <h1 class="header-title">My Orders</h1>
-        </el-header>
+        <el-header class="header-title">My Orders </el-header>
         <el-main>
           <el-table
             :data="orders"

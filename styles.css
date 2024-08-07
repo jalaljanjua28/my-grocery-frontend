@@ -92,7 +92,7 @@ body {
   min-width: 0;
 }
 .el-card__body {
-  padding: 10px;
+  padding: 10px !important;
 }
 .el-dropdown-link {
   cursor: pointer;
@@ -251,7 +251,6 @@ h1 {
   color: black;
   font-size: 20px;
   font-weight: bolder;
-  /* margin-top: 20px; */
   margin-bottom: 20px;
 }
 h {
@@ -687,13 +686,17 @@ strong {
   .account-form {
     padding: 20px;
   }
-  .el-container {
+  .el-card__body,
+  .el-main {
+    padding: 5px !important;
+  }
+  /* .el-container {
     flex: 1;
     flex-basis: auto;
     box-sizing: border-box;
     min-width: -2px;
     margin-right: 17px;
-  }
+  } */
   .input-with-select {
     width: 100%;
   }
@@ -778,7 +781,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 7px;
+    font-size: 9px !important;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
@@ -814,6 +817,7 @@ strong {
     width: 100% !important;
     margin-bottom: 25px !important;
     flex-direction: column !important;
+    margin-top: 10px !important;
   }
   .el-button--primary.is-plain {
     width: 100%;
@@ -847,7 +851,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 11px !important;
+    font-size: 10px;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
@@ -857,6 +861,7 @@ strong {
     display: flex;
     width: 100%;
     margin-bottom: 20px;
+    margin-top: 10px;
   }
   .el-carousel__container {
     height: 300px !important;
