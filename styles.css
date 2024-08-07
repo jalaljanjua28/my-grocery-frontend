@@ -260,7 +260,6 @@ h {
   display: flex;
   justify-content: center;
   color: black;
-  margin-top: 35px;
 }
 p {
   font-size: 14px;
@@ -393,7 +392,7 @@ strong {
 .header-title {
   padding: 0 0px;
   text-align: center;
-  font-size: x-large;
+  font-size: xx-large;
   color: darkred;
 }
 .account-form {
@@ -598,6 +597,9 @@ strong {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.el-col-12 {
+  width: 100%;
+}
 @media screen and (max-width: 350px) {
   .el-carousel__container {
     height: 450px !important;
@@ -633,7 +635,7 @@ strong {
   .header-title {
     padding: 0 0px !important;
     text-align: center;
-    font-size: medium !important;
+    font-size: x-large !important;
     color: darkred;
   }
   .joke-card {

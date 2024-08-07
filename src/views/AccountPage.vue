@@ -8,7 +8,7 @@
         <el-header style="height: 0px">
           <h1 class="header-title">My Account</h1>
         </el-header>
-        <el-main style="margin-top: 50px">
+        <el-main style="margin-top: 30px">
           <el-form class="account-form" :model="form" ref="form">
             <el-form-item label="Username">
               <el-input v-model="form.username"></el-input>

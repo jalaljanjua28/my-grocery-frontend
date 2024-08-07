@@ -2,7 +2,7 @@
   <div>
     <footer class="footer1">
       <div class="container">
-        <el-row :gutter="20" style="margin-left: 0px">
+        <el-row :gutter="20" style="margin-left: 0px; margin-top: 18px">
           <el-col :span="8">
             <h>About Us</h>
             <p>

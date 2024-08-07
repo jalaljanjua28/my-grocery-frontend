@@ -5,9 +5,7 @@
     </router-link>
     <el-main class="main-content">
       <el-container class="account-page">
-        <el-header>
-          <h1 class="header-title">Enter Items</h1>
-        </el-header>
+        <el-header class="header-title"> Enter Items </el-header>
         <el-card>
           <el-form class="account-form" :model="newItem">
             <el-form-item label="Item Name">
@@ -29,9 +27,7 @@
             </el-form-item>
           </el-form>
         </el-card>
-        <el-header>
-          <h1 class="header-title">Items Cart</h1>
-        </el-header>
+        <el-header class="header-title"> Items Cart </el-header>
         <el-row>
           <el-col :span="24" offset="0">
             <el-card>
