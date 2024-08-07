@@ -173,7 +173,7 @@
               <div v-if="suggestions && suggestions.length > 0 && !isLoading">
                 <div v-for="(item, index) in suggestions" :key="index">
                   <div>
-                    <strong>Food Item: </strong>{{ item["Food Item"] }}
+                    <p><strong>Food Item: </strong>{{ item["Food Item"] }}</p>
                     <p><strong>Suggestion:</strong> {{ item["Suggestion"] }}</p>
                   </div>
                 </div>
@@ -231,7 +231,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/health-incompatabilities-suggestions-using-gpt',
+                    '/health_incompatibilities_using_gpt',
                     'healthIncompatibilities'
                   )
                 "
@@ -314,7 +314,7 @@
                 @click="
                   fetchData(
                     'gpt',
-                    '/nutritional-value-suggestions-using-gpt',
+                    '/nutritional-value-using-gpt',
                     'nutritionalValue'
                   )
                 "

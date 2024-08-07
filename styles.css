@@ -143,7 +143,6 @@ body {
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
-
 .el-dropdown-selfdefine:focus:not(.focusing) {
   outline-width: 0;
   background: silver !important;
@@ -440,6 +439,14 @@ strong {
 .el-tabs__label {
   font-size: x-large !important;
 }
+.el-tabs__nav-next,
+.el-tabs__nav-prev {
+  position: absolute;
+  cursor: pointer;
+  line-height: 44px;
+  font-size: 12px;
+  color: white;
+}
 .el-icon-menu {
   margin-left: 10px;
 }
@@ -566,6 +573,31 @@ strong {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 0 10px;
 }
+.suggestions-container {
+  margin-top: 20px;
+}
+.suggestion-item {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.suggestion-item p {
+  margin: 0;
+  color: #333;
+}
+.el-autocomplete-suggestion li {
+  padding: 0 20px;
+  margin: 0;
+  line-height: 34px;
+  cursor: pointer;
+  color: #606266;
+  font-size: 14px !important;
+  list-style: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 @media screen and (max-width: 350px) {
   .el-carousel__container {
     height: 450px !important;
@@ -603,11 +635,6 @@ strong {
     text-align: center;
     font-size: medium !important;
     color: darkred;
-  }
-  .el-header {
-    height: 45px !important;
-    padding: 0 0px !important;
-    margin-bottom: 10px !important;
   }
   .joke-card {
     font-size: large;
@@ -818,7 +845,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 8px;
+    font-size: 11px !important;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
@@ -855,6 +882,18 @@ strong {
     object-fit: cover !important;
     border-radius: 50% !important;
     margin-bottom: 20px !important;
+  }
+  .el-autocomplete-suggestion li {
+    padding: 0 20px;
+    margin: 0;
+    line-height: 34px;
+    cursor: pointer;
+    color: #606266;
+    font-size: 11px !important;
+    list-style: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 550px) {
