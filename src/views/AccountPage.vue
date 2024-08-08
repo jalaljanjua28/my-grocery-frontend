@@ -32,6 +32,9 @@
 </template>
 
 <script>
+import { firestore } from "@/Firebase";
+import { doc, setDoc } from "firebase/firestore";
+
 export default {
   data() {
     return {
@@ -43,10 +46,27 @@ export default {
     };
   },
   methods: {
-    updateAccount() {
-      this.$refs.form.validate((valid) => {
+    async updateAccount() {
+      this.$refs.form.validate(async (valid) => {
         if (valid) {
-          // API call to update account details
+          try {
+            const userDoc = doc(firestore, "users", this.form.email);
+            await setDoc(userDoc, {
+              username: this.form.username,
+              email: this.form.email,
+              password: this.form.password,
+            });
+            this.$message({
+              message: "Account updated successfully!",
+              type: "success",
+            });
+          } catch (error) {
+            console.error("Error updating account: ", error);
+            this.$message({
+              message: "Error updating account",
+              type: "error",
+            });
+          }
         }
       });
     },
