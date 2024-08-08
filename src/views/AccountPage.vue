@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -43,10 +45,29 @@ export default {
     };
   },
   methods: {
-    updateAccount() {
-      this.$refs.form.validate((valid) => {
+    async updateAccount() {
+      this.$refs.form.validate(async (valid) => {
         if (valid) {
-          // API call to update account details
+          try {
+            await axios.post(
+              "https://us-central1-my-grocery-home.cloudfunctions.net/addUser",
+              {
+                username: this.form.username,
+                email: this.form.email,
+                password: this.form.password,
+              }
+            );
+            this.$message({
+              message: "Account updated successfully!",
+              type: "success",
+            });
+          } catch (error) {
+            console.error("Error updating account: ", error);
+            this.$message({
+              message: "Error updating account",
+              type: "error",
+            });
+          }
         }
       });
     },
