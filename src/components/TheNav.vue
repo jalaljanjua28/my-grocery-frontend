@@ -1,7 +1,7 @@
 <template>
   <el-aside width="200px" class="aside">
     <header-logo></header-logo>
-    <el-menu style="height: 145.2vh">
+    <el-menu style="height: 159.6vh">
       <el-submenu index="1">
         <template slot="title"
           ><i class="el-icon-message"></i>Navigator One</template
