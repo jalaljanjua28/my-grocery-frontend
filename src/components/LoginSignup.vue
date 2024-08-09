@@ -24,7 +24,7 @@
         <el-button @click="signInWithGoogle">Sign in with Google</el-button>
       </div>
       <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
-      <div v-if="users.length">
+      <!-- <div v-if="users.length">
         <h3>Switch Users</h3>
         <ul>
           <li v-for="user in users" :key="user.uid">
@@ -35,7 +35,7 @@
             >
           </li>
         </ul>
-      </div>
+      </div> -->
     </el-main>
   </div>
 </template>
@@ -137,15 +137,34 @@ export default {
         console.error("Error signing in:", error);
       }
     },
-    async switchUser(uid) {
-      const user = this.users.find((u) => u.uid === uid);
-      if (user) {
-        this.currentUser = user;
-        console.log("Switched to user:", user);
-      } else {
-        console.error("User not found");
-      }
-    },
+    // async switchUser(uid) {
+    //   const user = this.users.find((u) => u.uid === uid);
+    //   if (user) {
+    //     try {
+    //       // Sign out the current user
+    //       await auth.signOut();
+
+    //       // Sign in with the new user's credentials
+    //       await this.signUpWithEmailPassword();
+    //       // await this.signInWithGoogle();
+
+    //       this.currentUser = user;
+    //       console.log("Switched to user:", user);
+
+    //       // Update the user data in Firestore
+    //       const db = auth.firestore();
+    //       await db.collection("users").doc(uid).set({
+    //         email: user.email,
+    //         // Add any other user data you want to store
+    //       });
+    //       // Emit an event to update other components
+    //     } catch (error) {
+    //       console.error("Error switching user:", error);
+    //     }
+    //   } else {
+    //     console.error("User not found");
+    //   }
+    // },
     async signOut() {
       try {
         await firebaseSignOut(auth);

@@ -90,6 +90,7 @@ body {
   flex-basis: auto;
   box-sizing: border-box;
   min-width: 0;
+  flex-wrap: wrap;
 }
 .el-card__body {
   padding: 10px !important;
@@ -146,6 +147,24 @@ body {
 .el-dropdown-selfdefine:focus:not(.focusing) {
   outline-width: 0;
   background: silver !important;
+}
+.el-submenu .el-menu-item {
+  display: flex;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px !important;
+  min-width: 200px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.el-menu {
+  border-right: solid 1px #e6e6e6;
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding-left: 0;
+  background-color: #f3e1bfdb;
 }
 .el-select {
   font-size: 12px;
@@ -288,7 +307,7 @@ strong {
 }
 .header {
   background: #ffffffc9 !important;
-  height: 100px !important;
+  height: 105px !important;
   border-bottom: 5px solid black;
   width: 100%;
   padding: 0 15px !important;
@@ -599,6 +618,29 @@ strong {
 .el-col-12 {
   width: 100%;
 }
+.el-submenu__title {
+  padding-left: 0px !important;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border-bottom: 5px solid black;
+  justify-content: flex-end;
+  background: #ffffffc9 !important;
+}
+.user-notification {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.barcode {
+  display: none;
+}
 @media screen and (max-width: 350px) {
   .el-carousel__container {
     height: 450px !important;
@@ -690,13 +732,13 @@ strong {
   .el-main {
     padding: 5px !important;
   }
-  /* .el-container {
+  .el-container {
     flex: 1;
     flex-basis: auto;
     box-sizing: border-box;
     min-width: -2px;
     margin-right: 17px;
-  } */
+  }
   .input-with-select {
     width: 100%;
   }
@@ -808,7 +850,18 @@ strong {
     font-size: 10px;
   }
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
+  .logo-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border-bottom: none !important;
+    justify-content: flex-end;
+    background: none !important;
+  }
+  .aside {
+    display: none;
+  }
   .searchDev {
     display: none !important;
   }
@@ -903,8 +956,14 @@ strong {
     text-overflow: ellipsis;
   }
 }
-@media screen and (min-width: 550px) {
+@media screen and (min-width: 600px) {
   .searchInventory {
     display: none;
+  }
+  .logo-display {
+    display: none !important;
+  }
+  .el-dropdown-grid {
+    display: none !important;
   }
 }

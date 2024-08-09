@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <el-main class="main-content">
-      <home-page></home-page>
-      <br />
-      <dummy-component class="barcode" ref="DummyComponent" />
-    </el-main>
-  </div>
+  <el-main class="main-content">
+    <home-page></home-page>
+    <br />
+    <dummy-component class="barcode" ref="DummyComponent" />
+  </el-main>
 </template>
 
 <script>
@@ -27,8 +25,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.barcode {
-  display: none;
-}
-</style>
+<style scoped></style>

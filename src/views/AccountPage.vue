@@ -32,8 +32,7 @@
 </template>
 
 <script>
-import { firestore } from "@/Firebase";
-import { doc, setDoc } from "firebase/firestore";
+import axios from "axios";
 
 export default {
   data() {
@@ -50,12 +49,14 @@ export default {
       this.$refs.form.validate(async (valid) => {
         if (valid) {
           try {
-            const userDoc = doc(firestore, "users", this.form.email);
-            await setDoc(userDoc, {
-              username: this.form.username,
-              email: this.form.email,
-              password: this.form.password,
-            });
+            await axios.post(
+              "https://us-central1-my-grocery-home.cloudfunctions.net/addUser",
+              {
+                username: this.form.username,
+                email: this.form.email,
+                password: this.form.password,
+              }
+            );
             this.$message({
               message: "Account updated successfully!",
               type: "success",
@@ -67,6 +68,9 @@ export default {
               type: "error",
             });
           }
+          this.username = "";
+          this.email = "";
+          this.password = "";
         }
       });
     },

@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <el-header class="header">
-      <header-logo></header-logo>
-      <div>
-        <search-inventory
-          class="searchDev"
-          :ExpiredFood="Food_expired"
-          :ExpiredNonFood="NonFood_expired"
-          :NonExpiredFood="Food_nonexpired"
-          :NonExpiredNonFood="NonFood_nonexpired"
-          :itemsFood="Food"
-          :itemsNonFood="NonFood"
-        ></search-inventory>
-      </div>
-      <the-menu></the-menu>
-    </el-header>
-  </div>
+  <el-header class="header">
+    <header-logo class="logo-display"></header-logo>
+    <div>
+      <search-inventory
+        class="searchDev"
+        :ExpiredFood="Food_expired"
+        :ExpiredNonFood="NonFood_expired"
+        :NonExpiredFood="Food_nonexpired"
+        :NonExpiredNonFood="NonFood_nonexpired"
+        :itemsFood="Food"
+        :itemsNonFood="NonFood"
+      ></search-inventory>
+    </div>
+    <the-menu></the-menu>
+  </el-header>
 </template>
 
 <script>
@@ -44,6 +42,7 @@ export default {
       NonFood: [],
     };
   },
+
   async mounted() {
     try {
       // Fetch master expired data
@@ -63,6 +62,7 @@ export default {
       console.error("Error fetching data:", error);
     }
   },
+  methods: {},
 };
 </script>
 
