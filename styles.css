@@ -631,7 +631,7 @@ strong {
   flex-direction: row;
   border-bottom: 5px solid black;
   justify-content: flex-end;
-  background: #ffffffc9 !important;
+  /* background: #ffffffc9 !important; */
 }
 .user-notification {
   background-color: #f0f0f0;
