@@ -15,7 +15,7 @@
             <p>House 553, Street 10, F10/2</p>
             <p>Cell: 0334-9553387</p>
           </el-col>
-          <el-col :span="8" class="footer-column">
+          <el-col :span="8">
             <h>Follow Us</h>
             <p>
               <a

@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <el-container
-      style="height: 98vh; width: -webkit-fill-available !important"
-    >
+    <el-container style="height: 163vh">
       <the-nav></the-nav>
       <el-container>
         <the-header></the-header>

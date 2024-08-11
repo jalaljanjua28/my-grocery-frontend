@@ -1,7 +1,7 @@
 <template>
   <el-aside
     width="200px"
-    style="background: #f3e1bfdb; width: 200px; height: 157.5vh"
+    style="background: rgba(243, 225, 191, 0.86); height: 100%"
     class="aside"
   >
     <header-logo></header-logo>
@@ -89,3 +89,4 @@ export default {
   },
 };
 </script>
+<style scoped></style>
