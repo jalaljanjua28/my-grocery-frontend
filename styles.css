@@ -170,6 +170,7 @@ body {
   min-width: 0;
   flex-wrap: wrap;
   height: inherit;
+  width: -webkit-fill-available;
 }
 .loading-container {
   position: fixed;
