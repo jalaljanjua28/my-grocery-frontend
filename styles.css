@@ -62,7 +62,7 @@ body {
 }
 .el-button {
   display: inline-block;
-  line-height: 0;
+  line-height: 1;
   white-space: nowrap;
   cursor: pointer;
   background: #fff;
@@ -194,7 +194,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: row;
-  border-bottom: 5px solid black;
+  border-bottom: none;
   justify-content: flex-end;
 }
 .el-dropdown-link {
@@ -266,7 +266,6 @@ body {
   align-items: baseline;
   justify-content: center;
 }
-
 .el-menu {
   list-style: none;
   position: relative;
@@ -347,7 +346,7 @@ body {
   color: white;
   cursor: pointer;
   border-bottom: 2px solid white;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
@@ -421,7 +420,7 @@ strong {
   color: black;
 }
 .logo-text {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bolder;
   color: red;
   width: max-content;
@@ -693,7 +692,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 10px !important;
+    font-size: 12px !important;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
@@ -705,6 +704,24 @@ strong {
   }
 }
 @media screen and (max-width: 400px) {
+  .el-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    transition: 0.1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: large !important;
+    border-radius: 4px;
+  }
   .logo-text {
     font-size: 1.1em;
     font-weight: bolder;
@@ -849,7 +866,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 12px !important;
+    font-size: 14px !important;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
@@ -870,12 +887,30 @@ strong {
   }
 }
 @media screen and (max-width: 600px) {
+  .el-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    color: #606266;
+    text-align: center;
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    transition: 0.1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: large !important;
+    border-radius: 4px;
+  }
   .logo-text {
     font-size: 1.1em;
     font-weight: bolder;
     color: red;
-    width: max-content;
-    margin-left: 10px;
+    width: -moz-max-content;
+    margin-left: -7px;
     margin-right: 10px;
   }
   .logo-container {
@@ -885,6 +920,7 @@ strong {
     border-bottom: none !important;
     justify-content: flex-end;
     background: none !important;
+    margin-left: -20px;
   }
   .aside {
     display: none;
@@ -931,7 +967,7 @@ strong {
     color: white;
     cursor: pointer;
     border-bottom: 2px solid white;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;

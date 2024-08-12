@@ -2,12 +2,11 @@
   <div class="logo-container">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="60px"
-      height="60px"
+      width="100px"
+      height="70px"
       viewBox="0 0 1024 1024"
       class="icon"
       version="1.1"
-      style=""
     >
       <path
         d="M46.709019 525.864535s-58.209881-467.23131 458.623304-513.37587c130.037346-7.055743 458.623303 59.903259 467.23131 513.37587H46.709019z"

@@ -177,3 +177,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+/* .el-button {
+  font-size: large !important;
+} */
+</style>
