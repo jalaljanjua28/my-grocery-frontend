@@ -170,7 +170,6 @@ body {
   min-width: 0;
   flex-wrap: wrap;
   height: inherit;
-  width: -webkit-fill-available;
 }
 .loading-container {
   position: fixed;
@@ -197,7 +196,6 @@ body {
   flex-direction: row;
   border-bottom: 5px solid black;
   justify-content: flex-end;
-  /* background: #ffffffc9 !important; */
 }
 .el-dropdown-link {
   cursor: pointer;
@@ -423,7 +421,7 @@ strong {
   color: black;
 }
 .logo-text {
-  font-size: 1.4em;
+  font-size: 2em;
   font-weight: bolder;
   color: red;
   width: max-content;
@@ -757,11 +755,9 @@ strong {
     box-sizing: border-box;
     cursor: pointer;
   }
-
   .footer1 {
     display: none;
   }
-
   .el-dropdown {
     font-size: xx-large !important;
   }
@@ -771,11 +767,9 @@ strong {
   .account-page {
     height: 100%;
   }
-
   .account-form {
     padding: 20px;
   }
-
   .el-main {
     text-align: center;
     padding: 10px !important;
@@ -794,7 +788,6 @@ strong {
     position: relative;
     font-size: 10px;
   }
-
   p {
     font-size: 10px;
     color: white;
