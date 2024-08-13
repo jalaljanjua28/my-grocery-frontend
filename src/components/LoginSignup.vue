@@ -5,7 +5,7 @@
     </router-link>
     <el-main class="main-content">
       <h2>Login / Signup</h2>
-      <div v-if="!currentUser">
+      <div v-if="!currentUser" style="width: fit-content">
         <el-input
           style="margin-bottom: 20px"
           v-model="email"
@@ -18,12 +18,14 @@
           show-password
           style="margin-bottom: 20px"
         ></el-input>
-        <el-button @click="signUpWithEmailPassword"
-          >Sign up with Email</el-button
-        >
-        <el-button @click="signInWithGoogle">Sign in with Google</el-button>
+        <div style="display: flex">
+          <el-button @click="signUpWithEmailPassword"
+            >Sign up with Email</el-button
+          >
+          <el-button @click="signInWithGoogle">Sign in with Google</el-button>
+        </div>
+        <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
       </div>
-      <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
       <!-- <div v-if="users.length">
         <h3>Switch Users</h3>
         <ul>
