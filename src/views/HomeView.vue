@@ -4,7 +4,7 @@
       style="height: 163vh; width: -webkit-fill-available !important"
     >
       <the-nav></the-nav>
-      <el-container style="width: -webkit-fill-available !important">
+      <el-container style="width: -webkit-fill-available">
         <the-header></the-header>
         <the-main></the-main>
         <the-footer></the-footer>

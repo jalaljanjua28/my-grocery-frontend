@@ -53,7 +53,10 @@
         fill="#7A4721"
       />
     </svg>
-    <p class="logo-text">MY GROCERY</p>
+    <div>
+      <p class="logo-text" style="">MY</p>
+      <p class="logo-text">GROCERY</p>
+    </div>
   </div>
 </template>
 <script></script>

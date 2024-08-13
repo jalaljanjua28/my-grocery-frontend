@@ -420,12 +420,15 @@ strong {
   color: black;
 }
 .logo-text {
+  height: 4px;
+  display: flex;
   font-size: 1.5em;
   font-weight: bolder;
   color: red;
+  width: -moz-max-content;
   width: max-content;
-  margin-left: 10px;
   margin-right: 10px;
+  align-items: center;
 }
 .loading-indicator {
   text-align: center;
@@ -797,6 +800,7 @@ strong {
     box-sizing: border-box;
     min-width: -2px;
     margin-right: 17px;
+    width: auto !important;
   }
   .input-with-select {
     width: 100%;
@@ -889,7 +893,7 @@ strong {
 @media screen and (max-width: 600px) {
   .el-button {
     display: inline-block;
-    line-height: 1;
+    line-height: 0.5;
     white-space: nowrap;
     cursor: pointer;
     background: #fff;
@@ -902,7 +906,7 @@ strong {
     transition: 0.1s;
     font-weight: 500;
     padding: 12px 20px;
-    font-size: large !important;
+    font-size: medium;
     border-radius: 4px;
   }
   .logo-text {
