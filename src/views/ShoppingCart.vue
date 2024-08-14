@@ -6,7 +6,7 @@
     <el-main class="main-content">
       <el-container class="account-page">
         <el-header class="header-title"> Enter Items </el-header>
-        <el-card style="margin-right: 20px; color: white">
+        <el-card style="color: white">
           <el-form class="account-form" :model="newItem">
             <el-form-item label="Item Name">
               <el-input v-model="newItem.name" />
@@ -30,7 +30,7 @@
         <el-header class="header-title"> Items Cart </el-header>
         <el-row>
           <el-col :span="24" offset="0">
-            <el-card style="margin-right: 20px">
+            <el-card style="">
               <el-table :data="cartItems" border>
                 <el-table-column prop="name" label="Name"></el-table-column>
                 <el-table-column prop="price" label="Price"></el-table-column>

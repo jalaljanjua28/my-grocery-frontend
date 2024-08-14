@@ -44,7 +44,7 @@ export default {
         console.log("idToken", idToken);
 
         axiosInstance
-          .post("/image-process-upload-create", formData, {
+          .post("/image-process-upload", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${idToken}`,

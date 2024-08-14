@@ -5,7 +5,7 @@
     </router-link>
     <el-main class="main-content">
       <h2>Login / Signup</h2>
-      <div v-if="!currentUser" style="width: fit-content">
+      <div v-if="!currentUser" style="width: -webkit-fill-available">
         <el-input
           style="margin-bottom: 20px"
           v-model="email"
@@ -24,20 +24,16 @@
           >
           <el-button @click="signInWithGoogle">Sign in with Google</el-button>
         </div>
-        <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
       </div>
-      <!-- <div v-if="users.length">
-        <h3>Switch Users</h3>
+      <div v-if="users.length > 0 && currentUser">
+        <h3>Signed In User</h3>
         <ul>
           <li v-for="user in users" :key="user.uid">
-            <el-button
-              style="margin-bottom: 10px"
-              @click="switchUser(user.uid)"
-              >{{ user.email }}</el-button
-            >
+            {{ user.email }}
           </li>
         </ul>
-      </div> -->
+        <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
+      </div>
     </el-main>
   </div>
 </template>
