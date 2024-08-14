@@ -343,13 +343,14 @@ body {
   height: 33px;
   line-height: 53px;
   background-color: transparent;
-  color: white;
+  color: black;
   cursor: pointer;
-  border-bottom: 2px solid white;
-  font-size: 17px;
+  border-bottom: none;
+  font-size: 16px;
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
+  width: max-content;
 }
 .header {
   background: #ffffffc9 !important;
@@ -692,13 +693,14 @@ strong {
     height: 33px;
     line-height: 53px;
     background-color: transparent;
-    color: white;
+    color: black;
     cursor: pointer;
-    border-bottom: 2px solid white;
-    font-size: 12px !important;
+    border-bottom: none;
+    font-size: 16px;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
+    width: max-content;
   }
 }
 @media screen and (min-width: 400px) {
@@ -867,13 +869,14 @@ strong {
     height: 33px;
     line-height: 53px;
     background-color: transparent;
-    color: white;
+    color: black;
     cursor: pointer;
-    border-bottom: 2px solid white;
-    font-size: 14px !important;
+    border-bottom: none;
+    font-size: 16px;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
+    width: max-content;
   }
   .footer2 {
     height: 79px;
@@ -968,13 +971,14 @@ strong {
     height: 33px;
     line-height: 53px;
     background-color: transparent;
-    color: white;
+    color: black;
     cursor: pointer;
-    border-bottom: 2px solid white;
+    border-bottom: none;
     font-size: 16px;
     font-weight: 500;
     transition: border-bottom-color 0.3s;
     outline: 0;
+    width: max-content;
   }
   .searchInventory {
     justify-content: center;
