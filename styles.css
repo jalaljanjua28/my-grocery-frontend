@@ -133,9 +133,7 @@ body {
   font-size: 12px;
   border-radius: 3px;
 }
-.el-button.is-circle {
-  padding: 4px !important;
-}
+
 .el-card {
   border-radius: 10px !important;
   border: 0px solid darkcyan;
@@ -456,6 +454,7 @@ strong {
   background-color: #ffffffc9 !important;
   min-height: auto;
   flex: 1;
+  margin-bottom: -40px !important;
 }
 .footer1 {
   height: auto !important;

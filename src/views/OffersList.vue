@@ -2,7 +2,7 @@
   <el-carousel
     :interval="4000"
     type="card"
-    height="440px"
+    height="400px"
     style="overflow-x: auto"
   >
     <el-carousel-item class="offer-page" v-for="item in items" :key="item.id">
