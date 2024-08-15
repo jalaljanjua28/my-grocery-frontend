@@ -2,7 +2,7 @@
   <div>
     <footer class="footer1">
       <div class="container">
-        <el-row :gutter="20" style="margin-left: 0px">
+        <el-row :gutter="20" style="margin-left: 0px; margin-top: 18px">
           <el-col :span="8">
             <h>About Us</h>
             <p>
@@ -15,7 +15,7 @@
             <p>House 553, Street 10, F10/2</p>
             <p>Cell: 0334-9553387</p>
           </el-col>
-          <el-col :span="8" class="footer-column">
+          <el-col :span="8">
             <h>Follow Us</h>
             <p>
               <a

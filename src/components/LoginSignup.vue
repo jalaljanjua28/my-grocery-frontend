@@ -5,7 +5,7 @@
     </router-link>
     <el-main class="main-content">
       <h2>Login / Signup</h2>
-      <div v-if="!currentUser">
+      <div v-if="!currentUser" style="width: -webkit-fill-available">
         <el-input
           style="margin-bottom: 20px"
           v-model="email"
@@ -18,30 +18,28 @@
           show-password
           style="margin-bottom: 20px"
         ></el-input>
-        <el-button @click="signUpWithEmailPassword"
-          >Sign up with Email</el-button
-        >
-        <el-button @click="signInWithGoogle">Sign in with Google</el-button>
+        <div style="display: flex">
+          <el-button @click="signUpWithEmailPassword"
+            >Sign up with Email</el-button
+          >
+          <el-button @click="signInWithGoogle">Sign in with Google</el-button>
+        </div>
       </div>
-      <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
-      <div v-if="users.length">
-        <h3>Switch Users</h3>
+      <div v-if="users.length > 0 && currentUser">
+        <h3>Signed In User</h3>
         <ul>
           <li v-for="user in users" :key="user.uid">
-            <el-button
-              style="margin-bottom: 10px"
-              @click="switchUser(user.uid)"
-              >{{ user.email }}</el-button
-            >
+            {{ user.email }}
           </li>
         </ul>
+        <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
       </div>
     </el-main>
   </div>
 </template>
 
 <script>
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 import {
   signInWithPopup,
@@ -97,6 +95,9 @@ export default {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${idToken}`,
+            "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
+            "Access-Control-Allow-Methods": "POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type,Authorization",
           },
           body: JSON.stringify({ email: user.email, idToken }),
         });
@@ -123,6 +124,9 @@ export default {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${idToken}`,
+            "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
+            "Access-Control-Allow-Methods": "POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type,Authorization",
           },
           body: JSON.stringify({ email: user.email, idToken }),
         });
@@ -131,15 +135,34 @@ export default {
         console.error("Error signing in:", error);
       }
     },
-    async switchUser(uid) {
-      const user = this.users.find((u) => u.uid === uid);
-      if (user) {
-        this.currentUser = user;
-        console.log("Switched to user:", user);
-      } else {
-        console.error("User not found");
-      }
-    },
+    // async switchUser(uid) {
+    //   const user = this.users.find((u) => u.uid === uid);
+    //   if (user) {
+    //     try {
+    //       // Sign out the current user
+    //       await auth.signOut();
+
+    //       // Sign in with the new user's credentials
+    //       await this.signUpWithEmailPassword();
+    //       // await this.signInWithGoogle();
+
+    //       this.currentUser = user;
+    //       console.log("Switched to user:", user);
+
+    //       // Update the user data in Firestore
+    //       const db = auth.firestore();
+    //       await db.collection("users").doc(uid).set({
+    //         email: user.email,
+    //         // Add any other user data you want to store
+    //       });
+    //       // Emit an event to update other components
+    //     } catch (error) {
+    //       console.error("Error switching user:", error);
+    //     }
+    //   } else {
+    //     console.error("User not found");
+    //   }
+    // },
     async signOut() {
       try {
         await firebaseSignOut(auth);
@@ -152,3 +175,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+/* .el-button {
+  font-size: large !important;
+} */
+</style>

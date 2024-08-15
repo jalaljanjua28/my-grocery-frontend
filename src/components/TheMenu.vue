@@ -4,10 +4,24 @@
       <el-col
         :span="12"
         style="display: flex; flex-direction: row; align-items: center"
-        ><router-link to="/SignIn" style="text-decoration: none">
-          <el-button><i class="el-icon-s-custom"></i></el-button>
+      >
+        <el-popover placement="bottom" width="230" trigger="hover">
+          <template #reference>
+            <el-button
+              >User
+              <i class="el-icon-s-custom"></i>
+            </el-button>
+          </template>
+          <div>
+            <h3>Signed In User</h3>
+            <p style="color: red"><strong>Email:</strong> {{ email }}</p>
+            <!-- Add more user details here -->
+          </div>
+        </el-popover>
+        <router-link to="/SignIn" style="text-decoration: none">
+          <el-button>Signup<i class="el-icon-user"></i></el-button>
         </router-link>
-        <el-dropdown>
+        <el-dropdown class="el-dropdown-grid">
           <span class="el-dropdown-link">
             <i class="el-icon-s-grid"></i>
           </span>
@@ -15,11 +29,6 @@
             <router-link to="/account-page" style="text-decoration: none"
               ><el-dropdown-item style="border-bottom: none"
                 ><i class="el-icon-user"></i>Account</el-dropdown-item
-              ></router-link
-            >
-            <router-link to="/recipes-page" style="text-decoration: none"
-              ><el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-notebook-2"></i>Recipes</el-dropdown-item
               ></router-link
             >
             <router-link to="/shopping-cart" style="text-decoration: none">
@@ -32,12 +41,6 @@
               <el-dropdown-item style="border-bottom: none"
                 ><i class="el-icon-takeaway-box"></i>Order
                 History</el-dropdown-item
-              ></router-link
-            >
-            <router-link to="/items-inventory" style="text-decoration: none">
-              <el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-fork-spoon"></i>Items
-                Inventory</el-dropdown-item
               ></router-link
             >
             <router-link to="/barcode-scan" style="text-decoration: none">
@@ -63,11 +66,31 @@
 </template>
 
 <script>
+import { auth, onAuthStateChanged } from "../Firebase.js"; // Adjust the path as necessary
+
 export default {
+  components: {},
   data() {
-    return {};
+    return {
+      email: "",
+      currentUser: null,
+    };
   },
-  methods: {},
+  async mounted() {
+    this.checkAuth();
+  },
+  methods: {
+    checkAuth() {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.currentUser = user;
+          this.email = user.email;
+        } else {
+          console.log("No user is logged in");
+        }
+      });
+    },
+  },
 };
 </script>
 <style scoped>
@@ -75,8 +98,9 @@ export default {
   width: 100%;
 }
 .el-button {
-  font-size: xx-large;
+  font-size: x-large;
   background-color: transparent;
   border: none;
+  padding: 12px 8px;
 }
 </style>

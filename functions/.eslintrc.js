@@ -1,5 +1,5 @@
-/* eslint-disable quote-props */
 /* eslint-disable object-curly-spacing */
+/* eslint-disable quote-props */
 module.exports = {
   env: {
     es6: true,

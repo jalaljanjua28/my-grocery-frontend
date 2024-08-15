@@ -2,8 +2,8 @@
   <el-carousel
     :interval="4000"
     type="card"
-    height="440px"
-    style="overflow-x: auto; margin-bottom: 20px"
+    height="400px"
+    style="overflow-x: auto"
   >
     <el-carousel-item class="offer-page" v-for="item in items" :key="item.id">
       <div class="offer-item">
@@ -73,7 +73,4 @@ export default {
 };
 </script>
 
-<style scoped>
-@media screen and (max-width: 550px) {
-}
-</style>
+<style scoped></style>

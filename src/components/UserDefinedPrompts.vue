@@ -136,7 +136,7 @@
 </template>
 
 <script>
-const baseURL = "http://127.0.0.1:8081/api";
+const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 import { auth } from "../Firebase.js";
 
 export default {
@@ -311,20 +311,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.suggestions-container {
-  margin-top: 20px;
-}
-
-.suggestion-item {
-  background-color: #f5f5f5;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-.suggestion-item p {
-  margin: 0;
-  color: #333;
-}
-</style>
+<style scoped></style>

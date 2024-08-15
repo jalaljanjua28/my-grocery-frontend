@@ -5,34 +5,34 @@
     </router-link>
     <el-main class="main-content">
       <el-container class="order-page">
-        <el-header>
-          <h1 class="header-title">My Orders</h1>
-        </el-header>
-        <el-main>
-          <el-table
-            :data="orders"
-            class="order-table"
-            stripe
-            style="width: 100%"
-          >
-            <el-table-column prop="orderId" label="Order ID" />
-            <el-table-column prop="product" label="Product" />
-            <el-table-column prop="quantity" label="Quantity" />
-            <el-table-column prop="status" label="Status" />
-            <el-table-column prop="date" label="Date" />
-            <el-table-column label="Actions" width="100">
-              <template slot-scope="scope">
-                <el-button
-                  size="small"
-                  type="text"
-                  @click="handleViewOrder(scope.row)"
-                >
-                  View
-                </el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-main>
+        <el-header class="header-title">My Orders </el-header>
+        <el-card>
+          <el-main>
+            <el-table
+              :data="orders"
+              class="order-table"
+              stripe
+              style="width: 100%"
+            >
+              <el-table-column prop="orderId" label="Order ID" />
+              <el-table-column prop="product" label="Product" />
+              <el-table-column prop="quantity" label="Quantity" />
+              <el-table-column prop="status" label="Status" />
+              <el-table-column prop="date" label="Date" />
+              <el-table-column label="Actions" width="100">
+                <template slot-scope="scope">
+                  <el-button
+                    size="small"
+                    type="text"
+                    @click="handleViewOrder(scope.row)"
+                  >
+                    View
+                  </el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-main>
+        </el-card>
       </el-container>
     </el-main>
   </div>

@@ -3,11 +3,17 @@
     <router-link to="/" style="text-decoration: none">
       <el-page-header content="FAQs"> </el-page-header>
     </router-link>
-    <el-main class="main-content" style="margin-top: 20px">
+    <el-main class="main-content">
       <el-container>
-        <el-header>Frequently asked questions</el-header>
+        <h1>Frequently asked questions</h1>
         <el-main>
-          <el-card>
+          <div
+            style="
+              background-color: darkcyan;
+              padding: 15px;
+              border-radius: 20px;
+            "
+          >
             <el-collapse v-model="activeName" style="color: black">
               <el-collapse-item
                 v-for="(item, index) in faqs"
@@ -18,7 +24,7 @@
                 {{ item.answer }}
               </el-collapse-item>
             </el-collapse>
-          </el-card>
+          </div>
         </el-main>
       </el-container>
     </el-main>
@@ -105,17 +111,8 @@ export default {
 };
 </script>
 <style scoped>
-/* .el-collapse-item__header {
-  display: flex;
-  align-items: center;
-  height: 33px;
-  line-height: 53px;
-  background-color: transparent;
-  color: black !important;
-  border-bottom: 2px solid black !important;
-  font-size: 18px;
-  font-weight: 500;
-  transition: border-bottom-color 0.3s;
-  outline: 0;
-} */
+.el-card__body,
+.el-main {
+  padding: 10px;
+}
 </style>

@@ -1,16 +1,9 @@
 <template>
-  <div
-    style="
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      margin-right: 10px;
-    "
-  >
+  <div class="logo-container">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="60px"
-      height="100px"
+      width="100px"
+      height="70px"
       viewBox="0 0 1024 1024"
       class="icon"
       version="1.1"
@@ -60,7 +53,10 @@
         fill="#7A4721"
       />
     </svg>
-    <p class="logo-text">MY GROCERY</p>
+    <div>
+      <p class="logo-text" style="">MY</p>
+      <p class="logo-text">GROCERY</p>
+    </div>
   </div>
 </template>
 <script></script>
