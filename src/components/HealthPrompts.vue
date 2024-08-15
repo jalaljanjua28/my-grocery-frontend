@@ -365,8 +365,7 @@ export default {
             await this.fetchData(
               "json",
               "/allergy-information-using-json",
-              "AllergyInformation",
-              "loadingAllergyInformation"
+              "AllergyInformation"
             );
             await this.fetchData(
               "json",
@@ -376,38 +375,32 @@ export default {
             await this.fetchData(
               "json",
               "/healthy-eating-advice-using-json",
-              "eatingAdviceList",
-              "loadingEatingAdvice"
+              "eatingAdviceList"
             );
             await this.fetchData(
               "json",
               "/healthy-items-usage-using-json",
-              "suggestions",
-              "loadingHealthyUsage"
+              "suggestions"
             );
             await this.fetchData(
               "json",
               "/health_incompatibilities_using_json",
-              "healthIncompatibilities",
-              "loadingHealthIncompatabilities"
+              "healthIncompatibilities"
             );
             await this.fetchData(
               "json",
               "/nutritional-analysis-using-json",
-              "nutritionalAnalysis",
-              "loadingNutritionalAnalysis"
+              "nutritionalAnalysis"
             );
             await this.fetchData(
               "json",
               "/nutritional-value-using-json",
-              "nutritionalValue",
-              "loadingNutritionalValue"
+              "nutritionalValue"
             );
             await this.fetchData(
               "json",
               "/health-advice-using-json",
-              "healthAdviceList",
-              "loadingHealthAdvice"
+              "healthAdviceList"
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -418,7 +411,7 @@ export default {
         }
       });
     },
-    async fetchData(type, endpoint, property, loadingProperty) {
+    async fetchData(type, endpoint, property) {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {

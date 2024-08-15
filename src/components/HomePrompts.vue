@@ -236,44 +236,37 @@ export default {
             await this.fetchData(
               "json",
               "/ethical-eating-suggestion-using-json",
-              "ethicalEatingSuggestions",
-              "loadingEthicalSuggestions"
+              "ethicalEatingSuggestions"
             );
             await this.fetchData(
               "json",
               "/get-fun-facts-using-json",
-              "funFacts",
-              "loadingFunFacts"
+              "funFacts"
             );
             await this.fetchData(
               "json",
               "/food-waste-reduction-using-json",
-              "foodWasteReductionSuggestions",
-              "loadingWasteReduction"
+              "foodWasteReductionSuggestions"
             );
             await this.fetchData(
               "json",
               "/food-handling-advice-using-json",
-              "handlingadvice",
-              "loadingFoodHandling"
+              "handlingadvice"
             );
             await this.fetchData(
               "json",
               "/current-trends-using-json",
-              "currentTrends",
-              "loadingCurrentTrends"
+              "currentTrends"
             );
             await this.fetchData(
               "json",
               "/cooking-tips-using-json",
-              "cookingTips",
-              "loadingCookingTips"
+              "cookingTips"
             );
             await this.fetchData(
               "json",
               "/mood-changer-using-json",
-              "moodChangerSuggestions",
-              "loadingMoodChanger"
+              "moodChangerSuggestions"
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -284,7 +277,7 @@ export default {
         }
       });
     },
-    async fetchData(type, endpoint, property, loadingProperty) {
+    async fetchData(type, endpoint, property) {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {

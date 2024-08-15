@@ -137,8 +137,7 @@ export default {
             await this.fetchData(
               "json",
               "/fusion-cuisine-suggestions-using-json",
-              "fusionSuggestions",
-              "loadingSuggestions"
+              "fusionSuggestions"
             );
             await this.fetchData(
               "json",
@@ -148,14 +147,12 @@ export default {
             await this.fetchData(
               "json",
               "/unique-recipes-using-json",
-              "uniqueRecipes",
-              "loadingRecipes"
+              "uniqueRecipes"
             );
             await this.fetchData(
               "json",
               "/diet-schedule-using-json",
-              "dietSchedule",
-              "loadingSchedule"
+              "dietSchedule"
             );
             await this.fetchData(
               "json",
@@ -172,7 +169,7 @@ export default {
       });
     },
 
-    async fetchData(type, endpoint, property, loadingProperty) {
+    async fetchData(type, endpoint, property) {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {
