@@ -33,15 +33,12 @@ export default {
       if (fileToUpload) {
         const formData = new FormData();
         formData.append("file", fileToUpload);
-
         const currentUser = this.currentUser;
         if (!currentUser) {
           throw new Error("User not authenticated");
         }
-
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
         console.log("idToken", idToken);
-
         axiosInstance
           .post("/image-process-upload", formData, {
             headers: {

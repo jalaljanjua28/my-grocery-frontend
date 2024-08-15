@@ -97,7 +97,6 @@ export default {
     },
     async deleteItem(itemToDelete) {
       const currentUser = auth.currentUser;
-
       if (!currentUser) {
         throw new Error("User not authenticated");
       }
