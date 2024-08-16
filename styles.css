@@ -8,47 +8,56 @@ body {
   font-family: "Inter", sans-serif;
   /* Additional styles as needed */
 }
-.el-table th.el-table__cell > .cell {
+/* .el-table th.el-table__cell > .cell {
   display: inline-block;
   box-sizing: border-box;
   position: relative;
   vertical-align: middle;
   padding-left: 10px;
-  padding-right: 10px;
-  width: 100%;
+  padding-right: 0px !important;
+  width: max-content;
   text-align: center !important;
-}
+  font-size: 12px;
+} */
 .item-table {
-  width: 100%;
+  /* width: 100%; */
   border-collapse: collapse;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.el-table {
-  width: 100% !important;
-  max-width: 100% !important;
-  font-size: 12px !important;
-}
-.item-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-.el-table {
-  width: 100% !important;
-  max-width: 100% !important;
-  font-size: 12px !important;
+.el-table__body {
+  width: max-content !important;
 }
 .el-table .cell {
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-all;
+  line-height: 23px;
+  padding-left: 10px;
+  padding-right: 0px !important;
+}
+/* .el-table {
+  max-width: 100% !important;
+  font-size: 12px !important;
+} */
+
+/* .el-table {
+  width: 100% !important;
+  max-width: 100% !important;
+  font-size: 12px !important;
+} */
+/* .el-table .cell {
   line-height: 23px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: center !important;
   font-size: 10px;
-}
-.el-table .cell {
+} */
+/* .el-table .cell {
   box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,14 +68,13 @@ body {
   padding-right: 10px;
   text-align: center !important;
   font-size: 12px;
-}
+} */
 .el-button {
   display: inline-block;
   line-height: 1;
   white-space: nowrap;
   cursor: pointer;
   background: #fff;
-  border: 1px solid #dcdfe6;
   color: #606266;
   text-align: center;
   box-sizing: border-box;
@@ -124,9 +132,9 @@ body {
 }
 .el-button-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-evenly;
   flex-direction: row;
+  align-items: flex-start;
 }
 .el-button--small {
   padding: 9px 15px;
@@ -455,7 +463,6 @@ strong {
   background-color: #ffffffc9 !important;
   min-height: auto;
   flex: 1;
-  margin-bottom: -40px !important;
 }
 .footer1 {
   height: auto !important;
@@ -683,6 +690,9 @@ strong {
 .barcode {
   display: none;
 }
+.el-upload-list__item-name {
+  display: none !important;
+}
 @media screen and (max-width: 350px) {
   .el-carousel__container {
     height: 450px !important;
@@ -709,24 +719,6 @@ strong {
   }
 }
 @media screen and (max-width: 400px) {
-  .el-button {
-    display: inline-block;
-    line-height: 1;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #dcdfe6;
-    color: #606266;
-    text-align: center;
-    box-sizing: border-box;
-    outline: 0;
-    margin: 0;
-    transition: 0.1s;
-    font-weight: 500;
-    padding: 12px 20px;
-    font-size: large !important;
-    border-radius: 4px;
-  }
   .logo-text {
     font-size: 1.1em;
     font-weight: bolder;
@@ -893,25 +885,10 @@ strong {
     background: #ffffffa3 !important;
   }
 }
+.cell {
+  width: -webkit-fill-available !important ;
+}
 @media screen and (max-width: 600px) {
-  .el-button {
-    display: inline-block;
-    line-height: 0.5;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #dcdfe6;
-    color: #606266;
-    text-align: center;
-    box-sizing: border-box;
-    outline: 0;
-    margin: 0;
-    transition: 0.1s;
-    font-weight: 500;
-    padding: 12px 20px;
-    font-size: medium;
-    border-radius: 4px;
-  }
   .logo-text {
     font-size: 1.1em;
     font-weight: bolder;
