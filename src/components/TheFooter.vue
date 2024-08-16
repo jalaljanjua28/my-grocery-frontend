@@ -81,7 +81,7 @@
           Image Text-OCR/Upload Processing...
         </div>
         <div v-if="completionStatus" class="status">
-          <strong>Image Uploaded Successfully</strong>
+          Image Uploaded Successfully
         </div>
       </el-row>
     </footer>
@@ -157,6 +157,7 @@ export default {
             console.log(response.data);
             this.showStatus = false;
             this.completionStatus = true;
+            location.reload();
           })
           .catch((error) => {
             console.log(error);
