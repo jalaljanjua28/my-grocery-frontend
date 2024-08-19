@@ -8,7 +8,7 @@
 
 <script>
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
-const baseURL = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
+const baseURL = "http://127.0.0.1:8081/api";
 
 export default {
   methods: {
