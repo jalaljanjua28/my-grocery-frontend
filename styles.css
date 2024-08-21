@@ -8,67 +8,22 @@ body {
   font-family: "Inter", sans-serif;
   /* Additional styles as needed */
 }
-/* .el-table th.el-table__cell > .cell {
-  display: inline-block;
-  box-sizing: border-box;
-  position: relative;
-  vertical-align: middle;
-  padding-left: 10px;
-  padding-right: 0px !important;
-  width: max-content;
-  text-align: center !important;
-  font-size: 12px;
-} */
-.item-table {
-  /* width: 100%; */
-  border-collapse: collapse;
-  margin-top: 10px;
+.router_link {
+  width: 100px;
+  margin-left: 10px;
+}
+.el-row {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
-.el-table__body {
-  width: max-content !important;
+.item-row {
+  border: 1px solid #ccc;
 }
-.el-table .cell {
-  box-sizing: border-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-  word-break: break-all;
-  line-height: 23px;
-  padding-left: 10px;
-  padding-right: 0px !important;
+.el-button + .el-button,
+.el-checkbox.is-bordered + .el-checkbox.is-bordered {
+  margin-left: 0px;
 }
-/* .el-table {
-  max-width: 100% !important;
-  font-size: 12px !important;
-} */
-
-/* .el-table {
-  width: 100% !important;
-  max-width: 100% !important;
-  font-size: 12px !important;
-} */
-/* .el-table .cell {
-  line-height: 23px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center !important;
-  font-size: 10px;
-} */
-/* .el-table .cell {
-  box-sizing: border-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-  word-break: break-all;
-  line-height: 23px;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: center !important;
-  font-size: 12px;
-} */
 .el-button {
   display: inline-block;
   line-height: 1;
@@ -82,13 +37,15 @@ body {
   margin: 0;
   transition: 0.1s;
   font-weight: 500;
-  padding: 12px 20px;
+  padding: 7px 7px;
   font-size: 14px;
   border-radius: 4px;
 }
 .el-button.is-circle {
-  padding: 8px !important;
-  border-radius: 100% !important;
+  margin-right: 6px;
+  padding: 8px;
+  border-radius: 100%;
+  margin-bottom: 5px;
 }
 .el-button--success:focus,
 .el-button--success:hover {
@@ -103,8 +60,9 @@ body {
 }
 .nav-buttons {
   display: flex !important;
-  width: 300px !important;
+  width: 360px !important;
   margin-bottom: 25px !important;
+  margin-left: -10px !important;
 }
 .el-button--success.is-plain {
   color: #67c23a;
@@ -121,27 +79,26 @@ body {
 .el-button--primary.is-plain {
   border: 2px solid;
 }
+.el-button--primary:focus,
+.el-button--primary:hover {
+  background: blue;
+  border-color: #66b1ff;
+  color: #fff;
+}
 .el-button--danger.is-plain {
   border: 2px solid;
 }
 .el-button--small {
-  padding: 6px 10px;
-  margin-top: 20px !important;
-  font-size: 16px;
-  border-radius: 3px;
+  padding: 3px 11px;
+  font-size: 12px;
+  border-radius: 16px;
 }
 .el-button-footer {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
 }
-.el-button--small {
-  padding: 9px 15px;
-  font-size: 12px;
-  border-radius: 3px;
-}
-
 .el-card {
   border-radius: 10px !important;
   border: 0px solid darkcyan;
@@ -231,11 +188,20 @@ body {
   font-size: xx-large;
 }
 .el-dropdown-menu__item {
-  line-height: 40px;
-  font-size: 17px;
-  padding: 10px 30px;
+  line-height: 60px;
+  font-size: 16px;
+  /* padding: 8px 24px !important; */
   color: white;
   border-radius: 20px;
+  width: max-content;
+}
+.el-dropdown-menu el-popper {
+  transform-origin: center top;
+  z-index: 2003;
+  position: absolute;
+  top: 75px;
+  left: 195px !important;
+  height: 37vh !important;
 }
 .el-dropdown-menu__item i {
   margin-right: 18px;
@@ -362,7 +328,6 @@ body {
   background: #ffffffc9 !important;
   height: 105px !important;
   border-bottom: 5px solid black;
-  width: 100%;
   padding: 0 15px !important;
   display: flex;
   flex-direction: row;
@@ -476,21 +441,7 @@ strong {
   right: 0;
   border-top: 5px solid black;
 }
-.footer2 {
-  height: 79px;
-  line-height: 70px;
-  background: none;
-  padding: 5px 0;
-  border-top: 3px solid black;
-  color: #fff;
-  text-align: center;
-  position: relative;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  font-size: small;
-  background: #ffffffa3 !important;
-}
+
 .account-page {
   height: 100%;
 }
@@ -575,9 +526,7 @@ strong {
   font-size: 24px;
   margin-right: 10px;
 }
-.item-row {
-  border: 1px solid #ccc;
-}
+
 .item-image {
   width: 100px;
   padding: 10px;
@@ -693,6 +642,39 @@ strong {
 .el-upload-list__item-name {
   display: none !important;
 }
+.el-popper[x-placement^="bottom"] .popper__arrow::after {
+  top: 1px;
+  margin-left: -21px;
+  border-top-width: 0;
+  border-bottom-color: darkcyan;
+}
+.el-aside {
+  overflow: auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: fixed;
+  z-index: 1000;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.el-aside:hover {
+  opacity: 1;
+}
+.navbar {
+  display: flex;
+}
+.responsive-table {
+  width: 100%;
+  overflow-x: auto;
+}
+.table-image {
+  max-width: 100px;
+}
+.navbutton {
+  padding: 41px 3px !important;
+  margin-left: -15px !important;
+  margin-top: -2px !important;
+}
 @media screen and (max-width: 350px) {
   .el-carousel__container {
     height: 450px !important;
@@ -772,9 +754,6 @@ strong {
   .footer1 {
     display: none;
   }
-  .el-dropdown {
-    font-size: xx-large !important;
-  }
   .upload-demo {
     width: max-content;
   }
@@ -825,7 +804,7 @@ strong {
   .el-icon-camera {
     background: none !important;
     border: none;
-    color: black !important;
+    color: white !important;
     margin-top: 15px !important;
   }
   .el-icon-box {
@@ -872,9 +851,9 @@ strong {
   }
   .footer2 {
     height: 79px;
-    line-height: 70px;
     background: none;
     padding: 5px 0;
+    border-top: 3px solid black;
     color: #fff;
     text-align: center;
     position: relative;
@@ -883,14 +862,19 @@ strong {
     right: 0;
     font-size: small;
     background: #ffffffa3 !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
-.cell {
-  width: -webkit-fill-available !important ;
-}
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 650px) {
+  .router_link {
+    width: 100% !important;
+  }
   .logo-text {
-    font-size: 1.1em;
+    font-size: 1.5em;
     font-weight: bolder;
     color: red;
     width: -moz-max-content;
@@ -909,6 +893,9 @@ strong {
   .aside {
     display: none;
   }
+  .navbutton {
+    display: none;
+  }
   .searchDev {
     display: none !important;
   }
@@ -919,11 +906,11 @@ strong {
     flex-direction: column !important;
     margin-top: 10px !important;
   }
-  .el-button--primary.is-plain {
+  /* .el-button--primary.is-plain {
     width: 100%;
     margin-bottom: 10px;
     margin-left: 0px !important;
-  }
+  } */
   .el-button--warning.is-plain {
     width: 100%;
     margin-bottom: 10px;
@@ -935,7 +922,7 @@ strong {
     margin-left: 0px !important;
   }
   .el-button--danger.is-plain {
-    width: 100%;
+    width: 100% !important;
     margin-bottom: 10px;
     margin-left: 0px !important;
   }
@@ -958,7 +945,7 @@ strong {
     width: max-content;
   }
   .searchInventory {
-    justify-content: center;
+    justify-content: flex-start;
     display: flex;
     width: 100%;
     margin-bottom: 20px;
@@ -1003,13 +990,38 @@ strong {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .el-table {
+    display: block;
+    width: 100%;
+  }
+
+  .el-table-column {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .el-table-column .el-table__header-wrapper,
+  .el-table-column .el-table__body-wrapper {
+    display: block;
+    width: 100%;
+  }
+
+  .el-table-column .el-table__cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .el-table-column img {
+    max-width: 50px;
+    margin-right: 10px;
+  }
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 650px) {
   .searchInventory {
     display: none;
-  }
-  .logo-display {
-    display: none !important;
   }
   .el-dropdown-grid {
     display: none !important;

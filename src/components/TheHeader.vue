@@ -1,6 +1,6 @@
 <template>
   <el-header class="header">
-    <header-logo class="logo-display"></header-logo>
+    <the-nav></the-nav>
     <div>
       <search-inventory
         class="searchDev"
@@ -17,8 +17,8 @@
 </template>
 
 <script>
+import TheNav from "./TheNav.vue";
 import TheMenu from "./TheMenu.vue";
-import HeaderLogo from "./HeaderLogo.vue";
 import SearchInventory from "./SearchInventory.vue";
 import {
   fetchMasterExpiredData,
@@ -29,8 +29,8 @@ import {
 export default {
   components: {
     TheMenu,
-    HeaderLogo,
     SearchInventory,
+    TheNav,
   },
   data() {
     return {

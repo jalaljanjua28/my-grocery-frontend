@@ -269,10 +269,15 @@ export default {
 </script>
 
 <style scoped>
+.el-button--small {
+  padding: 5px 19px;
+  font-size: 12px;
+  border-radius: 0px;
+  margin-top: 10px;
+}
 .search-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 20px;
 }
 </style>

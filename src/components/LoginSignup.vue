@@ -18,11 +18,17 @@
           show-password
           style="margin-bottom: 20px"
         ></el-input>
-        <div style="display: flex">
-          <el-button @click="signUpWithEmailPassword"
+        <div style="display: flex; flex-direction: column">
+          <el-button
+            style="margin-bottom: 10px"
+            @click="signUpWithEmailPassword"
+            type="success"
+            plain
             >Sign up with Email</el-button
           >
-          <el-button @click="signInWithGoogle">Sign in with Google</el-button>
+          <el-button @click="signInWithGoogle" type="primary" plain
+            >Sign in with Google</el-button
+          >
         </div>
       </div>
       <div v-if="users.length > 0 && currentUser">
