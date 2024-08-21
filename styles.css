@@ -69,15 +69,23 @@ body {
   background: #f0f9eb;
   border-color: black;
   border: 2px solid;
+  /* width: 100% !important; */
+  margin-bottom: 10px !important;
 }
 .el-button--info.is-plain {
   border: 2px solid;
+  width: 100% !important;
+  margin-bottom: 10px !important;
 }
 .el-button--warning.is-plain {
   border: 2px solid;
+  width: 100% !important;
+  margin-bottom: 10px !important;
 }
 .el-button--primary.is-plain {
   border: 2px solid;
+  /* width: 100% !important; */
+  margin-bottom: 10px !important;
 }
 .el-button--primary:focus,
 .el-button--primary:hover {
@@ -97,7 +105,8 @@ body {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
-  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 13px;
 }
 .el-card {
   border-radius: 10px !important;
@@ -131,7 +140,7 @@ body {
   flex-basis: auto;
   box-sizing: border-box;
   min-width: 0;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   height: inherit;
 }
 .loading-container {
@@ -329,11 +338,11 @@ body {
   height: 105px !important;
   border-bottom: 5px solid black;
   padding: 0 15px !important;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  text-align: center;
+  text-align: center; */
   line-height: 0px;
 }
 .header-title {
@@ -701,8 +710,18 @@ strong {
   }
 }
 @media screen and (max-width: 400px) {
+  .el-page-header__content {
+    font-size: 12px !important;
+    color: #303133;
+  }
+  .el-button {
+    padding: 5px 8px !important;
+  }
+  .menu-bar {
+    flex-direction: column !important;
+  }
   .logo-text {
-    font-size: 1.1em;
+    font-size: 1.5em;
     font-weight: bolder;
     color: red;
     width: max-content;
@@ -754,9 +773,9 @@ strong {
   .footer1 {
     display: none;
   }
-  .upload-demo {
+  /* .upload-demo {
     width: max-content;
-  }
+  } */
   .account-page {
     height: 100%;
   }
@@ -767,14 +786,14 @@ strong {
     text-align: center;
     padding: 10px !important;
   }
-  .el-container {
+  /* .el-container {
     flex: 1;
     flex-basis: auto;
     box-sizing: border-box;
     min-width: -2px;
     margin-right: 17px;
     width: auto !important;
-  }
+  } */
   .input-with-select {
     width: 100%;
   }

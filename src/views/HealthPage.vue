@@ -7,7 +7,13 @@
     <el-main class="main-content">
       <div class="nav-buttons">
         <router-link to="items-inventory" class="router_link">
-          <el-button type="primary" size="x-small" plain>Items</el-button>
+          <el-button
+            style="width: 100% !important"
+            type="primary"
+            size="x-small"
+            plain
+            >Items</el-button
+          >
         </router-link>
         <router-link to="/recipes-page" class="router_link">
           <el-button
