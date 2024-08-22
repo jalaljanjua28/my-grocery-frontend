@@ -25,31 +25,6 @@
         <template slot-scope="scope">
           <el-row>
             <el-button
-              type="primary"
-              icon="el-icon-edit"
-              circle
-              size="x-small"
-              @click="addExpiry(scope.row)"
-            ></el-button>
-            <el-dialog :visible.sync="dialogVisible" title="Add Expiry">
-              <el-form :model="form" label-width="120px">
-                <el-form-item label="Item Name">
-                  <el-input v-model="form.item_name" disabled></el-input>
-                </el-form-item>
-                <el-form-item label="Days to Extend">
-                  <el-input
-                    v-model="form.days_to_extend"
-                    type="number"
-                  ></el-input>
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="info" @click="updateExpiry"
-                    >Update Expiry</el-button
-                  >
-                </el-form-item>
-              </el-form>
-            </el-dialog>
-            <el-button
               type="success"
               icon="el-icon-plus"
               circle
