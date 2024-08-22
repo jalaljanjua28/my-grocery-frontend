@@ -12,15 +12,15 @@
       </el-table-column>
       <el-table-column label="Name" prop="name"></el-table-column>
       <el-table-column label="Price" prop="price"></el-table-column>
-      <el-table-column label="Status" prop="status"></el-table-column>
+      <!-- <el-table-column label="Status" prop="status"></el-table-column>
       <el-table-column label="Expiry">
         <template slot-scope="scope">
           <span>{{ scope.row.date }}</span
           ><br />
           <span>{{ scope.row.expiry }}</span>
         </template>
-      </el-table-column>
-      <el-table-column label="Days" prop="days_left"></el-table-column>
+      </el-table-column> -->
+      <!-- <el-table-column label="Days" prop="days_left"></el-table-column> -->
       <el-table-column>
         <template slot-scope="scope">
           <el-row>
