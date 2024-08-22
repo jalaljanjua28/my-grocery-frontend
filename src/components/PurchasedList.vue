@@ -1,14 +1,27 @@
 <template>
   <div>
-    <el-table :data="items">
+    <el-table :data="items" class="responsive-table">
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
-          <img :src="scope.row.image" :alt="scope.row.name" />
+          <img
+            :src="scope.row.image"
+            :alt="scope.row.name"
+            class="table-image"
+          />
         </template>
       </el-table-column>
       <el-table-column label="Name" prop="name"></el-table-column>
       <el-table-column label="Price" prop="price"></el-table-column>
-      <el-table-column width="100%">
+      <el-table-column label="Status" prop="status"></el-table-column>
+      <el-table-column label="Expiry">
+        <template slot-scope="scope">
+          <span>{{ scope.row.date }}</span
+          ><br />
+          <span>{{ scope.row.expiry }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="Days" prop="days_left"></el-table-column>
+      <el-table-column>
         <template slot-scope="scope">
           <el-row>
             <el-button
@@ -24,8 +37,8 @@
               circle
               size="x-small"
               @click="deleteItem(scope.row)"
-            ></el-button
-          ></el-row>
+            ></el-button>
+          </el-row>
         </template>
       </el-table-column>
     </el-table>

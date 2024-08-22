@@ -12,6 +12,7 @@
               background-color: darkcyan;
               padding: 15px;
               border-radius: 20px;
+              width: fit-content;
             "
           >
             <el-collapse v-model="activeName" style="color: black">

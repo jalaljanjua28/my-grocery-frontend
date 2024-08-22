@@ -65,17 +65,17 @@
           accept="image/*"
         >
           <el-button slot="trigger" size="small" type="primary" plain>
-            Capture File
+            <i class="el-icon-camera-solid"></i>
           </el-button>
         </el-upload>
         <el-button
-          style="margin-left: 10px"
+          style="margin-left: 30px"
           size="small"
           type="success"
           plain
           @click="uploadImageProcess"
         >
-          Upload to Server
+          <i class="el-icon-upload"></i>
         </el-button>
         <div v-if="showStatus" class="status">
           Image Text-OCR/Upload Processing...
@@ -102,8 +102,6 @@ export default {
     return {
       showStatus: false,
       completionStatus: false,
-      // imageSrc: null,
-      // ocrText: null,
       selectedFile: null,
       uploadProgress: 0,
     };
@@ -117,7 +115,6 @@ export default {
         this.selectedFile = file.raw;
         console.log("File name:", this.selectedFile.name);
         // Generate a URL for the selected file and store it in 'imageSrc'
-        // this.imageSrc = URL.createObjectURL(this.selectedFile);
       } else {
         console.error("Invalid file object:", file);
       }
@@ -193,5 +190,9 @@ export default {
 <style scoped>
 p {
   color: black;
+}
+[class*=" el-icon-"],
+[class^="el-icon-"] {
+  font-size: 38px;
 }
 </style>

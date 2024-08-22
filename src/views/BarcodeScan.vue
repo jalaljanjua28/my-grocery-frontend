@@ -37,7 +37,7 @@
           <img
             :src="imageSrc"
             alt="Captured Image"
-            style="max-width: 50%; height: auto"
+            style="max-width: 100%; height: 100%"
           />
         </div>
 
@@ -57,7 +57,7 @@
           best possible image</strong
         >
         <el-button
-          style="margin-left: 10px"
+          style="margin-left: 10px; margin-top: 10px"
           size="small"
           type="success"
           plain
@@ -206,23 +206,6 @@ export default {
 </script>
 
 <style scoped>
-.image-preview {
-  margin-top: 20px;
-  width: 70%;
-}
-.ocr-result {
-  margin-top: 20px;
-  font-size: 16px;
-  white-space: pre-wrap; /* Ensures line breaks are respected */
-}
-.status {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #4caf50;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 h {
   display: flex;
   font-weight: bolder;
@@ -237,5 +220,10 @@ strong {
   font-weight: bolder;
   color: black;
   margin-top: 10px;
+}
+.el-button--small {
+  padding: 9px 25px;
+  font-size: 12px;
+  border-radius: 10px;
 }
 </style>

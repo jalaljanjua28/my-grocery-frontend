@@ -12,20 +12,26 @@
     </div>
     <div class="nav-buttons">
       <router-link to="items-inventory" class="router_link">
-        <el-button type="primary" size="x-small" plain>Items</el-button>
+        <el-button
+          type="primary"
+          size="x-small"
+          plain
+          style="margin-bottom: 10px !important; width: 100%"
+          >Items</el-button
+        >
       </router-link>
       <router-link to="/recipes-page" class="router_link">
-        <el-button type="warning" size="x-small" plain style="margin-left: 10px"
+        <el-button type="warning" size="x-small" plain style="width: 100%"
           >Recipes</el-button
         >
       </router-link>
       <router-link to="/health-page" class="router_link">
-        <el-button type="info" size="x-small" plain style="margin-left: 10px"
+        <el-button type="info" size="x-small" plain style="width: 100%"
           >Health</el-button
         >
       </router-link>
       <router-link to="user-defined-prompt" class="router_link">
-        <el-button type="danger" size="x-small" plain style="margin-left: 10px">
+        <el-button type="danger" size="x-small" plain style="width: 150%">
           User Defined Prompt</el-button
         >
       </router-link>
