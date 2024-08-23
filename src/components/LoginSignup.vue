@@ -38,7 +38,14 @@
             {{ user.email }}
           </li>
         </ul>
-        <el-button v-if="currentUser" @click="signOut">Sign Out</el-button>
+        <el-button
+          v-if="currentUser"
+          @click="signOut"
+          type="danger"
+          plain
+          size="small"
+          >Sign Out</el-button
+        >
       </div>
     </el-main>
   </div>

@@ -22,7 +22,7 @@
       </el-table-column>
       <el-table-column>
         <template slot-scope="scope">
-          <el-row>
+          <el-row v-if="scope.row">
             <el-button
               type="success"
               icon="el-icon-plus"

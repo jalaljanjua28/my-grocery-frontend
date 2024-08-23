@@ -31,7 +31,7 @@
         >
       </router-link>
       <router-link to="user-defined-prompt" class="router_link">
-        <el-button type="danger" size="x-small" plain style="width: 150%">
+        <el-button type="danger" size="x-small" plain style="width: 190%">
           User Defined Prompt</el-button
         >
       </router-link>
