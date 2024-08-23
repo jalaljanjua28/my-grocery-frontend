@@ -38,7 +38,7 @@ body {
   transition: 0.1s;
   font-weight: 500;
   padding: 7px 7px;
-  font-size: 14px;
+  font-size: large;
   border-radius: 4px;
 }
 .el-button.is-circle {
@@ -95,9 +95,9 @@ body {
   border: 2px solid;
 }
 .el-button--small {
-  padding: 3px 11px;
-  font-size: 12px;
-  border-radius: 16px;
+  padding: 8px 20px;
+  font-size: 17px;
+  border-radius: 10px;
 }
 .el-button-footer {
   display: flex;
@@ -192,6 +192,7 @@ body {
 }
 .el-dropdown {
   font-size: xx-large;
+  /* margin-left: 10px; */
 }
 .el-dropdown-menu__item {
   line-height: 60px;
@@ -636,11 +637,9 @@ strong {
 .el-upload-list__item-name {
   display: none !important;
 }
-.el-popper[x-placement^="bottom"] .popper__arrow::after {
-  top: 1px;
-  margin-left: -21px;
-  border-top-width: 0;
-  border-bottom-color: darkcyan;
+
+.el-popper[x-placement^="bottom"] .popper__arrow {
+  display: none;
 }
 .el-aside {
   overflow: auto;
@@ -720,6 +719,7 @@ strong {
   }
   .el-button {
     padding: 5px 8px !important;
+    font-size: large !important;
   }
   .menu-bar {
     flex-direction: column !important;
@@ -785,7 +785,7 @@ strong {
   }
   .el-main {
     text-align: center;
-    padding: 10px !important;
+    /* padding: 10px !important; */
   }
   .input-with-select {
     width: 100%;
@@ -878,6 +878,15 @@ strong {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+  }
+}
+@media screen and (max-width: 470px) {
+  .menu-bar {
+    flex-direction: column !important;
+  }
+  .el-button {
+    padding: 5px 8px !important;
+    font-size: large !important;
   }
 }
 @media screen and (max-width: 650px) {
