@@ -276,8 +276,8 @@ export default {
   margin-top: 10px;
 }
 .search-container {
-  display: flex;
-  justify-content: flex-start;
+  /* display: flex;
+  justify-content: flex-start; */
   margin-bottom: 20px;
 }
 </style>

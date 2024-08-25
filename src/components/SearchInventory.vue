@@ -1,6 +1,6 @@
 <template>
   <div style="">
-    <div style="display: flex; align-items: center">
+    <div>
       <div>
         <el-input
           placeholder="Please input"

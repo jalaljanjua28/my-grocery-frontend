@@ -178,7 +178,7 @@ body {
   z-index: 2007;
 }
 .el-select-dropdown__item {
-  font-size: 12px;
+  font-size: 18px;
   padding: 0 20px;
   position: relative;
   white-space: nowrap;
@@ -321,14 +321,14 @@ body {
   height: 33px;
   line-height: 53px;
   background-color: transparent;
-  color: black;
+  color: white;
   cursor: pointer;
   border-bottom: none;
   font-size: 16px;
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
-  width: max-content;
+  /* width: max-content; */
 }
 .header {
   background: #ffffffc9 !important;
@@ -347,7 +347,7 @@ body {
 .el-collapse-item__content {
   padding-bottom: 0px;
   font-size: 20px;
-  color: #303133;
+  color: white;
   line-height: 1.5;
   background-color: transparent;
 }
@@ -691,7 +691,7 @@ strong {
   .el-carousel__container {
     height: 450px !important;
   }
-  .el-collapse-item__header {
+  /* .el-collapse-item__header {
     display: flex;
     align-items: center;
     height: 33px;
@@ -705,7 +705,7 @@ strong {
     transition: border-bottom-color 0.3s;
     outline: 0;
     width: max-content;
-  }
+  } */
 }
 @media screen and (min-width: 400px) {
   .footer2 {
@@ -762,7 +762,7 @@ strong {
     font-size: 15px;
   }
   .el-select-dropdown__item {
-    font-size: 10px;
+    font-size: 14px;
     padding: 0 20px;
     position: relative;
     white-space: nowrap;
@@ -852,7 +852,7 @@ strong {
     height: 33px;
     line-height: 53px;
     background-color: transparent;
-    color: black;
+    color: white;
     cursor: pointer;
     border-bottom: none;
     font-size: 16px;
@@ -944,7 +944,7 @@ strong {
   .el-col-8 {
     width: 100%;
   }
-  .el-collapse-item__header {
+  /* .el-collapse-item__header {
     display: flex;
     align-items: center;
     height: 33px;
@@ -958,10 +958,10 @@ strong {
     transition: border-bottom-color 0.3s;
     outline: 0;
     width: max-content;
-  }
+  } */
   .searchInventory {
-    justify-content: flex-start;
-    display: flex;
+    /* justify-content: flex-start;
+    display: flex; */
     width: 100%;
     margin-bottom: 20px;
     margin-top: 10px;
