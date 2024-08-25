@@ -28,6 +28,9 @@
           <p style="color: red; font-size: 14px">
             Use Microsoft Lens for best image quality
           </p>
+          <div v-if="showStatus" class="status">
+            Image Text-OCR/Upload Processing...
+          </div>
         </div>
       </el-upload>
       <div style="display: flex">
@@ -48,9 +51,7 @@
           <!-- Using <pre> to preserve line breaks -->
         </div>
       </div>
-      <div v-if="showStatus" class="status">
-        Image Text-OCR/Upload Processing...
-      </div>
+
       <div v-if="checkStatus" class="status">
         <strong
           >Compare the result of the image and the extracted OCR and choose the
@@ -220,11 +221,19 @@ strong {
   font-size: 16px;
   font-weight: bolder;
   color: black;
-  margin-top: 10px;
+  margin-top: 100px;
 }
 .el-button--small {
   padding: 9px 25px;
   font-size: 12px;
   border-radius: 10px;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 110vh;
+  padding: 20px;
 }
 </style>
