@@ -52,7 +52,7 @@
           <!-- Using <pre> to preserve line breaks -->
         </div>
       </div>
-      <div v-if="checkStatus" class="status">
+      <div v-if="checkStatus" class="status" style="margin-top: 60px">
         <div v-if="showStatus" class="status">
           Image Text-OCR/Upload Processing...
         </div>
@@ -226,7 +226,7 @@ strong {
   font-size: 16px;
   font-weight: bolder;
   color: black;
-  /* margin-top: 100px; */
+  margin-top: inherit;
 }
 .el-button--small {
   padding: 9px 25px;

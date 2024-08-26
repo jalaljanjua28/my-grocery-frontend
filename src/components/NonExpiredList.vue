@@ -169,16 +169,23 @@ export default {
       this.form.days_to_extend = 0;
       this.dialogVisible = true;
     },
-    updateExpiry() {
+    async updateExpiry() {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
       const requestData = {
         item_name: this.form.item_name,
         days_to_extend: this.form.days_to_extend,
       };
 
-      fetch(baseUrl + "/api/update-master-nonexpired-item-expiry", {
+      fetch(baseUrl + "/update-master-nonexpired-item-expiry", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
           // Add additional headers if needed
         },
         body: JSON.stringify(requestData),
