@@ -178,7 +178,7 @@ body {
   z-index: 2007;
 }
 .el-select-dropdown__item {
-  font-size: 12px;
+  font-size: large;
   padding: 0 20px;
   position: relative;
   white-space: nowrap;
@@ -712,7 +712,7 @@ strong {
 }
 @media screen and (max-width: 400px) {
   .el-page-header__content {
-    font-size: 12px !important;
+    font-size: small !important;
     color: #303133;
   }
   .el-button {
@@ -760,7 +760,7 @@ strong {
     font-size: 15px;
   }
   .el-select-dropdown__item {
-    font-size: 10px;
+    font-size: medium;
     padding: 0 20px;
     position: relative;
     white-space: nowrap;
