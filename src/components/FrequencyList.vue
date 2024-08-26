@@ -78,8 +78,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.response-message {
-  margin-top: 10px;
-}
-</style>
+<style scoped></style>

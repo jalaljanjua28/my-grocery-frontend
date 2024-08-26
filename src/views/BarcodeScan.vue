@@ -21,6 +21,7 @@
           type="success"
           plain
           @click="checkProccessedImage"
+          :loading="isLoading"
           >Compare Results</el-button
         >
 
@@ -28,9 +29,6 @@
           <p style="color: red; font-size: 14px">
             Use Microsoft Lens for best image quality
           </p>
-          <div v-if="showStatus" class="status">
-            Image Text-OCR/Upload Processing...
-          </div>
         </div>
       </el-upload>
       <div style="display: flex">
@@ -47,12 +45,17 @@
         <!-- Display OCR Extracted Text -->
         <div v-if="ocrText" class="ocr-result">
           <h style="color: red">OCR Extracted Text:</h>
-          <pre style="color: black">{{ ocrText }}</pre>
+          <pre
+            style="color: black; border: 2px solid black; margin-left: 14px"
+            >{{ ocrText }}</pre
+          >
           <!-- Using <pre> to preserve line breaks -->
         </div>
       </div>
-
       <div v-if="checkStatus" class="status">
+        <div v-if="showStatus" class="status">
+          Image Text-OCR/Upload Processing...
+        </div>
         <strong
           >Compare the result of the image and the extracted OCR and choose the
           best possible image</strong
@@ -92,6 +95,7 @@ export default {
       showStatus: false,
       checkStatus: false,
       completionStatus: false,
+      isLoading: false,
       uploadProgress: 0,
     };
   },
@@ -113,7 +117,7 @@ export default {
     async checkProccessedImage() {
       if (this.selectedFile) {
         this.showStatus = true;
-        this.uploadProgress = 0;
+        (this.isLoading = true), (this.uploadProgress = 0);
         const formData = new FormData();
         formData.append("file", this.selectedFile);
 
@@ -146,6 +150,7 @@ export default {
         } finally {
           this.showStatus = false;
           this.checkStatus = true;
+          this.isLoading = false;
         }
       } else {
         this.$message.error("Please select a file to upload.");
@@ -221,11 +226,11 @@ strong {
   font-size: 16px;
   font-weight: bolder;
   color: black;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 .el-button--small {
   padding: 9px 25px;
-  font-size: 12px;
+  font-size: large;
   border-radius: 10px;
 }
 .main-content {
@@ -233,7 +238,7 @@ strong {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 110vh;
+  height: fit-content;
   padding: 20px;
 }
 </style>

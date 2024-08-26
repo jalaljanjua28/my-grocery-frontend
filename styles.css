@@ -669,18 +669,19 @@ strong {
   margin-top: -2px !important;
 }
 .image-preview {
-  margin-top: 20px;
-  width: 50%;
-  height: 500px;
+  /* margin-top: 20px; */
+  width: 70%;
+  height: 600px;
 }
 .ocr-result {
   margin-top: 20px;
-  font-size: 12px;
+  font-size: large;
   white-space: pre-wrap;
+  line-height: 3vh;
   width: 50%;
 }
 .status {
-  /* margin-top: 100px; */
+  margin-top: 50px;
   font-size: 14px;
   color: #4caf50;
   display: flex;
