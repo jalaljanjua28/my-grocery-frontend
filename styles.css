@@ -669,18 +669,19 @@ strong {
   margin-top: -2px !important;
 }
 .image-preview {
-  margin-top: 20px;
-  width: 50%;
-  height: 500px;
+  /* margin-top: 20px; */
+  width: 70%;
+  height: 600px;
 }
 .ocr-result {
   margin-top: 20px;
-  font-size: 12px;
+  font-size: large;
   white-space: pre-wrap;
+  line-height: 3vh;
   width: 50%;
 }
 .status {
-  margin-top: 100px;
+  margin-top: 50px;
   font-size: 14px;
   color: #4caf50;
   display: flex;
@@ -697,7 +698,7 @@ strong {
     height: 33px;
     line-height: 53px;
     background-color: transparent;
-    color: black;
+    color: white;
     cursor: pointer;
     border-bottom: none;
     font-size: 16px;
@@ -944,21 +945,6 @@ strong {
   .el-col-8 {
     width: 100%;
   }
-  /* .el-collapse-item__header {
-    display: flex;
-    align-items: center;
-    height: 33px;
-    line-height: 53px;
-    background-color: transparent;
-    color: black;
-    cursor: pointer;
-    border-bottom: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: border-bottom-color 0.3s;
-    outline: 0;
-    width: max-content;
-  } */
   .searchInventory {
     /* justify-content: flex-start;
     display: flex; */
