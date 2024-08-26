@@ -192,7 +192,6 @@ body {
 }
 .el-dropdown {
   font-size: xx-large;
-  /* margin-left: 10px; */
 }
 .el-dropdown-menu__item {
   line-height: 60px;
@@ -328,7 +327,6 @@ body {
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
-  /* width: max-content; */
 }
 .header {
   background: #ffffffc9 !important;
@@ -669,7 +667,6 @@ strong {
   margin-top: -2px !important;
 }
 .image-preview {
-  /* margin-top: 20px; */
   width: 70%;
   height: 600px;
 }
@@ -692,21 +689,6 @@ strong {
   .el-carousel__container {
     height: 450px !important;
   }
-  /* .el-collapse-item__header {
-    display: flex;
-    align-items: center;
-    height: 33px;
-    line-height: 53px;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    border-bottom: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: border-bottom-color 0.3s;
-    outline: 0;
-    width: max-content;
-  } */
 }
 @media screen and (min-width: 400px) {
   .footer2 {
@@ -786,7 +768,6 @@ strong {
   }
   .el-main {
     text-align: center;
-    /* padding: 10px !important; */
   }
   .input-with-select {
     width: 100%;
@@ -946,8 +927,6 @@ strong {
     width: 100%;
   }
   .searchInventory {
-    /* justify-content: flex-start;
-    display: flex; */
     width: 100%;
     margin-bottom: 20px;
     margin-top: 10px;
