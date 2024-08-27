@@ -1,6 +1,10 @@
 <template>
   <div class="navbar">
-    <el-button class="navbutton" @click="toggleNavbar">
+    <el-button
+      style="background: darkcyan"
+      class="navbar-button"
+      @click="toggleNavbar"
+    >
       <i class="el-icon-caret-right"></i>
     </el-button>
     <header-logo></header-logo>

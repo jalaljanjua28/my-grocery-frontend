@@ -43,7 +43,7 @@ body {
 }
 .el-button.is-circle {
   margin-right: 6px;
-  padding: 8px;
+  padding: 5px;
   border-radius: 100%;
   margin-bottom: 5px;
 }
@@ -164,7 +164,7 @@ body {
   align-items: center;
   flex-direction: row;
   border-bottom: none;
-  justify-content: flex-end;
+  margin-left: 10px;
 }
 .el-dropdown-link {
   cursor: pointer;
@@ -384,7 +384,7 @@ body {
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
-  width: 100% !important;
+  width: 90% !important;
 }
 .el-dialog__title {
   line-height: 24px;
@@ -427,6 +427,7 @@ strong {
   width: max-content;
   margin-right: 10px;
   align-items: center;
+  font-family: system-ui;
 }
 .loading-indicator {
   text-align: center;
@@ -634,7 +635,18 @@ strong {
   margin: 0;
   color: #333;
 }
-
+.el-autocomplete-suggestion li {
+  padding: 0 20px;
+  margin: 0;
+  line-height: 34px;
+  cursor: pointer;
+  color: #606266;
+  font-size: 14px !important;
+  list-style: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .el-col-12 {
   width: 100%;
 }
@@ -668,6 +680,7 @@ strong {
 }
 .navbar {
   display: flex;
+  align-items: center;
 }
 .responsive-table {
   width: 100%;
@@ -676,46 +689,32 @@ strong {
 .table-image {
   max-width: 100px;
 }
-.navbutton {
-  padding: 41px 3px !important;
-  margin-left: -15px !important;
-  margin-top: -2px !important;
+.navbar-button {
+  padding: 41px 3px;
+  margin-left: -15px;
+  margin-top: -2px;
 }
 .image-preview {
   width: 70%;
   height: 600px;
 }
 .ocr-result {
+  margin-top: 20px;
   font-size: large;
   white-space: pre-wrap;
   line-height: 3vh;
   width: 50%;
 }
 .status {
-  font-size: large;
+  font-size: medium;
   color: #4caf50;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 @media screen and (max-width: 350px) {
   .el-carousel__container {
     height: 450px !important;
-  }
-  .el-collapse-item__header {
-    display: flex;
-    align-items: center;
-    height: 33px;
-    line-height: 53px;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    border-bottom: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: border-bottom-color 0.3s;
-    outline: 0;
-    width: max-content;
   }
 }
 @media screen and (min-width: 400px) {
@@ -730,7 +729,7 @@ strong {
   }
   .el-button {
     padding: 5px 8px !important;
-    font-size: large !important;
+    font-size: medium !important;
   }
   .menu-bar {
     flex-direction: column !important;
@@ -740,7 +739,7 @@ strong {
     font-weight: bolder;
     color: red;
     width: max-content;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-right: 10px;
   }
   h1 {
@@ -896,7 +895,7 @@ strong {
   }
   .el-button {
     padding: 5px 8px !important;
-    font-size: large !important;
+    font-size: medium !important;
   }
 }
 @media screen and (max-width: 650px) {
@@ -908,7 +907,7 @@ strong {
     font-weight: bolder;
     color: red;
     width: -moz-max-content;
-    margin-left: -7px;
+    /* margin-left: -7px; */
     margin-right: 10px;
   }
   .logo-container {
@@ -918,12 +917,12 @@ strong {
     border-bottom: none !important;
     justify-content: flex-end;
     background: none !important;
-    margin-left: -20px;
+    margin-left: -15px;
   }
   .aside {
     display: none;
   }
-  .navbutton {
+  .navbar-button {
     display: none;
   }
   .searchDev {
@@ -954,7 +953,7 @@ strong {
   .el-col-8 {
     width: 100%;
   }
-  .searchInventory {
+  .search-inventory {
     width: 100%;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -1017,7 +1016,7 @@ strong {
   }
 }
 @media screen and (min-width: 650px) {
-  .searchInventory {
+  .search-inventory {
     display: none;
   }
   .el-dropdown-grid {
