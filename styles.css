@@ -43,7 +43,7 @@ body {
 }
 .el-button.is-circle {
   margin-right: 6px;
-  padding: 8px;
+  padding: 5px;
   border-radius: 100%;
   margin-bottom: 5px;
 }
@@ -164,7 +164,7 @@ body {
   align-items: center;
   flex-direction: row;
   border-bottom: none;
-  justify-content: flex-end;
+  margin-left: 10px;
 }
 .el-dropdown-link {
   cursor: pointer;
@@ -401,6 +401,7 @@ strong {
   width: max-content;
   margin-right: 10px;
   align-items: center;
+  font-family: system-ui;
 }
 .loading-indicator {
   text-align: center;
@@ -653,6 +654,7 @@ strong {
 }
 .navbar {
   display: flex;
+  align-items: center;
 }
 .responsive-table {
   width: 100%;
@@ -661,10 +663,10 @@ strong {
 .table-image {
   max-width: 100px;
 }
-.navbutton {
-  padding: 41px 3px !important;
-  margin-left: -15px !important;
-  margin-top: -2px !important;
+.navbar-button {
+  padding: 41px 3px;
+  margin-left: -15px;
+  margin-top: -2px;
 }
 .image-preview {
   width: 70%;
@@ -702,7 +704,7 @@ strong {
   }
   .el-button {
     padding: 5px 8px !important;
-    font-size: large !important;
+    font-size: medium !important;
   }
   .menu-bar {
     flex-direction: column !important;
@@ -712,7 +714,7 @@ strong {
     font-weight: bolder;
     color: red;
     width: max-content;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-right: 10px;
   }
   h1 {
@@ -745,7 +747,7 @@ strong {
     font-size: 15px;
   }
   .el-select-dropdown__item {
-    font-size: 14px;
+    font-size: large;
     padding: 0 20px;
     position: relative;
     white-space: nowrap;
@@ -880,7 +882,7 @@ strong {
     font-weight: bolder;
     color: red;
     width: -moz-max-content;
-    margin-left: -7px;
+    /* margin-left: -7px; */
     margin-right: 10px;
   }
   .logo-container {
@@ -890,7 +892,7 @@ strong {
     border-bottom: none !important;
     justify-content: flex-end;
     background: none !important;
-    margin-left: -20px;
+    margin-left: -15px;
   }
   .aside {
     display: none;

@@ -13,6 +13,7 @@
                   background-color: transparent;
                   border: none;
                   padding: 12px 0px;
+                  margin-left: 10px;
                 "
               >
                 <i class="el-icon-s-custom"> User</i>
