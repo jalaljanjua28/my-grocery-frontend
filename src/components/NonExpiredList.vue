@@ -180,6 +180,7 @@ export default {
         item_name: this.form.item_name,
         days_to_extend: this.form.days_to_extend,
       };
+      console.log("days_to_extend:", requestData.days_to_extend);
 
       fetch(baseUrl + "/update-master-nonexpired-item-expiry", {
         method: "POST",
@@ -198,17 +199,13 @@ export default {
         })
         .then((data) => {
           console.log(data);
-          // Do something with the response data if needed
-          // For example, update state or perform some action
         })
         .catch((error) => {
           console.error("There was a problem with the request:", error);
         });
-
-      // Reset form fields and reload the page
       this.form.item_name = "";
       this.form.days_to_extend = "";
-      location.reload();
+      // location.reload();
     },
   },
 };
