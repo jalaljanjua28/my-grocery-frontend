@@ -5,7 +5,7 @@
       class="navbar-button"
       @click="toggleNavbar"
     >
-      <i class="el-icon-caret-right"></i>
+      <i style="color: white" class="el-icon-caret-right"></i>
     </el-button>
     <header-logo></header-logo>
     <el-aside

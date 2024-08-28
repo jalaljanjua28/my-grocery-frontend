@@ -1,14 +1,5 @@
 <template>
-  <el-header
-    style="
-      display: flex;
-      height: 60px;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    "
-    class="header"
-  >
+  <el-header class="header">
     <the-nav></the-nav>
     <div>
       <search-inventory

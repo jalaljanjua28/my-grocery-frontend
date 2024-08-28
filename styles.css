@@ -329,11 +329,15 @@ body {
   outline: 0;
 }
 .header {
-  background: #ffffffc9 !important;
+  background: white !important;
   height: 105px !important;
   border-bottom: 5px solid black;
   padding: 0 15px !important;
   line-height: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 .header-title {
   padding: 0 0px;
@@ -427,7 +431,7 @@ strong {
   width: max-content;
   margin-right: 10px;
   align-items: center;
-  font-family: system-ui;
+  font-family: cursive;
 }
 .loading-indicator {
   text-align: center;
@@ -682,17 +686,17 @@ strong {
   display: flex;
   align-items: center;
 }
+.navbar-button {
+  padding: 41px 3px;
+  margin-left: -15px;
+  margin-top: -2px;
+}
 .responsive-table {
   width: 100%;
   overflow-x: auto;
 }
 .table-image {
   max-width: 100px;
-}
-.navbar-button {
-  padding: 41px 3px;
-  margin-left: -15px;
-  margin-top: -2px;
 }
 .image-preview {
   width: 70%;
@@ -727,6 +731,27 @@ strong {
     font-size: small !important;
     color: #303133;
   }
+  .header-title {
+    padding: 0 0px !important;
+    text-align: center;
+    font-size: x-large !important;
+    color: darkred;
+  }
+  .el-collapse-item__header {
+    display: flex;
+    align-items: center;
+    height: 33px;
+    line-height: 53px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border-bottom: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: border-bottom-color 0.3s;
+    outline: 0;
+    width: max-content;
+  }
   .el-button {
     padding: 5px 8px !important;
     font-size: medium !important;
@@ -749,12 +774,7 @@ strong {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .header-title {
-    padding: 0 0px !important;
-    text-align: center;
-    font-size: x-large !important;
-    color: darkred;
-  }
+
   .joke-card {
     font-size: large;
     color: white;
@@ -855,21 +875,7 @@ strong {
     font-size: 20px;
     color: black;
   }
-  .el-collapse-item__header {
-    display: flex;
-    align-items: center;
-    height: 33px;
-    line-height: 53px;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    border-bottom: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: border-bottom-color 0.3s;
-    outline: 0;
-    width: max-content;
-  }
+
   .footer2 {
     height: 79px;
     background: none;
