@@ -721,7 +721,7 @@ strong {
   height: 600px;
 }
 .ocr-result {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   font-size: large;
   white-space: pre-wrap;
   line-height: 3vh;

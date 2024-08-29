@@ -133,20 +133,24 @@ export default {
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
 
         try {
-          const response = await axiosInstance.post("/check-image", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${idToken}`,
-              "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
-              "Access-Control-Allow-Methods": "POST,OPTIONS",
-              "Access-Control-Allow-Headers": "Content-Type,Authorization",
-            },
-            onUploadProgress: (progressEvent) => {
-              this.uploadProgress = Math.round(
-                (progressEvent.loaded * 100) / progressEvent.total
-              );
-            },
-          });
+          const response = await axiosInstance.post(
+            "/compare-image",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${idToken}`,
+                "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
+                "Access-Control-Allow-Methods": "POST,OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type,Authorization",
+              },
+              onUploadProgress: (progressEvent) => {
+                this.uploadProgress = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total
+                );
+              },
+            }
+          );
           // Handle the response and display the OCR text
           this.ocrText = response.data.ocrText || "OCR text not found.";
           console.log("OCR Text:", this.ocrText);
