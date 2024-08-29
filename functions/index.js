@@ -21,3 +21,19 @@ exports.addUser = functions.https.onRequest((req, res) => {
     }
   });
 });
+
+exports.addFeedback = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => {
+    const { name, email, message } = req.body;
+    try {
+      await admin.firestore().collection("users").doc(email).set({
+        name,
+        email,
+        message,
+      });
+      res.status(200).send("User added successfully");
+    } catch (error) {
+      res.status(500).send(error.toString());
+    }
+  });
+});

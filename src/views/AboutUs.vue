@@ -1,3 +1,4 @@
+<!-- eslint-disable no-undef -->
 <template>
   <div>
     <router-link to="/" style="text-decoration: none">
@@ -119,12 +120,33 @@ export default {
     };
   },
   methods: {
-    submitFeedback() {
-      this.$refs.feedbackForm.validate((valid) => {
+    async submitFeedback() {
+      this.$refs.feedbackForm.validate(async (valid) => {
         if (valid) {
-          // Submit the feedback form
-          console.log(this.feedbackForm);
-        } else {
+          try {
+            // eslint-disable-next-line no-undef
+            await axios.post(
+              "https://us-central1-my-grocery-home.cloudfunctions.net/addFeedback",
+              {
+                name: this.form.name,
+                email: this.form.email,
+                message: this.form.message,
+              }
+            );
+            this.$message({
+              message: "Account updated successfully!",
+              type: "success",
+            });
+          } catch (error) {
+            console.error("Error updating account: ", error);
+            this.$message({
+              message: "Error updating account",
+              type: "error",
+            });
+          }
+          this.name = "";
+          this.email = "";
+          this.message = "";
           console.log("Error: Invalid form");
         }
       });
