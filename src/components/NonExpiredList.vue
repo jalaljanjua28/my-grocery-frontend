@@ -34,16 +34,21 @@
             <el-dialog :visible.sync="dialogVisible" title="Add Expiry">
               <el-form :model="form" label-width="120px">
                 <el-form-item label="Item Name">
-                  <el-input v-model="form.item_name" disabled></el-input>
+                  <el-input
+                    v-model="form.item_name"
+                    style="width: 90% !important"
+                    disabled
+                  ></el-input>
                 </el-form-item>
                 <el-form-item label="Days to Extend">
                   <el-input
                     v-model="form.days_to_extend"
                     type="number"
+                    style="width: 90% !important"
                   ></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="info" @click="updateExpiry"
+                  <el-button type="info" @click="updateExpiry" plain
                     >Update Expiry</el-button
                   >
                 </el-form-item>
@@ -204,12 +209,17 @@ export default {
         });
       this.form.item_name = "";
       this.form.days_to_extend = "";
-      location.reload();
+      // location.reload();
     },
   },
 };
 </script>
 
 <style scoped>
+.el-button--info.is-plain {
+  border: 2px solid;
+  width: auto !important;
+  margin-bottom: 10px !important;
+}
 /* Basic styling for the table */
 </style>

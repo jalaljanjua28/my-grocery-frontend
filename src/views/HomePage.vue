@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="searchInventory">
+    <div class="search-inventory">
       <search-inventory
         :ExpiredFood="Food_expired"
         :ExpiredNonFood="NonFood_expired"

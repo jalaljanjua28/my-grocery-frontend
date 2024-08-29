@@ -30,6 +30,27 @@
             Use Microsoft Lens for best image quality
           </p>
         </div>
+        <div v-if="checkStatus" class="status">
+          <div v-if="showStatus" class="status">
+            Image Text-OCR/Upload Processing...
+          </div>
+          <strong
+            >Compare the result of the image and the extracted OCR and choose
+            the best possible image</strong
+          >
+          <el-button
+            style="margin-left: 10px; margin-top: 10px"
+            size="small"
+            type="success"
+            plain
+            @click="uploadImageProcess"
+          >
+            Upload to Server
+          </el-button>
+        </div>
+        <div v-if="completionStatus" class="status">
+          <strong>Image Uploaded Successfully</strong>
+        </div>
       </el-upload>
       <div style="display: flex">
         <!-- Display Captured Image -->
@@ -46,32 +67,16 @@
         <div v-if="ocrText" class="ocr-result">
           <h style="color: red">OCR Extracted Text:</h>
           <pre
-            style="color: black; border: 2px solid black; margin-left: 14px"
+            style="
+              color: black;
+              border: 2px solid black;
+              margin-left: 14px;
+              width: fit-content;
+            "
             >{{ ocrText }}</pre
           >
           <!-- Using <pre> to preserve line breaks -->
         </div>
-      </div>
-      <div v-if="checkStatus" class="status">
-        <div v-if="showStatus" class="status">
-          Image Text-OCR/Upload Processing...
-        </div>
-        <strong
-          >Compare the result of the image and the extracted OCR and choose the
-          best possible image</strong
-        >
-        <el-button
-          style="margin-left: 10px; margin-top: 10px"
-          size="small"
-          type="success"
-          plain
-          @click="uploadImageProcess"
-        >
-          Upload to Server
-        </el-button>
-      </div>
-      <div v-if="completionStatus" class="status">
-        <strong>Image Uploaded Successfully</strong>
       </div>
     </el-main>
   </div>
@@ -127,20 +132,24 @@ export default {
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
 
         try {
-          const response = await axiosInstance.post("/check-image", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${idToken}`,
-              "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
-              "Access-Control-Allow-Methods": "POST,OPTIONS",
-              "Access-Control-Allow-Headers": "Content-Type,Authorization",
-            },
-            onUploadProgress: (progressEvent) => {
-              this.uploadProgress = Math.round(
-                (progressEvent.loaded * 100) / progressEvent.total
-              );
-            },
-          });
+          const response = await axiosInstance.post(
+            "/compare-image",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${idToken}`,
+                "Access-Control-Allow-Origin": "*", // This is not required on client-side normally, server should handle this
+                "Access-Control-Allow-Methods": "POST,OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type,Authorization",
+              },
+              onUploadProgress: (progressEvent) => {
+                this.uploadProgress = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total
+                );
+              },
+            }
+          );
           // Handle the response and display the OCR text
           this.ocrText = response.data.ocrText || "OCR text not found.";
           console.log("OCR Text:", this.ocrText);
@@ -225,7 +234,7 @@ strong {
   font-size: 16px;
   font-weight: bolder;
   color: black;
-  /* margin-top: 100px; */
+  margin-top: inherit;
 }
 .el-button--small {
   padding: 9px 25px;

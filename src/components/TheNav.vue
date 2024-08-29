@@ -1,21 +1,9 @@
 <template>
-  <div class="navbar">
-    <el-button
-      style="background: darkcyan"
-      class="navbar-button"
-      @click="toggleNavbar"
-    >
+  <div>
+    <el-button class="navbar-button" @click="toggleNavbar">
       <i class="el-icon-caret-right"></i>
     </el-button>
-    <header-logo></header-logo>
-    <el-aside
-      width="200px"
-      style="background: rgba(243, 225, 191, 0.86); height: 100%"
-      class="aside"
-      v-show="showNavbar"
-      :default-active="activeIndex"
-      mode="horizontal"
-    >
+    <el-aside v-if="showNavbar" :default-active="activeIndex" mode="horizontal">
       <el-menu>
         <el-submenu index="1">
           <template slot="title"
@@ -89,10 +77,8 @@
 </template>
 
 <script>
-import HeaderLogo from "./HeaderLogo.vue";
-
 export default {
-  components: { HeaderLogo },
+  components: {},
   data() {
     return {
       showNavbar: false,
@@ -113,4 +99,11 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.el-button:focus,
+.el-button:hover {
+  color: #409eff;
+  border-color: #c6e2ff;
+  background-color: blueviolet;
+}
+</style>
