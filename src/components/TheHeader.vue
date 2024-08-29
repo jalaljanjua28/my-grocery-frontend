@@ -1,6 +1,6 @@
 <template>
   <el-header class="header">
-    <the-nav></the-nav>
+    <header-logo></header-logo>
     <div>
       <search-inventory
         class="searchDev"
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import TheNav from "./TheNav.vue";
 import TheMenu from "./TheMenu.vue";
 import SearchInventory from "./SearchInventory.vue";
 import {
@@ -25,12 +24,12 @@ import {
   fetchShoppingListData,
   fetchMasterNonexpiredData,
 } from "@/plugins/Dataservice.js";
-
+import HeaderLogo from "./HeaderLogo.vue";
 export default {
   components: {
     TheMenu,
     SearchInventory,
-    TheNav,
+    HeaderLogo,
   },
   data() {
     return {
