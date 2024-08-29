@@ -209,7 +209,7 @@ export default {
         });
       this.form.item_name = "";
       this.form.days_to_extend = "";
-      // location.reload();
+      location.reload();
     },
   },
 };

@@ -103,7 +103,6 @@ export default {
       uploadProgress: 0,
     };
   },
-
   methods: {
     onFileChange(file) {
       // Verify the structure of the 'file' object
@@ -130,7 +129,6 @@ export default {
           throw new Error("User not authenticated");
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-
         try {
           const response = await axiosInstance.post(
             "/compare-image",
