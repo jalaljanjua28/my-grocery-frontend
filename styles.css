@@ -126,6 +126,8 @@ body {
 }
 .el-card__body {
   padding: 10px !important;
+  display: flex;
+  flex-direction: column;
 }
 .suggestion-card {
   width: calc(33.33% - 20px);
@@ -136,7 +138,7 @@ body {
   margin-top: 24px !important;
 }
 .joke-card {
-  font-size: x-large;
+  font-size: large;
   color: white;
   font-weight: bolder;
 }
@@ -912,7 +914,7 @@ strong {
     align-items: center;
   }
 }
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 490px) {
   .menu-bar {
     flex-direction: column !important;
   }

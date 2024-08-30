@@ -39,7 +39,7 @@
             the best possible image</strong
           >
           <el-button
-            style="margin-left: 10px; margin-top: 10px"
+            style="margin-top: 10px"
             size="small"
             type="success"
             plain
@@ -245,8 +245,8 @@ strong {
 .main-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  height: -moz-fit-content;
   height: fit-content;
   padding: 20px;
 }
