@@ -22,7 +22,10 @@
       </el-table-column>
       <el-table-column>
         <template slot-scope="scope">
-          <el-row v-if="scope.row">
+          <el-row
+            v-if="scope.row"
+            style="display: flex; justify-content: space-between"
+          >
             <el-button
               type="success"
               icon="el-icon-plus"

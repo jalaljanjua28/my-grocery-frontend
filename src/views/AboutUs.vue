@@ -64,6 +64,9 @@
                     <el-button type="primary" @click="submitFeedback" plain
                       >Submit</el-button
                     >
+                    <div v-if="feedbackSent" class="feedback-sent-message">
+                      <p>Feedback sent successfully!</p>
+                    </div>
                   </el-form-item>
                 </el-form>
               </div>
@@ -76,9 +79,11 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
+      feedbackSent: false,
       companyName: "My Grocery Home",
       companyDescription:
         "We are a leading company in the field of technology, providing innovative solutions for our clients.",
@@ -128,15 +133,16 @@ export default {
             await axios.post(
               "https://us-central1-my-grocery-home.cloudfunctions.net/addFeedback",
               {
-                name: this.form.name,
-                email: this.form.email,
-                message: this.form.message,
+                name: this.feedbackForm.name,
+                email: this.feedbackForm.email,
+                message: this.feedbackForm.message,
               }
             );
             this.$message({
               message: "Account updated successfully!",
               type: "success",
             });
+            this.feedbackSent = true;
           } catch (error) {
             console.error("Error updating account: ", error);
             this.$message({
@@ -144,11 +150,11 @@ export default {
               type: "error",
             });
           }
-          this.name = "";
-          this.email = "";
-          this.message = "";
-          console.log("Error: Invalid form");
         }
+        this.feedbackForm.name = "";
+        this.feedbackForm.email = "";
+        this.feedbackForm.message = "";
+        console.log("Error: Invalid form");
       });
     },
   },
