@@ -23,7 +23,10 @@
       <el-table-column label="Days" prop="days_left"></el-table-column>
       <el-table-column>
         <template slot-scope="scope">
-          <el-row v-if="scope.row">
+          <el-row
+            v-if="scope.row"
+            style="display: flex; justify-content: center"
+          >
             <el-button
               type="danger"
               icon="el-icon-delete"

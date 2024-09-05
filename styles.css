@@ -342,6 +342,7 @@ body {
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
+  width: max-content;
 }
 .header {
   background: white !important;
@@ -723,7 +724,6 @@ strong {
   height: 600px;
 }
 .ocr-result {
-  /* margin-top: 20px; */
   font-size: large;
   white-space: pre-wrap;
   line-height: 3vh;
@@ -736,6 +736,12 @@ strong {
   flex-direction: column;
   justify-content: center;
 }
+.el-main {
+  text-align: center;
+}
+.el-dialog__headerbtn .el-dialog__close {
+  color: white;
+}
 @media screen and (max-width: 350px) {
   .el-carousel__container {
     height: 450px !important;
@@ -747,6 +753,18 @@ strong {
   }
 }
 @media screen and (max-width: 400px) {
+  .logo-text {
+    height: 4px;
+    display: flex;
+    font-size: 1em;
+    font-weight: bolder;
+    color: red;
+    width: -moz-max-content;
+    width: max-content;
+    margin-right: 10px;
+    align-items: center;
+    font-family: cursive;
+  }
   .el-page-header__content {
     font-size: small !important;
     color: #303133;
@@ -826,9 +844,7 @@ strong {
   .account-form {
     padding: 20px;
   }
-  .el-main {
-    text-align: center;
-  }
+
   .input-with-select {
     width: 100%;
   }

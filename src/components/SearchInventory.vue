@@ -59,7 +59,7 @@
           </el-table-column>
           <el-table-column>
             <template slot-scope="scope">
-              <el-row style="display: flex; text-align: center">
+              <el-row style="display: flex; text-align: space-between">
                 <el-button
                   type="success"
                   icon="el-icon-plus"
