@@ -24,7 +24,6 @@
           :loading="isLoading"
           >Compare Results</el-button
         >
-
         <div class="el-upload__tip" slot="tip">
           <p style="color: red; font-size: 14px">
             Use Microsoft Lens for best image quality
