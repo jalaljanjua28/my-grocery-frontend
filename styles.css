@@ -68,7 +68,7 @@ body {
   display: flex !important;
   width: 360px !important;
   margin-bottom: 25px !important;
-  margin-left: -10px !important;
+  /* margin-left: -10px !important; */
 }
 .nav {
   width: fit-content;
@@ -342,7 +342,7 @@ body {
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
-  width: max-content;
+  /* width: max-content; */
 }
 .header {
   background: white !important;
