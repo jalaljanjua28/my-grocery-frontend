@@ -65,10 +65,11 @@ body {
   border-color: #f56c6c;
 }
 .nav-buttons {
-  display: flex !important;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   width: 360px !important;
   margin-bottom: 25px !important;
-  /* margin-left: -10px !important; */
 }
 .nav {
   width: fit-content;
