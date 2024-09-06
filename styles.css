@@ -68,7 +68,6 @@ body {
   display: flex !important;
   width: 360px !important;
   margin-bottom: 25px !important;
-  /* margin-left: -10px !important; */
 }
 .nav {
   width: fit-content;
@@ -959,6 +958,7 @@ strong {
     margin-bottom: 25px !important;
     flex-direction: column !important;
     margin-top: 10px !important;
+    align-items: flex-end;
   }
   .el-button--warning.is-plain {
     width: 100%;
