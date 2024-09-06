@@ -16,7 +16,7 @@
         <template slot-scope="scope">
           <el-row
             v-if="scope.row"
-            style="display: flex; justify-content: space-between"
+            style="display: flex; justify-content: center; flex-wrap: wrap"
           >
             <el-button
               type="success"

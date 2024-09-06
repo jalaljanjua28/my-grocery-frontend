@@ -15,7 +15,7 @@ body {
 .el-row {
   display: flex;
   justify-content: flex-start;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 .item-row {
   border: 1px solid #ccc;
@@ -68,7 +68,7 @@ body {
   display: flex !important;
   width: 360px !important;
   margin-bottom: 25px !important;
-  margin-left: -10px !important;
+  /* margin-left: -10px !important; */
 }
 .nav {
   width: fit-content;
@@ -342,7 +342,7 @@ body {
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
-  width: max-content;
+  /* width: max-content; */
 }
 .header {
   background: white !important;
@@ -790,10 +790,6 @@ strong {
     outline: 0;
     width: max-content;
   }
-  .el-button {
-    padding: 5px 8px !important;
-    font-size: medium !important;
-  }
   .menu-bar {
     flex-direction: column !important;
   }
@@ -929,7 +925,7 @@ strong {
     flex-direction: column !important;
   }
   .el-button {
-    padding: 5px 8px !important;
+    padding: 2px 5px !important;
     font-size: large !important;
   }
 }

@@ -238,9 +238,9 @@ strong {
   margin-top: inherit;
 }
 .el-button--small {
-  padding: 9px 25px;
+  padding: 5px 10px;
   font-size: large;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .main-content {
   display: flex;
