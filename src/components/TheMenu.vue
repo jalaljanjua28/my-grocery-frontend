@@ -10,7 +10,7 @@
               <el-button
                 style="
                   font-size: x-large;
-                  background-color: transparent;
+                  background-color: papayawhip;
                   border: none;
                   padding: 12px 0px;
                   margin-left: 10px;
@@ -44,7 +44,7 @@
             <el-button
               style="
                 font-size: x-large;
-                background-color: transparent;
+                background-color: papayawhip;
                 border: none;
                 padding: 12px 0px;
                 margin-left: 12px;
@@ -184,5 +184,10 @@ export default {
   background-color: transparent;
   border: none;
   padding: 8px 8px;
+}
+@media screen and (max-width: 490px) {
+  .el-button {
+    margin-bottom: 10px !important;
+  }
 }
 </style>
