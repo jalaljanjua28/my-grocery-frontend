@@ -10,10 +10,9 @@
               <el-button
                 style="
                   font-size: x-large;
-                  background-color: papayawhip;
+                  background-color: transparent;
                   border: none;
-                  padding: 12px 0px;
-                  margin-left: 10px;
+                  padding: 12px;
                 "
               >
                 <i class="el-icon-s-custom"> User</i>
@@ -44,9 +43,9 @@
             <el-button
               style="
                 font-size: x-large;
-                background-color: papayawhip;
+                background-color: transparent;
                 border: none;
-                padding: 12px 0px;
+                padding: 12px;
                 margin-left: 12px;
               "
               ><i class="el-icon-user"> SignUp</i></el-button
@@ -178,16 +177,5 @@ export default {
 <style scoped>
 .el-col-12 {
   width: 100%;
-}
-.el-button {
-  font-size: medium;
-  background-color: transparent;
-  border: none;
-  padding: 8px 8px;
-}
-@media screen and (max-width: 490px) {
-  .el-button {
-    margin-bottom: 10px !important;
-  }
 }
 </style>

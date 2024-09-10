@@ -5,7 +5,10 @@
       <el-option label="Monthly" value="monthly"></el-option>
       <el-option label="Today" value="today"></el-option>
     </el-select>
-    <el-button @click="checkFrequency" type="primary" style="margin-top: 10px"
+    <el-button
+      @click="checkFrequency"
+      type="primary"
+      style="margin-top: 10px; background: mediumblue"
       >Check Frequency</el-button
     >
 
