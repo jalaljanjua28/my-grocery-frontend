@@ -16,7 +16,7 @@
           type="primary"
           size="x-small"
           plain
-          style="margin-bottom: 10px !important; width: 100%"
+          style="margin-bottom: 10px !important; width: 100% !important"
           >Items</el-button
         >
       </router-link>

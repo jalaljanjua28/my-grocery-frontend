@@ -11,12 +11,26 @@
         </template>
       </el-table-column>
       <el-table-column label="Name" prop="name"></el-table-column>
-      <el-table-column label="Price" prop="price"></el-table-column>
+
+      <!-- Editable Price Column -->
+      <el-table-column label="Price">
+        <template slot-scope="scope">
+          <el-input-number
+            v-model="scope.row.price"
+            :min="0"
+            :max="10000"
+            :step="0.01"
+            size="small"
+            @change="updatePrice(scope.row, scope.row.category)"
+          />
+        </template>
+      </el-table-column>
+
       <el-table-column>
         <template slot-scope="scope">
           <el-row
             v-if="scope.row"
-            style="display: flex; justify-content: space-between"
+            style="display: flex; justify-content: center; flex-wrap: wrap"
           >
             <el-button
               type="success"
@@ -125,6 +139,32 @@ export default {
             this.$message.error("An error occurred");
           });
       }
+    },
+    updatePrice(item, category) {
+      // Use fetch to send the updated price along with the category
+      fetch(baseUrl + "/update_price", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Name: item.name,
+          Price: item.price,
+          Category: category, // Use the dynamic category (food/non-food)
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error updating price");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data.message); // Handle success message
+        })
+        .catch((error) => {
+          console.error("Error updating price:", error.message);
+        });
     },
   },
 };

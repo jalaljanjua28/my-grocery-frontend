@@ -51,14 +51,14 @@
           <strong>Image Uploaded Successfully</strong>
         </div>
       </el-upload>
-      <div style="display: flex">
+      <div class="ocr-dev">
         <!-- Display Captured Image -->
         <div v-if="imageSrc" class="image-preview">
           <h style="color: red">Captured Image:</h>
           <img
             :src="imageSrc"
             alt="Captured Image"
-            style="max-width: 100%; height: 100%"
+            style="width: fit-content; height: 100%"
           />
         </div>
 
@@ -69,8 +69,8 @@
             style="
               color: black;
               border: 2px solid black;
-              margin-left: 14px;
-              width: fit-content;
+              width: 100%;
+              height: 100%;
             "
             >{{ ocrText }}</pre
           >
@@ -221,14 +221,14 @@ export default {
 h {
   display: flex;
   font-weight: bolder;
-  font-size: 25px;
+  font-size: medium;
   display: flex;
   justify-content: flex-start;
   margin-bottom: 20px;
   color: black;
 }
 strong {
-  font-size: 16px;
+  font-size: medium;
   font-weight: bolder;
   color: black;
   margin-top: inherit;
@@ -245,5 +245,10 @@ strong {
   height: -moz-fit-content;
   height: fit-content;
   padding: 20px;
+}
+@media screen and (max-width: 600px) {
+  h {
+    font-size: medium;
+  }
 }
 </style>

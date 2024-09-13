@@ -4,16 +4,24 @@
       <el-col
         :span="12"
         style="display: flex; flex-direction: row; align-items: center"
-        ><div class="menu-bar" style="display: flex; align-items: center">
+        ><div
+          class="menu-bar"
+          style="
+            display: flex;
+            align-items: center;
+            background-color: darkcyan;
+            border-radius: 10px;
+          "
+        >
           <el-popover placement="bottom" width="230" trigger="hover">
             <template #reference>
               <el-button
                 style="
                   font-size: x-large;
-                  background-color: transparent;
+                  background-color: darkcyan;
                   border: none;
-                  padding: 12px 0px;
-                  margin-left: 10px;
+                  padding: 12px;
+                  color: white;
                 "
               >
                 <i class="el-icon-s-custom"> User</i>
@@ -44,10 +52,10 @@
             <el-button
               style="
                 font-size: x-large;
-                background-color: transparent;
+                background-color: darkcyan;
                 border: none;
-                padding: 12px 0px;
-                margin-left: 12px;
+                padding: 12px;
+                color: white;
               "
               ><i class="el-icon-user"> SignUp</i></el-button
             >
@@ -178,11 +186,5 @@ export default {
 <style scoped>
 .el-col-12 {
   width: 100%;
-}
-.el-button {
-  font-size: medium;
-  background-color: transparent;
-  border: none;
-  padding: 8px 8px;
 }
 </style>
