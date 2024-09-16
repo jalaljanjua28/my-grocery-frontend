@@ -140,31 +140,43 @@ export default {
           });
       }
     },
-    updatePrice(item, category) {
-      // Use fetch to send the updated price along with the category
-      fetch(baseUrl + "/update_price", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Name: item.name,
-          Price: item.price,
-          Category: category, // Use the dynamic category (food/non-food)
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error updating price");
-          }
-          return response.json();
+    async updatePrice(item, category) {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      console.log("idToken", idToken);
+      const userConfirmed = confirm(
+        "Are you sure you want to update the price?"
+      );
+      if (userConfirmed) {
+        // Use fetch to send the updated price along with the category
+        fetch(baseUrl + "/update_price", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({
+            Name: item.name,
+            Price: item.price,
+            Category: category,
+          }),
         })
-        .then((data) => {
-          console.log(data.message); // Handle success message
-        })
-        .catch((error) => {
-          console.error("Error updating price:", error.message);
-        });
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error updating price");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.message); // Handle success message
+          })
+          .catch((error) => {
+            console.error("Error updating price:", error.message);
+          });
+      }
     },
   },
 };

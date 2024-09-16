@@ -11,6 +11,7 @@
             align-items: center;
             background-color: darkcyan;
             border-radius: 10px;
+            padding: 6px;
           "
         >
           <el-popover placement="bottom" width="230" trigger="hover">
