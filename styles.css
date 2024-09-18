@@ -11,12 +11,10 @@ body {
 .router_link {
   width: auto;
   text-align: center;
-  /* margin-left: 10px; */
 }
 .el-row {
   display: flex;
   justify-content: flex-start;
-  /* flex-wrap: wrap; */
 }
 .item-row {
   border: 1px solid #ccc;
@@ -34,12 +32,10 @@ body {
 .el-button {
   border-radius: 12px;
   transition: all 0.3s ease;
-  padding: 12px 24px;
+  padding: 7px 24px;
   font-size: large;
   font-weight: bold;
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-  width: fit-content !important;
-  /* background: linear-gradient(145deg, #f0f0f0, #e0e0e0); */
+  width: fit-content;
 }
 .el-button:hover {
   transform: scale(1.05);
@@ -106,7 +102,7 @@ body {
   border-color: #f56c6c;
 }
 .nav-buttons {
-  width: 360px !important;
+  width: 100% !important;
   margin-bottom: 25px !important;
   display: flex;
   flex-direction: row;
@@ -135,6 +131,7 @@ body {
 .el-button--primary.is-plain {
   border: 2px solid;
   margin-bottom: 10px !important;
+  width: 100% !important;
 }
 .el-button--primary:focus,
 .el-button--primary:hover {
@@ -144,6 +141,7 @@ body {
 }
 .el-button--danger.is-plain {
   border: 2px solid;
+  width: 100% !important;
 }
 .el-button--small {
   padding: 8px 20px;
@@ -248,9 +246,9 @@ body {
 .el-dropdown {
   font-size: xx-large;
 }
-.el-dropdown-grid {
+/* .el-dropdown-grid {
   margin-left: 10px;
-}
+} */
 .el-dropdown-menu__item {
   line-height: 60px;
   font-size: 16px;
@@ -337,6 +335,16 @@ body {
   font-size: 12px;
   width: 100%;
 }
+.el-input-number--small {
+  width: max-content;
+  line-height: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.el-input-number--small .el-input-number__decrease,
+.el-input-number--small .el-input-number__increase {
+  font-size: 13px;
+}
 .el-input__inner {
   background-color: white;
   box-sizing: border-box;
@@ -349,12 +357,15 @@ body {
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
 }
+.el-page-header__content {
+  font-size: large !important;
+  color: #303133;
+  margin-right: 10px;
+}
 .el-page-header__left {
   display: flex;
   cursor: pointer;
-  margin-right: 40px;
   position: relative;
-  margin-left: 30px !important;
 }
 .el-page-header__left::after {
   position: absolute;
@@ -373,6 +384,8 @@ body {
   background: #ffffffc9;
   line-height: 45px;
   border-bottom: 5px solid black;
+  display: flex;
+  justify-content: space-between;
 }
 .el-collapse-item__header {
   display: flex;
@@ -387,12 +400,14 @@ body {
   font-weight: 500;
   transition: border-bottom-color 0.3s;
   outline: 0;
-  /* width: max-content; */
 }
 .header {
   background: white !important;
   height: 102px !important;
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid darkcyan;
+  border-top: 5px solid darkcyan;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
   padding: 0 15px !important;
   line-height: 0px;
   display: flex;
@@ -496,6 +511,7 @@ strong {
   margin-right: 10px;
   align-items: center;
   font-family: cursive;
+  margin-left: -10px;
 }
 .loading-indicator {
   text-align: center;
@@ -534,6 +550,9 @@ strong {
   left: 0;
   right: 0;
   border-top: 5px solid black;
+  border-bottom: 5px solid black;
+  border-left: 5px solid darkcyan;
+  border-right: 5px solid darkcyan;
 }
 .account-page {
   height: 100%;
@@ -630,6 +649,10 @@ strong {
 }
 .item-details {
   padding: 10px;
+}
+.price-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
 }
 .item-name,
 .item-price,
@@ -822,10 +845,10 @@ strong {
     margin-right: 10px;
     align-items: center;
     font-family: cursive;
+    margin-left: -15px;
   }
   .el-page-header__content {
     font-size: small !important;
-    color: #303133;
   }
   .header-title {
     padding: 0 0px !important;
@@ -963,7 +986,10 @@ strong {
     height: 79px;
     background: none;
     padding: 5px 0;
-    border-top: 3px solid black;
+    border-bottom: 5px solid black;
+    border-top: 5px solid black;
+    border-left: 5px solid darkcyan;
+    border-right: 5px solid darkcyan;
     color: #fff;
     text-align: center;
     position: relative;
@@ -980,11 +1006,12 @@ strong {
 }
 @media screen and (max-width: 490px) {
   .menu-bar {
-    flex-direction: column !important;
+    padding: 6px !important;
+    flex-direction: column;
   }
   .el-button {
     padding: 5px 10px !important;
-    font-size: large !important;
+    font-size: medium !important;
   }
 }
 @media screen and (max-width: 750px) {
@@ -1022,11 +1049,9 @@ strong {
   .el-button {
     border-radius: 12px;
     transition: all 0.3s ease;
-    padding: 12px 24px;
+    padding: 7px 24px;
     font-size: large;
     font-weight: bold;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    /* background: linear-gradient(145deg, #f0f0f0, #e0e0e0); */
   }
   .el-button--warning.is-plain {
     width: 100%;
