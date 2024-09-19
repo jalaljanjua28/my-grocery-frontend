@@ -15,14 +15,16 @@
       <!-- Editable Price Column -->
       <el-table-column label="Price">
         <template slot-scope="scope">
-          <el-input-number
-            v-model="scope.row.price"
-            :min="0"
-            :max="10000"
-            :step="0.01"
-            size="small"
-            @change="updatePrice(scope.row, scope.row.category)"
-          />
+          <div class="price-scroll-container">
+            <el-input-number
+              v-model="scope.row.price"
+              :min="0"
+              :max="10000"
+              :step="0.01"
+              size="small"
+              @change="updatePrice(scope.row, scope.row.category)"
+            />
+          </div>
         </template>
       </el-table-column>
 
