@@ -58,7 +58,6 @@ export default {
         );
       }
     },
-
     async simulateUpload() {
       if (this.currentUser) {
         // If a user is already authenticated, simulate the upload
