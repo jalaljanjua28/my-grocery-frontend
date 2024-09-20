@@ -30,7 +30,6 @@ export default {
     async DummyProcess(dummyFile = null) {
       const fileToUpload = dummyFile || this.selectedFile;
       console.log("File to upload:", fileToUpload);
-
       if (fileToUpload) {
         const formData = new FormData();
         formData.append("file", fileToUpload);
@@ -59,7 +58,6 @@ export default {
         );
       }
     },
-
     async simulateUpload() {
       if (this.currentUser) {
         // If a user is already authenticated, simulate the upload
