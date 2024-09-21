@@ -30,6 +30,7 @@ export default {
     async DummyProcess(dummyFile = null) {
       const fileToUpload = dummyFile || this.selectedFile;
       console.log("File to upload:", fileToUpload);
+
       if (fileToUpload) {
         const formData = new FormData();
         formData.append("file", fileToUpload);

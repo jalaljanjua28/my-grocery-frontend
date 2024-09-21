@@ -38,22 +38,25 @@
                   {{ group["Ethical Eating Suggestions"] }}
                 </p>
               </div>
-              <el-button
-                @click="
-                  fetchData(
-                    'gpt',
-                    '/ethical-eating-suggestion-using-gpt',
-                    'ethicalEatingSuggestions'
-                  )
-                "
-                :loading="isLoading"
-                type="info"
-                plain
-                style="margin-left: 0px !important"
-              >
-                Generate Prompt
-              </el-button>
+              <el-alert v-if="errorMessage" title="Error" type="error">{{
+                errorMessage
+              }}</el-alert>
             </div>
+            <el-button
+              @click="
+                fetchData(
+                  'gpt',
+                  '/ethical-eating-suggestion-using-gpt',
+                  'ethicalEatingSuggestions'
+                )
+              "
+              :loading="isLoading"
+              type="info"
+              plain
+              style="margin-left: 0px !important"
+            >
+              Generate Prompt
+            </el-button>
           </div>
         </el-collapse-item>
         <!-- Fun Facts Section -->
