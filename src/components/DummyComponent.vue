@@ -23,6 +23,13 @@ export default {
     // Listen for authentication state changes
     onAuthStateChanged(auth, (user) => {
       this.currentUser = user;
+
+      // Call the simulateUpload function only after the user is authenticated
+      if (user) {
+        this.simulateUpload();
+      } else {
+        console.log("No authenticated user");
+      }
     });
   },
 
@@ -66,6 +73,7 @@ export default {
           // If a file is selected, upload it
           this.DummyProcess(this.selectedFile);
         } else {
+          console.log("simulateUpload function called with dummy file!");
           // If no file is selected, simulate the upload with a dummy file
           const dummyFile = new File(["dummy content"], "dummy.jpg", {
             type: "image/jpeg",
