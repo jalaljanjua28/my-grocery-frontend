@@ -34,7 +34,7 @@
               size="x-small"
               @click="addExpiry(scope.row)"
             ></el-button>
-            <el-dialog :visible.sync="dialogVisible" title="Add Expiry">
+            <el-dialog :visible.sync="dialogVisible1" title="Add Expiry">
               <el-form :model="form" label-width="120px">
                 <el-form-item label="Item Name">
                   <el-input
@@ -54,6 +54,36 @@
                   <el-button type="info" @click="updateExpiry" plain
                     >Update Expiry</el-button
                   >
+                </el-form-item>
+              </el-form>
+            </el-dialog>
+            <el-button
+              type="primary"
+              icon="el-icon-plus"
+              circle
+              size="x-small"
+              @click="addPrice(scope.row)"
+            ></el-button>
+            <el-dialog :visible.sync="dialogVisible2" title="Add Price">
+              <el-form :model="form" label-width="120px">
+                <el-form-item label="Item Name">
+                  <el-input
+                    v-model="form.item_name"
+                    style="width: 90% !important"
+                    disabled
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="Price to Add">
+                  <el-input
+                    v-model="form.price"
+                    type="number"
+                    style="width: 90% !important"
+                  />
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="info" @click="updatePrice" plain
+                    >Add Price
+                  </el-button>
                 </el-form-item>
               </el-form>
             </el-dialog>
@@ -91,15 +121,71 @@ export default {
   },
   data() {
     return {
-      dialogVisible: false, // Control the visibility of the dialog
+      dialogVisible1: false, // Control the visibility of the dialog
+      dialogVisible2: false, // Control the visibility of the dialog
       form: {
         item_name: "",
         days_to_extend: "",
+        price: "",
       },
     };
   },
 
   methods: {
+    addPrice(item) {
+      this.form.item_name = item.name;
+      this.form.price = item.price; // Set the form price correctly
+      this.dialogVisible2 = true;
+    },
+
+    async updatePrice() {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+
+      const userConfirmed = confirm(
+        "Are you sure you want to update the price?"
+      );
+      if (userConfirmed) {
+        const requestData = {
+          Name: this.form.item_name,
+          Price: this.form.price, // Use form.price
+        };
+
+        fetch(baseUrl + "/update_price", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify(requestData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Error updating price");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Price updated:", data.message);
+            this.dialogVisible2 = false;
+            this.$message({
+              message: "Price updated successfully!",
+              type: "success",
+            });
+            location.reload();
+          })
+          .catch((error) => {
+            console.error("Error updating price:", error.message);
+            this.$message({
+              message: "An error occurred while updating price",
+              type: "error",
+            });
+          });
+      }
+    },
     async addItem(itemToAdd) {
       const currentUser = auth.currentUser;
       if (!currentUser) {
@@ -142,6 +228,7 @@ export default {
       const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
       console.log("idToken", idToken);
       const userConfirmed = confirm("Are you sure you want to delete items?");
+
       if (userConfirmed) {
         // Send a request to your backend to delete the item by its name
         fetch(baseUrl + "/removeItem/master-nonexpired", {
@@ -174,8 +261,9 @@ export default {
       // Open the dialog to add expiry
       this.form.item_name = item.name;
       this.form.days_to_extend = 0;
-      this.dialogVisible = true;
+      this.dialogVisible1 = true;
     },
+
     async updateExpiry() {
       const currentUser = auth.currentUser;
       if (!currentUser) {
