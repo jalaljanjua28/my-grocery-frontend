@@ -31,7 +31,7 @@ exports.addFeedback = functions.https.onRequest((req, res) => {
         email,
         message,
       });
-      res.status(200).send("User added successfully");
+      res.status(200).send("User feedback successfully uploaded");
     } catch (error) {
       res.status(500).send(error.toString());
     }

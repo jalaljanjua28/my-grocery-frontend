@@ -20,7 +20,7 @@
               v-model="scope.row.price"
               :min="0"
               :max="10000"
-              :step="0.01"
+              :step="1"
               size="small"
               @change="updatePrice(scope.row, scope.row.category)"
             />
