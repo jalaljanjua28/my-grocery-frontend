@@ -15,6 +15,9 @@
                   <strong>Food Waste Reduction Suggestion:</strong>
                   {{ suggestion["Food Waste Reduction Suggestion"] }}
                 </p>
+                <p style="color: red">
+                  For custom prompts go to the user defined prompt section
+                </p>
               </div>
             </div>
           </div>
@@ -183,6 +186,9 @@
                 <p>
                   <strong>Food Suggestion: </strong
                   >{{ suggestion["Food Suggestion"] }}
+                </p>
+                <p style="color: red">
+                  For custom prompts go to the user defined prompt section
                 </p>
               </div>
             </div>

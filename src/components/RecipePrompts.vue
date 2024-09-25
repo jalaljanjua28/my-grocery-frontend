@@ -15,6 +15,9 @@
                     <strong> Fusion Cuisine Suggestion:</strong>
                     {{ suggestion["Fusion Cuisine Suggestion"] }}
                   </p>
+                  <p style="color: red">
+                    For custom prompts go to the user defined prompt section
+                  </p>
                 </div>
               </div>
             </div>
@@ -25,6 +28,9 @@
               <div v-if="!isLoading">
                 <div v-for="(fact, index) in definedDishes" :key="index">
                   <p><strong>Fun Facts:</strong> {{ fact["Fun Facts"] }}</p>
+                  <p style="color: red">
+                    For custom prompts go to the user defined prompt section
+                  </p>
                 </div>
               </div>
             </div>
@@ -38,6 +44,9 @@
                   <p>
                     <strong>Encouragement:</strong>
                     {{ recipe["Encouragement"] }}
+                  </p>
+                  <p style="color: red">
+                    For custom prompts go to the user defined prompt section
                   </p>
                 </div>
               </div>
@@ -61,12 +70,7 @@
               </div>
               <el-button
                 @click="
-                  fetchData(
-                    'gpt',
-                    '/diet-schedule-using-gpt',
-                    'dietSchedule',
-                    'loadingSchedule'
-                  )
+                  fetchData('gpt', '/diet-schedule-using-gpt', 'dietSchedule')
                 "
                 type="info"
                 plain

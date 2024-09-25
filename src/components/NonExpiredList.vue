@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-table :data="items" class="responsive-table">
+  <div class="table-wrapper">
+    <el-table :data="items" class="responsive-table" style="width: 1000px">
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
@@ -29,7 +29,7 @@
           >
             <el-button
               type="primary"
-              icon="el-icon-edit"
+              icon="el-icon-date"
               circle
               size="x-small"
               @click="addExpiry(scope.row)"
@@ -58,8 +58,8 @@
               </el-form>
             </el-dialog>
             <el-button
-              type="primary"
-              icon="el-icon-plus"
+              type="warning"
+              icon="el-icon-money"
               circle
               size="x-small"
               @click="addPrice(scope.row)"
@@ -175,6 +175,7 @@ export default {
               message: "Price updated successfully!",
               type: "success",
             });
+            location.reload();
           })
           .catch((error) => {
             console.error("Error updating price:", error.message);
@@ -311,5 +312,4 @@ export default {
   width: auto !important;
   margin-bottom: 10px !important;
 }
-/* Basic styling for the table */
 </style>

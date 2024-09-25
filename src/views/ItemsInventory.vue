@@ -4,27 +4,66 @@
       <el-page-header content="Items Inventory"> </el-page-header>
     </router-link>
     <el-main class="main-content">
-      <div class="nav-buttons">
+      <div
+        class="nav-buttons"
+        style="
+          display: flex;
+          align-items: center;
+          background-color: darkcyan;
+          border-radius: 10px;
+          padding: 0px;
+          border: 2px solid black;
+        "
+      >
         <router-link to="/recipes-page" class="router_link">
-          <el-button type="warning" size="x-small" plain>Recipes</el-button>
+          <el-button
+            style="
+              font-size: x-large;
+              background-color: darkcyan;
+              border: none;
+              padding: 12px;
+              color: white;
+            "
+            ><i class="el-icon-chicken"> Recipes</i>
+          </el-button>
         </router-link>
         <router-link to="/health-page" class="router_link">
-          <el-button type="info" size="x-small" plain style="margin-left: 10px"
-            >Health</el-button
-          >
+          <el-button
+            style="
+              font-size: x-large;
+              background-color: darkcyan;
+              border: none;
+              padding: 12px;
+              color: white;
+            "
+            ><i class="el-icon-no-smoking"> Health</i>
+          </el-button>
+        </router-link>
+        <router-link to="user-defined-prompt" class="router_link">
+          <el-button
+            style="
+              font-size: x-large;
+              background-color: darkcyan;
+              border: none;
+              padding: 12px;
+              color: white;
+            "
+            ><i class="el-icon-s-order"> User Defined Prompt</i>
+          </el-button>
         </router-link>
       </div>
-      <div class="search-container">
-        <search-inventory
-          :ExpiredFood="Food_expired"
-          :ExpiredNonFood="NonFood_expired"
-          :NonExpiredFood="Food_nonexpired"
-          :NonExpiredNonFood="NonFood_nonexpired"
-          :itemsFood="Food"
-          :itemsNonFood="NonFood"
-        />
-      </div>
+
       <el-card>
+        <div class="search-container">
+          <search-inventory
+            :ExpiredFood="Food_expired"
+            :ExpiredNonFood="NonFood_expired"
+            :NonExpiredFood="Food_nonexpired"
+            :NonExpiredNonFood="NonFood_nonexpired"
+            :itemsFood="Food"
+            :itemsNonFood="NonFood"
+          />
+        </div>
         <el-tabs
           :tab-position="tabPosition"
           style="height: auto"
@@ -154,13 +193,17 @@
         </el-tabs>
         <div>
           <el-button
-            type="primary"
-            icon="el-icon-plus"
-            size="small"
             @click="openDialog"
-            plain
-            >Add Item</el-button
-          >
+            style="
+              font-size: x-large;
+              background-color: darkcyan;
+              border: none;
+              padding: 12px;
+              color: chartreuse;
+            "
+            ><i class="el-icon-plus"> Add items manually</i>
+          </el-button>
+
           <el-dialog :visible.sync="dialogVisible" title="Add Item" width="90%">
             <add-items @item-added="closeDialog" />
           </el-dialog>

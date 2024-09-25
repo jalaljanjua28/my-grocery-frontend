@@ -1,8 +1,16 @@
 <template>
   <div>
-    <el-button type="danger" @click="deleteAllItems" plain
-      >Delete All Items</el-button
-    >
+    <el-button
+      @click="deleteAllItems"
+      style="
+        font-size: x-large;
+        background-color: darkcyan;
+        border: none;
+        padding: 12px;
+        color: red;
+      "
+      ><i class="el-icon-delete-solid"> Delete All Items</i>
+    </el-button>
   </div>
 </template>
 

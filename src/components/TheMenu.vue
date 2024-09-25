@@ -62,46 +62,46 @@
               ><i class="el-icon-user"> SignUp</i></el-button
             >
           </router-link>
+          <el-dropdown class="el-dropdown-grid">
+            <span class="el-dropdown-link">
+              <i class="el-icon-d-caret"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <router-link to="/account-page" style="text-decoration: none"
+                ><el-dropdown-item style="border-bottom: none"
+                  ><i class="el-icon-user"></i>Account</el-dropdown-item
+                ></router-link
+              >
+              <router-link to="/shopping-cart" style="text-decoration: none">
+                <el-dropdown-item style="border-bottom: none"
+                  ><i class="el-icon-shopping-cart-full"></i>Shopping
+                  Cart</el-dropdown-item
+                ></router-link
+              >
+              <router-link to="/orders-history" style="text-decoration: none">
+                <el-dropdown-item style="border-bottom: none"
+                  ><i class="el-icon-takeaway-box"></i>Order
+                  History</el-dropdown-item
+                ></router-link
+              >
+              <router-link to="/barcode-scan" style="text-decoration: none">
+                <el-dropdown-item style="border-bottom: none"
+                  ><i class="el-icon-camera" style="font-size: large"></i
+                  >Barcode Scan</el-dropdown-item
+                ></router-link
+              ><router-link to="/about-us" style="text-decoration: none"
+                ><el-dropdown-item style="border-bottom: none"
+                  ><i class="el-icon-info"></i>About Us</el-dropdown-item
+                ></router-link
+              >
+              <router-link to="/faqs-page" style="text-decoration: none"
+                ><el-dropdown-item style="border-bottom: none"
+                  ><i class="el-icon-question"></i>FAQs</el-dropdown-item
+                ></router-link
+              >
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
-        <el-dropdown class="el-dropdown-grid">
-          <span class="el-dropdown-link">
-            <i class="el-icon-d-caret"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <router-link to="/account-page" style="text-decoration: none"
-              ><el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-user"></i>Account</el-dropdown-item
-              ></router-link
-            >
-            <router-link to="/shopping-cart" style="text-decoration: none">
-              <el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-shopping-cart-full"></i>Shopping
-                Cart</el-dropdown-item
-              ></router-link
-            >
-            <router-link to="/orders-history" style="text-decoration: none">
-              <el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-takeaway-box"></i>Order
-                History</el-dropdown-item
-              ></router-link
-            >
-            <router-link to="/barcode-scan" style="text-decoration: none">
-              <el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-camera" style="font-size: large"></i>Barcode
-                Scan</el-dropdown-item
-              ></router-link
-            ><router-link to="/about-us" style="text-decoration: none"
-              ><el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-info"></i>About Us</el-dropdown-item
-              ></router-link
-            >
-            <router-link to="/faqs-page" style="text-decoration: none"
-              ><el-dropdown-item style="border-bottom: none"
-                ><i class="el-icon-question"></i>FAQs</el-dropdown-item
-              ></router-link
-            >
-          </el-dropdown-menu>
-        </el-dropdown>
       </el-col>
     </el-row>
   </div>

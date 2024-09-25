@@ -62,27 +62,25 @@
           >
             No suggestions available.
           </el-alert>
-          <div>
-            <div v-if="displayMood && !loading">
-              <div
-                v-for="(suggestion, index) in moodChangerSuggestions"
-                :key="index"
-              >
-                <p>
-                  <strong>Food Suggestion: </strong>
-                  {{ suggestion["Food Suggestion"] }}
-                </p>
-              </div>
-              <el-alert
-                v-if="moodChangerSuggestions.length === 0"
-                title="No Mood Changer Suggestions"
-                type="info"
-                show-icon
-              >
-                No Mood Changer suggestions available.
-              </el-alert>
-            </div>
+        </div>
+        <div v-if="displayMood && !loading">
+          <div
+            v-for="(suggestion, index) in moodChangerSuggestions"
+            :key="index"
+          >
+            <p>
+              <strong>Food Suggestion: </strong>
+              {{ suggestion["Food Suggestion"] }}
+            </p>
           </div>
+          <el-alert
+            v-if="moodChangerSuggestions.length === 0"
+            title="No Mood Changer Suggestions"
+            type="info"
+            show-icon
+          >
+            No Mood Changer suggestions available.
+          </el-alert>
         </div>
         <div v-if="displaySuggestions && !loading">
           <div v-for="(suggestion, index) in fusionSuggestions" :key="index">
@@ -311,4 +309,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+p {
+  text-align: left;
+  line-height: 2.1;
+}
+</style>

@@ -3,7 +3,7 @@
     <div>
       <div>
         <el-input
-          placeholder="Please input"
+          placeholder="Search items by category from the select menu "
           v-model="searchQuery"
           class="input-with-select"
           @change="searchItems"
@@ -22,15 +22,19 @@
       :visible.sync="dialogTableVisible"
       width="100%"
     >
-      <div v-if="dialogTableVisible">
-        <el-table :data="filteredItems">
+      <div v-if="dialogTableVisible" class="table-wrapper">
+        <el-table
+          :data="filteredItems"
+          class="responsive-table"
+          style="width: 1000px"
+        >
           <el-table-column v-for="item in filteredItems" :key="item.id">
             <template slot="header">Image</template>
             <template slot-scope="scope">
               <img
                 :src="scope.row.image"
                 :alt="scope.row.name"
-                style="max-width: 100%"
+                class="table-image"
               />
             </template>
           </el-table-column>
