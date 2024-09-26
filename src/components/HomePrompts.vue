@@ -15,6 +15,9 @@
                   <strong>Food Waste Reduction Suggestion:</strong>
                   {{ suggestion["Food Waste Reduction Suggestion"] }}
                 </p>
+                <p style="color: red">
+                  For custom prompts go to the user defined prompt section
+                </p>
               </div>
             </div>
           </div>
@@ -38,22 +41,25 @@
                   {{ group["Ethical Eating Suggestions"] }}
                 </p>
               </div>
-              <el-button
-                @click="
-                  fetchData(
-                    'gpt',
-                    '/ethical-eating-suggestion-using-gpt',
-                    'ethicalEatingSuggestions'
-                  )
-                "
-                :loading="isLoading"
-                type="info"
-                plain
-                style="margin-left: 0px !important"
-              >
-                Generate Prompt
-              </el-button>
+              <el-alert v-if="errorMessage" title="Error" type="error">{{
+                errorMessage
+              }}</el-alert>
             </div>
+            <el-button
+              @click="
+                fetchData(
+                  'gpt',
+                  '/ethical-eating-suggestion-using-gpt',
+                  'ethicalEatingSuggestions'
+                )
+              "
+              :loading="isLoading"
+              type="info"
+              plain
+              style="margin-left: 0px !important"
+            >
+              Generate Prompt
+            </el-button>
           </div>
         </el-collapse-item>
         <!-- Fun Facts Section -->
@@ -180,6 +186,9 @@
                 <p>
                   <strong>Food Suggestion: </strong
                   >{{ suggestion["Food Suggestion"] }}
+                </p>
+                <p style="color: red">
+                  For custom prompts go to the user defined prompt section
                 </p>
               </div>
             </div>

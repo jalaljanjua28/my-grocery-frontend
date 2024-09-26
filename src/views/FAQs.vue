@@ -15,7 +15,11 @@
               width: max-content;
             "
           >
-            <el-collapse v-model="activeName" style="color: black">
+            <el-collapse
+              :accordion="true"
+              v-model="activeName"
+              style="color: black"
+            >
               <el-collapse-item
                 v-for="(item, index) in faqs"
                 :key="index"

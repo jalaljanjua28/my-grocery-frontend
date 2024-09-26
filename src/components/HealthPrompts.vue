@@ -213,7 +213,7 @@
                 <div v-for="item in healthIncompatibilities" :key="item.id">
                   <p>
                     <strong>Food Combination: </strong>
-                    {{ item["Food Combination"] }}
+                    {{ item["Food Combination"].join(", ") }}
                   </p>
                   <p>
                     <strong>Health-wise Incompatabilities: </strong

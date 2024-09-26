@@ -508,7 +508,7 @@ strong {
   width: max-content;
   margin-right: 10px;
   align-items: center;
-  font-family: cursive;
+  font-family: sans-serif;
   margin-left: -10px;
 }
 .loading-indicator {
@@ -635,7 +635,7 @@ strong {
   color: white;
 }
 .el-icon-d-caret {
-  color: black;
+  color: white;
 }
 .item-image {
   width: 100px;
@@ -783,12 +783,31 @@ strong {
   background: darkcyan;
   border-radius: 0px;
 }
-.responsive-table {
+/* .responsive-table {
   width: 100%;
   overflow-x: auto;
-}
-.table-image {
+} */
+/* .table-image {
   max-width: 100px;
+} */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+
+.el-table {
+  width: 100%; /* Set fixed or max width here */
+  table-layout: fixed; /* Ensures columns take up equal space */
+}
+
+.table-image {
+  width: 50px; /* Example width for images */
+  height: 50px;
+  object-fit: cover;
+}
+
+.responsive-table {
+  min-width: 1000px; /* Minimum width to ensure table columns don't collapse */
 }
 .image-preview {
   width: 100%;
@@ -833,16 +852,7 @@ strong {
     flex-wrap: wrap;
   }
   .logo-text {
-    height: 4px;
-    display: flex;
     font-size: 1em;
-    font-weight: bolder;
-    color: red;
-    width: -moz-max-content;
-    width: max-content;
-    margin-right: 10px;
-    align-items: center;
-    font-family: cursive;
     margin-left: -15px;
   }
   .el-page-header__content {
@@ -1106,10 +1116,10 @@ strong {
     width: 100vw !important;
     overflow-x: auto !important;
   }
-  .el-table {
+  /* .el-table {
     display: block;
     width: 100%;
-  }
+  } */
   .el-table-column {
     display: block;
     width: 100%;

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-table :data="items" class="responsive-table">
+  <div class="table-wrapper">
+    <el-table :data="items" class="responsive-table" style="width: 1000px">
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
