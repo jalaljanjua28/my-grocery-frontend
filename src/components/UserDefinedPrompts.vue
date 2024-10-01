@@ -30,10 +30,11 @@
           @select="handleSelect"
         >
           <i
-            class="el-icon-edit el-input__icon"
+            class="el-icon-remove-outline el-input__icon"
             slot="suffix"
             @click="handleIconClick"
           >
+            Click to Erase
           </i>
           <template slot-scope="{ item }">
             <div class="value">{{ item }}</div>
@@ -60,7 +61,7 @@
             show-icon
             class="no-suggestion"
           >
-            No suggestions available.
+            Please select a prompt from the select box.
           </el-alert>
         </div>
         <div v-if="displayMood && !loading">
@@ -79,7 +80,7 @@
             type="info"
             show-icon
           >
-            No Mood Changer suggestions available.
+            Please select from the box for a Mood changer suggestions.
           </el-alert>
         </div>
         <div v-if="displaySuggestions && !loading">
@@ -95,7 +96,7 @@
             type="info"
             show-icon
           >
-            No Fusion Cuisine suggestions available.
+            Please select from the box for a Fusion Cuisine suggestions.
           </el-alert>
         </div>
         <div v-if="displayDishes && !loading">
@@ -108,7 +109,7 @@
             type="info"
             show-icon
           >
-            No Fun Facts available.
+            Please select from the box for User Defined Dishes and Fun Facts
           </el-alert>
         </div>
         <div v-if="displayRecipe && !loading">
@@ -125,7 +126,7 @@
             type="info"
             show-icon
           >
-            No Recipes available.
+            Please select from the box for New Recipes.
           </el-alert>
         </div>
       </el-card>

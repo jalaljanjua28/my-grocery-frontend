@@ -1,10 +1,10 @@
 <template>
   <div>
     <router-link to="/" style="text-decoration: none">
-      <el-page-header content="Sign In / Sign Out"></el-page-header>
+      <el-page-header content="Sign Up"></el-page-header>
     </router-link>
     <el-main class="main-content">
-      <h2>Login / Signup</h2>
+      <h2>Signup</h2>
       <div v-if="!currentUser" style="width: -webkit-fill-available">
         <el-input
           style="margin-bottom: 20px"
@@ -27,7 +27,7 @@
             >Sign up with Email</el-button
           >
           <el-button @click="signInWithGoogle" type="primary" plain
-            >Sign in with Google</el-button
+            >Sign Up with Google</el-button
           >
         </div>
       </div>

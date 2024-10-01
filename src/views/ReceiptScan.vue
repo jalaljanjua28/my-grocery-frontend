@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link to="/" style="text-decoration: none">
-      <el-page-header content="Barcode Scan"> </el-page-header>
+      <el-page-header content="Receipt Scan"> </el-page-header>
     </router-link>
     <el-main class="main-content">
       <el-upload

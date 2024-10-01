@@ -41,10 +41,10 @@
           >
           <el-menu-item-group>
             <el-menu-item index="2-1"
-              ><router-link to="/barcode-scan" style="text-decoration: none">
+              ><router-link to="/receipt-scan" style="text-decoration: none">
                 <el-menu-item style="border-bottom: none"
                   ><i class="el-icon-camera" style="font-size: large"></i
-                  >Barcode Scan</el-menu-item
+                  >Receipt Scan</el-menu-item
                 ></router-link
               ></el-menu-item
             >

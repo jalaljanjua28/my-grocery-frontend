@@ -11,7 +11,7 @@
         <el-form-item label="Item Date">
           <el-input v-model="form.item_date"></el-input>
         </el-form-item>
-        <el-form-item label="Item Expiry">
+        <!-- <el-form-item label="Item Expiry">
           <el-input v-model="form.item_expiry"></el-input>
         </el-form-item>
         <el-form-item label="Item Status">
@@ -19,9 +19,20 @@
         </el-form-item>
         <el-form-item label="Item Days Left">
           <el-input v-model="form.item_day_left"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item>
-          <el-button type="success" @click="AddItem" plain>Add Item</el-button>
+          <el-button
+            style="
+              display: flex;
+              align-content: stretch;
+              justify-content: flex-end;
+              align-items: center;
+            "
+            type="success"
+            @click="AddItem"
+            plain
+            >Add Item</el-button
+          >
         </el-form-item>
       </el-form>
     </el-main>
@@ -38,10 +49,7 @@ export default {
       form: {
         item_name: "",
         item_price: "",
-        item_status: "",
         item_date: "",
-        item_expiry: "",
-        item_day_left: "",
       },
     };
   },
@@ -56,10 +64,7 @@ export default {
       const requestData = {
         item_name: this.form.item_name,
         item_price: this.form.item_price,
-        item_status: this.form.item_status,
         item_date: this.form.item_date,
-        item_expiry: this.form.item_expiry,
-        item_day_left: this.form.item_day_left,
       };
       fetch(baseURL + "/add-custom-item", {
         method: "POST",
@@ -90,10 +95,7 @@ export default {
         });
       this.form.item_name = "";
       this.form.item_price = "";
-      this.form.item_status = "";
       this.form.item_date = "";
-      this.form.item_expiry = "";
-      this.form.item_day_left = "";
     },
   },
 };
