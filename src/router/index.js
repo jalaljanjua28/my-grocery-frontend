@@ -10,7 +10,7 @@ import AccountPage from "../views/AccountPage";
 import OrdersHistory from "../views/OrdersHistory";
 import RecipePage from "../views/RecipePage";
 import FAQPage from "../views/FAQs";
-import BarcodeScan from "../views/BarcodeScan";
+import ReceiptScan from "../views/ReceiptScan";
 import Search from "../components/SearchInventory.vue";
 import HealthPage from "../views/HealthPage.vue";
 import UserDefinedPrompt from "../components/UserDefinedPrompts.vue";
@@ -25,7 +25,7 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/SignIn",
+    path: "/SignUp",
     name: "Firebase",
     component: FirebaseAuth,
   },
@@ -71,9 +71,9 @@ const routes = [
     component: FAQPage,
   },
   {
-    path: "/barcode-scan",
-    name: "barcode",
-    component: BarcodeScan,
+    path: "/receipt-scan",
+    name: "receipt",
+    component: ReceiptScan,
   },
   {
     path: "/search-inventory",

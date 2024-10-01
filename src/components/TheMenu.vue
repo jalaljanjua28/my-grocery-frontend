@@ -11,7 +11,7 @@
             align-items: center;
             background-color: darkcyan;
             border-radius: 10px;
-            padding: 0px;
+            padding: 0px 5px;
             border: 2px solid black;
           "
         >
@@ -22,7 +22,7 @@
                   font-size: x-large;
                   background-color: darkcyan;
                   border: none;
-                  padding: 12px;
+                  padding: 0px;
                   color: white;
                 "
               >
@@ -50,7 +50,7 @@
               <!-- Add more user details here -->
             </div>
           </el-popover>
-          <router-link to="/SignIn" style="text-decoration: none">
+          <router-link to="/SignUp" style="text-decoration: none">
             <el-button
               style="
                 font-size: x-large;
@@ -64,7 +64,7 @@
           </router-link>
           <el-dropdown class="el-dropdown-grid">
             <span class="el-dropdown-link">
-              <i class="el-icon-d-caret"></i>
+              <i class="el-icon-menu"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <router-link to="/account-page" style="text-decoration: none"
@@ -84,10 +84,10 @@
                   History</el-dropdown-item
                 ></router-link
               >
-              <router-link to="/barcode-scan" style="text-decoration: none">
+              <router-link to="/receipt-scan" style="text-decoration: none">
                 <el-dropdown-item style="border-bottom: none"
                   ><i class="el-icon-camera" style="font-size: large"></i
-                  >Barcode Scan</el-dropdown-item
+                  >Receipt Scan</el-dropdown-item
                 ></router-link
               ><router-link to="/about-us" style="text-decoration: none"
                 ><el-dropdown-item style="border-bottom: none"
