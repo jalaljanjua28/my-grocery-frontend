@@ -32,7 +32,7 @@ body {
 .el-button {
   border-radius: 12px;
   transition: all 0.3s ease;
-  padding: 7px 24px;
+  padding: 10px 24px;
   font-size: large;
   font-weight: bold;
   width: fit-content;
@@ -85,7 +85,7 @@ body {
 }
 .el-button.is-circle {
   margin-right: 6px;
-  padding: 5px;
+  padding: 10px;
   border-radius: 100%;
   margin-bottom: 5px;
   margin: 5px;
@@ -801,8 +801,8 @@ strong {
 }
 
 .table-image {
-  width: 50px; /* Example width for images */
-  height: 50px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
 }
 
@@ -879,9 +879,6 @@ strong {
     outline: 0;
     width: max-content;
   }
-  .menu-bar {
-    flex-direction: column !important;
-  }
 
   h1 {
     color: black;
@@ -892,7 +889,7 @@ strong {
   }
 
   .joke-card {
-    font-size: large;
+    font-size: medium;
     color: white;
     font-weight: bolder;
   }
@@ -950,11 +947,10 @@ strong {
     color: black;
   }
   .el-icon-goods {
-    font-size: xx-large !important;
+    font-size: large !important;
     background: none !important;
     border: none;
-    color: black !important;
-    margin-top: 15px !important;
+    color: white !important;
   }
   .el-icon-camera {
     background: none !important;
@@ -1014,11 +1010,17 @@ strong {
 }
 @media screen and (max-width: 490px) {
   .menu-bar {
-    padding: 6px !important;
     flex-direction: column;
+    display: flex;
+    align-items: center;
+    background-color: darkcyan;
+    border-radius: 0px !important;
+    padding: 0px !important;
+    border: none !important;
+    margin-right: -15px !important;
   }
   .el-button {
-    padding: 5px 10px !important;
+    padding: 7px 10px !important;
     font-size: medium !important;
   }
 }
@@ -1053,13 +1055,6 @@ strong {
     flex-direction: column !important;
     margin-top: 10px !important;
     align-items: flex-end;
-  }
-  .el-button {
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    padding: 7px 24px;
-    font-size: large;
-    font-weight: bold;
   }
   .el-button--warning.is-plain {
     width: 100%;
