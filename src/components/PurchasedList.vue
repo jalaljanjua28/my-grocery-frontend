@@ -153,7 +153,6 @@ export default {
         "Are you sure you want to update the price?"
       );
       if (userConfirmed) {
-        // Use fetch to send the updated price along with the category
         fetch(baseUrl + "/update_price", {
           method: "POST",
           headers: {
@@ -173,8 +172,13 @@ export default {
             return response.json();
           })
           .then((data) => {
-            console.log(data.message); // Handle success message
-            this.Price = ""; // Clear the input field
+            console.log(data.message);
+            this.Price = "";
+            // Add a success message and reload the page
+            alert("Price updated successfully!");
+            setTimeout(() => {
+              location.reload();
+            }, 1000); // Reload after 1 second
           })
           .catch((error) => {
             console.error("Error updating price:", error.message);
