@@ -1022,7 +1022,7 @@ strong {
     align-items: center;
     background-color: darkcyan;
     border-radius: 0px !important;
-    padding: 0px !important;
+    padding: 3px !important;
     border: none !important;
     margin-right: -15px !important;
   }
