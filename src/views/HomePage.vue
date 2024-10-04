@@ -89,24 +89,26 @@
           @tab-click="handleOuterTabClick"
           class="custom-tabs"
         >
-          <el-tab-pane name="1" label="Food"
+          <el-tab-pane name="Food" label="Food"
             ><span slot="label" class="el-tabs__label"
               ><i class="el-icon-food"></i> Food</span
             >
             <div>
               <purchased-list
-                :items="Food_nonexpired"
+                :filteredItems="Food_nonexpired"
+                :active-tab="outerActiveTab"
                 @item-deleted="handleItemDeleted()"
               ></purchased-list>
             </div>
           </el-tab-pane>
-          <el-tab-pane name="2" label="Not Food">
+          <el-tab-pane name="Not_Food" label="Not Food">
             <span slot="label" class="el-tabs__label"
-              ><i class="el-icon-bicycle"></i> Non Food</span
+              ><i class="el-icon-bicycle"></i> Non Food / Unrecognized</span
             >
             <div>
               <purchased-list
-                :items="NonFood_nonexpired"
+                :active-tab="outerActiveTab"
+                :filteredItems="NonFood_nonexpired"
                 @item-deleted="handleItemDeleted()"
               ></purchased-list>
             </div>
@@ -145,7 +147,7 @@ export default {
   data() {
     return {
       loading: false,
-      outerActiveTab: null,
+      outerActiveTab: "Food",
       jokes: [],
       displayJokes: false,
       Food: [],
@@ -155,6 +157,12 @@ export default {
       item: [],
       currentUser: null,
     };
+  },
+  computed: {
+    filteredItems() {
+      console.log(this.items);
+      return this.items.filter((item) => item && item.category);
+    },
   },
   async mounted() {
     try {
@@ -191,14 +199,16 @@ export default {
       console.log("Deleted Item:", itemToDelete);
       // Update the active tab when an item is deleted
     },
-    handleInnerTabClick(tab) {
-      // Update the local storage on inner tab change
-      localStorage.setItem("activeInnerTab", tab.name);
-      console.log("Inner Tab: " + this.innerActiveTab);
-    },
+    // handleInnerTabClick(tab) {
+    //   // Update the local storage on inner tab change
+    //   localStorage.setItem("activeInnerTab", tab.name);
+    //   console.log("Inner Tab: " + this.innerActiveTab);
+    // },
     handleOuterTabClick(tab) {
       // Update the local storage on outer tab change
       localStorage.setItem("activeOuterTab", tab.name);
+      this.outerActiveTab = tab.name; // Update the active tab when clicked
+
       console.log("Outer Tab: " + this.outerActiveTab);
     },
 

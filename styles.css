@@ -8,6 +8,20 @@ body {
   font-family: "Inter", sans-serif;
   /* Additional styles as needed */
 }
+.el-popover {
+  max-width: 300px;
+}
+.el-popover h3 {
+  margin-top: 0;
+  color: #409eff;
+}
+.el-popover p {
+  margin: 5px 0;
+  color: black;
+}
+.el-popover strong {
+  color: blue;
+}
 .router_link {
   width: auto;
   text-align: center;
@@ -145,6 +159,15 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   margin-top: 13px;
+}
+.el-table .el-table__cell {
+  padding: 12px 0;
+  min-width: 0;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  position: relative;
+  text-align: center;
 }
 .el-card {
   border-radius: 10px !important;
@@ -795,7 +818,7 @@ strong {
   object-fit: cover;
 }
 .responsive-table {
-  min-width: 1000px; /* Minimum width to ensure table columns don't collapse */
+  min-width: 100%; /* Minimum width to ensure table columns don't collapse */
 }
 .image-preview {
   width: 100%;
