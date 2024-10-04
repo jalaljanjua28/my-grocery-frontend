@@ -34,7 +34,6 @@
             slot="suffix"
             @click="handleIconClick"
           >
-            Click to Erase
           </i>
           <template slot-scope="{ item }">
             <div class="value">{{ item }}</div>

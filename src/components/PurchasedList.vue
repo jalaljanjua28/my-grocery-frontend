@@ -1,6 +1,10 @@
 <template>
   <div class="table-wrapper">
-    <el-table :data="items" class="responsive-table" style="width: 1000px">
+    <el-table
+      :data="filteredItems"
+      class="responsive-table"
+      style="width: 1000px"
+    >
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
@@ -11,6 +15,20 @@
         </template>
       </el-table-column>
       <el-table-column label="Name" prop="name"></el-table-column>
+      <!-- Move to Food Column-->
+      <el-table-column v-if="activeTab === 'Not_Food'" label="Move to Food">
+        <template slot-scope="scope">
+          <el-button
+            v-if="scope.row.category === 'Not_Food'"
+            type="success"
+            circle
+            icon="el-icon-finished"
+            size="mini"
+            @click="moveToFood(scope.row)"
+          >
+          </el-button>
+        </template>
+      </el-table-column>
 
       <!-- Editable Price Column -->
       <el-table-column label="Price">
@@ -27,7 +45,37 @@
           </div>
         </template>
       </el-table-column>
-
+      <!-- Info Column-->
+      <el-table-column label="Info" width="80">
+        <template slot-scope="scope">
+          <el-popover
+            placement="right"
+            width="400"
+            trigger="hover"
+            :open-delay="300"
+            :close-delay="200"
+          >
+            <div>
+              <h3>{{ scope.row.name }}</h3>
+              <p>Category: {{ scope.row.category }}</p>
+              <p>Price: {{ scope.row.price }}</p>
+              <p>Date: {{ scope.row.date }}</p>
+              <strong>
+                Change the name of the item if it doesnt match the name on the
+                receipt using the edit name button
+              </strong>
+              <!-- Add more information as needed -->
+            </div>
+            <el-button
+              slot="reference"
+              type="text"
+              icon="el-icon-info"
+              circle
+            ></el-button>
+          </el-popover>
+        </template>
+      </el-table-column>
+      <!--Button columns-->
       <el-table-column>
         <template slot-scope="scope">
           <el-row
@@ -48,6 +96,13 @@
               size="x-small"
               @click="deleteItem(scope.row)"
             ></el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              circle
+              size="x-small"
+              @click="editItemName(scope.row)"
+            ></el-button>
           </el-row>
         </template>
       </el-table-column>
@@ -57,13 +112,26 @@
 
 <script>
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+import { Table, TableColumn, Popover, Button } from "element-ui";
+
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
+  components: {
+    "el-table": Table,
+    "el-table-column": TableColumn,
+    "el-popover": Popover,
+    "el-button": Button,
+  },
   props: {
-    items: {
+    activeTab: {
+      type: String,
+      required: true,
+    },
+    filteredItems: {
       type: Array,
       required: true,
+      default: () => [],
     },
   },
   data() {
@@ -71,6 +139,35 @@ export default {
   },
 
   methods: {
+    async moveToFood(item) {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        throw new Error("User not authenticated");
+      }
+      const idToken = await currentUser.getIdToken(true);
+
+      fetch(baseUrl + "/move_to_food", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ itemName: item.name }),
+      })
+        .then((response) => response.json())
+        // .then((data) => {
+        //   this.$message.success(data.message);
+        //   this.$emit("item-moved", item);
+        // })
+        .catch((error) => {
+          console.error("Error moving item to Food:", error);
+          this.$message.error("Failed to move item to Food category");
+        });
+      alert("Item moved successfully!");
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    },
     async addItem(itemToAdd) {
       const currentUser = auth.currentUser;
       if (!currentUser) {
@@ -142,6 +239,52 @@ export default {
           });
       }
     },
+    async editItemName(item) {
+      const newName = await this.$prompt(
+        "Enter new name for " + item.name,
+        "Edit Item Name",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          inputPattern: /\S+/,
+          inputErrorMessage: "Name cannot be empty",
+        }
+      ).catch(() => null);
+
+      if (newName && newName.value) {
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+          throw new Error("User not authenticated");
+        }
+        const idToken = await currentUser.getIdToken(true);
+
+        fetch(baseUrl + "/update_item_name", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({
+            oldName: item.name,
+            newName: newName.value,
+            category: item.category,
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error("Failed to update item name");
+            return response.json();
+          })
+          .then(() => {
+            this.$message.success("Item name updated successfully");
+            setTimeout(() => location.reload(), 1000);
+          })
+          .catch((error) => {
+            console.error("Error updating item name:", error);
+            this.$message.error("Failed to update item name");
+          });
+      }
+    },
+
     async updatePrice(item, category) {
       const currentUser = auth.currentUser;
       if (!currentUser) {
@@ -153,7 +296,6 @@ export default {
         "Are you sure you want to update the price?"
       );
       if (userConfirmed) {
-        // Use fetch to send the updated price along with the category
         fetch(baseUrl + "/update_price", {
           method: "POST",
           headers: {
@@ -172,9 +314,15 @@ export default {
             }
             return response.json();
           })
-          .then((data) => {
-            console.log(data.message); // Handle success message
-            this.Price = ""; // Clear the input field
+
+          .then(() => {
+            console.log("Price updated successfully");
+            this.Price = "";
+            // Add a success message and reload the page
+            alert("Price updated successfully!");
+            setTimeout(() => {
+              location.reload();
+            }, 1000); // Reload after 1 second
           })
           .catch((error) => {
             console.error("Error updating price:", error.message);
