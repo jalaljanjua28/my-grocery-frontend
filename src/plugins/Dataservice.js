@@ -154,6 +154,7 @@ function processData(data) {
         price: item.Price,
         status: item.Status,
         days_left: item.Days_Until_Expiry,
+        category: "Food", // Add this line
       })
     );
     // Process NonFood data
@@ -167,6 +168,7 @@ function processData(data) {
       price: item.Price,
       status: item.Status,
       days_left: item.Days_Until_Expiry,
+      category: "Not_Food", // Add this line
     }));
     return {
       Food_expired: Food,
