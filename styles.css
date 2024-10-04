@@ -121,7 +121,7 @@ body {
   background: #f0f9eb;
   border-color: black;
   border: 2px solid;
-  margin-bottom: 20px !important;
+  /* margin-bottom: 20px !important; */
 }
 .el-button--info.is-plain {
   border: 2px solid;
@@ -135,7 +135,7 @@ body {
 }
 .el-button--primary.is-plain {
   border: 2px solid;
-  margin-bottom: 10px !important;
+  /* margin-bottom: 10px !important; */
   width: 100% !important;
 }
 .el-button--primary:focus,
@@ -158,7 +158,7 @@ body {
   justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-top: 13px;
+  align-items: center;
 }
 .el-table .el-table__cell {
   padding: 12px 0;
@@ -167,7 +167,23 @@ body {
   text-overflow: ellipsis;
   vertical-align: middle;
   position: relative;
-  text-align: center;
+  text-align: left;
+}
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+.el-table {
+  width: 100%; /* Set fixed or max width here */
+  table-layout: fixed; /* Ensures columns take up equal space */
+}
+.table-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.responsive-table {
+  min-width: 1000px; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;
@@ -804,22 +820,7 @@ strong {
   background: darkcyan;
   border-radius: 0px;
 }
-.table-wrapper {
-  width: 100%;
-  overflow-x: auto; /* Enables horizontal scrolling */
-}
-.el-table {
-  width: 100%; /* Set fixed or max width here */
-  table-layout: fixed; /* Ensures columns take up equal space */
-}
-.table-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-.responsive-table {
-  min-width: 1000px; /* Minimum width to ensure table columns don't collapse */
-}
+
 .image-preview {
   width: 100%;
   height: 600px;
@@ -1001,7 +1002,7 @@ strong {
   .footer2 {
     height: 79px;
     background: none;
-    padding: 5px 0;
+    padding: 0px 0;
     border-bottom: 5px solid black;
     border-top: 5px solid black;
     border-left: 5px solid darkcyan;
