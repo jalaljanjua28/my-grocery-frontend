@@ -1,10 +1,6 @@
 <template>
   <div class="table-wrapper">
-    <el-table
-      :data="filteredItems"
-      class="responsive-table"
-      style="width: 1000px"
-    >
+    <el-table :data="filteredItems" class="responsive-table">
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
@@ -146,6 +142,18 @@ export default {
       }
       const idToken = await currentUser.getIdToken(true);
 
+      const confirmMove = await this.$confirm(
+        `Are you sure you want to move "${item.name}" to the Food category?`,
+        "Confirm",
+        {
+          confirmButtonText: "Yes",
+          cancelButtonText: "No",
+          type: "warning",
+        }
+      ).catch(() => false);
+      if (!confirmMove) {
+        return;
+      }
       fetch(baseUrl + "/move_to_food", {
         method: "POST",
         headers: {
@@ -155,10 +163,10 @@ export default {
         body: JSON.stringify({ itemName: item.name }),
       })
         .then((response) => response.json())
-        // .then((data) => {
-        //   this.$message.success(data.message);
-        //   this.$emit("item-moved", item);
-        // })
+        .then((data) => {
+          this.$message.success(data.message);
+          this.$emit("item-moved", item);
+        })
         .catch((error) => {
           console.error("Error moving item to Food:", error);
           this.$message.error("Failed to move item to Food category");

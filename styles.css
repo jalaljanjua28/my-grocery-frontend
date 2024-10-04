@@ -818,7 +818,7 @@ strong {
   object-fit: cover;
 }
 .responsive-table {
-  min-width: 100%; /* Minimum width to ensure table columns don't collapse */
+  min-width: 1000px; /* Minimum width to ensure table columns don't collapse */
 }
 .image-preview {
   width: 100%;

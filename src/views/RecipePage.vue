@@ -56,6 +56,7 @@
     </el-main>
   </div>
 </template>
+
 <script>
 import RecipePrompt from "../components/RecipePrompts.vue";
 export default {
