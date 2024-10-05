@@ -33,6 +33,20 @@ body {
 .item-row {
   border: 1px solid #ccc;
 }
+.el-message-box {
+  display: inline-block;
+  width: 90%;
+  padding-bottom: 10px;
+  vertical-align: middle;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #ebeef5;
+  font-size: 18px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  text-align: left;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
 .el-button + .el-button,
 .el-checkbox.is-bordered + .el-checkbox.is-bordered {
   margin-left: 0px;
@@ -49,11 +63,10 @@ body {
   padding: 10px 24px;
   font-size: large;
   font-weight: bold;
-  /* width: fit-content; */
 }
 .el-button:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.744);
 }
 .el-button[type="primary"] {
   background: linear-gradient(145deg, #3a8ee6, #1e5fa1);
@@ -113,15 +126,12 @@ body {
   flex-direction: row;
   gap: 10px;
 }
-.nav {
-  width: fit-content;
-}
 .el-button--success.is-plain {
   color: #67c23a;
   background: #f0f9eb;
   border-color: black;
   border: 2px solid;
-  /* margin-bottom: 20px !important; */
+  margin-bottom: 20px !important;
 }
 .el-button--info.is-plain {
   border: 2px solid;
@@ -135,7 +145,7 @@ body {
 }
 .el-button--primary.is-plain {
   border: 2px solid;
-  /* margin-bottom: 10px !important; */
+  margin-bottom: 10px !important;
   width: 100% !important;
 }
 .el-button--primary:focus,
@@ -158,7 +168,10 @@ body {
   justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
+  margin-top: 13px;
+}
+.nav {
+  width: fit-content;
 }
 .el-table .el-table__cell {
   padding: 12px 0;
@@ -167,23 +180,25 @@ body {
   text-overflow: ellipsis;
   vertical-align: middle;
   position: relative;
-  text-align: left;
+  text-align: center;
 }
 .table-wrapper {
   width: 100%;
   overflow-x: auto; /* Enables horizontal scrolling */
+  -webkit-overflow-scrolling: touch;
 }
 .el-table {
-  width: 100%; /* Set fixed or max width here */
-  table-layout: fixed; /* Ensures columns take up equal space */
-}
-.table-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 1;
+  max-width: unset;
+  font-size: 14px;
+  color: #606266;
+  table-layout: fixed;
 }
 .responsive-table {
-  min-width: 1000px; /* Minimum width to ensure table columns don't collapse */
+  width: 100%; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;
@@ -210,7 +225,7 @@ body {
 .el-alert--info.is-light {
   background-color: #f4f4f5;
   color: #909399;
-  width: 400px;
+  width: 100%;
   margin-left: 2px;
   margin-top: 10px;
 }
@@ -308,7 +323,7 @@ body {
   z-index: 10;
   padding: 0px 0;
   margin: 5px 0;
-  background-color: darkcyan;
+  background-color: rgba(139, 0, 0, 0.785);
   border: 0px solid darkcyan;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -483,11 +498,7 @@ body {
   display: inline-block;
   width: 100%;
 }
-.el-autocomplete-suggestion li {
-  max-width: 100% !important; /* Ensure it fits within the screen width */
-  width: 100% !important;
-  overflow-x: auto !important;
-}
+
 .el-dialog__body {
   padding: 20px 0px;
   color: #606266;
@@ -685,10 +696,6 @@ strong {
 .item-details {
   padding: 10px;
 }
-.price-scroll-container {
-  overflow-x: auto;
-  white-space: nowrap;
-}
 .item-name,
 .item-price,
 .item-status,
@@ -777,6 +784,9 @@ strong {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100% !important; /* Ensure it fits within the screen width */
+  width: 100% !important;
+  overflow-x: auto;
 }
 .el-col-12 {
   width: 100%;
@@ -820,7 +830,11 @@ strong {
   background: darkcyan;
   border-radius: 0px;
 }
-
+.table-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
 .image-preview {
   width: 100%;
   height: 600px;
@@ -845,6 +859,10 @@ strong {
 }
 .el-dialog__headerbtn .el-dialog__close {
   color: white;
+}
+.price-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
 }
 @media screen and (max-width: 350px) {
   .el-carousel__container {
@@ -940,7 +958,6 @@ strong {
   .account-form {
     padding: 20px;
   }
-
   .input-with-select {
     width: 100%;
   }
@@ -1002,7 +1019,7 @@ strong {
   .footer2 {
     height: 79px;
     background: none;
-    padding: 0px 0;
+    padding: 5px 0;
     border-bottom: 5px solid black;
     border-top: 5px solid black;
     border-left: 5px solid darkcyan;
@@ -1058,7 +1075,6 @@ strong {
   .searchDev {
     display: none !important;
   }
-
   .nav-buttons {
     display: flex !important;
     width: 100% !important;
@@ -1117,11 +1133,10 @@ strong {
     border-radius: 50% !important;
     margin-bottom: 20px !important;
   }
-  .el-autocomplete-suggestion li {
-    max-width: 100vw !important; /* Fit within the viewport width */
+  /* .el-autocomplete-suggestion li {
+    max-width: 100vw !important;
     width: 100vw !important;
-    overflow-x: auto !important;
-  }
+  } */
   .el-table-column {
     display: block;
     width: 100%;

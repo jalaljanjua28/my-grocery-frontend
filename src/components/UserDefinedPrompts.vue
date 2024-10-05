@@ -8,7 +8,7 @@
         <el-select
           v-model="selectedPrompt"
           placeholder="Select Prompt"
-          style="margin-bottom: 20px; width: max-content"
+          style="margin-bottom: 20px; width: max-auto"
         >
           <el-option
             label="Food Waste Reduction"
