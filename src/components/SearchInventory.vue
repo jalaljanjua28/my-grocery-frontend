@@ -65,17 +65,17 @@
             <template slot-scope="scope">
               <el-row style="display: flex; text-align: space-between">
                 <el-button
-                  type="success"
+                  type="text"
                   icon="el-icon-plus"
                   circle
-                  size="x-small"
+                  size="large"
                   @click="addItem(scope.row)"
                 ></el-button>
                 <el-button
-                  type="danger"
+                  type="text"
                   icon="el-icon-delete"
                   circle
-                  size="x-small"
+                  size="large"
                   @click="deleteItem(scope.row)"
                 ></el-button>
               </el-row>

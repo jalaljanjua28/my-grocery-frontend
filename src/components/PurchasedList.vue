@@ -1,6 +1,10 @@
 <template>
   <div class="table-wrapper">
-    <el-table :data="filteredItems" class="responsive-table">
+    <el-table
+      :data="filteredItems"
+      class="responsive-table"
+      style="width: 1050px"
+    >
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
@@ -25,7 +29,6 @@
           </el-button>
         </template>
       </el-table-column>
-
       <!-- Editable Price Column -->
       <el-table-column label="Price">
         <template slot-scope="scope">
@@ -79,24 +82,24 @@
             style="display: flex; justify-content: center; flex-wrap: wrap"
           >
             <el-button
-              type="success"
+              type="text"
               icon="el-icon-plus"
               circle
-              size="x-small"
+              size="large"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
-              type="danger"
+              type="text"
               icon="el-icon-delete"
               circle
-              size="x-small"
+              size="large"
               @click="deleteItem(scope.row)"
             ></el-button>
             <el-button
-              type="primary"
+              type="text"
               icon="el-icon-edit"
               circle
-              size="x-small"
+              size="large"
               @click="editItemName(scope.row)"
             ></el-button>
           </el-row>

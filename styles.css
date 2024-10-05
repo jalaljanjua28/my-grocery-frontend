@@ -131,12 +131,12 @@ body {
   background: #f0f9eb;
   border-color: black;
   border: 2px solid;
-  margin-bottom: 20px !important;
+  /* margin-bottom: 20px !important; */
 }
 .el-button--info.is-plain {
   border: 2px solid;
   width: 100% !important;
-  margin-bottom: 10px !important;
+  /* margin-bottom: 10px !important; */
 }
 .el-button--warning.is-plain {
   border: 2px solid;
@@ -145,7 +145,7 @@ body {
 }
 .el-button--primary.is-plain {
   border: 2px solid;
-  margin-bottom: 10px !important;
+  /* margin-bottom: 10px !important; */
   width: 100% !important;
 }
 .el-button--primary:focus,
@@ -168,7 +168,7 @@ body {
   justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-top: 13px;
+  /* margin-top: 13px; */
 }
 .nav {
   width: fit-content;
@@ -180,7 +180,7 @@ body {
   text-overflow: ellipsis;
   vertical-align: middle;
   position: relative;
-  text-align: center;
+  text-align: left;
 }
 .table-wrapper {
   width: 100%;
@@ -196,6 +196,9 @@ body {
   font-size: 14px;
   color: #606266;
   table-layout: fixed;
+}
+.el-table tr {
+  background-color: seagreen;
 }
 .responsive-table {
   width: 100%; /* Minimum width to ensure table columns don't collapse */
@@ -305,14 +308,14 @@ body {
   border-radius: 20px;
   width: max-content;
 }
-.el-dropdown-menu el-popper {
+/* .el-dropdown-menu el-popper {
   transform-origin: center top;
   z-index: 2003;
   position: absolute;
-  top: 75px;
-  left: 195px !important;
+  top: 0px !important;
+  left: 175px !important;
   height: 37vh !important;
-}
+} */
 .el-dropdown-menu__item i {
   margin-right: 18px;
 }
@@ -323,8 +326,8 @@ body {
   z-index: 10;
   padding: 0px 0;
   margin: 5px 0;
-  background-color: rgba(139, 0, 0, 0.785);
-  border: 0px solid darkcyan;
+  background-color: teal;
+  border: 0px solid teal;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
@@ -392,8 +395,6 @@ body {
   padding-right: 0px !important;
   font-size: 13px;
   line-height: 30px;
-  padding-left: 0px;
-  padding-right: 0px;
 }
 .el-input__inner {
   background-color: white;
@@ -1017,7 +1018,7 @@ strong {
     color: black;
   }
   .footer2 {
-    height: 79px;
+    height: 100px;
     background: none;
     padding: 5px 0;
     border-bottom: 5px solid black;
