@@ -63,11 +63,10 @@ body {
   padding: 10px 24px;
   font-size: large;
   font-weight: bold;
-  /* width: fit-content; */
 }
 .el-button:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.744);
 }
 .el-button[type="primary"] {
   background: linear-gradient(145deg, #3a8ee6, #1e5fa1);
@@ -127,9 +126,6 @@ body {
   flex-direction: row;
   gap: 10px;
 }
-.nav {
-  width: fit-content;
-}
 .el-button--success.is-plain {
   color: #67c23a;
   background: #f0f9eb;
@@ -174,6 +170,9 @@ body {
   flex-wrap: nowrap;
   margin-top: 13px;
 }
+.nav {
+  width: fit-content;
+}
 .el-table .el-table__cell {
   padding: 12px 0;
   min-width: 0;
@@ -186,13 +185,20 @@ body {
 .table-wrapper {
   width: 100%;
   overflow-x: auto; /* Enables horizontal scrolling */
+  -webkit-overflow-scrolling: touch;
 }
 .el-table {
-  width: 100%; /* Set fixed or max width here */
-  table-layout: fixed; /* Ensures columns take up equal space */
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 1;
+  max-width: unset;
+  font-size: 14px;
+  color: #606266;
+  table-layout: fixed;
 }
 .responsive-table {
-  min-width: 900px !important; /* Minimum width to ensure table columns don't collapse */
+  width: 100%; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;
@@ -317,7 +323,7 @@ body {
   z-index: 10;
   padding: 0px 0;
   margin: 5px 0;
-  background-color: darkcyan;
+  background-color: rgba(139, 0, 0, 0.785);
   border: 0px solid darkcyan;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -694,10 +700,6 @@ strong {
 .item-details {
   padding: 10px;
 }
-.price-scroll-container {
-  overflow-x: auto;
-  white-space: nowrap;
-}
 .item-name,
 .item-price,
 .item-status,
@@ -829,13 +831,11 @@ strong {
   background: darkcyan;
   border-radius: 0px;
 }
-
 .table-image {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
 }
-
 .image-preview {
   width: 100%;
   height: 600px;
@@ -860,6 +860,10 @@ strong {
 }
 .el-dialog__headerbtn .el-dialog__close {
   color: white;
+}
+.price-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
 }
 @media screen and (max-width: 350px) {
   .el-carousel__container {
