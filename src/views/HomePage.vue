@@ -71,17 +71,17 @@
         </el-button>
       </router-link>
     </div>
-    <div v-if="displayJokes">
-      <el-card v-for="(joke, index) in jokes" :key="index">
-        <p class="joke-card">
-          {{ joke["Food Joke"] }}
-        </p>
-        <el-button :loading="loading" type="info" @click="gptJokes()" plain
-          >Generate Prompt</el-button
-        >
+    <div v-if="displayJokes" class="jokes-container">
+      <el-card class="jokes-box">
+        <div class="jokes-header">
+          <h2>Food Joke of the Day</h2>
+        </div>
+        <div v-for="(joke, index) in jokes" :key="index" class="joke-item">
+          <p class="joke-text">{{ joke["Food Joke"] }}</p>
+        </div>
       </el-card>
     </div>
-    <offers-page></offers-page>
+    <!-- <offers-page></offers-page> -->
     <el-card>
       <section>
         <el-tabs
@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import OffersPage from "@/views/OffersList.vue";
+// import OffersPage from "@/views/OffersList.vue";
 import HomePrompt from "../components/HomePrompts.vue";
 import PurchasedList from "../components/PurchasedList.vue";
 import DeleteAllPurchaseList from "../components/DeleteAllPurchaseList.vue";
@@ -138,7 +138,7 @@ const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   components: {
-    OffersPage,
+    // OffersPage,
     HomePrompt,
     PurchasedList,
     DeleteAllPurchaseList,
@@ -176,7 +176,12 @@ export default {
       const { Food, NonFood } = await fetchShoppingListData();
       this.Food = Food;
       this.NonFood = NonFood;
-      await this.jsonJokes();
+      // await this.jsonJokes();
+      this.fetchJokesWithTimestamp();
+
+      setInterval(() => {
+        this.fetchJokesWithTimestamp();
+      }, 3600000); // 3600000 milliseconds = 1 hour
     } catch (error) {
       console.error("Error loading data:", error);
     }
@@ -212,71 +217,107 @@ export default {
       console.log("Outer Tab: " + this.outerActiveTab);
     },
 
-    async jsonJokes() {
+    // async jsonJokes() {
+    //   try {
+    //     const currentUser = auth.currentUser;
+    //     if (!currentUser) {
+    //       throw new Error("User not authenticated");
+    //     }
+    //     const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+    //     console.log("idToken", idToken);
+    //     this.loading = true;
+    //     const response = await fetch(baseUrl + "/jokes-using-json", {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${idToken}`,
+    //       },
+    //     });
+    //     if (!response.ok) {
+    //       throw new Error(`HTTP error! Status: ${response.status}`);
+    //     }
+    //     const data = await response.json();
+    //     console.log("Data Received:", data);
+    //     if (data.jokes) {
+    //       this.jokes = data.jokes;
+    //     } else {
+    //       this.errorMessage = "Error retrieving jokes.";
+    //     }
+    //     this.loading = false;
+    //   } catch (error) {
+    //     console.error("Error:", error);
+    //     this.errorMessage = "Error retrieving jokes.";
+    //     this.loading = false;
+    //   }
+    //   this.displayJokes = true;
+    // },
+    async fetchJokesWithTimestamp() {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {
           throw new Error("User not authenticated");
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-        console.log("idToken", idToken);
-        this.loading = true;
-        const response = await fetch(baseUrl + "/jokes-using-json", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-        });
+
+        const timestamp = Math.floor(Date.now() / 1000); // Current timestamp in seconds
+        const response = await fetch(
+          `${baseUrl}/jokes-with-timestamp/${timestamp}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+          }
+        );
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
-        console.log("Data Received:", data);
         if (data.jokes) {
           this.jokes = data.jokes;
+          this.displayJokes = true;
         } else {
           this.errorMessage = "Error retrieving jokes.";
         }
-        this.loading = false;
       } catch (error) {
-        console.error("Error:", error);
-        this.errorMessage = "Error retrieving jokes.";
-        this.loading = false;
-      }
-      this.displayJokes = true;
-    },
-    async gptJokes() {
-      try {
-        const currentUser = auth.currentUser;
-        if (!currentUser) {
-          throw new Error("User not authenticated");
-        }
-        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-        console.log("idToken", idToken);
-        this.loading = true;
-        const response = await fetch(baseUrl + "/jokes-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-          body: JSON.stringify({}),
-        });
-        const data = await response.json();
-        console.log("Data Received:", data);
-        if (data.jokes) {
-          this.jokes = data.jokes;
-        } else {
-          this.errorMessage = "Error retrieving jokes.";
-        }
-        this.loading = false;
-      } catch (error) {
-        console.error("Error in gptJokes:", error);
+        console.error("Error in fetchJokesWithTimestamp:", error);
         this.errorMessage = error.message;
-        this.loading = false;
       }
     },
+    // async gptJokes() {
+    //   try {
+    //     const currentUser = auth.currentUser;
+    //     if (!currentUser) {
+    //       throw new Error("User not authenticated");
+    //     }
+    //     const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+    //     console.log("idToken", idToken);
+    //     this.loading = true;
+    //     const response = await fetch(baseUrl + "/jokes-using-gpt", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${idToken}`,
+    //       },
+    //       body: JSON.stringify({}),
+    //     });
+    //     const data = await response.json();
+    //     console.log("Data Received:", data);
+    //     if (data.jokes) {
+    //       this.jokes = data.jokes;
+    //     } else {
+    //       this.errorMessage = "Error retrieving jokes.";
+    //     }
+    //     this.loading = false;
+    //   } catch (error) {
+    //     console.error("Error in gptJokes:", error);
+    //     this.errorMessage = error.message;
+    //     this.loading = false;
+    //   }
+    // },
   },
 };
 </script>
@@ -284,5 +325,35 @@ export default {
 <style scoped>
 .el-page-header {
   display: none !important;
+}
+.jokes-container {
+  margin: 20px 0;
+}
+
+.jokes-box {
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.jokes-header {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.joke-item {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.joke-item:last-child {
+  border-bottom: none;
+}
+
+.joke-text {
+  font-size: 16px;
+  line-height: 1.5;
 }
 </style>

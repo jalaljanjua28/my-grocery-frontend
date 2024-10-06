@@ -217,6 +217,11 @@ body {
   display: flex;
   flex-direction: column;
 }
+.el-card.is-always-shadow,
+.el-card.is-hover-shadow:focus,
+.el-card.is-hover-shadow:hover {
+  box-shadow: 0 19px 12px 0 rgb(43 47 50);
+}
 .suggestion-card {
   width: calc(33.33% - 20px);
   margin: 10px;

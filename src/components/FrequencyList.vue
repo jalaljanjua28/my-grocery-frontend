@@ -1,5 +1,20 @@
 <template>
   <div style="align-items: center; flex-direction: column; margin-top: 20px">
+    <div v-if="responseMessage" class="response-message">
+      {{ responseMessage }}
+    </div>
+
+    <div
+      v-if="sortedItemFrequency"
+      class="item-frequency"
+      style="display: flex; flex-direction: column; align-items: center"
+    >
+      <h3 style="color: gold">Item Frequency</h3>
+      <el-table :data="sortedItemFrequency" style="width: 100%">
+        <el-table-column prop="itemName" label="Item Name"></el-table-column>
+        <el-table-column prop="frequency" label="Frequency"></el-table-column>
+      </el-table>
+    </div>
     <el-select v-model="condition" placeholder="Select condition">
       <el-option label="Biweekly" value="biweekly"></el-option>
       <el-option label="Monthly" value="monthly"></el-option>
@@ -17,22 +32,6 @@
       "
       ><i class="el-icon-pie-chart"> Check Frequency</i>
     </el-button>
-
-    <div v-if="responseMessage" class="response-message">
-      {{ responseMessage }}
-    </div>
-
-    <div
-      v-if="sortedItemFrequency"
-      class="item-frequency"
-      style="display: flex; flex-direction: column; align-items: center"
-    >
-      <h3 style="color: gold">Item Frequency</h3>
-      <el-table :data="sortedItemFrequency" style="width: 100%">
-        <el-table-column prop="itemName" label="Item Name"></el-table-column>
-        <el-table-column prop="frequency" label="Frequency"></el-table-column>
-      </el-table>
-    </div>
   </div>
 </template>
 
