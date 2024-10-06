@@ -193,7 +193,7 @@ body {
   box-sizing: border-box;
   flex: 1;
   max-width: unset;
-  font-size: 14px;
+  font-size: 18px;
   color: #606266;
   table-layout: fixed;
 }
@@ -201,7 +201,7 @@ body {
   background-color: seagreen;
 }
 .responsive-table {
-  width: 100%; /* Minimum width to ensure table columns don't collapse */
+  width: 1700px; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;
@@ -241,6 +241,36 @@ body {
   font-size: large;
   color: white;
   font-weight: bolder;
+}
+.jokes-container {
+  margin: 20px 0;
+}
+
+.jokes-box {
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.jokes-header {
+  background-color: #4caf50;
+  color: white;
+  padding: 0px;
+  text-align: center;
+}
+
+.joke-item {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.joke-item:last-child {
+  border-bottom: none;
+}
+
+.joke-text {
+  font-size: 18px;
+  line-height: 1.5;
 }
 .el-container {
   display: flex;
@@ -313,14 +343,6 @@ body {
   border-radius: 20px;
   width: max-content;
 }
-/* .el-dropdown-menu el-popper {
-  transform-origin: center top;
-  z-index: 2003;
-  position: absolute;
-  top: 0px !important;
-  left: 175px !important;
-  height: 37vh !important;
-} */
 .el-dropdown-menu__item i {
   margin-right: 18px;
 }
@@ -1061,6 +1083,10 @@ strong {
 @media screen and (max-width: 790px) {
   .router_link {
     width: 100% !important;
+  }
+  .joke-text {
+    font-size: 14px;
+    line-height: 1.5;
   }
   .logo-container {
     display: flex;

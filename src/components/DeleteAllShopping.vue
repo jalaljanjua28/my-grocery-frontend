@@ -8,6 +8,7 @@
         border: none;
         padding: 12px;
         color: red;
+        margin-bottom: 10px;
       "
       ><i class="el-icon-delete-solid"> Delete All Items</i>
     </el-button>

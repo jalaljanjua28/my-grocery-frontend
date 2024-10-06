@@ -1,6 +1,6 @@
 <template>
   <div class="table-wrapper">
-    <el-table :data="items" class="responsive-table" style="width: 1050px">
+    <el-table :data="items" class="responsive-table">
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
@@ -30,14 +30,14 @@
               type="text"
               icon="el-icon-plus"
               circle
-              size="large"
+              style="font-size: 30px"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-delete"
               circle
-              size="large"
+              style="font-size: 30px"
               @click="deleteItem(scope.row)"
             ></el-button>
           </el-row>
