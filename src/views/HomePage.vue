@@ -71,17 +71,17 @@
         </el-button>
       </router-link>
     </div>
-    <div v-if="displayJokes">
-      <el-card v-for="(joke, index) in jokes" :key="index">
-        <p class="joke-card">
-          {{ joke["Food Joke"] }}
-        </p>
-        <el-button :loading="loading" type="info" @click="gptJokes()" plain
-          >Generate Prompt</el-button
-        >
+    <div v-if="displayJokes" class="jokes-container">
+      <el-card class="jokes-box">
+        <div class="jokes-header">
+          <h2>Joke of the Day</h2>
+        </div>
+        <div class="joke-item">
+          <p class="joke-text">{{ jokes["Food Joke"] }}</p>
+        </div>
       </el-card>
     </div>
-    <offers-page></offers-page>
+    <!-- <offers-page></offers-page> -->
     <el-card>
       <section>
         <el-tabs
@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import OffersPage from "@/views/OffersList.vue";
+// import OffersPage from "@/views/OffersList.vue";
 import HomePrompt from "../components/HomePrompts.vue";
 import PurchasedList from "../components/PurchasedList.vue";
 import DeleteAllPurchaseList from "../components/DeleteAllPurchaseList.vue";
@@ -138,7 +138,7 @@ const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   components: {
-    OffersPage,
+    // OffersPage,
     HomePrompt,
     PurchasedList,
     DeleteAllPurchaseList,
@@ -176,7 +176,12 @@ export default {
       const { Food, NonFood } = await fetchShoppingListData();
       this.Food = Food;
       this.NonFood = NonFood;
-      await this.jsonJokes();
+      // await this.jsonJokes();
+      this.fetchJokesWithTimestamp();
+
+      setInterval(() => {
+        this.fetchJokesWithTimestamp();
+      }, 3600000); // 3600000 milliseconds = 1 hour
     } catch (error) {
       console.error("Error loading data:", error);
     }
@@ -199,11 +204,6 @@ export default {
       console.log("Deleted Item:", itemToDelete);
       // Update the active tab when an item is deleted
     },
-    // handleInnerTabClick(tab) {
-    //   // Update the local storage on inner tab change
-    //   localStorage.setItem("activeInnerTab", tab.name);
-    //   console.log("Inner Tab: " + this.innerActiveTab);
-    // },
     handleOuterTabClick(tab) {
       // Update the local storage on outer tab change
       localStorage.setItem("activeOuterTab", tab.name);
@@ -211,70 +211,40 @@ export default {
 
       console.log("Outer Tab: " + this.outerActiveTab);
     },
-
-    async jsonJokes() {
+    async fetchJokesWithTimestamp() {
       try {
         const currentUser = auth.currentUser;
         if (!currentUser) {
           throw new Error("User not authenticated");
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-        console.log("idToken", idToken);
-        this.loading = true;
-        const response = await fetch(baseUrl + "/jokes-using-json", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-        });
+
+        const timestamp = Math.floor(Date.now() / 1000); // Current timestamp in seconds
+        const response = await fetch(
+          `${baseUrl}/jokes-with-timestamp/${timestamp}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+          }
+        );
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         const data = await response.json();
-        console.log("Data Received:", data);
-        if (data.jokes) {
-          this.jokes = data.jokes;
+        if (data.jokes && data.jokes.length > 0) {
+          this.jokes = data.jokes[0]; // Set only the first joke
+          this.displayJokes = true;
         } else {
           this.errorMessage = "Error retrieving jokes.";
         }
-        this.loading = false;
       } catch (error) {
-        console.error("Error:", error);
-        this.errorMessage = "Error retrieving jokes.";
-        this.loading = false;
-      }
-      this.displayJokes = true;
-    },
-    async gptJokes() {
-      try {
-        const currentUser = auth.currentUser;
-        if (!currentUser) {
-          throw new Error("User not authenticated");
-        }
-        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-        console.log("idToken", idToken);
-        this.loading = true;
-        const response = await fetch(baseUrl + "/jokes-using-gpt", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-          body: JSON.stringify({}),
-        });
-        const data = await response.json();
-        console.log("Data Received:", data);
-        if (data.jokes) {
-          this.jokes = data.jokes;
-        } else {
-          this.errorMessage = "Error retrieving jokes.";
-        }
-        this.loading = false;
-      } catch (error) {
-        console.error("Error in gptJokes:", error);
+        console.error("Error in fetchJokesWithTimestamp:", error);
         this.errorMessage = error.message;
-        this.loading = false;
       }
     },
   },

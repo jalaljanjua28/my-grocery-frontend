@@ -1,6 +1,6 @@
 <template>
   <div class="table-wrapper">
-    <el-table :data="items" class="responsive-table" style="width: 1000px">
+    <el-table :data="items" class="responsive-table">
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
@@ -28,10 +28,10 @@
             style="display: flex; justify-content: center; flex-wrap: wrap"
           >
             <el-button
-              type="primary"
+              type="text"
               icon="el-icon-date"
               circle
-              size="x-small"
+              style="font-size: 30px"
               @click="addExpiry(scope.row)"
             ></el-button>
             <el-dialog :visible.sync="dialogVisible1" title="Add Expiry">
@@ -58,10 +58,10 @@
               </el-form>
             </el-dialog>
             <el-button
-              type="warning"
+              type="text"
               icon="el-icon-money"
               circle
-              size="x-small"
+              style="font-size: 30px"
               @click="addPrice(scope.row)"
             ></el-button>
             <el-dialog :visible.sync="dialogVisible2" title="Add Price">
@@ -88,17 +88,17 @@
               </el-form>
             </el-dialog>
             <el-button
-              type="success"
+              type="text"
               icon="el-icon-plus"
               circle
-              size="x-small"
+              style="font-size: 30px"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
-              type="danger"
+              type="text"
               icon="el-icon-delete"
               circle
-              size="x-small"
+              style="font-size: 30px"
               @click="deleteItem(scope.row)"
             ></el-button>
           </el-row>

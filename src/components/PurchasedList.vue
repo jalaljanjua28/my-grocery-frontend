@@ -1,10 +1,6 @@
 <template>
   <div class="table-wrapper">
-    <el-table
-      :data="filteredItems"
-      class="responsive-table"
-      style="width: 1000px"
-    >
+    <el-table :data="filteredItems" class="responsive-table">
       <el-table-column label="Image" prop="image">
         <template slot-scope="scope">
           <img
@@ -29,7 +25,6 @@
           </el-button>
         </template>
       </el-table-column>
-
       <!-- Editable Price Column -->
       <el-table-column label="Price">
         <template slot-scope="scope">
@@ -83,24 +78,24 @@
             style="display: flex; justify-content: center; flex-wrap: wrap"
           >
             <el-button
-              type="success"
+              type="text"
               icon="el-icon-plus"
               circle
-              size="x-small"
+              style="font-size: 30px"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
-              type="danger"
+              type="text"
               icon="el-icon-delete"
               circle
-              size="x-small"
+              style="font-size: 30px"
               @click="deleteItem(scope.row)"
             ></el-button>
             <el-button
-              type="primary"
+              type="text"
               icon="el-icon-edit"
               circle
-              size="x-small"
+              style="font-size: 30px"
               @click="editItemName(scope.row)"
             ></el-button>
           </el-row>
@@ -114,7 +109,7 @@
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
 import { Table, TableColumn, Popover, Button } from "element-ui";
 
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   components: {

@@ -52,7 +52,6 @@
           </el-button>
         </router-link>
       </div>
-
       <el-card>
         <div class="search-container">
           <search-inventory
@@ -200,15 +199,17 @@
               border: none;
               padding: 12px;
               color: chartreuse;
+              margin-top: 10px;
             "
-            ><i class="el-icon-plus"> Add items manually</i>
+            ><i class="el-icon-plus"> Add items to shopping manually</i>
           </el-button>
-
           <el-dialog :visible.sync="dialogVisible" title="Add Item" width="90%">
             <add-items @item-added="closeDialog" />
           </el-dialog>
-          <frequency-list></frequency-list>
         </div>
+      </el-card>
+      <el-card>
+        <frequency-list></frequency-list>
       </el-card>
     </el-main>
   </div>

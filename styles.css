@@ -131,12 +131,12 @@ body {
   background: #f0f9eb;
   border-color: black;
   border: 2px solid;
-  margin-bottom: 20px !important;
+  /* margin-bottom: 20px !important; */
 }
 .el-button--info.is-plain {
   border: 2px solid;
   width: 100% !important;
-  margin-bottom: 10px !important;
+  /* margin-bottom: 10px !important; */
 }
 .el-button--warning.is-plain {
   border: 2px solid;
@@ -145,7 +145,7 @@ body {
 }
 .el-button--primary.is-plain {
   border: 2px solid;
-  margin-bottom: 10px !important;
+  /* margin-bottom: 10px !important; */
   width: 100% !important;
 }
 .el-button--primary:focus,
@@ -168,7 +168,7 @@ body {
   justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-top: 13px;
+  /* margin-top: 13px; */
 }
 .nav {
   width: fit-content;
@@ -180,7 +180,7 @@ body {
   text-overflow: ellipsis;
   vertical-align: middle;
   position: relative;
-  text-align: center;
+  text-align: left;
 }
 .table-wrapper {
   width: 100%;
@@ -193,12 +193,15 @@ body {
   box-sizing: border-box;
   flex: 1;
   max-width: unset;
-  font-size: 14px;
+  font-size: 18px;
   color: #606266;
   table-layout: fixed;
 }
+.el-table tr {
+  background-color: seagreen;
+}
 .responsive-table {
-  width: 100%; /* Minimum width to ensure table columns don't collapse */
+  width: 1700px; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;
@@ -214,6 +217,11 @@ body {
   display: flex;
   flex-direction: column;
 }
+.el-card.is-always-shadow,
+.el-card.is-hover-shadow:focus,
+.el-card.is-hover-shadow:hover {
+  box-shadow: 0 19px 12px 0 rgb(43 47 50);
+}
 .suggestion-card {
   width: calc(33.33% - 20px);
   margin: 10px;
@@ -225,7 +233,7 @@ body {
 .el-alert--info.is-light {
   background-color: #f4f4f5;
   color: #909399;
-  width: 400px;
+  width: 100%;
   margin-left: 2px;
   margin-top: 10px;
 }
@@ -233,6 +241,36 @@ body {
   font-size: large;
   color: white;
   font-weight: bolder;
+}
+.jokes-container {
+  margin: 20px 0;
+}
+
+.jokes-box {
+  border: 2px solid #4caf50;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.jokes-header {
+  background-color: #4caf50;
+  color: white;
+  padding: 0px;
+  text-align: center;
+}
+
+.joke-item {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.joke-item:last-child {
+  border-bottom: none;
+}
+
+.joke-text {
+  font-size: 18px;
+  line-height: 1.5;
 }
 .el-container {
   display: flex;
@@ -305,14 +343,6 @@ body {
   border-radius: 20px;
   width: max-content;
 }
-.el-dropdown-menu el-popper {
-  transform-origin: center top;
-  z-index: 2003;
-  position: absolute;
-  top: 75px;
-  left: 195px !important;
-  height: 37vh !important;
-}
 .el-dropdown-menu__item i {
   margin-right: 18px;
 }
@@ -323,8 +353,8 @@ body {
   z-index: 10;
   padding: 0px 0;
   margin: 5px 0;
-  background-color: rgba(139, 0, 0, 0.785);
-  border: 0px solid darkcyan;
+  background-color: teal;
+  border: 0px solid teal;
   border-radius: 20px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
@@ -392,8 +422,6 @@ body {
   padding-right: 0px !important;
   font-size: 13px;
   line-height: 30px;
-  padding-left: 0px;
-  padding-right: 0px;
 }
 .el-input__inner {
   background-color: white;
@@ -498,11 +526,7 @@ body {
   display: inline-block;
   width: 100%;
 }
-.el-autocomplete-suggestion li {
-  max-width: 100% !important; /* Ensure it fits within the screen width */
-  width: 100% !important;
-  overflow-x: auto !important;
-}
+
 .el-dialog__body {
   padding: 20px 0px;
   color: #606266;
@@ -788,6 +812,9 @@ strong {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100% !important; /* Ensure it fits within the screen width */
+  width: 100% !important;
+  overflow-x: auto;
 }
 .el-col-12 {
   width: 100%;
@@ -959,7 +986,6 @@ strong {
   .account-form {
     padding: 20px;
   }
-
   .input-with-select {
     width: 100%;
   }
@@ -1019,7 +1045,7 @@ strong {
     color: black;
   }
   .footer2 {
-    height: 79px;
+    height: 100px;
     background: none;
     padding: 5px 0;
     border-bottom: 5px solid black;
@@ -1058,6 +1084,10 @@ strong {
   .router_link {
     width: 100% !important;
   }
+  .joke-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
   .logo-container {
     display: flex;
     align-items: center;
@@ -1077,7 +1107,6 @@ strong {
   .searchDev {
     display: none !important;
   }
-
   .nav-buttons {
     display: flex !important;
     width: 100% !important;
@@ -1136,11 +1165,10 @@ strong {
     border-radius: 50% !important;
     margin-bottom: 20px !important;
   }
-  .el-autocomplete-suggestion li {
-    max-width: 100vw !important; /* Fit within the viewport width */
+  /* .el-autocomplete-suggestion li {
+    max-width: 100vw !important;
     width: 100vw !important;
-    overflow-x: auto !important;
-  }
+  } */
   .el-table-column {
     display: block;
     width: 100%;
