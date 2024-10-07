@@ -57,6 +57,13 @@ body {
   border-color: #c6e2ff;
   background-color: blueviolet;
 }
+.el-button--text {
+  border-color: transparent;
+  color: mediumblue;
+  background: 0 0;
+  padding-left: 0;
+  padding-right: 0;
+}
 .el-button {
   border-radius: 12px;
   transition: all 0.3s ease;
@@ -131,12 +138,10 @@ body {
   background: #f0f9eb;
   border-color: black;
   border: 2px solid;
-  /* margin-bottom: 20px !important; */
 }
 .el-button--info.is-plain {
   border: 2px solid;
   width: 100% !important;
-  /* margin-bottom: 10px !important; */
 }
 .el-button--warning.is-plain {
   border: 2px solid;
@@ -145,7 +150,6 @@ body {
 }
 .el-button--primary.is-plain {
   border: 2px solid;
-  /* margin-bottom: 10px !important; */
   width: 100% !important;
 }
 .el-button--primary:focus,
@@ -168,7 +172,6 @@ body {
   justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: nowrap;
-  /* margin-top: 13px; */
 }
 .nav {
   width: fit-content;
@@ -194,11 +197,11 @@ body {
   flex: 1;
   max-width: unset;
   font-size: 18px;
-  color: #606266;
+  color: mediumblue;
   table-layout: fixed;
 }
 .el-table tr {
-  background-color: seagreen;
+  background-color: darkcyan;
 }
 .responsive-table {
   width: 1700px; /* Minimum width to ensure table columns don't collapse */

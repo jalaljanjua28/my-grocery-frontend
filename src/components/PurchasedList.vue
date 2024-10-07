@@ -81,21 +81,21 @@
               type="text"
               icon="el-icon-plus"
               circle
-              style="font-size: 30px"
+              style="font-size: 30px !important"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-delete"
               circle
-              style="font-size: 30px"
+              style="font-size: 30px !important"
               @click="deleteItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-edit"
               circle
-              style="font-size: 30px"
+              style="font-size: 30px !important"
               @click="editItemName(scope.row)"
             ></el-button>
           </el-row>
