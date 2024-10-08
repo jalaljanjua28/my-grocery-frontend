@@ -209,7 +209,7 @@ body {
   background-color: darkcyan;
 }
 .responsive-table {
-  width: 1700px; /* Minimum width to ensure table columns don't collapse */
+  width: 1000px; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;

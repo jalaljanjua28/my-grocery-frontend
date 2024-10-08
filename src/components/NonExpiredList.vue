@@ -31,7 +31,7 @@
               type="text"
               icon="el-icon-date"
               circle
-              style="font-size: 30px"
+              style="font-size: 30px !important"
               @click="addExpiry(scope.row)"
             ></el-button>
             <el-dialog :visible.sync="dialogVisible1" title="Add Expiry">
@@ -61,7 +61,7 @@
               type="text"
               icon="el-icon-money"
               circle
-              style="font-size: 30px"
+              style="font-size: 30px !important"
               @click="addPrice(scope.row)"
             ></el-button>
             <el-dialog :visible.sync="dialogVisible2" title="Add Price">
@@ -91,14 +91,14 @@
               type="text"
               icon="el-icon-plus"
               circle
-              style="font-size: 30px"
+              style="font-size: 30px !important"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-delete"
               circle
-              style="font-size: 30px"
+              style="font-size: 30px !important"
               @click="deleteItem(scope.row)"
             ></el-button>
           </el-row>
