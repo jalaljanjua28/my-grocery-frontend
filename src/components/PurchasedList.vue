@@ -16,10 +16,10 @@
         <template slot-scope="scope">
           <el-button
             v-if="scope.row.category === 'Not_Food'"
-            type="success"
+            type="text"
             circle
             icon="el-icon-finished"
-            size="mini"
+            style="font-size: 20px !important"
             @click="moveToFood(scope.row)"
           >
           </el-button>
@@ -35,8 +35,14 @@
               :max="10000"
               :step="1"
               size="small"
-              @change="updatePrice(scope.row, scope.row.category)"
             />
+            <el-button
+              type="text"
+              icon="el-icon-circle-plus"
+              circle
+              style="font-size: 20px !important"
+              @change="updatePrice(scope.row, scope.row.category)"
+            ></el-button>
           </div>
         </template>
       </el-table-column>
@@ -81,21 +87,21 @@
               type="text"
               icon="el-icon-plus"
               circle
-              style="font-size: 30px"
+              style="font-size: 20px !important"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-delete"
               circle
-              style="font-size: 30px"
+              style="font-size: 20px !important"
               @click="deleteItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-edit"
               circle
-              style="font-size: 30px"
+              style="font-size: 20px !important"
               @click="editItemName(scope.row)"
             ></el-button>
           </el-row>

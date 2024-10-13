@@ -9,10 +9,8 @@
           style="
             display: flex;
             align-items: center;
-            background-color: darkcyan;
             border-radius: 10px;
             padding: 0px 5px;
-            border: 2px solid black;
           "
         >
           <el-popover placement="bottom" width="230" trigger="hover">
@@ -20,11 +18,13 @@
               <el-button
                 style="
                   font-size: x-large;
-                  background-color: darkcyan;
+                  background-color: mediumaquamarine;
                   border: none;
-                  padding: 0px;
-                  color: white;
+                  padding: 12px;
+                  color: black;
                 "
+                type="info"
+                plain
               >
                 <i class="el-icon-s-custom"> User</i>
               </el-button>
@@ -54,11 +54,13 @@
             <el-button
               style="
                 font-size: x-large;
-                background-color: darkcyan;
+                background-color: mediumaquamarine;
                 border: none;
                 padding: 12px;
-                color: white;
+                color: black;
               "
+              type="info"
+              plain
               ><i class="el-icon-user"> SignUp</i></el-button
             >
           </router-link>

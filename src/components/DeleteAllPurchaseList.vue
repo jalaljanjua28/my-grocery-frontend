@@ -4,12 +4,13 @@
       @click="deleteAllItems"
       style="
         font-size: x-large;
-        background-color: darkcyan;
         border: none;
         padding: 12px;
         color: red;
         margin-bottom: 10px;
       "
+      type="danger"
+      plain
       ><i class="el-icon-delete-solid"> Delete All Items</i>
     </el-button>
   </div>
