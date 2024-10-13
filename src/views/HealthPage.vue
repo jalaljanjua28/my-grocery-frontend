@@ -10,21 +10,21 @@
         style="
           display: flex;
           align-items: center;
-          background-color: darkcyan;
           border-radius: 10px;
           padding: 0px;
-          border: 2px solid black;
+          border: 2px solid #4caf50;
         "
       >
         <router-link to="items-inventory" class="router_link">
           <el-button
             style="
               font-size: x-large;
-              background-color: darkcyan;
               border: none;
               padding: 12px;
-              color: white;
+              color: black;
             "
+            type="info"
+            plain
             ><i class="el-icon-goods"> Items</i>
           </el-button>
         </router-link>
@@ -32,11 +32,12 @@
           <el-button
             style="
               font-size: x-large;
-              background-color: darkcyan;
               border: none;
               padding: 12px;
-              color: white;
+              color: black;
             "
+            type="info"
+            plain
             ><i class="el-icon-chicken"> Recipes</i>
           </el-button>
         </router-link>
@@ -45,11 +46,12 @@
           <el-button
             style="
               font-size: x-large;
-              background-color: darkcyan;
               border: none;
               padding: 12px;
-              color: white;
+              color: black;
             "
+            type="info"
+            plain
             ><i class="el-icon-s-order"> User Defined Prompt</i>
           </el-button>
         </router-link>

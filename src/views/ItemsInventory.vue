@@ -9,21 +9,21 @@
         style="
           display: flex;
           align-items: center;
-          background-color: darkcyan;
           border-radius: 10px;
           padding: 0px;
-          border: 2px solid black;
+          border: 2px solid #4caf50;
         "
       >
         <router-link to="/recipes-page" class="router_link">
           <el-button
             style="
               font-size: x-large;
-              background-color: darkcyan;
               border: none;
               padding: 12px;
-              color: white;
+              color: black;
             "
+            type="info"
+            plain
             ><i class="el-icon-chicken"> Recipes</i>
           </el-button>
         </router-link>
@@ -31,11 +31,12 @@
           <el-button
             style="
               font-size: x-large;
-              background-color: darkcyan;
               border: none;
               padding: 12px;
-              color: white;
+              color: black;
             "
+            type="info"
+            plain
             ><i class="el-icon-no-smoking"> Health</i>
           </el-button>
         </router-link>
@@ -43,11 +44,12 @@
           <el-button
             style="
               font-size: x-large;
-              background-color: darkcyan;
               border: none;
               padding: 12px;
-              color: white;
+              color: black;
             "
+            type="info"
+            plain
             ><i class="el-icon-s-order"> User Defined Prompt</i>
           </el-button>
         </router-link>
@@ -195,13 +197,14 @@
             @click="openDialog"
             style="
               font-size: x-large;
-              background-color: darkcyan;
               border: none;
               padding: 12px;
-              color: chartreuse;
+              color: darkgreen;
               margin-top: 10px;
             "
-            ><i class="el-icon-plus"> Add items to shopping manually</i>
+            type="success"
+            plain
+            ><i class="el-icon-plus"> Add Manually to Shopping</i>
           </el-button>
           <el-dialog :visible.sync="dialogVisible" title="Add Item" width="90%">
             <add-items @item-added="closeDialog" />
@@ -286,6 +289,12 @@ export default {
       this.outerActiveTab = storedOuterTab;
       this.innerActiveTab = storedInnerTab;
     }
+    this.outerActiveTab = "a"; // "a" corresponds to the "Non Expired" tab
+    this.innerActiveTab = "1"; // "1" corresponds to the "Food" sub-tab
+
+    // Store these values in localStorage
+    localStorage.setItem("activeOuterTab", this.outerActiveTab);
+    localStorage.setItem("activeInnerTab", this.innerActiveTab);
   },
   methods: {
     openDialog() {

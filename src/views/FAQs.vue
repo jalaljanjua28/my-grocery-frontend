@@ -9,7 +9,7 @@
         <el-main>
           <div
             style="
-              background-color: darkcyan;
+              background-color: white;
               padding: 15px;
               border-radius: 20px;
               width: max-content;

@@ -19,7 +19,7 @@
             type="text"
             circle
             icon="el-icon-finished"
-            style="font-size: 30px !important"
+            style="font-size: 20px !important"
             @click="moveToFood(scope.row)"
           >
           </el-button>
@@ -40,7 +40,7 @@
               type="text"
               icon="el-icon-circle-plus"
               circle
-              style="font-size: 30px !important"
+              style="font-size: 20px !important"
               @change="updatePrice(scope.row, scope.row.category)"
             ></el-button>
           </div>
@@ -87,21 +87,21 @@
               type="text"
               icon="el-icon-plus"
               circle
-              style="font-size: 30px !important"
+              style="font-size: 20px !important"
               @click="addItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-delete"
               circle
-              style="font-size: 30px !important"
+              style="font-size: 20px !important"
               @click="deleteItem(scope.row)"
             ></el-button>
             <el-button
               type="text"
               icon="el-icon-edit"
               circle
-              style="font-size: 30px !important"
+              style="font-size: 20px !important"
               @click="editItemName(scope.row)"
             ></el-button>
           </el-row>

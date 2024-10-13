@@ -9,7 +9,7 @@
       class="item-frequency"
       style="display: flex; flex-direction: column; align-items: center"
     >
-      <h3 style="color: white; font-size: x-large">Item Frequency</h3>
+      <h3 style="color: black; font-size: x-large">Item Frequency</h3>
       <el-table :data="sortedItemFrequency" style="width: 100%">
         <el-table-column prop="itemName" label="Item Name"></el-table-column>
         <el-table-column prop="frequency" label="Frequency"></el-table-column>
@@ -23,14 +23,15 @@
     <el-button
       @click="checkFrequency"
       style="
-        font-size: x-large;
-        background-color: darkcyan;
+        font-size: 20px;
         border: none;
         padding: 12px;
-        color: yellow;
+        color: darkblue;
         margin-top: 10px;
         margin-left: 10px;
       "
+      type="info"
+      plain
       ><i class="el-icon-pie-chart"> Check Frequency</i>
     </el-button>
   </div>

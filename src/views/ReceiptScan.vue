@@ -16,7 +16,7 @@
           Select File
         </el-button>
         <el-button
-          style="margin-left: 10px"
+          style="margin-left: 10px; margin-top: 10px; width: 100%"
           size="small"
           type="success"
           plain
@@ -40,7 +40,7 @@
           <el-button
             style="margin-top: 10px"
             size="small"
-            type="success"
+            type="info"
             plain
             @click="uploadImageProcess"
           >
