@@ -429,7 +429,6 @@ body {
   margin: 5px 0;
 }
 .input-with-select .el-input-group__prepend {
-  background-color: darkcyan;
   border: 3px solid black;
   border-right: none;
 }
@@ -463,7 +462,6 @@ body {
   font-size: 13px;
 }
 .el-input__inner {
-  background-color: darkcyan;
   box-sizing: border-box;
   color: black;
   border: 3px solid black;
@@ -898,8 +896,8 @@ strong {
   border-radius: 0px;
 }
 .table-image {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
 }
 .image-preview {

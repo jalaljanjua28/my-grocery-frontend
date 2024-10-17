@@ -15,7 +15,7 @@
       style="
         display: flex;
         align-items: center;
-
+        background: #f4f4f5;
         border-radius: 10px;
         padding: 0px;
         border: 2px solid #4caf50;
