@@ -42,13 +42,15 @@
               :step="1"
               size="small"
             />
-            <el-button
-              type="text"
-              icon="el-icon-circle-plus"
-              circle
-              style="font-size: 20px !important"
-              @change="updatePrice(scope.row, scope.row.category)"
-            ></el-button>
+            <el-tooltip content="Update Price" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-circle-plus"
+                circle
+                style="font-size: 20px !important"
+                @change="updatePrice(scope.row, scope.row.category)"
+              ></el-button>
+            </el-tooltip>
           </div>
         </template>
       </el-table-column>
@@ -365,5 +367,8 @@ export default {
   [class^="el-icon-"] {
     font-size: 20px !important;
   }
+}
+.responsive-table {
+  width: 600px !important;
 }
 </style>

@@ -24,13 +24,7 @@
     >
       <router-link to="items-inventory" class="router_link">
         <el-button
-          style="
-            font-size: x-large;
-
-            border: none;
-            padding: 12px;
-            color: black;
-          "
+          style="font-size: x-large; border: none; padding: 12px; color: black"
           type="info"
           plain
           ><i class="el-icon-goods"> Items</i>
@@ -38,13 +32,7 @@
       </router-link>
       <router-link to="/recipes-page" class="router_link">
         <el-button
-          style="
-            font-size: x-large;
-
-            border: none;
-            padding: 12px;
-            color: black;
-          "
+          style="font-size: x-large; border: none; padding: 12px; color: black"
           type="info"
           plain
           ><i class="el-icon-chicken"> Recipes</i>
@@ -52,13 +40,7 @@
       </router-link>
       <router-link to="/health-page" class="router_link">
         <el-button
-          style="
-            font-size: x-large;
-
-            border: none;
-            padding: 12px;
-            color: black;
-          "
+          style="font-size: x-large; border: none; padding: 12px; color: black"
           type="info"
           plain
           ><i class="el-icon-no-smoking"> Health</i>
@@ -66,13 +48,7 @@
       </router-link>
       <router-link to="user-defined-prompt" class="router_link">
         <el-button
-          style="
-            font-size: x-large;
-
-            border: none;
-            padding: 12px;
-            color: black;
-          "
+          style="font-size: x-large; border: none; padding: 12px; color: black"
           type="info"
           plain
           ><i class="el-icon-s-order"> User Defined Prompt</i>

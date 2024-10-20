@@ -26,20 +26,24 @@
             v-if="scope.row"
             style="display: flex; justify-content: center; flex-wrap: wrap"
           >
-            <el-button
-              type="text"
-              icon="el-icon-plus"
-              circle
-              style="font-size: 20px !important"
-              @click="addItem(scope.row)"
-            ></el-button>
-            <el-button
-              type="text"
-              icon="el-icon-delete"
-              circle
-              style="font-size: 20px !important"
-              @click="deleteItem(scope.row)"
-            ></el-button>
+            <el-tooltip content="Add Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-plus"
+                circle
+                style="font-size: 20px !important"
+                @click="addItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip content="Delete Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-delete"
+                circle
+                style="font-size: 20px !important"
+                @click="deleteItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
           </el-row>
         </template>
       </el-table-column>
@@ -50,7 +54,15 @@
 <script>
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
+import { Table, TableColumn, Button, Tooltip } from "element-ui";
+
 export default {
+  components: {
+    "el-table": Table,
+    "el-table-column": TableColumn,
+    "el-button": Button,
+    "el-tooltip": Tooltip,
+  },
   props: {
     items: {
       type: Array,
@@ -138,4 +150,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  width: 735px !important;
+}
+</style>

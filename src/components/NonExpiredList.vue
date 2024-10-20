@@ -27,13 +27,19 @@
             v-if="scope.row"
             style="display: flex; justify-content: center; flex-wrap: wrap"
           >
-            <el-button
-              type="text"
-              icon="el-icon-date"
-              circle
-              style="font-size: 20px !important"
-              @click="addExpiry(scope.row)"
-            ></el-button>
+            <el-tooltip
+              content="Change expiry date"
+              placement="top"
+              effect="light"
+            >
+              <el-button
+                type="text"
+                icon="el-icon-date"
+                circle
+                style="font-size: 20px !important"
+                @click="addExpiry(scope.row)"
+              ></el-button>
+            </el-tooltip>
             <el-dialog :visible.sync="dialogVisible1" title="Add Expiry">
               <el-form :model="form" label-width="120px">
                 <el-form-item label="Item Name">
@@ -57,13 +63,15 @@
                 </el-form-item>
               </el-form>
             </el-dialog>
-            <el-button
-              type="text"
-              icon="el-icon-money"
-              circle
-              style="font-size: 20px !important"
-              @click="addPrice(scope.row)"
-            ></el-button>
+            <el-tooltip content="Change price" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-money"
+                circle
+                style="font-size: 20px !important"
+                @click="addPrice(scope.row)"
+              ></el-button>
+            </el-tooltip>
             <el-dialog :visible.sync="dialogVisible2" title="Add Price">
               <el-form :model="form" label-width="120px">
                 <el-form-item label="Item Name">
@@ -87,20 +95,24 @@
                 </el-form-item>
               </el-form>
             </el-dialog>
-            <el-button
-              type="text"
-              icon="el-icon-plus"
-              circle
-              style="font-size: 20px !important"
-              @click="addItem(scope.row)"
-            ></el-button>
-            <el-button
-              type="text"
-              icon="el-icon-delete"
-              circle
-              style="font-size: 20px !important"
-              @click="deleteItem(scope.row)"
-            ></el-button>
+            <el-tooltip content="Add Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-plus"
+                circle
+                style="font-size: 20px !important"
+                @click="addItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip content="Delete Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-delete"
+                circle
+                style="font-size: 20px !important"
+                @click="deleteItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
           </el-row>
         </template>
       </el-table-column>
@@ -111,8 +123,15 @@
 <script>
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+import { Table, TableColumn, Button, Tooltip } from "element-ui";
 
 export default {
+  components: {
+    "el-table": Table,
+    "el-table-column": TableColumn,
+    "el-button": Button,
+    "el-tooltip": Tooltip,
+  },
   props: {
     items: {
       type: Array,
@@ -311,5 +330,10 @@ export default {
   border: 2px solid;
   width: auto !important;
   margin-bottom: 10px !important;
+}
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  width: 700px !important;
 }
 </style>
