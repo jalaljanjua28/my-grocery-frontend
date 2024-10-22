@@ -1,7 +1,7 @@
 <template>
   <div class="table-wrapper">
     <el-table :data="filteredItems" class="responsive-table">
-      <el-table-column label="Image" prop="image">
+      <el-table-column width="90px !important" label="Image" prop="image">
         <template slot-scope="scope">
           <img
             :src="scope.row.image"
@@ -10,9 +10,17 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="Name" prop="name"></el-table-column>
+      <el-table-column
+        width="120px !important"
+        label="Name"
+        prop="name"
+      ></el-table-column>
       <!-- Move to Food Column-->
-      <el-table-column v-if="activeTab === 'Not_Food'" label="Move to Food">
+      <el-table-column
+        width="120px"
+        v-if="activeTab === 'Not_Food'"
+        label="Move to Food"
+      >
         <template slot-scope="scope">
           <el-tooltip
             content="Move to Food Category"
@@ -32,7 +40,7 @@
         </template>
       </el-table-column>
       <!-- Editable Price Column -->
-      <el-table-column label="Price">
+      <el-table-column width="120px" label="Price">
         <template slot-scope="scope">
           <div class="price-scroll-container">
             <el-input-number
@@ -55,7 +63,7 @@
         </template>
       </el-table-column>
       <!-- Info Column-->
-      <el-table-column label="Info" width="80">
+      <el-table-column label="Info" width="100px">
         <template slot-scope="scope">
           <el-popover
             placement="right"
@@ -87,10 +95,7 @@
       <!--Button columns-->
       <el-table-column>
         <template slot-scope="scope">
-          <el-row
-            v-if="scope.row"
-            style="display: flex; justify-content: center; flex-wrap: wrap"
-          >
+          <el-row v-if="scope.row" style="display: flex; flex-wrap: wrap">
             <el-tooltip content="Add Item" placement="top" effect="light">
               <el-button
                 type="text"
@@ -368,7 +373,7 @@ export default {
     font-size: 20px !important;
   }
 }
-.responsive-table {
+/* .responsive-table {
   width: 600px !important;
-}
+} */
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="table-wrapper">
     <el-table :data="items" class="responsive-table">
-      <el-table-column label="Image" prop="image">
+      <el-table-column width="100px" label="Image" prop="image">
         <template slot-scope="scope">
           <img
             :src="scope.row.image"
@@ -10,10 +10,18 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="Name" prop="name"></el-table-column>
-      <el-table-column label="Price" prop="price"></el-table-column>
-      <el-table-column label="Status" prop="status"></el-table-column>
-      <el-table-column label="Expiry">
+      <el-table-column width="100px" label="Name" prop="name"></el-table-column>
+      <el-table-column
+        width="100px"
+        label="Price"
+        prop="price"
+      ></el-table-column>
+      <el-table-column
+        width="100px"
+        label="Status"
+        prop="status"
+      ></el-table-column>
+      <el-table-column width="100px" label="Expiry">
         <template slot-scope="scope">
           <span>{{ scope.row.date }}</span
           ><br />
@@ -23,10 +31,7 @@
       <el-table-column label="Days" prop="days_left"></el-table-column>
       <el-table-column>
         <template slot-scope="scope">
-          <el-row
-            v-if="scope.row"
-            style="display: flex; justify-content: center; flex-wrap: wrap"
-          >
+          <el-row v-if="scope.row" style="display: flex; flex-wrap: wrap">
             <el-tooltip
               content="Change expiry date"
               placement="top"
@@ -287,9 +292,9 @@ export default {
   width: auto !important;
   margin-bottom: 10px !important;
 }
-.responsive-table {
+/* .responsive-table {
   width: 100%;
   border-collapse: collapse;
   width: 735px !important;
-}
+} */
 </style>

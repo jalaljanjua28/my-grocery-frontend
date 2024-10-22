@@ -200,13 +200,6 @@ body {
   overflow-x: auto; /* Enables horizontal scrolling */
   -webkit-overflow-scrolling: touch;
 }
-/* .el-table td.el-table__cell div {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-} */
 .el-table .cell {
   box-sizing: border-box;
   overflow: hidden;
@@ -228,11 +221,8 @@ body {
   color: navy;
   table-layout: fixed;
 }
-/* .el-table tr {
-  background-color: darkcyan;
-} */
 .responsive-table {
-  width: 680px; /* Minimum width to ensure table columns don't collapse */
+  width: 800px !important; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;
@@ -441,7 +431,7 @@ body {
   border-right: none;
 }
 .el-input__icon {
-  width: 100%;
+  width: 70%;
   height: 100%;
   text-align: center;
   transition: all 0.3s;
