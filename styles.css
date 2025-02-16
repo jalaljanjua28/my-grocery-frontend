@@ -61,7 +61,7 @@ body {
 }
 .el-button--text {
   border-color: transparent;
-  color: darkred;
+  color: black;
   background: 0 0;
   padding-left: 0;
   padding-right: 0;
@@ -142,6 +142,7 @@ body {
   background: #f0f9eb;
   border-color: black;
   border: 2px solid;
+  width: 100%;
 }
 .el-button--info.is-plain {
   border: 2px solid;
@@ -180,8 +181,13 @@ body {
 .nav {
   width: fit-content;
 }
+.el-table th.el-table__cell > .cell {
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
+}
 .el-table .el-table__cell {
-  padding: 12px 5px;
+  padding: 0px 0px;
   min-width: 0;
   box-sizing: border-box;
   text-overflow: ellipsis;
@@ -194,12 +200,6 @@ body {
   overflow-x: auto; /* Enables horizontal scrolling */
   -webkit-overflow-scrolling: touch;
 }
-.el-table td.el-table__cell div {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .el-table .cell {
   box-sizing: border-box;
   overflow: hidden;
@@ -209,6 +209,7 @@ body {
   line-height: 23px;
   padding-left: 0px;
   padding-right: 0px;
+  text-align: left;
 }
 .el-table {
   position: relative;
@@ -217,14 +218,11 @@ body {
   flex: 1;
   max-width: unset;
   font-size: 12px;
-  color: darkred;
+  color: navy;
   table-layout: fixed;
 }
-.el-table tr {
-  background-color: darkcyan;
-}
 .responsive-table {
-  width: 680px; /* Minimum width to ensure table columns don't collapse */
+  width: 800px !important; /* Minimum width to ensure table columns don't collapse */
 }
 .el-card {
   border-radius: 10px !important;
@@ -429,12 +427,11 @@ body {
   margin: 5px 0;
 }
 .input-with-select .el-input-group__prepend {
-  background-color: darkcyan;
   border: 3px solid black;
   border-right: none;
 }
 .el-input__icon {
-  width: 100%;
+  width: 70%;
   height: 100%;
   text-align: center;
   transition: all 0.3s;
@@ -459,11 +456,14 @@ body {
 }
 .el-input-number--small .el-input-number__decrease,
 .el-input-number--small .el-input-number__increase {
-  width: 15px;
+  width: 30px;
   font-size: 13px;
 }
+.el-input-number--small {
+  width: 110px !important;
+  line-height: 30px;
+}
 .el-input__inner {
-  background-color: darkcyan;
   box-sizing: border-box;
   color: black;
   border: 3px solid black;
@@ -898,8 +898,8 @@ strong {
   border-radius: 0px;
 }
 .table-image {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
 }
 .image-preview {

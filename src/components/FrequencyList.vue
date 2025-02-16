@@ -15,7 +15,11 @@
         <el-table-column prop="frequency" label="Frequency"></el-table-column>
       </el-table>
     </div>
-    <el-select v-model="condition" placeholder="Select condition">
+    <el-select
+      v-model="condition"
+      placeholder="Select condition"
+      style="margin-top: 10px"
+    >
       <el-option label="Biweekly" value="biweekly"></el-option>
       <el-option label="Monthly" value="monthly"></el-option>
       <el-option label="Today" value="today"></el-option>

@@ -1,7 +1,7 @@
 <template>
   <div class="table-wrapper">
     <el-table :data="items" class="responsive-table">
-      <el-table-column label="Image" prop="image">
+      <el-table-column width="90px" label="Image" prop="image">
         <template slot-scope="scope">
           <img
             :src="scope.row.image"
@@ -10,30 +10,48 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="Name" prop="name"></el-table-column>
-      <el-table-column label="Price" prop="price"></el-table-column>
-      <el-table-column label="Status" prop="status"></el-table-column>
-      <el-table-column label="Expiry">
+      <el-table-column width="100px" label="Name" prop="name"></el-table-column>
+      <el-table-column
+        width="60px"
+        label="Price"
+        prop="price"
+      ></el-table-column>
+      <el-table-column
+        width="90px"
+        label="Status"
+        prop="status"
+      ></el-table-column>
+      <el-table-column width="90px" label="Expiry">
         <template slot-scope="scope">
           <span>{{ scope.row.date }}</span
           ><br />
           <span>{{ scope.row.expiry }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Days" prop="days_left"></el-table-column>
+      <el-table-column
+        width="70px"
+        label="Days"
+        prop="days_left"
+      ></el-table-column>
       <el-table-column>
         <template slot-scope="scope">
           <el-row
             v-if="scope.row"
             style="display: flex; justify-content: center; flex-wrap: wrap"
           >
-            <el-button
-              type="text"
-              icon="el-icon-date"
-              circle
-              style="font-size: 20px !important"
-              @click="addExpiry(scope.row)"
-            ></el-button>
+            <el-tooltip
+              content="Change expiry date"
+              placement="top"
+              effect="light"
+            >
+              <el-button
+                type="text"
+                icon="el-icon-date"
+                circle
+                style="font-size: 20px !important"
+                @click="addExpiry(scope.row)"
+              ></el-button>
+            </el-tooltip>
             <el-dialog :visible.sync="dialogVisible1" title="Add Expiry">
               <el-form :model="form" label-width="120px">
                 <el-form-item label="Item Name">
@@ -57,13 +75,15 @@
                 </el-form-item>
               </el-form>
             </el-dialog>
-            <el-button
-              type="text"
-              icon="el-icon-money"
-              circle
-              style="font-size: 20px !important"
-              @click="addPrice(scope.row)"
-            ></el-button>
+            <el-tooltip content="Change price" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-money"
+                circle
+                style="font-size: 20px !important"
+                @click="addPrice(scope.row)"
+              ></el-button>
+            </el-tooltip>
             <el-dialog :visible.sync="dialogVisible2" title="Add Price">
               <el-form :model="form" label-width="120px">
                 <el-form-item label="Item Name">
@@ -87,20 +107,24 @@
                 </el-form-item>
               </el-form>
             </el-dialog>
-            <el-button
-              type="text"
-              icon="el-icon-plus"
-              circle
-              style="font-size: 20px !important"
-              @click="addItem(scope.row)"
-            ></el-button>
-            <el-button
-              type="text"
-              icon="el-icon-delete"
-              circle
-              style="font-size: 20px !important"
-              @click="deleteItem(scope.row)"
-            ></el-button>
+            <el-tooltip content="Add Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-plus"
+                circle
+                style="font-size: 20px !important"
+                @click="addItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip content="Delete Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-delete"
+                circle
+                style="font-size: 20px !important"
+                @click="deleteItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
           </el-row>
         </template>
       </el-table-column>
@@ -111,8 +135,15 @@
 <script>
 const baseUrl = "http://127.0.0.1:8081/api";
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+import { Table, TableColumn, Button, Tooltip } from "element-ui";
 
 export default {
+  components: {
+    "el-table": Table,
+    "el-table-column": TableColumn,
+    "el-button": Button,
+    "el-tooltip": Tooltip,
+  },
   props: {
     items: {
       type: Array,
@@ -312,4 +343,9 @@ export default {
   width: auto !important;
   margin-bottom: 10px !important;
 }
+/* .responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  width: 700px !important;
+} */
 </style>

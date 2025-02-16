@@ -1,7 +1,7 @@
 <template>
   <div class="table-wrapper">
     <el-table :data="filteredItems" class="responsive-table">
-      <el-table-column label="Image" prop="image">
+      <el-table-column width="90px !important" label="Image" prop="image">
         <template slot-scope="scope">
           <img
             :src="scope.row.image"
@@ -10,23 +10,37 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="Name" prop="name"></el-table-column>
+      <el-table-column
+        width="120px !important"
+        label="Name"
+        prop="name"
+      ></el-table-column>
       <!-- Move to Food Column-->
-      <el-table-column v-if="activeTab === 'Not_Food'" label="Move to Food">
+      <el-table-column
+        width="120px"
+        v-if="activeTab === 'Not_Food'"
+        label="Move to Food"
+      >
         <template slot-scope="scope">
-          <el-button
-            v-if="scope.row.category === 'Not_Food'"
-            type="text"
-            circle
-            icon="el-icon-finished"
-            style="font-size: 20px !important"
-            @click="moveToFood(scope.row)"
+          <el-tooltip
+            content="Move to Food Category"
+            placement="top"
+            effect="light"
           >
-          </el-button>
+            <el-button
+              v-if="scope.row.category === 'Not_Food'"
+              type="text"
+              circle
+              icon="el-icon-finished"
+              style="font-size: 20px !important"
+              @click="moveToFood(scope.row)"
+            >
+            </el-button>
+          </el-tooltip>
         </template>
       </el-table-column>
       <!-- Editable Price Column -->
-      <el-table-column label="Price">
+      <el-table-column width="120px" label="Price">
         <template slot-scope="scope">
           <div class="price-scroll-container">
             <el-input-number
@@ -36,18 +50,20 @@
               :step="1"
               size="small"
             />
-            <el-button
-              type="text"
-              icon="el-icon-circle-plus"
-              circle
-              style="font-size: 20px !important"
-              @change="updatePrice(scope.row, scope.row.category)"
-            ></el-button>
+            <el-tooltip content="Update Price" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-circle-plus"
+                circle
+                style="font-size: 20px !important"
+                @change="updatePrice(scope.row, scope.row.category)"
+              ></el-button>
+            </el-tooltip>
           </div>
         </template>
       </el-table-column>
       <!-- Info Column-->
-      <el-table-column label="Info" width="80">
+      <el-table-column label="Info" width="100px">
         <template slot-scope="scope">
           <el-popover
             placement="right"
@@ -79,31 +95,34 @@
       <!--Button columns-->
       <el-table-column>
         <template slot-scope="scope">
-          <el-row
-            v-if="scope.row"
-            style="display: flex; justify-content: center; flex-wrap: wrap"
-          >
-            <el-button
-              type="text"
-              icon="el-icon-plus"
-              circle
-              style="font-size: 20px !important"
-              @click="addItem(scope.row)"
-            ></el-button>
-            <el-button
-              type="text"
-              icon="el-icon-delete"
-              circle
-              style="font-size: 20px !important"
-              @click="deleteItem(scope.row)"
-            ></el-button>
-            <el-button
-              type="text"
-              icon="el-icon-edit"
-              circle
-              style="font-size: 20px !important"
-              @click="editItemName(scope.row)"
-            ></el-button>
+          <el-row v-if="scope.row" style="display: flex; flex-wrap: wrap">
+            <el-tooltip content="Add Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-plus"
+                circle
+                style="font-size: 20px !important"
+                @click="addItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip content="Delete Item" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-delete"
+                circle
+                style="font-size: 20px !important"
+                @click="deleteItem(scope.row)"
+              ></el-button>
+            </el-tooltip>
+            <el-tooltip content="Edit Item Name" placement="top" effect="light">
+              <el-button
+                type="text"
+                icon="el-icon-edit"
+                circle
+                style="font-size: 20px !important"
+                @click="editItemName(scope.row)"
+              ></el-button>
+            </el-tooltip>
           </el-row>
         </template>
       </el-table-column>
@@ -113,7 +132,7 @@
 
 <script>
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
-import { Table, TableColumn, Popover, Button } from "element-ui";
+import { Table, TableColumn, Popover, Button, Tooltip } from "element-ui";
 
 const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
@@ -123,6 +142,7 @@ export default {
     "el-table-column": TableColumn,
     "el-popover": Popover,
     "el-button": Button,
+    "el-tooltip": Tooltip,
   },
   props: {
     activeTab: {
@@ -353,4 +373,7 @@ export default {
     font-size: 20px !important;
   }
 }
+/* .responsive-table {
+  width: 600px !important;
+} */
 </style>

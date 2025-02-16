@@ -13,6 +13,7 @@
           border-radius: 10px;
           padding: 0px;
           border: 2px solid #4caf50;
+          background: #f4f4f5;
         "
       >
         <router-link to="items-inventory" class="router_link">
