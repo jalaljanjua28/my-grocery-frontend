@@ -211,7 +211,7 @@
 <script>
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "https://my-grocery-app-hlai3cv5za-uc.a.run.app/api";
 
 export default {
   data() {
