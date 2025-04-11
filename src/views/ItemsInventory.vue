@@ -4,25 +4,10 @@
       <el-page-header content="Items Inventory"> </el-page-header>
     </router-link>
     <el-main class="main-content">
-      <div
-        class="nav-buttons"
-        style="
-          display: flex;
-          align-items: center;
-          border-radius: 10px;
-          padding: 0px;
-          border: 2px solid #4caf50;
-          background: #f4f4f5;
-        "
-      >
+      <div class="nav-buttons">
         <router-link to="/recipes-page" class="router_link">
           <el-button
-            style="
-              font-size: x-large;
-              border: none;
-              padding: 12px;
-              color: black;
-            "
+            style="font-size: large; border: none; padding: 12px; color: black"
             type="info"
             plain
             ><i class="el-icon-chicken"> Recipes</i>
@@ -30,12 +15,7 @@
         </router-link>
         <router-link to="/health-page" class="router_link">
           <el-button
-            style="
-              font-size: x-large;
-              border: none;
-              padding: 12px;
-              color: black;
-            "
+            style="font-size: large; border: none; padding: 12px; color: black"
             type="info"
             plain
             ><i class="el-icon-no-smoking"> Health</i>
@@ -43,12 +23,7 @@
         </router-link>
         <router-link to="user-defined-prompt" class="router_link">
           <el-button
-            style="
-              font-size: x-large;
-              border: none;
-              padding: 12px;
-              color: black;
-            "
+            style="font-size: large; border: none; padding: 12px; color: black"
             type="info"
             plain
             ><i class="el-icon-s-order"> User Defined Prompt</i>
@@ -197,11 +172,12 @@
           <el-button
             @click="openDialog"
             style="
-              font-size: x-large;
+              font-size: 14px;
               border: none;
-              padding: 12px;
+              padding: 4px;
               color: darkgreen;
               margin-top: 10px;
+              border: 2px solid;
             "
             type="success"
             plain

@@ -2,13 +2,7 @@
   <div>
     <el-button
       @click="deleteAllItems"
-      style="
-        font-size: x-large;
-        border: none;
-        padding: 12px;
-        color: red;
-        margin-bottom: 10px;
-      "
+      class="deleteallitems"
       type="danger"
       plain
       ><i class="el-icon-delete-solid"> Delete All Items</i>

@@ -18,7 +18,7 @@
               <el-button
                 style="
                   font-size: x-large;
-                  background-color: mediumaquamarine;
+                  background-color: none;
                   border: none;
                   padding: 12px;
                   color: black;
@@ -54,7 +54,7 @@
             <el-button
               style="
                 font-size: x-large;
-                background-color: mediumaquamarine;
+                background-color: none;
                 border: none;
                 padding: 12px;
                 color: black;

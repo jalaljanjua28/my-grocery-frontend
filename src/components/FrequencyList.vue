@@ -27,12 +27,11 @@
     <el-button
       @click="checkFrequency"
       style="
-        font-size: 20px;
+        font-size: 16px;
         border: none;
-        padding: 12px;
+        padding: 5px;
         color: darkblue;
         margin-top: 10px;
-        margin-left: 10px;
       "
       type="info"
       plain
