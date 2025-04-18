@@ -66,4 +66,7 @@ export default {
   font-size: 12px;
   margin-top: 10px;
 }
+.el-button--danger.is-plain {
+  width: 90% !important;
+}
 </style>

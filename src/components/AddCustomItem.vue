@@ -11,21 +11,12 @@
         <el-form-item label="Item Date">
           <el-input v-model="form.item_date"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="Item Expiry">
-          <el-input v-model="form.item_expiry"></el-input>
-        </el-form-item>
-        <el-form-item label="Item Status">
-          <el-input v-model="form.item_status"></el-input>
-        </el-form-item>
-        <el-form-item label="Item Days Left">
-          <el-input v-model="form.item_day_left"></el-input>
-        </el-form-item> -->
         <el-form-item>
           <el-button
             style="
               display: flex;
               align-content: stretch;
-              justify-content: flex-end;
+              justify-content: center;
               align-items: center;
             "
             type="success"

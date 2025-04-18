@@ -4,43 +4,116 @@
       <div>
         <!-- Food Waste Reduction Suggestions Section -->
         <el-collapse-item title="Food Waste Reduction Suggestions">
-          <div>
-            <div v-if="!isLoading">
-              <div
-                v-for="(suggestion, index) in foodWasteReductionSuggestions"
-                :key="index"
-                :body-style="{ height: 'auto' }"
+          <template #title>
+            <div class="section-title">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/415/415682.png"
+                class="fruit-icon"
+                alt="Apple icon"
+              />
+              Food Waste Reduction Suggestions
+            </div>
+          </template>
+          <div class="prompt-section">
+            <div v-if="!isLoading" class="scrollable-container">
+              <template v-if="hasValidFoodWasteReductionSuggestions">
+                <div
+                  v-for="(suggestion, index) in foodWasteReductionSuggestions"
+                  :key="index"
+                  class="suggestion-item food-waste-item"
+                >
+                  <p
+                    v-if="
+                      suggestion['Food Waste Reduction Suggestion'] &&
+                      suggestion['Food Waste Reduction Suggestion'].trim()
+                    "
+                  >
+                    <strong>Food Waste Reduction Suggestion:</strong>
+                    <span
+                      v-html="
+                        formatNumberedList(
+                          suggestion['Food Waste Reduction Suggestion']
+                        )
+                      "
+                    ></span>
+                  </p>
+                  <p style="color: #e6a23c">
+                    For custom prompts go to the user defined prompt section
+                  </p>
+                  <el-divider
+                    v-if="index < foodWasteReductionSuggestions.length - 1"
+                  ></el-divider>
+                </div>
+              </template>
+              <!-- Add empty state notification -->
+              <el-alert
+                v-if="!hasValidFoodWasteReductionSuggestions"
+                title="No Food Waste Reduction Suggestions"
+                type="info"
+                show-icon
               >
-                <p>
-                  <strong>Food Waste Reduction Suggestion:</strong>
-                  {{ suggestion["Food Waste Reduction Suggestion"] }}
-                </p>
-                <p style="color: red">
-                  For custom prompts go to the user defined prompt section
-                </p>
-              </div>
+                No food waste reduction suggestions available.
+              </el-alert>
             </div>
           </div>
         </el-collapse-item>
+
         <!-- Ethical Eating Suggestions Section -->
         <el-collapse-item title="Ethical Eating Suggestions">
-          <div>
-            <div v-if="!isLoading">
-              <div
-                v-for="(group, index) in ethicalEatingSuggestions"
-                :key="index"
-              >
-                <div v-if="Array.isArray(group['Group of Items'])">
-                  <p>
-                    <strong>Ingredients:</strong>
-                    {{ group["Group of Items"].join(", ") }}
+          <template #title>
+            <div class="section-title">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2909/2909841.png"
+                class="fruit-icon"
+                alt="Leaf icon"
+              />
+              Ethical Eating Suggestions
+            </div>
+          </template>
+          <div class="prompt-section">
+            <div v-if="!isLoading" class="scrollable-container">
+              <template v-if="hasValidEthicalSuggestions">
+                <div
+                  v-for="(group, index) in ethicalEatingSuggestions"
+                  :key="index"
+                  class="suggestion-item ethical-item"
+                >
+                  <div
+                    v-if="
+                      Array.isArray(group['Group of Items']) &&
+                      group['Group of Items'].length > 0
+                    "
+                  >
+                    <p>
+                      <strong>Ingredients:</strong>
+                      {{ group["Group of Items"].join(", ") }}
+                    </p>
+                  </div>
+                  <p
+                    v-if="
+                      group['Ethical Eating Suggestions'] &&
+                      group['Ethical Eating Suggestions'].trim()
+                    "
+                  >
+                    <strong>Ethical Eating Suggestions:</strong>
+                    <span
+                      v-html="formatText(group['Ethical Eating Suggestions'])"
+                    ></span>
                   </p>
+                  <el-divider
+                    v-if="index < ethicalEatingSuggestions.length - 1"
+                  ></el-divider>
                 </div>
-                <p>
-                  <strong>Ethical Eating Suggestions:</strong>
-                  {{ group["Ethical Eating Suggestions"] }}
-                </p>
-              </div>
+              </template>
+              <!-- Add empty state notification -->
+              <el-alert
+                v-if="!hasValidEthicalSuggestions"
+                title="No Ethical Eating Suggestions"
+                type="info"
+                show-icon
+              >
+                No ethical eating suggestions available.
+              </el-alert>
               <el-alert v-if="errorMessage" title="Error" type="error">{{
                 errorMessage
               }}</el-alert>
@@ -54,7 +127,7 @@
                 )
               "
               :loading="isLoading"
-              type="info"
+              type="success"
               plain
               style="margin-left: 0px !important"
             >
@@ -62,46 +135,101 @@
             </el-button>
           </div>
         </el-collapse-item>
+
         <!-- Fun Facts Section -->
         <el-collapse-item title="Fun Facts">
-          <div>
-            <div v-if="!isLoading">
-              <div
-                v-for="(fact, index) in funFacts"
-                :key="index"
-                :body-style="{ height: 'auto' }"
-              >
-                <p>
-                  <strong>Food Items:</strong>
-                  {{ fact["Food Item"] }}
-                </p>
-                <p><strong>Fun Facts:</strong> {{ fact["Fun Facts"] }}</p>
-              </div>
+          <template #title>
+            <div class="section-title">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1625/1625099.png"
+                class="fruit-icon"
+                alt="Mango icon"
+              />
+              Fun Facts
             </div>
-            <el-alert v-if="errorMessage" title="Error" type="error">{{
-              errorMessage
-            }}</el-alert>
+          </template>
+          <div class="prompt-section">
+            <div v-if="!isLoading" class="scrollable-container">
+              <template v-if="hasValidFunFacts">
+                <div
+                  v-for="(fact, index) in funFacts"
+                  :key="index"
+                  class="suggestion-item fun-facts-item"
+                >
+                  <p v-if="fact['Food Item'] && fact['Food Item'].trim()">
+                    <strong>Food Items:</strong>
+                    {{ fact["Food Item"] }}
+                  </p>
+                  <p v-if="fact['Fun Facts'] && fact['Fun Facts'].trim()">
+                    <strong>Fun Facts:</strong>
+                    <span v-html="formatText(fact['Fun Facts'])"></span>
+                  </p>
+                  <el-divider v-if="index < funFacts.length - 1"></el-divider>
+                </div>
+              </template>
+              <!-- Add empty state notification -->
+              <el-alert
+                v-if="!hasValidFunFacts"
+                title="No Fun Facts"
+                type="info"
+                show-icon
+              >
+                No fun facts available.
+              </el-alert>
+              <el-alert v-if="errorMessage" title="Error" type="error">{{
+                errorMessage
+              }}</el-alert>
+            </div>
+            <el-button
+              @click="fetchData('gpt', '/get-fun-facts-using-gpt', 'funFacts')"
+              :loading="isLoading"
+              type="warning"
+              plain
+              style="margin-left: 0px !important"
+            >
+              Generate Prompt
+            </el-button>
           </div>
-          <el-button
-            @click="fetchData('gpt', '/get-fun-facts-using-gpt', 'funFacts')"
-            :loading="isLoading"
-            type="info"
-            plain
-            style="margin-left: 0px !important"
-          >
-            Generate Prompt
-          </el-button>
         </el-collapse-item>
+
         <!-- Cooking Tips Section -->
         <el-collapse-item title="Cooking Tips">
-          <div>
-            <div v-if="!isLoading">
-              <div v-for="(tip, index) in cookingTips" :key="index">
-                <p><strong>Cooking Tips: </strong>{{ tip["Cooking Tip"] }}</p>
-              </div>
+          <template #title>
+            <div class="section-title">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2909/2909838.png"
+                class="fruit-icon"
+                alt="Peach icon"
+              />
+              Cooking Tips
             </div>
-            <div v-if="cookingTips.length === 0 && !isLoading">
-              <el-alert title="No Cooking Tips" type="info" show-icon>
+          </template>
+          <div class="prompt-section">
+            <div v-if="!isLoading" class="scrollable-container">
+              <template v-if="hasValidCookingTips">
+                <div
+                  v-for="(tip, index) in cookingTips"
+                  :key="index"
+                  class="suggestion-item cooking-tips-item"
+                >
+                  <p v-if="tip['Cooking Tip'] && tip['Cooking Tip'].trim()">
+                    <strong>Cooking Tips: </strong>
+                    <span
+                      v-html="formatNumberedList(tip['Cooking Tip'])"
+                    ></span>
+                  </p>
+                  <el-divider
+                    v-if="index < cookingTips.length - 1"
+                  ></el-divider>
+                </div>
+              </template>
+              <!-- Empty state notification -->
+              <el-alert
+                v-if="!hasValidCookingTips"
+                title="No Cooking Tips"
+                type="warning"
+                show-icon
+              >
                 No cooking tips available.
               </el-alert>
             </div>
@@ -117,16 +245,45 @@
             </el-button>
           </div>
         </el-collapse-item>
+
         <!-- Current Trends Section -->
         <el-collapse-item title="Current Trends">
-          <div>
-            <div v-if="!isLoading">
-              <div v-for="(trend, index) in currentTrends" :key="index">
-                <p><strong>Current Trends:</strong>{{ trend["Fun Facts"] }}</p>
-              </div>
+          <template #title>
+            <div class="section-title">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3143/3143640.png"
+                class="fruit-icon"
+                alt="Pineapple icon"
+              />
+              Current Trends
             </div>
-            <div v-if="currentTrends.length === 0 && !isLoading">
-              <el-alert title="No Fun Facts" type="info" show-icon>
+          </template>
+          <div class="prompt-section">
+            <div v-if="!isLoading" class="scrollable-container">
+              <template v-if="hasValidCurrentTrends">
+                <div
+                  v-for="(trend, index) in currentTrends"
+                  :key="index"
+                  class="suggestion-item trends-item"
+                >
+                  <p v-if="trend['Fun Facts'] && trend['Fun Facts'].trim()">
+                    <strong>Current Trends:</strong>
+                    <span
+                      v-html="formatNumberedList(trend['Fun Facts'])"
+                    ></span>
+                  </p>
+                  <el-divider
+                    v-if="index < currentTrends.length - 1"
+                  ></el-divider>
+                </div>
+              </template>
+              <!-- Empty state notification -->
+              <el-alert
+                v-if="!hasValidCurrentTrends"
+                title="No Current Trends"
+                type="info"
+                show-icon
+              >
                 No current food trends available.
               </el-alert>
             </div>
@@ -135,28 +292,58 @@
                 fetchData('gpt', '/current-trends-using-gpt', 'currentTrends')
               "
               :loading="isLoading"
-              type="info"
+              type="success"
               plain
             >
               Generate Prompt
             </el-button>
           </div>
         </el-collapse-item>
-        <!-- Food Handling  Section -->
+
+        <!-- Food Handling Section -->
         <el-collapse-item title="Food Handling Advice">
-          <div>
-            <div v-if="!isLoading">
-              <div v-for="(item, index) in handlingadvice" :key="index">
-                <p><strong>Food Items:</strong> {{ item["Food Item"] }}</p>
-                <p>
-                  <strong>Handling Advice:</strong>
-                  {{ item["Handling Advice"] }}
-                </p>
-              </div>
+          <template #title>
+            <div class="section-title">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/1652/1652077.png"
+                class="fruit-icon"
+                alt="Potato icon"
+              />
+              Food Handling Advice
             </div>
-            <div v-if="handlingadvice.length === 0 && !isLoading">
-              <el-alert title="No handling Advice" type="info" show-icon>
-                No health handling advice available.
+          </template>
+          <div class="prompt-section">
+            <div v-if="!isLoading" class="scrollable-container">
+              <template v-if="hasValidHandlingAdvice">
+                <div
+                  v-for="(item, index) in handlingadvice"
+                  :key="index"
+                  class="suggestion-item handling-item"
+                >
+                  <p v-if="item['Food Item'] && item['Food Item'].trim()">
+                    <strong>Food Items:</strong> {{ item["Food Item"] }}
+                  </p>
+                  <p
+                    v-if="
+                      item['Handling Advice'] && item['Handling Advice'].trim()
+                    "
+                  >
+                    <strong>Handling Advice:</strong>
+                    <span v-html="formatText(item['Handling Advice'])"></span>
+                  </p>
+                  <el-divider
+                    v-if="index < handlingadvice.length - 1"
+                  ></el-divider>
+                </div>
+              </template>
+              <!-- Empty state notification -->
+              <el-alert
+                v-if="!hasValidHandlingAdvice"
+                title="No Handling Advice"
+                type="success"
+                show-icon
+              >
+                No food handling advice available.
               </el-alert>
             </div>
             <el-button
@@ -168,37 +355,61 @@
                 )
               "
               :loading="isLoading"
-              type="info"
+              type="danger"
               plain
             >
               Generate Prompt
             </el-button>
           </div>
         </el-collapse-item>
+
         <!-- Mood Changer Section -->
         <el-collapse-item title="Mood Changer Suggestion">
-          <div>
-            <div v-if="!isLoading">
-              <div
-                v-for="(suggestion, index) in moodChangerSuggestions"
-                :key="index"
-              >
-                <p>
-                  <strong>Food Suggestion: </strong
-                  >{{ suggestion["Food Suggestion"] }}
-                </p>
-                <p style="color: red">
-                  For custom prompts go to the user defined prompt section
-                </p>
-              </div>
+          <template #title>
+            <div class="section-title">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png"
+                class="fruit-icon"
+                alt="Strawberry icon"
+              />
+              Mood Changer Suggestion
             </div>
-            <div v-if="moodChangerSuggestions.length === 0 && !isLoading">
+          </template>
+          <div class="prompt-section">
+            <div v-if="!isLoading" class="scrollable-container">
+              <template v-if="hasValidMoodChangerSuggestions">
+                <div
+                  v-for="(suggestion, index) in moodChangerSuggestions"
+                  :key="index"
+                  class="suggestion-item mood-item"
+                >
+                  <p
+                    v-if="
+                      suggestion['Food Suggestion'] &&
+                      suggestion['Food Suggestion'].trim()
+                    "
+                  >
+                    <strong>Food Suggestion: </strong>
+                    <span
+                      v-html="formatText(suggestion['Food Suggestion'])"
+                    ></span>
+                  </p>
+                  <p style="color: red">
+                    For custom prompts go to the user defined prompt section
+                  </p>
+                  <el-divider
+                    v-if="index < moodChangerSuggestions.length - 1"
+                  ></el-divider>
+                </div>
+              </template>
+              <!-- Empty state notification -->
               <el-alert
-                title="No Mood Changer Suggestion"
-                type="info"
+                v-if="!hasValidMoodChangerSuggestions"
+                title="No Mood Changer Suggestions"
+                type="danger"
                 show-icon
               >
-                No Mood Changer Suggestion available.
+                Go to the custom prompt section to generate a mood prompt.
               </el-alert>
             </div>
           </div>
@@ -229,6 +440,93 @@ export default {
       currentUser: null,
       errorMessage: null,
     };
+  },
+  computed: {
+    hasValidFoodWasteReductionSuggestions() {
+      if (
+        !this.foodWasteReductionSuggestions ||
+        this.foodWasteReductionSuggestions.length === 0
+      ) {
+        return false;
+      }
+      return this.foodWasteReductionSuggestions.some(
+        (suggestion) =>
+          suggestion["Food Waste Reduction Suggestion"] &&
+          suggestion["Food Waste Reduction Suggestion"].trim() !== ""
+      );
+    },
+
+    hasValidEthicalSuggestions() {
+      if (
+        !this.ethicalEatingSuggestions ||
+        this.ethicalEatingSuggestions.length === 0
+      ) {
+        return false;
+      }
+      return this.ethicalEatingSuggestions.some((group) => {
+        const hasItems =
+          Array.isArray(group["Group of Items"]) &&
+          group["Group of Items"].length > 0;
+        const hasSuggestions =
+          group["Ethical Eating Suggestions"] &&
+          group["Ethical Eating Suggestions"].trim() !== "";
+        return hasItems || hasSuggestions;
+      });
+    },
+
+    hasValidFunFacts() {
+      if (!this.funFacts || this.funFacts.length === 0) {
+        return false;
+      }
+      return this.funFacts.some(
+        (fact) =>
+          (fact["Food Item"] && fact["Food Item"].trim() !== "") ||
+          (fact["Fun Facts"] && fact["Fun Facts"].trim() !== "")
+      );
+    },
+
+    hasValidCookingTips() {
+      if (!this.cookingTips || this.cookingTips.length === 0) {
+        return false;
+      }
+      return this.cookingTips.some(
+        (tip) => tip["Cooking Tip"] && tip["Cooking Tip"].trim() !== ""
+      );
+    },
+
+    hasValidCurrentTrends() {
+      if (!this.currentTrends || this.currentTrends.length === 0) {
+        return false;
+      }
+      return this.currentTrends.some(
+        (trend) => trend["Fun Facts"] && trend["Fun Facts"].trim() !== ""
+      );
+    },
+
+    hasValidHandlingAdvice() {
+      if (!this.handlingadvice || this.handlingadvice.length === 0) {
+        return false;
+      }
+      return this.handlingadvice.some(
+        (advice) =>
+          (advice["Food Item"] && advice["Food Item"].trim() !== "") ||
+          (advice["Handling Advice"] && advice["Handling Advice"].trim() !== "")
+      );
+    },
+
+    hasValidMoodChangerSuggestions() {
+      if (
+        !this.moodChangerSuggestions ||
+        this.moodChangerSuggestions.length === 0
+      ) {
+        return false;
+      }
+      return this.moodChangerSuggestions.some(
+        (suggestion) =>
+          suggestion["Food Suggestion"] &&
+          suggestion["Food Suggestion"].trim() !== ""
+      );
+    },
   },
   async mounted() {
     // Check authentication state
@@ -341,6 +639,20 @@ export default {
         console.error("Error in fetchData:", error);
       }
     },
+    formatNumberedList(text) {
+      if (!text) return "";
+      // Replace numbered patterns like "1. ", "2. " etc. with line breaks before them
+      // Except for the first one
+      return text.replace(/(\d+\.\s)/g, (match, p1, offset) => {
+        return offset === 0 ? p1 : "<br><br>" + p1;
+      });
+    },
+
+    formatText(text) {
+      if (!text) return "";
+      // Add line breaks for general text that might need formatting
+      return text.replace(/\.\s+(?=[A-Z])/g, ".<br><br>");
+    },
   },
 };
 </script>
@@ -348,5 +660,154 @@ export default {
 <style scoped>
 .el-button {
   margin-top: 10px;
+}
+
+/* New decorative styles */
+.prompt-section {
+  position: relative;
+  padding: 10px;
+}
+
+/* Add scrollable container styles */
+.scrollable-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px; /* Add padding to accommodate scrollbar */
+  margin-bottom: 5px;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #67c23a #f0f0f0; /* Firefox */
+}
+
+/* Custom scrollbar styling for webkit browsers */
+.scrollable-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #67c23a;
+  border-radius: 4px;
+  border: 2px solid #f0f0f0;
+}
+
+/* Make suggestion items display inline-block for horizontal scrolling */
+.suggestion-item {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 280px; /* Minimum width for each item */
+  max-width: 90vw; /* Maximum width on small screens */
+  width: auto;
+  margin-right: 15px; /* Space between items */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #67c23a;
+  position: relative;
+  overflow: hidden;
+  white-space: normal; /* Allow text to wrap inside the item */
+}
+
+/* Last item doesn't need right margin */
+.suggestion-item:last-child {
+  margin-right: 0;
+}
+
+.fruit-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.suggestion-item::after {
+  content: "";
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.food-waste-item::after {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/415/415682.png"); /* Apple */
+}
+
+.ethical-item::after {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/2909/2909841.png"); /* Leaf */
+}
+
+.fun-facts-item::after {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/3143/3143645.png"); /* Orange */
+}
+
+.cooking-tips-item::after {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1147/1147805.png"); /* Chef hat */
+}
+
+.trends-item::after {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/590/590772.png"); /* Tomato */
+}
+
+.handling-item::after {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1625/1625099.png"); /* Mango */
+}
+
+.mood-item::after {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/2965/2965567.png"); /* Strawberry */
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #303133;
+}
+
+.el-collapse-item__header {
+  background-color: #f5f7fa;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  transition: all 0.3s;
+}
+
+.el-collapse-item__header:hover {
+  background-color: #e6f7ff;
+}
+
+.el-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.el-alert {
+  margin-bottom: 15px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .suggestion-item {
+    min-width: 250px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .suggestion-item {
+    min-width: 220px;
+  }
+
+  .scrollable-container::-webkit-scrollbar {
+    height: 6px;
+  }
 }
 </style>

@@ -64,7 +64,7 @@
               ><i class="el-icon-user"> SignUp</i></el-button
             >
           </router-link>
-          <el-dropdown class="el-dropdown-grid">
+          <!-- <el-dropdown class="el-dropdown-grid">
             <span class="el-dropdown-link">
               <i class="el-icon-menu"></i>
             </span>
@@ -102,7 +102,7 @@
                 ></router-link
               >
             </el-dropdown-menu>
-          </el-dropdown>
+          </el-dropdown> -->
         </div>
       </el-col>
     </el-row>
@@ -190,5 +190,8 @@ export default {
 <style scoped>
 .el-col-12 {
   width: 100%;
+}
+.el-button--info.is-plain {
+  background: none;
 }
 </style>

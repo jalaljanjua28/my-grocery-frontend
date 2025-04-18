@@ -26,7 +26,12 @@
                 :title="item.question"
                 :name="index"
               >
-                {{ item.answer }}
+                <p
+                  v-for="(line, lineIndex) in item.answer.split('\n')"
+                  :key="lineIndex"
+                >
+                  {{ line }}
+                </p>
               </el-collapse-item>
             </el-collapse>
           </div>
@@ -45,13 +50,13 @@ export default {
         {
           question: "How does the app use ChatGPT for prompts?",
           answer:
-            "The app uses ChatGPT to generate prompts related to food items found in the receipts. This can include recipe suggestions, nutritional information, and more.",
+            "The app uses ChatGPT to generate prompts related to food items found in the receipts.\n This can include recipe suggestions, nutritional information, and more.",
         },
         {
           question:
             "How does the app analyze the frequency of items purchased?",
           answer:
-            "The app tracks the items extracted from receipts over time and provides reports on the frequency of specific items purchased. This helps users understand their purchasing habits.",
+            "The app tracks the items extracted from receipts over time and provides reports on the frequency of specific items purchased.\n This helps users understand their purchasing habits.",
         },
         {
           question: "Is there a way to view the history of receipts scanned?",
@@ -66,7 +71,7 @@ export default {
         {
           question: "How accurate is the OCR feature in your app?",
           answer:
-            "The OCR feature is designed to be highly accurate, using advanced algorithms to recognize and extract text from receipts. However, accuracy can vary depending on the quality of the receipt image.",
+            "The OCR feature is designed to be highly accurate, using advanced algorithms to recognize and extract text from receipts.\n However, accuracy can vary depending on the quality of the receipt image.",
         },
         {
           question: "Is the data from receipts stored securely?",
@@ -76,18 +81,18 @@ export default {
         {
           question: "Can the app provide insights on spending habits?",
           answer:
-            "Yes, the app analyzes the extracted data to provide insights on spending habits, such as identifying frequently purchased items and total spending over time.",
+            "Yes, the app analyzes the extracted data to provide insights on spending habits,\n such as identifying frequently purchased items and total spending over time.",
         },
         {
           question: "Does the app support multiple languages?",
           answer:
-            "Currently, the app supports OCR and text extraction primarily in English. Support for additional languages may be added in future updates.",
+            "Currently, the app supports OCR and text extraction primarily in English.\n Support for additional languages may be added in future updates.",
         },
         {
           question:
             "What kind of prompts related to food items does the app provide?",
           answer:
-            "The app provides prompts such as recipe ideas, nutritional information, and suggestions for alternative ingredients based on the items found in the receipts.",
+            "The app provides prompts such as recipe ideas, nutritional information,\n and suggestions for alternative ingredients based on the items found in the receipts.",
         },
         {
           question:
@@ -98,7 +103,7 @@ export default {
         {
           question: "What is the purpose of your app?",
           answer:
-            "The app uses OCR technology to extract textual data from receipts and displays it. It also uses ChatGPT to provide prompts related to food items and analyzes the frequency of items purchased.",
+            "The app uses OCR technology to extract textual data from receipts and displays it.\n It also uses ChatGPT to provide prompts related to food items and analyzes the frequency of items purchased.",
         },
         {
           question: "How to use the OCR feature in your app?",
@@ -108,7 +113,7 @@ export default {
         {
           question: "What are the key features of your app?",
           answer:
-            "The app offers OCR to extract text from receipts, displays the extracted data, provides ChatGPT prompts related to food items, and analyzes the frequency of items purchased.",
+            "The app offers OCR to extract text from receipts, displays the extracted data, \nprovides ChatGPT prompts related to food items, and analyzes the frequency of items purchased.",
         },
       ],
     };

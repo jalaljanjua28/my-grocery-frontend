@@ -343,9 +343,4 @@ export default {
   width: auto !important;
   margin-bottom: 10px !important;
 }
-/* .responsive-table {
-  width: 100%;
-  border-collapse: collapse;
-  width: 700px !important;
-} */
 </style>

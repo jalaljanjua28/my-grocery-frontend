@@ -31,7 +31,7 @@
       <el-table-column label="Days" prop="days_left"></el-table-column>
       <el-table-column>
         <template slot-scope="scope">
-          <el-row v-if="scope.row" style="display: flex; flex-wrap: wrap">
+          <el-row v-if="scope.row" style="display: flex; flex-wrap: nowrap">
             <el-tooltip
               content="Change expiry date"
               placement="top"
@@ -94,7 +94,7 @@
                   />
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="text" @click="updatePrice" plain
+                  <el-button type="success" @click="updatePrice" plain
                     >Add Price
                   </el-button>
                 </el-form-item>
@@ -289,13 +289,6 @@ export default {
 
 <style scoped>
 .el-button--info.is-plain {
-  border: 2px solid;
-  width: auto !important;
-  margin-bottom: 10px !important;
+  margin-left: 20px !important;
 }
-/* .responsive-table {
-  width: 100%;
-  border-collapse: collapse;
-  width: 735px !important;
-} */
 </style>
