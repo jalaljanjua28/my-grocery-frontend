@@ -128,7 +128,7 @@
 </template>
 
 <script>
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "http://localhost:8081/api";
 
 import {
   signInWithPopup,
@@ -342,7 +342,7 @@ export default {
 </script>
 
 <style scoped>
-.custom-page-header {
+/* .custom-page-header {
   margin-bottom: 20px;
   padding: 10px 20px;
   background-color: #fff;
@@ -360,13 +360,23 @@ export default {
   margin-right: 10px;
   color: #409eff;
   font-size: 28px;
-}
+} */
 .login-signup-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-
+.login-signup-container::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmNWY1ZjUiPjwvcmVjdD4KPC9zdmc+");
+  opacity: 0.6;
+  z-index: -1;
+}
 .auth-card {
   max-width: 450px;
   margin: 20px auto;

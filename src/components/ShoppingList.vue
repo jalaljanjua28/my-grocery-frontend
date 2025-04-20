@@ -62,7 +62,16 @@
                   ></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="info" @click="updateExpiry" plain
+                  <el-button
+                    style="
+                      display: flex;
+                      align-content: stretch;
+                      justify-content: center;
+                      align-items: center;
+                    "
+                    type="success"
+                    @click="updateExpiry"
+                    plain
                     >Update Expiry</el-button
                   >
                 </el-form-item>
@@ -94,7 +103,16 @@
                   />
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="success" @click="updatePrice" plain
+                  <el-button
+                    style="
+                      display: flex;
+                      align-content: stretch;
+                      justify-content: center;
+                      align-items: center;
+                    "
+                    type="success"
+                    @click="updatePrice"
+                    plain
                     >Add Price
                   </el-button>
                 </el-form-item>
@@ -120,7 +138,7 @@
 import { Table, TableColumn, Button, Tooltip } from "element-ui";
 
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "http://localhost:8081/api";
 
 export default {
   components: {
@@ -288,7 +306,16 @@ export default {
 </script>
 
 <style scoped>
-.el-button--info.is-plain {
+.el-button--success.is-plain,
+.el-button--info.is-plain,
+.el-button--warning.is-plain,
+.el-button--primary.is-plain,
+.el-button--danger.is-plain {
+  width: 50% !important;
+  display: flex;
+  align-content: stretch;
+  justify-content: center;
+  align-items: stretch;
   margin-left: 20px !important;
 }
 </style>

@@ -132,7 +132,7 @@ import {
 import SearchInventory from "../components/SearchInventory.vue";
 import { auth } from "../Firebase.js";
 
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "http://localhost:8081/api";
 
 export default {
   components: {
@@ -306,39 +306,6 @@ export default {
 .food-icon:hover {
   transform: rotate(15deg) scale(1.2);
   opacity: 1;
-}
-
-/* Navigation buttons */
-.nav-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0;
-  position: relative;
-  z-index: 1;
-}
-
-.nav-button {
-  font-size: large;
-  border: none;
-  padding: 12px 20px;
-  color: #303133;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.nav-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  /* background-color: #fff; */
-}
-
-.nav-button i {
-  margin-right: 8px;
-  font-size: 18px;
 }
 
 /* Jokes container */

@@ -7,7 +7,7 @@
       </div>
 
       <div class="container">
-        <el-row :gutter="20" style="margin-left: 0px; margin-top: 18px">
+        <el-row :gutter="20" style="margin-left: 70px; margin-top: 18px">
           <el-col :span="8" class="footer-column">
             <div class="column-header">
               <div class="food-icon tomato"></div>
@@ -75,7 +75,7 @@
       <div class="footer-actions-container">
         <el-upload
           class="upload-demo"
-          action="http://127.0.0.1:8081/api/image-process-upload"
+          action="http://localhost:8081/api/image-process-upload"
           ref="fileInput"
           :auto-upload="false"
           :on-change="onFileChange"
@@ -134,7 +134,7 @@ import { auth } from "../Firebase.js"; // Assuming this is your Firebase initial
 
 // Create a custom Axios instance with a progress event
 const axiosInstance = axios.create();
-axiosInstance.defaults.baseURL = "http://127.0.0.1:8081/api";
+axiosInstance.defaults.baseURL = "http://localhost:8081/api";
 
 export default {
   components: {},

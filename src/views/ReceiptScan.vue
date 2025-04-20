@@ -27,7 +27,7 @@
         <div class="upload-area">
           <el-upload
             class="upload-demo"
-            action="http://127.0.0.1:8081/api/image-process-upload"
+            action="http://localhost:8081/api/image-process-upload"
             ref="fileInput"
             :auto-upload="false"
             :on-change="onFileChange"
@@ -201,7 +201,7 @@ import { auth } from "../Firebase.js"; // Assuming this is your Firebase initial
 
 // Create a custom Axios instance with a progress event
 const axiosInstance = axios.create();
-axiosInstance.defaults.baseURL = "http://127.0.0.1:8081/api"; // Set your API base URL
+axiosInstance.defaults.baseURL = "http://localhost:8081/api"; // Set your API base URL
 
 export default {
   data() {
@@ -385,6 +385,23 @@ export default {
 /* Main container styling */
 .receipt-scan-container {
   animation: fadeIn 0.5s ease-in-out;
+  position: relative;
+  padding: 20px 0;
+  min-height: 100vh;
+}
+
+/* Background pattern - fixed z-index and positioning */
+.receipt-scan-container:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmNWY1ZjUiPjwvcmVjdD4KPC9zdmc+");
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none; /* Ensures clicks pass through */
 }
 
 @keyframes fadeIn {
@@ -396,6 +413,33 @@ export default {
   }
 }
 
+/* Page header styling */
+.custom-page-header {
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.custom-page-header:hover {
+  transform: translateY(-2px);
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  color: #303133;
+}
+
+.page-title i {
+  margin-right: 10px;
+  color: #409eff;
+  font-size: 28px;
+}
+
 .main-content {
   display: flex;
   flex-direction: column;
@@ -405,16 +449,17 @@ export default {
   margin: 0 auto;
 }
 
-/* Header section styling */
+/* Header section styling - improved animation performance */
 .scan-header {
   text-align: center;
   margin-bottom: 30px;
-  padding: 20px;
+  padding: 25px;
   width: 100%;
   max-width: 800px;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  will-change: transform; /* Performance optimization */
 }
 
 .scan-icon-container {
@@ -425,6 +470,7 @@ export default {
   margin-bottom: 15px;
   box-shadow: 0 5px 15px rgba(64, 158, 255, 0.4);
   animation: pulse 2s infinite;
+  will-change: transform; /* Performance optimization */
 }
 
 @keyframes pulse {
@@ -459,7 +505,7 @@ export default {
   margin: 0 auto;
 }
 
-/* Upload container styling */
+/* Upload container styling - improved visual feedback */
 .upload-container {
   width: 100%;
   max-width: 800px;
@@ -473,6 +519,7 @@ export default {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   border: 2px dashed #c0c4cc;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .upload-area:hover {
@@ -481,27 +528,52 @@ export default {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
+/* Add a subtle background pattern to the upload area */
+.upload-area:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f0f2f5' fill-opacity='0.5' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  border-radius: 13px;
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .upload-icon {
   font-size: 50px;
   color: #c0c4cc;
   margin-bottom: 10px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .upload-area:hover .upload-icon {
   color: #409eff;
+  transform: translateY(-5px);
 }
 
 .el-upload__text {
   font-size: 16px;
   color: #606266;
   margin: 10px 0;
+  position: relative;
+  z-index: 1;
 }
 
 .browse-text {
   color: #409eff;
   font-weight: 600;
   text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.browse-text:hover {
+  color: #66b1ff;
 }
 
 .tip-container {
@@ -512,6 +584,14 @@ export default {
   padding: 10px;
   background-color: #f0f9eb;
   border-radius: 8px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.tip-container:hover {
+  background-color: #e1f3d8;
+  transform: translateY(-2px);
 }
 
 .tip-icon {
@@ -520,12 +600,14 @@ export default {
   font-size: 16px;
 }
 
-/* Action buttons styling */
+/* Action buttons styling - improved visual feedback */
 .action-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .action-button {
@@ -533,11 +615,46 @@ export default {
   font-size: 16px;
   border-radius: 8px;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .action-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a subtle shine effect on hover */
+.action-button:after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.action-button:hover:after {
+  opacity: 1;
+  animation: shine 1.5s ease;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
 }
 
 .compare-button {
@@ -550,9 +667,12 @@ export default {
   border: none;
 }
 
-/* Status indicators styling */
+/* Status indicators styling - improved visual distinction */
 .status-container {
   margin-top: 20px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .status-indicator {
@@ -562,6 +682,12 @@ export default {
   border-radius: 8px;
   margin-top: 15px;
   animation: fadeIn 0.5s ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-indicator:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .status-indicator i {
@@ -573,21 +699,24 @@ export default {
   background-color: #e6f7ff;
   border-left: 4px solid #1890ff;
   color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
 }
 
 .compare {
   background-color: #f0f9eb;
   border-left: 4px solid #67c23a;
   color: #67c23a;
+  box-shadow: 0 2px 8px rgba(103, 194, 58, 0.1);
 }
 
 .success {
   background-color: #f0f9eb;
   border-left: 4px solid #67c23a;
   color: #67c23a;
+  box-shadow: 0 2px 8px rgba(103, 194, 58, 0.1);
 }
 
-/* Preview section styling */
+/* Preview section styling - improved image handling */
 .preview-section {
   width: 100%;
   max-width: 800px;
@@ -670,14 +799,19 @@ export default {
   padding: 15px;
   height: 400px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
 }
 
 .preview-image {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   border-radius: 8px;
   transition: transform 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .image-frame:hover .preview-image {
@@ -696,6 +830,7 @@ export default {
     rgba(0, 0, 0, 0.1) 100%
   );
   pointer-events: none;
+  border-radius: 8px;
 }
 
 .ocr-frame {
@@ -704,6 +839,7 @@ export default {
   position: relative;
 }
 
+/* Continuing from previous code */
 .ocr-text {
   height: calc(100% - 40px);
   overflow-y: auto;
@@ -717,6 +853,28 @@ export default {
   border-radius: 8px;
   border: 1px solid #ebeef5;
   margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #c0c4cc #f8f9fa;
+}
+
+/* Custom scrollbar for webkit browsers */
+.ocr-text::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ocr-text::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.ocr-text::-webkit-scrollbar-thumb {
+  background-color: #c0c4cc;
+  border-radius: 4px;
+  border: 2px solid #f8f9fa;
+}
+
+.ocr-text::-webkit-scrollbar-thumb:hover {
+  background-color: #909399;
 }
 
 .ocr-controls {
@@ -728,17 +886,38 @@ export default {
 .copy-button {
   color: #409eff;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .copy-button:hover {
   color: #66b1ff;
+  transform: translateY(-2px);
 }
 
-/* Instructions section styling */
+.copy-button i {
+  margin-right: 5px;
+  transition: transform 0.3s ease;
+}
+
+.copy-button:hover i {
+  transform: translateY(-1px);
+}
+
+/* Instructions section styling - improved visual hierarchy */
 .instructions-section {
   width: 100%;
   max-width: 800px;
   margin-bottom: 40px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instructions-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .instructions-title {
@@ -746,9 +925,25 @@ export default {
   align-items: center;
   font-size: 22px;
   color: #303133;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   padding-bottom: 10px;
   border-bottom: 2px solid #ebeef5;
+  position: relative;
+}
+
+.instructions-title:after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background-color: #409eff;
+  transition: width 0.3s ease;
+}
+
+.instructions-section:hover .instructions-title:after {
+  width: 100px;
 }
 
 .instructions-title i {
@@ -766,15 +961,32 @@ export default {
   display: flex;
   align-items: flex-start;
   padding: 20px;
-  background-color: white;
+  background-color: #f5f7fa;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .instruction-step:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background-color: #ecf5ff;
+}
+
+/* Add a subtle pattern to instruction steps */
+.instruction-step:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14z' fill='%23ffffff' fill-opacity='0.3'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .step-number {
@@ -790,12 +1002,31 @@ export default {
   border-radius: 50%;
   margin-right: 15px;
   flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(64, 158, 255, 0.3);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.instruction-step:hover .step-number {
+  transform: scale(1.1);
+  box-shadow: 0 5px 12px rgba(64, 158, 255, 0.4);
+}
+
+.step-content {
+  position: relative;
+  z-index: 1;
 }
 
 .step-content h4 {
   margin: 0 0 10px;
   font-size: 18px;
   color: #303133;
+  transition: color 0.3s ease;
+}
+
+.instruction-step:hover .step-content h4 {
+  color: #409eff;
 }
 
 .step-content p {
@@ -804,7 +1035,59 @@ export default {
   line-height: 1.5;
 }
 
-/* Responsive adjustments */
+/* Upload progress indicator */
+.el-progress {
+  margin-top: 15px;
+}
+
+.el-progress-bar__inner {
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Improved upload component styling */
+.upload-demo {
+  width: 100%;
+}
+
+.el-upload-dragger {
+  width: fit-content;
+  height: auto;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d9d9d9;
+  border-radius: 10px;
+  background-color: #fafafa;
+  transition: all 0.3s;
+}
+
+.el-upload-dragger:hover {
+  border-color: #409eff;
+  background-color: #f5f7fa;
+}
+
+.el-upload-dragger.is-dragover {
+  background-color: rgba(64, 158, 255, 0.1);
+  border-color: #409eff;
+}
+
+/* Responsive adjustments - improved breakpoints */
+@media screen and (max-width: 992px) {
+  .scan-title {
+    font-size: 26px;
+  }
+
+  .scan-subtitle {
+    font-size: 15px;
+  }
+
+  .instructions-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media screen and (max-width: 768px) {
   .scan-title {
     font-size: 24px;
@@ -816,7 +1099,14 @@ export default {
 
   .action-buttons {
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto 0;
+  }
+
+  .action-button {
+    width: 100%;
   }
 
   .preview-container {
@@ -831,9 +1121,26 @@ export default {
   .instructions-container {
     grid-template-columns: 1fr;
   }
+
+  /* Reduce animations for better performance on mobile */
+  .scan-icon-container {
+    animation: pulse 3s infinite;
+  }
+
+  .action-button:after {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  .main-content {
+    padding: 15px 10px;
+  }
+
+  .scan-header {
+    padding: 20px 15px;
+  }
+
   .scan-icon-container {
     padding: 15px;
   }
@@ -846,8 +1153,12 @@ export default {
     font-size: 20px;
   }
 
+  .scan-subtitle {
+    font-size: 13px;
+  }
+
   .upload-area {
-    padding: 20px;
+    padding: 20px 15px;
   }
 
   .upload-icon {
@@ -871,6 +1182,100 @@ export default {
 
   .step-content h4 {
     font-size: 16px;
+  }
+
+  .step-content p {
+    font-size: 13px;
+  }
+
+  .preview-title,
+  .instructions-title {
+    font-size: 18px;
+  }
+
+  .preview-header h4 {
+    font-size: 14px;
+  }
+
+  /* Disable animations for better performance on low-end devices */
+  @media (prefers-reduced-motion: reduce) {
+    .receipt-scan-container,
+    .preview-section,
+    .status-indicator {
+      animation: none;
+    }
+
+    .scan-icon-container {
+      animation: none;
+    }
+
+    .instruction-step:hover,
+    .image-preview-container:hover,
+    .ocr-preview-container:hover,
+    .instructions-section:hover,
+    .upload-area:hover,
+    .status-indicator:hover {
+      transform: none;
+    }
+
+    .instruction-step:hover .step-number {
+      transform: none;
+    }
+
+    .image-frame:hover .preview-image {
+      transform: none;
+    }
+  }
+}
+
+/* Print styles */
+@media print {
+  .receipt-scan-container:before {
+    display: none;
+  }
+
+  .scan-header,
+  .upload-container,
+  .action-buttons,
+  .status-container {
+    display: none;
+  }
+
+  .preview-section {
+    width: 100%;
+    margin: 0;
+    animation: none;
+  }
+
+  .preview-container {
+    display: block;
+  }
+
+  .image-preview-container,
+  .ocr-preview-container {
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .image-frame,
+  .ocr-frame {
+    height: auto;
+  }
+
+  .preview-image {
+    max-height: 300px;
+  }
+
+  .ocr-controls {
+    display: none;
+  }
+
+  .instructions-section {
+    page-break-before: always;
+    box-shadow: none;
+    border: 1px solid #ddd;
   }
 }
 </style>

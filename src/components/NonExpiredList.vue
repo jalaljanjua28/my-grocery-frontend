@@ -133,7 +133,7 @@
 </template>
 
 <script>
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "http://localhost:8081/api";
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
 import { Table, TableColumn, Button, Tooltip } from "element-ui";
 

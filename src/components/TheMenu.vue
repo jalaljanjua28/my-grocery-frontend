@@ -118,7 +118,7 @@ import {
   signOut as firebaseSignOut,
 } from "firebase/auth"; // Adjust the path as necessary
 
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "http://localhost:8081/api";
 
 export default {
   components: {},
