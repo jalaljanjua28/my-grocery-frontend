@@ -398,7 +398,7 @@
 </template>
 
 <script>
-const baseURL = "http://localhost:8081/api";
+const baseURL = "https://my-grocery-app-888361723877.us-central1.run.app/api";
 import { auth } from "../Firebase.js";
 
 export default {
