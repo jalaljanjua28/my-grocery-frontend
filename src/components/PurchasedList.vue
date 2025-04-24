@@ -239,7 +239,7 @@ import {
   Input,
 } from "element-ui";
 
-const baseUrl = "http://localhost:8081/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   components: {

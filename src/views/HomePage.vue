@@ -132,7 +132,7 @@ import {
 import SearchInventory from "../components/SearchInventory.vue";
 import { auth } from "../Firebase.js";
 
-const baseUrl = "http://localhost:8081/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   components: {
