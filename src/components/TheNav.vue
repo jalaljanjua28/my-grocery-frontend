@@ -315,7 +315,7 @@ export default {
   text-transform: uppercase;
 }
 /* Animated hamburger icon - ENHANCED */
-.toggle-icon {
+/* .toggle-icon {
   position: relative;
   width: 24px;
   height: 2px;
@@ -323,6 +323,9 @@ export default {
   border-radius: 2px;
   transition: all 0.3s ease;
   margin-top: 3px;
+} */
+.toggle-icon {
+  display: none;
 }
 
 .toggle-icon:before,

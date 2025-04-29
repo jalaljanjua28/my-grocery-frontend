@@ -10,17 +10,17 @@
             display: flex;
             align-items: center;
             border-radius: 10px;
-            padding: 0px 5px;
+            padding: 10px;
           "
         >
           <el-popover placement="bottom" width="230" trigger="hover">
             <template #reference>
               <el-button
                 style="
-                  font-size: x-large;
+                  font-size: large;
                   background-color: none;
                   border: none;
-                  padding: 12px;
+                  padding: 0px;
                   color: black;
                 "
                 type="info"
@@ -53,10 +53,10 @@
           <router-link to="/SignUp" style="text-decoration: none">
             <el-button
               style="
-                font-size: x-large;
+                font-size: large;
                 background-color: none;
                 border: none;
-                padding: 12px;
+                padding: 10px;
                 color: black;
               "
               type="info"

@@ -148,7 +148,7 @@ strong {
   display: inline-block;
   height: 38px;
   outline: 0;
-  padding: 0 15px;
+  padding: 0 6px;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
   border-radius: var(--border-radius-sm);
@@ -173,7 +173,7 @@ strong {
 }
 
 /* Input number */
-.el-input-number--small {
+/* .el-input-number--small {
   width: 110px;
   line-height: 30px;
 }
@@ -189,7 +189,7 @@ strong {
 .el-input-number--small .el-input-number__increase {
   width: 30px;
   font-size: 13px;
-}
+} */
 
 /* Select styles */
 .el-select {
@@ -1206,9 +1206,9 @@ strong {
     display: none;
   }
 
-  .searchDev {
+  /* .searchDev {
     display: none !important;
-  }
+  } */
 
   .deleteallitems {
     font-size: x-large;

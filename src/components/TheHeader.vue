@@ -11,13 +11,12 @@
       <div class="food-icon carrot" title="Vegetables">
         <div class="icon-tooltip">Vegetables</div>
       </div>
+      <!-- Navigation component -->
+      <the-nav class="nav-component"></the-nav>
+
+      <!-- Logo with subtle animation -->
+      <header-logo class="logo-component"></header-logo>
     </div>
-
-    <!-- Navigation component -->
-    <the-nav class="nav-component"></the-nav>
-
-    <!-- Logo with subtle animation -->
-    <header-logo class="logo-component"></header-logo>
 
     <!-- Enhanced search container with animations -->
     <div class="search-container">
@@ -206,12 +205,14 @@ export default {
 /* Header decorations */
 .header-decoration {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 15px;
   z-index: 1;
   padding: 10px;
   border-radius: 15px;
   transition: all 0.3s ease;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .header-decoration:hover {
@@ -445,7 +446,11 @@ export default {
 .peach {
   background-image: url("https://cdn-icons-png.flaticon.com/512/2909/2909838.png");
 }
-
+@media screen and (max-width: 870px) {
+  .search-container {
+    display: none;
+  }
+}
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
   .header {
@@ -468,13 +473,13 @@ export default {
     min-height: 80px;
   }
 
-  .header-decoration {
+  /* .header-decoration {
     display: none;
-  }
+  } */
 
-  .search-decoration {
+  /* .search-decoration {
     display: none;
-  }
+  } */
 
   .search-container {
     margin: 0 10px;
