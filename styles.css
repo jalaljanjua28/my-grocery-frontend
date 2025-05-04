@@ -1196,7 +1196,10 @@ strong {
   .search-container {
     display: none !important;
   }
-
+  .food-icon {
+    width: 20px !important;
+    height: 30px;
+  }
   .offer-item-offer {
     color: #2ecc71 !important;
     font-size: 7px !important;
@@ -1312,7 +1315,7 @@ strong {
 @media screen and (max-width: 300px) {
   .el-button {
     padding: 4px 10px;
-    font-size: x-small !important;
+    font-size: small !important;
   }
   .el-tabs__label {
     font-size: medium !important;

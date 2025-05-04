@@ -280,10 +280,10 @@ export default {
   align-items: center;
   flex: 1;
   max-width: 600px;
-  margin: 0 20px;
+  margin: 0 -17px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 30px;
-  padding: 5px 10px;
+  padding: 7px 2px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }

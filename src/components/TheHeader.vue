@@ -242,8 +242,6 @@ export default {
 } */
 
 .left-decoration {
-  /* margin-right: 15px;
-  margin-right: 8px; */
   margin-left: 62px;
 }
 
@@ -474,7 +472,7 @@ export default {
   }
 
   .food-icon {
-    width: 30px;
+    width: 25px;
     height: 30px;
   }
 
