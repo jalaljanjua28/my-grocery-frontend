@@ -5,12 +5,23 @@
 
     <!-- Left decoration with interactive food icons -->
     <div class="header-decoration left-decoration">
-      <div class="food-icon apple" title="Fresh Produce">
-        <div class="icon-tooltip">Fresh Produce</div>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+        "
+      >
+        <div class="food-icon apple" title="Fresh Produce">
+          <div class="icon-tooltip">Fresh Produce</div>
+        </div>
+        <div class="food-icon carrot" title="Vegetables">
+          <div class="icon-tooltip">Vegetables</div>
+        </div>
       </div>
-      <div class="food-icon carrot" title="Vegetables">
-        <div class="icon-tooltip">Vegetables</div>
-      </div>
+
       <!-- Navigation component -->
       <the-nav class="nav-component"></the-nav>
 
@@ -41,16 +52,24 @@
       </div>
     </div>
 
-    <!-- Menu component -->
-    <the-menu class="menu-component"></the-menu>
-
     <!-- Right decoration with interactive food icons -->
-    <div class="header-decoration right-decoration">
-      <div class="food-icon banana" title="Fruits">
-        <div class="icon-tooltip">Fruits</div>
-      </div>
-      <div class="food-icon orange" title="Citrus">
-        <div class="icon-tooltip">Citrus</div>
+    <div class="header-decoration">
+      <!-- Menu component -->
+      <the-menu class="menu-component"></the-menu>
+      <div
+        style="
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+        "
+      >
+        <div class="food-icon banana" title="Fruits">
+          <div class="icon-tooltip">Fruits</div>
+        </div>
+        <div class="food-icon orange" title="Citrus">
+          <div class="icon-tooltip">Citrus</div>
+        </div>
       </div>
     </div>
 
@@ -208,27 +227,24 @@ export default {
   flex-direction: row;
   gap: 15px;
   z-index: 1;
-  padding: 10px;
+  padding: 0px;
   border-radius: 15px;
   transition: all 0.3s ease;
   align-items: center;
   justify-content: flex-start;
+  margin-right: 0px;
 }
 
-.header-decoration:hover {
+/* .header-decoration:hover {
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transform: translateY(-2px);
-}
+} */
 
 .left-decoration {
-  margin-right: 15px;
-  margin-right: 8px;
+  /* margin-right: 15px;
+  margin-right: 8px; */
   margin-left: 62px;
-}
-
-.right-decoration {
-  margin-left: 15px;
 }
 
 /* Search container with decorations */
@@ -275,7 +291,7 @@ export default {
 /* Food icons */
 .food-icon {
   width: 35px;
-  height: 35px;
+  height: 39px !important;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -446,11 +462,11 @@ export default {
 .peach {
   background-image: url("https://cdn-icons-png.flaticon.com/512/2909/2909838.png");
 }
-@media screen and (max-width: 870px) {
+/* @media screen and (max-width: 870px) {
   .search-container {
     display: none;
   }
-}
+} */
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
   .header {
@@ -493,7 +509,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .header {
     flex-wrap: wrap;
     padding: 10px;
@@ -527,9 +543,9 @@ export default {
   .floating-food-icons {
     display: none;
   }
-}
+} */
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
   .header {
     border-radius: 0;
   }
@@ -538,7 +554,7 @@ export default {
   .menu-component {
     transform: scale(0.9);
   }
-}
+} */
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {

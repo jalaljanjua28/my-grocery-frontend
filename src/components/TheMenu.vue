@@ -11,6 +11,7 @@
             align-items: center;
             border-radius: 10px;
             padding: 10px;
+            flex-direction: column;
           "
         >
           <el-popover placement="bottom" width="230" trigger="hover">
@@ -21,7 +22,7 @@
                   background-color: none;
                   border: none;
                   padding: 0px;
-                  color: black;
+                  color: darkorange;
                 "
                 type="info"
                 plain
@@ -57,7 +58,7 @@
                 background-color: none;
                 border: none;
                 padding: 10px;
-                color: black;
+                color: darkorange;
               "
               type="info"
               plain

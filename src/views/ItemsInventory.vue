@@ -785,7 +785,7 @@ export default {
   }
 
   .page-title {
-    font-size: 20px;
+    font-size: 14px;
   }
 
   .page-title i {

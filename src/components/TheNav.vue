@@ -272,9 +272,9 @@ export default {
 /* Toggle button styling - ENHANCED */
 .navbar-toggle {
   position: fixed; /* Fixed position to prevent moving with sidebar */
-  top: 20px;
+  top: 13px;
   left: 20px;
-  width: 60px;
+  width: 52px;
   height: 60px;
   border-radius: 12px;
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);

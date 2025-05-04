@@ -9,8 +9,14 @@
       <div class="food-icon orange"></div>
     </div>
 
-    <div class="search-inventory">
+    <div class="search-HomeContainer">
+      <div class="search-decoration">
+        <div class="food-icon tomato" title="Search Inventory">
+          <div class="icon-tooltip">Search Inventory</div>
+        </div>
+      </div>
       <search-inventory
+        class="searchDev"
         :ExpiredFood="Food_expired"
         :ExpiredNonFood="NonFood_expired"
         :NonExpiredFood="Food_nonexpired"
@@ -18,6 +24,11 @@
         :itemsFood="Food"
         :itemsNonFood="NonFood"
       />
+      <div class="search-decoration">
+        <div class="food-icon broccoli" title="Healthy Options">
+          <div class="icon-tooltip">Healthy Options</div>
+        </div>
+      </div>
     </div>
 
     <div class="nav-buttons">
@@ -254,10 +265,45 @@ export default {
 </script>
 
 <style scoped>
+.search-HomeContainer {
+  background-color: rgba(50, 50, 50, 0.8) !important;
+}
 .el-page-header {
   display: none !important;
 }
-
+.searchDev {
+  flex: 1;
+}
+/* Search container with decorations */
+.search-HomeContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 600px;
+  margin: 0 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  padding: 5px 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+/* Pulsing animation for the search container when focused */
+.search-HomeContainer:focus-within {
+  box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.3);
+  animation: pulse-border 2s infinite;
+}
+.search-HomeContainer:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+.search-HomeContainer {
+  /* max-width: 450px; */
+  margin-bottom: 20px;
+}
+.search-decoration {
+  margin: 0 10px;
+  position: relative;
+}
 .home-page-container {
   position: relative;
   padding: 20px;
@@ -522,6 +568,11 @@ export default {
   .card-decoration {
     display: none;
   }
+  /* .search-HomeContainer {
+    margin: 0 10px;
+    max-width: 100%;
+    padding: 3px 8px;
+  } */
 
   .decorative-food-header,
   .decorative-food-footer {
@@ -544,10 +595,10 @@ export default {
 }
 
 @media screen and (max-width: 480px) {
-  .decorative-food-header,
+  /* .decorative-food-header,
   .decorative-food-footer {
     display: none;
-  }
+  } */
 
   .nav-buttons {
     flex-direction: column;
