@@ -1,6 +1,6 @@
 <template>
   <div class="logo-container">
-    <svg
+    <!-- <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       width="90"
@@ -14,7 +14,7 @@
         width="1000"
         height="1455"
       />
-    </svg>
+    </svg> -->
     <div>
       <p class="logo-text" style="">MY</p>
       <p class="logo-text">GROCERY</p>

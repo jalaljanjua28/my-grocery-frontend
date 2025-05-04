@@ -270,7 +270,8 @@ export default {
 
 /* Footer columns */
 .footer-column {
-  padding: 0 15px;
+  padding: 0 41px;
+  margin-left: 45px;
 }
 
 .column-header {
