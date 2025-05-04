@@ -1058,7 +1058,9 @@ strong {
   .el-input__icon {
     font-size: small;
   }
-
+  .table-title {
+    font-size: 15px;
+  }
   .page-title {
     font-size: 12px;
   }
@@ -1325,11 +1327,7 @@ strong {
   }
 
   .table-title {
-    text-align: center;
-    margin: 0 auto 20px;
-    color: #303133;
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 13px !important;
   }
 }
 /* Print styles */
