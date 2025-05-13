@@ -61,12 +61,7 @@ export default {
 };
 </script>
 <style scoped>
-.el-button {
-  padding: 6px 10px;
-  font-size: 12px;
-  margin-top: 10px;
-}
-.el-button--danger.is-plain {
+/* .el-button--danger.is-plain {
   width: 90% !important;
-}
+} */
 </style>

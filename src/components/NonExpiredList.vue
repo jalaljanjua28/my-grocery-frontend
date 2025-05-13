@@ -46,9 +46,9 @@
             >
               <el-button
                 type="text"
+                class="el-button-non-expired"
                 icon="el-icon-date"
                 circle
-                style="font-size: 20px !important"
                 @click="addExpiry(scope.row)"
               ></el-button>
             </el-tooltip>
@@ -78,9 +78,9 @@
             <el-tooltip content="Change price" placement="top" effect="light">
               <el-button
                 type="text"
+                class="el-button-non-expired"
                 icon="el-icon-money"
                 circle
-                style="font-size: 20px !important"
                 @click="addPrice(scope.row)"
               ></el-button>
             </el-tooltip>
@@ -110,18 +110,18 @@
             <el-tooltip content="Add Item" placement="top" effect="light">
               <el-button
                 type="text"
+                class="el-button-non-expired"
                 icon="el-icon-plus"
                 circle
-                style="font-size: 20px !important"
                 @click="addItem(scope.row)"
               ></el-button>
             </el-tooltip>
             <el-tooltip content="Delete Item" placement="top" effect="light">
               <el-button
                 type="text"
+                class="el-button-non-expired"
                 icon="el-icon-delete"
                 circle
-                style="font-size: 20px !important"
                 @click="deleteItem(scope.row)"
               ></el-button>
             </el-tooltip>

@@ -26,13 +26,7 @@
     </el-select>
     <el-button
       @click="checkFrequency"
-      style="
-        font-size: 16px;
-        border: none;
-        padding: 5px;
-        color: darkblue;
-        margin-top: 10px;
-      "
+      class="el-button-check-frequency"
       type="info"
       plain
       ><i class="el-icon-pie-chart"> Check Frequency</i>

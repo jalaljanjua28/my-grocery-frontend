@@ -547,7 +547,7 @@ export default {
 .image-container {
   position: relative;
   width: 60px;
-  height: 60px;
+  height: 46px;
   overflow: hidden;
   border-radius: 8px;
 }

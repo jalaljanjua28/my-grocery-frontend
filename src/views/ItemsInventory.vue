@@ -88,11 +88,7 @@
               class="inner-tabs"
             >
               <el-tab-pane name="1" label="Food">
-                <span
-                  slot="label"
-                  class="el-tabs__sublabel"
-                  style="font-size: large"
-                >
+                <span slot="label" class="el-tabs__sublabel">
                   <div class="tab-label-container">
                     <i class="el-icon-food"></i>
                     <span>Food</span>
@@ -107,11 +103,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane name="2" label="Not Food">
-                <span
-                  slot="label"
-                  class="el-tabs__sublabel"
-                  style="font-size: large"
-                >
+                <span slot="label" class="el-tabs__sublabel">
                   <div class="tab-label-container">
                     <i class="el-icon-bicycle"></i>
                     <span>Non Food</span>
@@ -148,11 +140,7 @@
               class="inner-tabs"
             >
               <el-tab-pane name="3" label="Food">
-                <span
-                  slot="label"
-                  class="el-tabs__sublabel"
-                  style="font-size: large"
-                >
+                <span slot="label" class="el-tabs__sublabel">
                   <div class="tab-label-container">
                     <i class="el-icon-food"></i>
                     <span>Food</span>
@@ -167,11 +155,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane name="4" label="Not Food">
-                <span
-                  slot="label"
-                  class="el-tabs__sublabel"
-                  style="font-size: large"
-                >
+                <span slot="label" class="el-tabs__sublabel">
                   <div class="tab-label-container">
                     <i class="el-icon-bicycle"></i>
                     <span>Non Food</span>
@@ -208,11 +192,7 @@
               class="inner-tabs"
             >
               <el-tab-pane name="5" label="Food">
-                <span
-                  slot="label"
-                  class="el-tabs__sublabel"
-                  style="font-size: large"
-                >
+                <span slot="label" class="el-tabs__sublabel">
                   <div class="tab-label-container">
                     <i class="el-icon-food"></i>
                     <span>Food</span>
@@ -227,11 +207,7 @@
                 </div>
               </el-tab-pane>
               <el-tab-pane name="6" label="Not Food">
-                <span
-                  slot="label"
-                  class="el-tabs__sublabel"
-                  style="font-size: large"
-                >
+                <span slot="label" class="el-tabs__sublabel">
                   <div class="tab-label-container">
                     <i class="el-icon-bicycle"></i>
                     <span>Non Food</span>
@@ -415,391 +391,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Custom styles specific to this component that don't overlap with global styles */
-.inventory-page-container {
-  position: relative;
-  padding: 20px 0;
-  min-height: 100vh;
-}
-
-/* Background pattern */
-.inventory-page-container::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmNWY1ZjUiPjwvcmVjdD4KPC9zdmc+");
-  opacity: 0.6;
-  z-index: -1;
-}
-
-/* Card decorations */
-/* Inventory card */
-.inventory-card {
-  position: relative;
-  margin-bottom: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border: none;
-  overflow: visible;
-  padding: 20px;
-}
-
-/* Card decorations */
-.card-decoration {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  z-index: 1;
-}
-
-.left-decoration {
-  left: -15px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.right-decoration {
-  right: -15px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* Search container */
-.search-container {
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: #f0f9eb;
-  border-radius: 10px;
-  border-left: 4px solid #67c23a;
-}
-
-.search-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.search-header i {
-  font-size: 24px;
-  color: #67c23a;
-  margin-right: 10px;
-}
-
-.search-header h3 {
-  margin: 0;
-  color: #67c23a;
-}
-
-.enhanced-search {
-  width: 100%;
-}
-
-/* Custom tabs styling */
-.tab-label-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-  padding-bottom: 5px;
-}
-
-.tab-indicator {
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
-.non-expired-indicator {
-  background-color: #67c23a;
-}
-
-.expired-indicator {
-  background-color: #f56c6c;
-}
-
-.shopping-indicator {
-  background-color: #409eff;
-}
-
-.food-indicator {
-  background-color: #e6a23c;
-}
-
-.non-food-indicator {
-  background-color: #909399;
-}
-
-.inner-tabs {
-  margin-top: 20px;
-  margin-bottom: 30px;
-}
-
-.tab-content-container {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
-}
-
-/* Add item button - custom styling */
-.add-item-button {
-  font-size: 16px;
-  padding: 6px 24px;
-  border-radius: 8px;
-  border: 2px solid #67c23a;
-  color: #67c23a;
-  background-color: #f0f9eb;
-  transition: all 0.3s ease;
-}
-
-.add-item-button:hover {
-  background-color: #67c23a;
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(103, 194, 58, 0.3);
-}
-
-/* Dialog header decoration */
-.dialog-header-decoration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.dialog-header-decoration h3 {
-  margin: 0 15px;
-  color: #67c23a;
-}
-
-/* Frequency card */
-.frequency-card {
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border: none;
-  padding: 20px;
-  margin-bottom: 30px;
-}
-
-.frequency-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ebeef5;
-}
-
-.frequency-header i {
-  font-size: 24px;
-  color: #409eff;
-  margin-right: 10px;
-}
-
-.frequency-header h3 {
-  margin: 0;
-  color: #409eff;
-}
-
-.frequency-description {
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #ecf5ff;
-  border-radius: 6px;
-}
-
-.frequency-description p {
-  margin: 0;
-  color: #409eff;
-  font-size: 14px;
-}
-
-/* Food icon images */
-.apple {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/415/415682.png");
-}
-
-.banana {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/3143/3143693.png");
-}
-
-.orange {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/3143/3143645.png");
-}
-
-.carrot {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/1147/1147801.png");
-}
-
-.broccoli {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/1147/1147809.png");
-}
-
-.tomato {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/590/590772.png");
-}
-
-.strawberry {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/2965/2965567.png");
-}
-
-.pineapple {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/3143/3143640.png");
-}
-
-.grapes {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/2909/2909761.png");
-}
-
-.avocado {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/2909/2909761.png");
-}
-
-.watermelon {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/3143/3143665.png");
-}
-
-.peach {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/2909/2909838.png");
-}
-
-.potato {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/1652/1652077.png");
-}
-
-.mango {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/1625/1625099.png");
-}
-
-.cherry {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/590/590775.png");
-}
-
-.lemon {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/590/590774.png");
-}
-
-.corn {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/1147/1147803.png");
-}
-
-.mushroom {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/1147/1147807.png");
-}
-
-/* Animation for decorative elements */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.decorative-food-header .food-icon,
-.decorative-food-footer .food-icon {
-  animation: float 5s ease-in-out infinite;
-}
-
-.decorative-food-header .food-icon:nth-child(odd),
-.decorative-food-footer .food-icon:nth-child(odd) {
-  animation-delay: 1s;
-}
-
-.decorative-food-header .food-icon:nth-child(even),
-.decorative-food-footer .food-icon:nth-child(even) {
-  animation-delay: 2s;
-}
-
-.card-decoration .food-icon {
-  animation: float 6s ease-in-out infinite;
-}
-
-.card-decoration .food-icon:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.card-decoration .food-icon:nth-child(2) {
-  animation-delay: 2s;
-}
-
-.card-decoration .food-icon:nth-child(3) {
-  animation-delay: 4s;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .card-decoration {
-    display: none;
-  }
-
-  .decorative-food-header,
-  .decorative-food-footer {
-    max-width: 100%;
-  }
-
-  .food-icon {
-    width: 25px;
-    height: 25px;
-  }
-
-  .nav-button {
-    font-size: medium;
-    padding: 10px 15px;
-  }
-
-  .search-container {
-    padding: 15px;
-  }
-
-  .tab-content-container {
-    padding: 15px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .decorative-food-header,
-  .decorative-food-footer {
-    display: none;
-  }
-
-  .nav-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav-button {
-    width: 100%;
-    max-width: 250px;
-  }
-
-  .page-title {
-    font-size: 14px;
-  }
-
-  .page-title i {
-    font-size: 24px;
-  }
-
-  .search-header i,
-  .frequency-header i {
-    font-size: 20px;
-  }
-
-  .search-header h3,
-  .frequency-header h3 {
-    font-size: 16px;
-  }
-}
-</style>
+<style scoped></style>

@@ -1,32 +1,11 @@
 <template>
   <div>
     <el-row class="block-col-2">
-      <el-col
-        :span="12"
-        style="display: flex; flex-direction: row; align-items: center"
-        ><div
-          class="menu-bar"
-          style="
-            display: flex;
-            align-items: center;
-            border-radius: 10px;
-            padding: 10px;
-            flex-direction: column;
-          "
-        >
+      <el-col class="el-col-24-menu" :span="12">
+        <div class="menu-bar">
           <el-popover placement="bottom" width="230" trigger="hover">
             <template #reference>
-              <el-button
-                style="
-                  font-size: large;
-                  background-color: none;
-                  border: none;
-                  padding: 0px;
-                  color: darkorange;
-                "
-                type="info"
-                plain
-              >
+              <el-button class="el-button-user" type="info" plain>
                 <i class="el-icon-s-custom"> User</i>
               </el-button>
             </template>
@@ -52,16 +31,7 @@
             </div>
           </el-popover>
           <router-link to="/SignUp" style="text-decoration: none">
-            <el-button
-              style="
-                font-size: large;
-                background-color: none;
-                border: none;
-                padding: 10px;
-                color: darkorange;
-              "
-              type="info"
-              plain
+            <el-button class="el-button-signup" type="info" plain
               ><i class="el-icon-user"> SignUp</i></el-button
             >
           </router-link>
@@ -188,11 +158,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-.el-col-12 {
-  width: 100%;
-}
-.el-button--info.is-plain {
-  background: none;
-}
-</style>
+<style scoped></style>

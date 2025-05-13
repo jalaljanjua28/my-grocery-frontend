@@ -68,9 +68,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.el-card__body,
-.el-main {
-  padding: 0px;
-}
-</style>
+<style scoped></style>

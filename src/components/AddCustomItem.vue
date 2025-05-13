@@ -13,15 +13,10 @@
         </el-form-item>
         <el-form-item>
           <el-button
-            style="
-              display: flex;
-              align-content: stretch;
-              justify-content: center;
-              align-items: center;
-            "
             type="success"
             @click="AddItem"
             plain
+            class="add-item-button"
             >Add Item</el-button
           >
         </el-form-item>
@@ -93,10 +88,7 @@ export default {
 </script>
 
 <style scoped>
-.el-button {
-  margin-top: 15px;
-}
-div {
+/* div {
   width: -webkit-fill-available !important;
-}
+} */
 </style>

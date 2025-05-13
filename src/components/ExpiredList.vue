@@ -36,7 +36,7 @@
                 type="text"
                 icon="el-icon-plus"
                 circle
-                style="font-size: 20px !important"
+                class="el-button-add-item"
                 @click="addItem(scope.row)"
               ></el-button>
             </el-tooltip>
@@ -45,7 +45,7 @@
                 type="text"
                 icon="el-icon-delete"
                 circle
-                style="font-size: 20px !important"
+                class="el-button-delete-item"
                 @click="deleteItem(scope.row)"
               ></el-button>
             </el-tooltip>
@@ -154,10 +154,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* .responsive-table {
-  width: 100%;
-  border-collapse: collapse;
-  width: 735px !important;
-} */
-</style>
+<style scoped></style>

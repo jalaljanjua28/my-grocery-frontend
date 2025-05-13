@@ -60,10 +60,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-.el-button {
-  padding: 6px 10px;
-  font-size: 12px;
-  margin-top: 10px;
-}
-</style>
+<style scoped></style>

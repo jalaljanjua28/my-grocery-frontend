@@ -69,6 +69,7 @@
                   icon="el-icon-plus"
                   circle
                   size="large"
+                  class="el-button-searchInventory"
                   @click="addItem(scope.row)"
                 ></el-button>
                 <el-button
@@ -76,6 +77,7 @@
                   icon="el-icon-delete"
                   circle
                   size="large"
+                  class="el-button-searchInventory"
                   @click="deleteItem(scope.row)"
                 ></el-button>
               </el-row>
@@ -241,9 +243,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.el-button.is-circle {
-  padding: 7px !important;
-  border-radius: 100% !important;
-}
-</style>
+<style scoped></style>

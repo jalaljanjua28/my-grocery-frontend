@@ -41,7 +41,7 @@
                 type="text"
                 icon="el-icon-date"
                 circle
-                style="font-size: 20px !important"
+                class="el-button-add-expiry"
                 @click="addExpiry(scope.row)"
               ></el-button>
             </el-tooltip>
@@ -63,12 +63,7 @@
                 </el-form-item>
                 <el-form-item>
                   <el-button
-                    style="
-                      display: flex;
-                      align-content: stretch;
-                      justify-content: center;
-                      align-items: center;
-                    "
+                    class="el-button-add-date"
                     type="success"
                     @click="updateExpiry"
                     plain
@@ -81,8 +76,8 @@
               <el-button
                 type="text"
                 icon="el-icon-money"
+                class="el-button-add-price"
                 circle
-                style="font-size: 20px !important"
                 @click="addPrice(scope.row)"
               ></el-button>
             </el-tooltip>
@@ -103,17 +98,8 @@
                   />
                 </el-form-item>
                 <el-form-item>
-                  <el-button
-                    style="
-                      display: flex;
-                      align-content: stretch;
-                      justify-content: center;
-                      align-items: center;
-                    "
-                    type="success"
-                    @click="updatePrice"
-                    plain
-                    >Add Price
+                  <el-button class="el-button-update-price" plain>
+                    type="success" @click="updatePrice" plain >Add Price
                   </el-button>
                 </el-form-item>
               </el-form>
