@@ -7,7 +7,7 @@
       </div>
 
       <div class="container">
-        <el-row :gutter="20" style="margin-left: 70px; margin-top: 18px">
+        <el-row :gutter="20" style="margin-left: 12px; margin-top: 18px">
           <el-col :span="8" class="footer-column">
             <div class="column-header">
               <div class="food-icon tomato"></div>

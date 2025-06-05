@@ -10,27 +10,6 @@
       <span class="toggle-icon"></span>
       <span class="toggle-label">Menu</span>
     </el-button>
-
-    <!-- Sidebar navigation with enhanced styling -->
-    <!-- <transition name="nav-slide">
-      <div
-        v-if="showNavbar"
-        class="nav-sidebar"
-        :class="{ 'is-visible': showNavbar }"
-      >
-        <div class="nav-header">
-          <div class="nav-logo">
-            <i class="el-icon-shopping-bag-1"></i>
-            <span>My Grocery</span>
-          </div>
-          <el-button
-            class="close-nav"
-            @click="toggleNavbar"
-            aria-label="Close navigation"
-          >
-            <i class="el-icon-close"></i>
-          </el-button>
-        </div> -->
     <transition name="nav-slide">
       <div
         v-if="showNavbar"
@@ -89,20 +68,6 @@
                 <span>My Account</span>
               </router-link>
             </el-menu-item>
-
-            <!-- <el-menu-item index="1-2" class="submenu-item">
-              <router-link to="/shopping-cart" class="menu-link">
-                <i class="el-icon-shopping-cart-full"></i>
-                <span>Shopping Cart</span>
-              </router-link>
-            </el-menu-item> -->
-
-            <!-- <el-menu-item index="1-3" class="submenu-item">
-              <router-link to="/orders-history" class="menu-link">
-                <i class="el-icon-takeaway-box"></i>
-                <span>Order History</span>
-              </router-link>
-            </el-menu-item> -->
           </el-submenu>
 
           <!-- Inventory section -->
@@ -125,36 +90,7 @@
                 <span>Receipt Scanner</span>
               </router-link>
             </el-menu-item>
-
-            <!-- <el-menu-item index="2-3" class="submenu-item">
-              <router-link to="/add-item" class="menu-link">
-                <i class="el-icon-plus"></i>
-                <span>Add Items</span>
-              </router-link>
-            </el-menu-item> -->
           </el-submenu>
-
-          <!-- Food & Recipes section -->
-          <!-- <el-submenu index="3" class="menu-submenu">
-            <template #title>
-              <i class="el-icon-food"></i>
-              <span>Food & Recipes</span>
-            </template>
-
-            <el-menu-item index="3-1" class="submenu-item">
-              <router-link to="/user-defined-prompts" class="menu-link">
-                <i class="el-icon-chat-dot-round"></i>
-                <span>Food Prompts</span>
-              </router-link>
-            </el-menu-item>
-
-            <el-menu-item index="3-2" class="submenu-item">
-              <router-link to="/recipe-suggestions" class="menu-link">
-                <i class="el-icon-notebook-2"></i>
-                <span>Recipe Ideas</span>
-              </router-link>
-            </el-menu-item>
-          </el-submenu> -->
 
           <!-- Information section -->
           <el-submenu index="4" class="menu-submenu">
@@ -176,13 +112,6 @@
                 <span>FAQs</span>
               </router-link>
             </el-menu-item>
-
-            <!-- <el-menu-item index="4-3" class="submenu-item">
-              <router-link to="/contact-us" class="menu-link">
-                <i class="el-icon-message"></i>
-                <span>Contact Us</span>
-              </router-link>
-            </el-menu-item> -->
           </el-submenu>
         </el-menu>
 

@@ -13,14 +13,11 @@
           <div class="icon-tooltip">Vegetables</div>
         </div>
       </div>
-
-      <!-- Navigation component -->
-      <the-nav class="nav-component"></the-nav>
-
-      <!-- Logo with subtle animation -->
       <header-logo class="logo-component"></header-logo>
     </div>
 
+    <!-- Navigation component -->
+    <!-- <the-nav class="nav-component"></the-nav> -->
     <!-- Enhanced search container with animations -->
     <div class="search-container">
       <div class="search-decoration">
@@ -45,26 +42,21 @@
     </div>
 
     <!-- Right decoration with interactive food icons -->
-    <div class="header-decoration">
-      <!-- Menu component -->
+    <div class="header-decoration right-decoration">
       <the-menu class="menu-component"></the-menu>
-      <div
-        style="
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
-        "
-      >
-        <div class="food-icon banana" title="Fruits">
-          <div class="icon-tooltip">Fruits</div>
-        </div>
-        <div class="food-icon orange" title="Citrus">
-          <div class="icon-tooltip">Citrus</div>
+
+      <div class="header-decoration-content">
+        <!-- Menu component -->
+        <div>
+          <div class="food-icon banana" title="Fruits">
+            <div class="icon-tooltip">Fruits</div>
+          </div>
+          <div class="food-icon orange" title="Citrus">
+            <div class="icon-tooltip">Citrus</div>
+          </div>
         </div>
       </div>
     </div>
-
     <!-- Floating food icons background with enhanced animations -->
     <div class="floating-food-icons">
       <div class="floating-icon strawberry" title="Berries"></div>
@@ -79,7 +71,7 @@
 <script>
 import TheMenu from "./TheMenu.vue";
 import SearchInventory from "./SearchInventory.vue";
-import TheNav from "./TheNav.vue";
+// import TheNav from "./TheNav.vue";
 import {
   fetchMasterExpiredData,
   fetchShoppingListData,
@@ -91,7 +83,7 @@ export default {
     TheMenu,
     SearchInventory,
     HeaderLogo,
-    TheNav,
+    // TheNav,
   },
   data() {
     return {
@@ -107,7 +99,10 @@ export default {
   async mounted() {
     try {
       // Add a subtle loading animation to the header
-      document.querySelector(".header").classList.add("loading");
+      // Use this.$el to reliably access the component's root element
+      if (this.$el) {
+        this.$el.classList.add("loading");
+      }
 
       // Fetch master expired data
       const { Food_expired, NonFood_expired } = await fetchMasterExpiredData();
@@ -127,7 +122,10 @@ export default {
 
       // Remove loading animation when data is loaded
       setTimeout(() => {
-        document.querySelector(".header").classList.remove("loading");
+        // Use this.$el again
+        if (this.$el) {
+          this.$el.classList.remove("loading");
+        }
       }, 500);
     } catch (error) {
       console.error("Error fetching data:", error);

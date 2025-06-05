@@ -1,5 +1,7 @@
 <template>
   <div class="home-page-container">
+    <the-nav></the-nav>
+
     <!-- Decorative food-themed header -->
     <div class="decorative-food-header">
       <div class="food-icon apple"></div>
@@ -69,7 +71,7 @@
 
     <!-- <offers-page></offers-page> -->
     <el-card class="main-content-card">
-      <div class="card-decoration left-decoration">
+      <div class="card-decoration left-list-decoration">
         <div class="food-icon tomato"></div>
         <div class="food-icon grapes"></div>
         <div class="food-icon avocado"></div>
@@ -110,7 +112,7 @@
 
       <delete-all-purchase-list></delete-all-purchase-list>
 
-      <div class="card-decoration right-decoration">
+      <div class="card-decoration right-list-decoration">
         <div class="food-icon watermelon"></div>
         <div class="food-icon peach"></div>
         <div class="food-icon potato"></div>
@@ -131,6 +133,7 @@
 </template>
 
 <script>
+import TheNav from "../components/TheNav.vue";
 // import OffersPage from "@/views/OffersList.vue";
 import HomePrompt from "../components/HomePrompts.vue";
 import PurchasedList from "../components/PurchasedList.vue";
@@ -152,6 +155,7 @@ export default {
     PurchasedList,
     DeleteAllPurchaseList,
     SearchInventory,
+    TheNav,
   },
   data() {
     return {

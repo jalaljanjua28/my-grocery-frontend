@@ -38,7 +38,7 @@
         <div class="food-icon orange"></div>
       </div>
       <el-card class="inventory-card">
-        <div class="card-decoration left-decoration">
+        <div class="card-decoration left-inventorylist-decoration">
           <div class="food-icon tomato"></div>
           <div class="food-icon grapes"></div>
           <div class="food-icon avocado"></div>
@@ -235,11 +235,7 @@
           >
             <i class="el-icon-plus"></i> Add Manually to Shopping
           </el-button>
-          <el-dialog
-            :visible.sync="dialogVisible"
-            width="90%"
-            class="custom-dialog"
-          >
+          <el-dialog :visible.sync="dialogVisible" class="custom-dialog">
             <div class="dialog-header-decoration">
               <div class="food-icon strawberry"></div>
               <h3>Add New Item</h3>

@@ -98,8 +98,13 @@
                   />
                 </el-form-item>
                 <el-form-item>
-                  <el-button class="el-button-update-price" plain>
-                    type="success" @click="updatePrice" plain >Add Price
+                  <el-button
+                    class="el-button-update-price"
+                    type="success"
+                    @click="updatePrice"
+                    plain
+                  >
+                    Add Price
                   </el-button>
                 </el-form-item>
               </el-form>
