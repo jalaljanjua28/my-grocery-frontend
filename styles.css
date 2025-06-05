@@ -79,8 +79,10 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   overflow: visible !important;
+  overflow-x: visible;
+  overflow-y: visible;
   /* Prevent scrolling on small screens
-  overflow-x: visible; /* Don't hide horizontal overflow */
+   /* Don't hide horizontal overflow */
 }
 
 p {
