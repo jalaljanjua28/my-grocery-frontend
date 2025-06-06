@@ -801,7 +801,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
