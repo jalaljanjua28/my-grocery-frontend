@@ -1255,7 +1255,7 @@ h4 {
   border-radius: var(--border-radius-sm);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
-  width: 55% !important;
+  width: fit-content !important;
 }
 
 .el-dialog__title {
@@ -2855,7 +2855,6 @@ h4 {
   text-align: center;
   margin-bottom: 30px;
   padding: 25px;
-  width: 100%;
   max-width: 800px;
   background: linear-gradient(135deg, var(--background-color) 0%, #c3cfe2 100%);
   /* Use variable */
@@ -3147,7 +3146,6 @@ h4 {
   width: 100%;
   height: 100%;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmNWY1ZjUiPjwvcmVjdD4KPC9zdmc+");
-
   z-index: -1;
   pointer-events: none;
 }
@@ -3157,7 +3155,7 @@ h4 {
   margin-bottom: 30px;
   padding: 25px;
   width: 100%;
-  max-width: 800px;
+  /* max-width: 800px; */
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -4146,15 +4144,17 @@ h4 {
 }
 
 .scan-header {
+  display: flex;
   text-align: center;
   margin-bottom: 30px;
   padding: 25px;
-  width: 100%;
   max-width: 800px;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   will-change: transform;
+  flex-direction: row;
+  align-items: center;
 }
 
 .scan-icon-container {
@@ -4287,7 +4287,7 @@ h4 {
 .action-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 10x;
   margin-top: 30px;
   position: relative;
   z-index: 1;
@@ -4512,7 +4512,7 @@ h4 {
 
 /* Instructions section styling */
 .instructions-section {
-  width: 100%;
+  /* width: 100%; */
   max-width: 800px;
   margin-bottom: 40px;
   background-color: white;
@@ -5729,6 +5729,17 @@ h4 {
 /* 13. Media Queries */
 
 /* Small devices (phones) */
+
+@media screen and (max-width: 390px) {
+  .account-content {
+    margin-left: 25px;
+    margin-right: 42px;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+  }
+}
+
 @media screen and (max-width: 500px) {
   :root {
     /* Adjust spacing for small screens */
@@ -5886,8 +5897,8 @@ h4 {
 
   .auth-card {
     margin: 10px;
-    padding: 20px;
-    width: calc(100% - 20px);
+    /* padding: 20px;
+    width: calc(100% - 20px); */
   }
 
   .auth-header h2 {
