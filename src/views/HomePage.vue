@@ -11,7 +11,7 @@
       <div class="food-icon orange"></div>
     </div>
 
-    <div class="search-HomeContainer">
+    <!-- <div class="search-homepage">
       <div class="search-decoration">
         <div class="food-icon tomato" title="Search Inventory">
           <div class="icon-tooltip">Search Inventory</div>
@@ -31,7 +31,7 @@
           <div class="icon-tooltip">Healthy Options</div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="nav-buttons">
       <router-link to="items-inventory" class="router_link">
@@ -143,7 +143,7 @@ import {
   fetchMasterExpiredData,
   fetchShoppingListData,
 } from "@/plugins/Dataservice.js";
-import SearchInventory from "../components/SearchInventory.vue";
+// import SearchInventory from "../components/SearchInventory.vue";
 import { auth } from "../Firebase.js";
 
 const baseUrl = "http://127.0.0.1:8081/api";
@@ -154,7 +154,7 @@ export default {
     HomePrompt,
     PurchasedList,
     DeleteAllPurchaseList,
-    SearchInventory,
+    // SearchInventory,
     TheNav,
   },
   data() {

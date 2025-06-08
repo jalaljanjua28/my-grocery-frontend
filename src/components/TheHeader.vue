@@ -19,7 +19,7 @@
     <!-- Navigation component -->
     <!-- <the-nav class="nav-component"></the-nav> -->
     <!-- Enhanced search container with animations -->
-    <div class="search-container">
+    <div class="search-header">
       <div class="search-decoration">
         <div class="food-icon tomato" title="Search Inventory">
           <div class="icon-tooltip">Search Inventory</div>
