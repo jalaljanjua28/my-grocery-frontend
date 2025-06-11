@@ -297,7 +297,7 @@ export default {
 </script>
 
 <style scoped>
-.el-button--success.is-plain,
+/* .el-button--success.is-plain,
 .el-button--info.is-plain,
 .el-button--warning.is-plain,
 .el-button--primary.is-plain,
@@ -308,5 +308,5 @@ export default {
   justify-content: center;
   align-items: stretch;
   margin-left: 20px !important;
-}
+} */
 </style>

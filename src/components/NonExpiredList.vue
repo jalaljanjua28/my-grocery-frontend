@@ -338,9 +338,6 @@ export default {
 </script>
 
 <style scoped>
-.el-button--info.is-plain {
-  border: 2px solid;
-  width: auto !important;
-  margin-bottom: 10px !important;
-}
+/* .el-button--info.is-plain {
+} */
 </style>

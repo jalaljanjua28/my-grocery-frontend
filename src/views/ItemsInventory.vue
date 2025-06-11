@@ -45,8 +45,8 @@
         </div>
 
         <!-- Enhanced Search Container -->
-        <div class="search-container">
-          <div class="search-header">
+        <div class="search-inventory">
+          <div class="search-inventory-header">
             <i class="el-icon-search"></i>
             <h3>Find Items</h3>
           </div>
