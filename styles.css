@@ -5898,7 +5898,7 @@ h4 {
     display: flex;
     align-items: center;
     border: none !important;
-    margin-right: 44px !important;
+    /* margin-right: 44px !important; */
     border-radius: 10px;
     padding: 10px;
   }
@@ -6238,6 +6238,10 @@ h4 {
 
 /* Medium devices (tablets) */
 @media screen and (max-width: 750px) {
+  .el-collapse-item__header {
+    width: max-content;
+    font-size: 14px;
+  }
   .content-decoration {
     display: none;
   }
@@ -6461,10 +6465,10 @@ h4 {
     display: none;
   }
 
-  .decorative-food-header,
+  /* .decorative-food-header,
   .decorative-food-footer {
     max-width: 100%;
-  }
+  } */
 
   /* .food-icon {
     width: 25px;
