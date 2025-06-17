@@ -158,4 +158,9 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.el-button--info.is-plain {
+  background: none !important;
+  color: white !important;
+}
+</style>

@@ -2,7 +2,6 @@
   <el-header class="header">
     <!-- Animated gradient background -->
     <div class="header-background"></div>
-
     <!-- Left decoration with interactive food icons -->
     <div class="header-decoration left-decoration">
       <div class="header-decoration-content">
@@ -15,9 +14,7 @@
       </div>
       <header-logo class="logo-component"></header-logo>
     </div>
-
     <!-- Navigation component -->
-    <!-- <the-nav class="nav-component"></the-nav> -->
     <!-- Enhanced search container with animations -->
     <div class="search-header">
       <div class="search-decoration">

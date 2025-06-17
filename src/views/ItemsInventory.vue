@@ -118,7 +118,6 @@
                 </div>
               </el-tab-pane>
             </el-tabs>
-            <delete-all-master-non-expired></delete-all-master-non-expired>
           </el-tab-pane>
 
           <!-- Expired Tab -->
@@ -170,7 +169,6 @@
                 </div>
               </el-tab-pane>
             </el-tabs>
-            <delete-all-master-expired></delete-all-master-expired>
           </el-tab-pane>
 
           <!-- Shopping List Tab -->
@@ -222,7 +220,6 @@
                 </div>
               </el-tab-pane>
             </el-tabs>
-            <delete-all-shopping></delete-all-shopping>
           </el-tab-pane>
         </el-tabs>
 
@@ -251,6 +248,7 @@
           <div class="food-icon potato"></div>
         </div>
       </el-card>
+      <delete-all></delete-all>
 
       <!-- Enhanced Frequency List Card -->
       <el-card class="frequency-card">
@@ -284,9 +282,10 @@ import SearchInventory from "../components/SearchInventory.vue";
 import ExpiredList from "../components/ExpiredList.vue";
 import NonExpiredList from "../components/NonExpiredList.vue";
 import AddItems from "../components/AddCustomItem.vue";
-import DeleteAllMasterNonExpired from "../components/DeleteAllMasterNonExpired.vue";
-import DeleteAllShopping from "../components/DeleteAllShopping.vue";
-import DeleteAllMasterExpired from "../components/DeleteAllMasterExpired.vue";
+import DeleteAll from "../components/DeleteAll.vue";
+// import DeleteAllMasterNonExpired from "../components/DeleteAllMasterNonExpired.vue";
+// import DeleteAllShopping from "../components/DeleteAllShopping.vue";
+// import DeleteAllMasterExpired from "../components/DeleteAllMasterExpired.vue";
 import ShoppingList from "../components/ShoppingList.vue";
 import FrequencyList from "../components/FrequencyList.vue";
 import {
@@ -302,9 +301,10 @@ export default {
     ExpiredList,
     NonExpiredList,
     AddItems,
-    DeleteAllMasterNonExpired,
-    DeleteAllShopping,
-    DeleteAllMasterExpired,
+    DeleteAll,
+    // DeleteAllMasterNonExpired,
+    // DeleteAllShopping,
+    // DeleteAllMasterExpired,
     FrequencyList,
   },
   data() {

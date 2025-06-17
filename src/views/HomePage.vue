@@ -10,29 +10,6 @@
       <div class="food-icon broccoli"></div>
       <div class="food-icon orange"></div>
     </div>
-
-    <!-- <div class="search-homepage">
-      <div class="search-decoration">
-        <div class="food-icon tomato" title="Search Inventory">
-          <div class="icon-tooltip">Search Inventory</div>
-        </div>
-      </div>
-      <search-inventory
-        class="searchDev"
-        :ExpiredFood="Food_expired"
-        :ExpiredNonFood="NonFood_expired"
-        :NonExpiredFood="Food_nonexpired"
-        :NonExpiredNonFood="NonFood_nonexpired"
-        :itemsFood="Food"
-        :itemsNonFood="NonFood"
-      />
-      <div class="search-decoration">
-        <div class="food-icon broccoli" title="Healthy Options">
-          <div class="icon-tooltip">Healthy Options</div>
-        </div>
-      </div>
-    </div> -->
-
     <div class="nav-buttons">
       <router-link to="items-inventory" class="router_link">
         <el-button class="nav-button" type="success" plain
@@ -110,17 +87,13 @@
         </el-tabs>
       </section>
 
-      <delete-all-purchase-list></delete-all-purchase-list>
-
       <div class="card-decoration right-list-decoration">
         <div class="food-icon watermelon"></div>
         <div class="food-icon peach"></div>
         <div class="food-icon potato"></div>
       </div>
     </el-card>
-
     <home-prompt></home-prompt>
-
     <!-- Decorative food-themed footer -->
     <div class="decorative-food-footer">
       <div class="food-icon mango"></div>
@@ -134,27 +107,21 @@
 
 <script>
 import TheNav from "../components/TheNav.vue";
-// import OffersPage from "@/views/OffersList.vue";
 import HomePrompt from "../components/HomePrompts.vue";
 import PurchasedList from "../components/PurchasedList.vue";
-import DeleteAllPurchaseList from "../components/DeleteAllPurchaseList.vue";
 import {
   fetchPurchasedListData,
   fetchMasterExpiredData,
   fetchShoppingListData,
 } from "@/plugins/Dataservice.js";
-// import SearchInventory from "../components/SearchInventory.vue";
 import { auth } from "../Firebase.js";
 
 const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
 
 export default {
   components: {
-    // OffersPage,
     HomePrompt,
     PurchasedList,
-    DeleteAllPurchaseList,
-    // SearchInventory,
     TheNav,
   },
   data() {
@@ -189,9 +156,7 @@ export default {
       const { Food, NonFood } = await fetchShoppingListData();
       this.Food = Food;
       this.NonFood = NonFood;
-      // await this.jsonJokes();
       this.fetchJokesWithTimestamp();
-
       setInterval(() => {
         this.fetchJokesWithTimestamp();
       }, 3600000); // 3600000 milliseconds = 1 hour
@@ -235,7 +200,6 @@ export default {
           throw new Error("User not authenticated");
         }
         const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-
         const timestamp = Math.floor(Date.now() / 1000); // Current timestamp in seconds
         const response = await fetch(
           `${baseUrl}/jokes-with-timestamp/${timestamp}`,
@@ -247,11 +211,9 @@ export default {
             },
           }
         );
-
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         const data = await response.json();
         if (data.jokes && data.jokes.length > 0) {
           this.jokes = data.jokes[0]; // Set only the first joke

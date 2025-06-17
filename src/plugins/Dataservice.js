@@ -183,3 +183,39 @@ function processData(data) {
     throw error;
   }
 }
+// Add this function to your existing Dataservice.js file
+
+export async function deleteAllItems(endpoint) {
+  return new Promise((resolve, reject) => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const idToken = await user.getIdToken(/* forceRefresh */ true);
+          console.log("Deleting all items from:", endpoint);
+
+          const response = await fetch(`${baseUrl}/deleteAll/${endpoint}`, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`Failed to delete all items from ${endpoint}`);
+          }
+
+          const data = await response.json();
+          console.log(`Delete all ${endpoint} response:`, data);
+          resolve(data);
+        } catch (error) {
+          console.error(`Error deleting all items from ${endpoint}:`, error);
+          reject(error);
+        }
+      } else {
+        reject(new Error("User not authenticated"));
+      }
+    });
+  });
+}

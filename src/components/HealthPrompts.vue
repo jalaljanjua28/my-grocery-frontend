@@ -5,14 +5,12 @@
         <i :class="`el-icon-${healthIcons[i % healthIcons.length]}`"></i>
       </div>
     </div>
-
     <el-card class="health-card">
       <div class="card-header">
         <i class="el-icon-first-aid-kit"></i>
         <h2>Health & Wellness</h2>
         <i class="el-icon-first-aid-kit"></i>
       </div>
-
       <el-collapse :accordion="true" class="custom-collapse">
         <!-- Allergy Information Section -->
         <el-collapse-item title="Allergy Information" name="allergy">
@@ -22,12 +20,10 @@
               <span>Allergy Information</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-umbrella"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div
@@ -39,7 +35,6 @@
                     <i class="el-icon-warning"></i>
                     <h3>Allergy Alert</h3>
                   </div>
-
                   <p
                     v-if="item['Food Item'] && item['Food Item'].trim()"
                     class="food-item-list"
@@ -47,7 +42,6 @@
                     <i class="el-icon-food"></i>
                     <strong>Food Item: </strong>{{ item["Food Item"] }}
                   </p>
-
                   <div
                     v-if="
                       item['Allergy Information'] &&
@@ -57,13 +51,11 @@
                   >
                     <p v-html="formatText(item['Allergy Information'])"></p>
                   </div>
-
                   <el-divider
                     v-if="index < AllergyInformation.length - 1"
                     class="fancy-divider"
                   ></el-divider>
                 </div>
-
                 <el-alert
                   v-if="!hasValidAllergyInformation"
                   title="No Allergy Information"
@@ -81,7 +73,6 @@
                   </div>
                 </el-alert>
               </div>
-
               <el-button
                 type="danger"
                 @click="
@@ -99,13 +90,11 @@
                 Generate Allergy Information
               </el-button>
             </div>
-
             <div class="content-decoration right">
               <i class="el-icon-umbrella"></i>
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Healthier Eating Alternatives Section -->
         <el-collapse-item
           title="Healthier Eating Alternatives"
@@ -117,12 +106,10 @@
               <span>Healthier Eating Alternatives</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-apple"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div
@@ -134,7 +121,6 @@
                     <i class="el-icon-refresh-right"></i>
                     <h3>Healthy Alternative</h3>
                   </div>
-
                   <p
                     v-if="item['Food Item'] && item['Food Item'].trim()"
                     class="food-item-list"
@@ -142,7 +128,6 @@
                     <i class="el-icon-food"></i>
                     <strong>Food Item:</strong> {{ item["Food Item"] }}
                   </p>
-
                   <p
                     v-if="
                       item['Healthy Alternative'] &&
@@ -154,13 +139,11 @@
                       v-html="formatText(item['Healthy Alternative'])"
                     ></span>
                   </p>
-
                   <el-divider
                     v-if="index < alternatives.length - 1"
                     class="fancy-divider"
                   ></el-divider>
                 </div>
-
                 <el-alert
                   v-if="!hasValidAlternatives"
                   title="No Healthy Alternatives"
@@ -178,7 +161,6 @@
                   </div>
                 </el-alert>
               </div>
-
               <el-button
                 type="success"
                 @click="
@@ -196,13 +178,11 @@
                 Generate Healthy Alternatives
               </el-button>
             </div>
-
             <div class="content-decoration right">
               <i class="el-icon-apple"></i>
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Healthy Eating Advice Section -->
         <el-collapse-item title="Healthy Eating Advice" name="eating-advice">
           <template slot="title">
@@ -211,12 +191,10 @@
               <span>Healthy Eating Advice</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-fork-spoon"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div
@@ -228,7 +206,6 @@
                     <i class="el-icon-document"></i>
                     <h3>Eating Advice</h3>
                   </div>
-
                   <div
                     v-if="item['Health Advice'] && item['Health Advice'].trim()"
                     class="suggestion-content"
@@ -237,13 +214,11 @@
                       <span v-html="formatText(item['Health Advice'])"></span>
                     </p>
                   </div>
-
                   <el-divider
                     v-if="index < eatingAdviceList.length - 1"
                     class="fancy-divider"
                   ></el-divider>
                 </div>
-
                 <el-alert
                   v-if="!hasValidEatingAdvice"
                   title="No Healthy Eating Advice"
@@ -262,7 +237,6 @@
                   </div>
                 </el-alert>
               </div>
-
               <el-button
                 type="primary"
                 @click="
@@ -280,13 +254,11 @@
                 Generate Eating Advice
               </el-button>
             </div>
-
             <div class="content-decoration right">
               <i class="el-icon-fork-spoon"></i>
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Health Advice Section -->
         <el-collapse-item title="Health Advice" name="health-advice">
           <template slot="title">
@@ -295,12 +267,10 @@
               <span>Health Advice</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-medal"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div
@@ -312,7 +282,6 @@
                     <i class="el-icon-help"></i>
                     <h3>Health Guidance</h3>
                   </div>
-
                   <div
                     class="prompt-container"
                     v-if="advice.Prompt && advice.Prompt.trim()"
@@ -322,7 +291,6 @@
                       <strong>Prompt:</strong> {{ advice.Prompt }}
                     </p>
                   </div>
-
                   <p
                     v-if="
                       advice['Health Advice'] && advice['Health Advice'].trim()
@@ -331,13 +299,11 @@
                   >
                     <span v-html="formatText(advice['Health Advice'])"></span>
                   </p>
-
                   <el-divider
                     v-if="index < healthAdviceList.length - 1"
                     class="fancy-divider"
                   ></el-divider>
                 </div>
-
                 <el-alert
                   v-if="!hasValidHealthAdvice"
                   title="No Health Advice"
@@ -353,7 +319,6 @@
                   </div>
                 </el-alert>
               </div>
-
               <el-button
                 type="info"
                 @click="
@@ -371,13 +336,11 @@
                 Generate Health Advice
               </el-button>
             </div>
-
             <div class="content-decoration right">
               <i class="el-icon-medal"></i>
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Healthy Items Usage Suggestions Section -->
         <el-collapse-item title="Healthy Items Usage" name="usage">
           <template slot="title">
@@ -386,12 +349,10 @@
               <span>Healthy Items Usage</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-shopping-cart-full"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div
@@ -403,7 +364,6 @@
                     <i class="el-icon-shopping-cart-2"></i>
                     <h3>Usage Suggestion</h3>
                   </div>
-
                   <p
                     v-if="item['Food Item'] && item['Food Item'].trim()"
                     class="food-item-list"
@@ -411,20 +371,17 @@
                     <i class="el-icon-food"></i>
                     <strong>Food Item: </strong>{{ item["Food Item"] }}
                   </p>
-
                   <p
                     v-if="item['Suggestion'] && item['Suggestion'].trim()"
                     class="suggestion-content"
                   >
                     <span v-html="formatText(item['Suggestion'])"></span>
                   </p>
-
                   <el-divider
                     v-if="index < suggestions.length - 1"
                     class="fancy-divider"
                   ></el-divider>
                 </div>
-
                 <el-alert
                   v-if="!hasValidSuggestions"
                   title="No Healthy Items Usage Suggestions"
@@ -442,7 +399,6 @@
                   </div>
                 </el-alert>
               </div>
-
               <el-button
                 type="warning"
                 @click="
@@ -460,13 +416,11 @@
                 Generate Usage Ideas
               </el-button>
             </div>
-
             <div class="content-decoration right">
               <i class="el-icon-shopping-cart-full"></i>
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Health Incompatibilities Section -->
         <el-collapse-item
           title="Health Incompatibilities"
@@ -478,12 +432,10 @@
               <span>Health Incompatibilities</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-circle-close"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div
@@ -495,7 +447,6 @@
                     <i class="el-icon-warning-outline"></i>
                     <h3>Incompatibility Warning</h3>
                   </div>
-
                   <p
                     v-if="
                       item['Food Combination'] &&
@@ -516,7 +467,6 @@
                       </span>
                     </span>
                   </p>
-
                   <p
                     v-if="
                       item['Health-wise Incompatibility Information'] &&
@@ -534,13 +484,11 @@
                       "
                     ></span>
                   </p>
-
                   <el-divider
                     v-if="index < healthIncompatibilities.length - 1"
                     class="fancy-divider"
                   ></el-divider>
                 </div>
-
                 <el-alert
                   v-if="!hasValidHealthIncompatibilities"
                   title="No Health Incompatibilities"
@@ -559,7 +507,6 @@
                   </div>
                 </el-alert>
               </div>
-
               <el-button
                 type="danger"
                 @click="
@@ -577,13 +524,11 @@
                 Generate Incompatibility Info
               </el-button>
             </div>
-
             <div class="content-decoration right">
               <i class="el-icon-circle-close"></i>
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Nutritional Analysis Section -->
         <el-collapse-item title="Nutritional Analysis" name="analysis">
           <template slot="title">
@@ -592,12 +537,10 @@
               <span>Nutritional Analysis</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-pie-chart"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div
@@ -609,7 +552,6 @@
                     <i class="el-icon-data-line"></i>
                     <h3>Nutrition Breakdown</h3>
                   </div>
-
                   <p
                     v-if="
                       item['Group of Items'] &&
@@ -630,7 +572,6 @@
                       </span>
                     </span>
                   </p>
-
                   <p
                     v-if="
                       item['Nutritional Analysis'] &&
@@ -644,13 +585,11 @@
                       v-html="formatText(item['Nutritional Analysis'])"
                     ></span>
                   </p>
-
                   <el-divider
                     v-if="index < nutritionalAnalysis.length - 1"
                     class="fancy-divider"
                   ></el-divider>
                 </div>
-
                 <el-alert
                   v-if="!hasValidNutritionalAnalysis"
                   title="No Nutritional Analysis"
@@ -668,7 +607,6 @@
                   </div>
                 </el-alert>
               </div>
-
               <el-button
                 type="primary"
                 @click="
@@ -686,13 +624,11 @@
                 Generate Nutritional Analysis
               </el-button>
             </div>
-
             <div class="content-decoration right">
               <i class="el-icon-pie-chart"></i>
             </div>
           </div>
         </el-collapse-item>
-
         <!-- Nutritional Value Section -->
         <el-collapse-item title="Nutritional Value" name="value">
           <template slot="title">
@@ -701,12 +637,10 @@
               <span>Nutritional Value</span>
             </div>
           </template>
-
           <div class="content-wrapper">
             <div class="content-decoration left">
               <i class="el-icon-trophy"></i>
             </div>
-
             <div class="content-body">
               <div v-if="!isLoading">
                 <div

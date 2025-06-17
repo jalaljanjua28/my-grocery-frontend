@@ -13,8 +13,9 @@ import FAQPage from "../views/FAQs";
 import ReceiptScan from "../views/ReceiptScan";
 import Search from "../components/SearchInventory.vue";
 import HealthPage from "../views/HealthPage.vue";
-import UserDefinedPrompt from "../components/UserDefinedPrompts.vue";
-import FirebaseAuth from "../components/LoginSignup.vue";
+import UserDefinedPrompt from "../views/UserDefinedPrompts.vue";
+import FirebaseAuth from "../views/LoginSignup.vue";
+import DeleteAll from "../components/DeleteAll.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,11 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/delete-all",
+    name: "deleteAll",
+    component: DeleteAll,
   },
   {
     path: "/SignUp",

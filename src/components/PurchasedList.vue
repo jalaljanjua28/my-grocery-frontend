@@ -280,11 +280,16 @@ export default {
 
     confirmPriceUpdate() {
       if (this.newPrice === "" || isNaN(this.newPrice)) {
-        this.$message.error("Please enter a valid price");
+        this.$message({
+          message: "Please enter a valid price",
+          type: "error",
+          duration: 3000,
+          showClose: true,
+        });
         return;
       }
 
-      this.updatePrice(this.currentItem, this.currentItem.category);
+      this.updatePrice(this.currentItem);
       this.priceDialogVisible = false;
     },
 
@@ -401,25 +406,49 @@ export default {
       }
     },
     async editItemName(item) {
-      const newName = await this.$prompt(
-        "Enter new name for " + item.name,
-        "Edit Item Name",
-        {
-          confirmButtonText: "OK",
-          cancelButtonText: "Cancel",
-          inputPattern: /\S+/,
-          inputErrorMessage: "Name cannot be empty",
-        }
-      ).catch(() => null);
+      try {
+        const newName = await this.$prompt(
+          `Enter new name for "${item.name}":`,
+          "Edit Item Name",
+          {
+            confirmButtonText: "Update",
+            cancelButtonText: "Cancel",
+            inputPattern: /^.{1,50}$/,
+            inputErrorMessage: "Name must be between 1-50 characters",
+            inputValue: item.name,
+          }
+        );
 
-      if (newName && newName.value) {
-        const currentUser = auth.currentUser;
-        if (!currentUser) {
-          throw new Error("User not authenticated");
+        if (newName.value && newName.value.trim() !== item.name) {
+          await this.updateItemName(item, newName.value.trim());
         }
+      } catch (error) {
+        // User cancelled the prompt
+        this.$message({
+          message: "Name update cancelled",
+          type: "info",
+          duration: 2000,
+          showClose: true,
+        });
+      }
+    },
+
+    async updateItemName(item, newName) {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        this.$message({
+          message: "Please log in to continue",
+          type: "error",
+          duration: 3000,
+          showClose: true,
+        });
+        return;
+      }
+
+      try {
         const idToken = await currentUser.getIdToken(true);
 
-        fetch(baseUrl + "/update_item_name", {
+        const response = await fetch(baseUrl + "/update_item_name", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -427,68 +456,97 @@ export default {
           },
           body: JSON.stringify({
             oldName: item.name,
-            newName: newName.value,
+            newName: newName,
             category: item.category,
           }),
-        })
-          .then((response) => {
-            if (!response.ok) throw new Error("Failed to update item name");
-            return response.json();
-          })
-          .then(() => {
-            this.$message.success("Item name updated successfully");
-            setTimeout(() => location.reload(), 1000);
-          })
-          .catch((error) => {
-            console.error("Error updating item name:", error);
-            this.$message.error("Failed to update item name");
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          this.$message({
+            message: `Item name successfully changed from "${item.name}" to "${newName}"!`,
+            type: "success",
+            duration: 4000,
+            showClose: true,
           });
+
+          // Reload after a short delay
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
+        } else {
+          throw new Error(data.message || "Failed to update item name");
+        }
+      } catch (error) {
+        console.error("Error updating item name:", error);
+        this.$message({
+          message: `Failed to update item name from "${item.name}" to "${newName}". Please try again.`,
+          type: "error",
+          duration: 5000,
+          showClose: true,
+        });
       }
     },
 
-    async updatePrice(item, category) {
+    async updatePrice(item) {
       const currentUser = auth.currentUser;
       if (!currentUser) {
-        throw new Error("User not authenticated");
+        this.$message({
+          message: "Please log in to continue",
+          type: "error",
+          duration: 3000,
+          showClose: true,
+        });
+        return;
       }
-      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-      console.log("idToken", idToken);
 
-      fetch(baseUrl + "/update_price", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${idToken}`,
-        },
-        body: JSON.stringify({
-          Name: item.name,
-          Price: this.newPrice,
-          Category: category,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Error updating price");
-          }
-          return response.json();
-        })
-        .then(() => {
-          console.log("Price updated successfully");
-          this.Price = "";
-          // Add a success message and reload the page
+      try {
+        const idToken = await currentUser.getIdToken(true);
+
+        const response = await fetch(baseUrl + "/update_price", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({
+            Name: item.name,
+            Price: parseFloat(this.newPrice),
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
           this.$message({
-            message: "Price updated successfully!",
+            message: `Price for "${item.name}" successfully updated from ${
+              item.price
+            } to $${parseFloat(this.newPrice).toFixed(2)}!`,
             type: "success",
-            duration: 2000,
+            duration: 4000,
+            showClose: true,
           });
+
+          // Update the local item price
+          item.price = `$${parseFloat(this.newPrice).toFixed(2)}`;
+
+          // Reload after a short delay
           setTimeout(() => {
             location.reload();
-          }, 1000); // Reload after 1 second
-        })
-        .catch((error) => {
-          console.error("Error updating price:", error.message);
-          this.$message.error("Failed to update price: " + error.message);
+          }, 2000);
+        } else {
+          throw new Error(data.message || "Failed to update price");
+        }
+      } catch (error) {
+        console.error("Error updating price:", error);
+        this.$message({
+          message: `Failed to update price for "${item.name}". Please try again.`,
+          type: "error",
+          duration: 5000,
+          showClose: true,
         });
+      }
     },
   },
 };
