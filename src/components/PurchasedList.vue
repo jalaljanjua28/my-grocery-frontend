@@ -127,7 +127,7 @@
       <!--Button columns-->
       <el-table-column>
         <template slot-scope="scope">
-          <el-row v-if="scope.row" class="action-buttons">
+          <el-row v-if="scope.row">
             <el-tooltip content="Add Item" placement="top" effect="light">
               <el-button
                 type="text"

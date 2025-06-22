@@ -162,7 +162,7 @@ h4 {
 
 .el-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   /* margin-left: -167px; */
   /* Consider adjusting this magic number */
 }
@@ -171,10 +171,11 @@ h4 {
   text-align: center;
   flex: 1;
   padding: 20px;
-  max-width: 1200px;
-  margin: 0px;
+  max-width: 100%;
+  margin: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   background-color: var(--transparent-white);
-  /* Use variable */
 }
 
 .el-aside {
@@ -298,7 +299,7 @@ h4 {
 .el-button {
   border-radius: var(--border-radius-lg);
   transition: all 0.3s ease;
-  padding: 4px 24px;
+  padding: 10px 24px;
   font-size: medium;
   font-weight: bold;
   cursor: pointer;
@@ -443,10 +444,8 @@ h4 {
 .el-button--info.is-plain
   .el-button--warning.is-plain
   .el-button--danger.is-plain {
-  color: var(--white);
-  background-color: var(--info-color);
-  /* Use variable, consistent with gradient */
-  border-color: var(--info-color);
+  background: none !important;
+  color: none;
 }
 
 .el-button--small {
@@ -559,7 +558,7 @@ h4 {
   font-size: 16px;
   border-radius: 8px;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  /* background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); */
   /* Consider using variables */
   border: none;
 }
@@ -781,10 +780,10 @@ h4 {
 .navbar-toggle {
   margin-left: -18px;
   position: absolute;
-  top: -28px;
-  width: 0px;
+  top: -30px;
+  width: 0;
   border-radius: 12px;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   border: none;
   padding: 26px;
@@ -795,7 +794,7 @@ h4 {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 1002;
-  color: white;
+  color: #fff;
 }
 
 /* When navbar is open, move the toggle button to stay visible outside */
@@ -954,6 +953,8 @@ h4 {
   background-color: var(--background-color);
   /* Use variable */
   border-bottom: 1px solid #f0f0f0;
+  justify-content: center;
+
   /* Consider using a variable */
 }
 
@@ -1833,9 +1834,14 @@ h4 {
 
 /* Recipe Prompt */
 .recipe-prompts-container {
-  position: relative;
-  padding: 20px 0;
+  padding: 20px 10px;
   animation: fadeIn 0.8s ease-in-out;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNXY1SDB6Ii8+PHBhdGggZmlsbD0iI2Y1ZjVmNSIgZD0iTTAgMGgxdjFIMHoiLz48L3N2Zz4=);
+  z-index: -1;
 }
 
 .recipe-decoration {
@@ -1887,9 +1893,19 @@ h4 {
 }
 /* Health Prompt */
 .health-prompts-container {
-  position: relative;
-  padding: 20px 0;
+  /* position: relative; */
+  padding: 20px 10px;
   animation: fadeIn 0.8s ease-in-out;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNXY1SDB6Ii8+PHBhdGggZmlsbD0iI2Y1ZjVmNSIgZD0iTTAgMGgxdjFIMHoiLz48L3N2Zz4=);
+}
+
+.health-prompts-container:before {
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNXY1SDB6Ii8+PHBhdGggZmlsbD0iI2Y1ZjVmNSIgZD0iTTAgMGgxdjFIMHoiLz48L3N2Zz4=); */
+  z-index: -1;
 }
 
 .health-decoration {
@@ -2690,7 +2706,7 @@ h4 {
 /* New container for footer actions */
 .footer-actions-container {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   position: relative;
   z-index: 1;
@@ -3169,7 +3185,7 @@ h4 {
   text-align: center;
   margin-bottom: 30px;
   padding: 25px;
-  width: 100%;
+  /* width: 100%; */
   /* max-width: 800px; */
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 15px;
@@ -3399,7 +3415,7 @@ h4 {
   text-align: center;
   margin-bottom: 30px;
   padding: 25px;
-  width: 100%;
+  /* width: 100%; */
   /* max-width: 800px; */
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 15px;
@@ -3660,15 +3676,14 @@ h4 {
   min-height: 100vh;
 }
 
-.inventory-page-container::before {
+.inventory-page-container:before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmNWY1ZjUiPjwvcmVjdD4KPC9zdmc+");
-
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNXY1SDB6Ii8+PHBhdGggZmlsbD0iI2Y1ZjVmNSIgZD0iTTAgMGgxdjFIMHoiLz48L3N2Zz4=);
   z-index: -1;
 }
 
@@ -3680,7 +3695,7 @@ h4 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--success-color);
   overflow: visible;
-  padding: 20px;
+  padding: 20px 0px;
   width: 100%;
 }
 
@@ -3773,6 +3788,7 @@ h4 {
 .search-inventory-header h3 {
   margin: 0;
   color: #67c23a;
+  font-size: x-large;
 }
 .enhanced-search {
   width: 100%;
@@ -4695,7 +4711,7 @@ h4 {
 /* Improved upload component styling */
 .upload-demo {
   width: 100%;
-  display: flex;
+  flex-direction: column;
 }
 
 .el-upload-dragger {
@@ -4826,11 +4842,9 @@ h4 {
   display: flex;
   align-items: center;
   flex: 1;
-  /* max-width: 413px; */
-  /* margin: 0 100px; */
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: hsla(0, 0%, 100%, 0.8);
   border-radius: 30px;
-  padding: 12px 10px;
+  padding: 0px 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
@@ -5028,7 +5042,6 @@ h4 {
 .home-page-container {
   position: relative;
   padding: 20px;
-  /* background-color: #f9f9f9; */
   overflow: hidden;
   width: 100%;
 }
@@ -5569,6 +5582,8 @@ h4 {
   display: inline-block;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .el-upload-list {
@@ -6514,7 +6529,7 @@ h4 {
   }
 
   .action-buttons {
-    flex-direction: row;
+    flex-direction: column;
     gap: 15px;
     width: 100%;
     max-width: 300px;
@@ -6582,9 +6597,9 @@ h4 {
     display: none;
   }
 
-  .router_link {
+  /* .router_link {
     width: 100% !important;
-  }
+  } */
 
   .logo-container {
     justify-content: flex-end;

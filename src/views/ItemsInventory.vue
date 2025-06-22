@@ -283,9 +283,6 @@ import ExpiredList from "../components/ExpiredList.vue";
 import NonExpiredList from "../components/NonExpiredList.vue";
 import AddItems from "../components/AddCustomItem.vue";
 import DeleteAll from "../components/DeleteAll.vue";
-// import DeleteAllMasterNonExpired from "../components/DeleteAllMasterNonExpired.vue";
-// import DeleteAllShopping from "../components/DeleteAllShopping.vue";
-// import DeleteAllMasterExpired from "../components/DeleteAllMasterExpired.vue";
 import ShoppingList from "../components/ShoppingList.vue";
 import FrequencyList from "../components/FrequencyList.vue";
 import {
@@ -302,9 +299,6 @@ export default {
     NonExpiredList,
     AddItems,
     DeleteAll,
-    // DeleteAllMasterNonExpired,
-    // DeleteAllShopping,
-    // DeleteAllMasterExpired,
     FrequencyList,
   },
   data() {
