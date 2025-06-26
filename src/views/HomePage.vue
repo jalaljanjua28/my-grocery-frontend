@@ -1,7 +1,5 @@
 <template>
   <div class="home-page-container">
-    <the-nav></the-nav>
-
     <!-- Decorative food-themed header -->
     <div class="decorative-food-header">
       <div class="food-icon apple"></div>
@@ -31,6 +29,11 @@
           ><i class="el-icon-s-order"></i> User Defined Prompt
         </el-button>
       </router-link>
+      <router-link to="receipt-scan" class="router_link">
+        <el-button class="nav-button" type="danger" plain
+          ><i class="el-icon-camera"></i> Receipt Scanner
+        </el-button>
+      </router-link>
     </div>
 
     <div v-if="displayJokes" class="jokes-container">
@@ -45,8 +48,6 @@
         </div>
       </el-card>
     </div>
-
-    <!-- <offers-page></offers-page> -->
     <el-card class="main-content-card">
       <div class="card-decoration left-list-decoration">
         <div class="food-icon tomato"></div>
@@ -106,7 +107,6 @@
 </template>
 
 <script>
-import TheNav from "../components/TheNav.vue";
 import HomePrompt from "../components/HomePrompts.vue";
 import PurchasedList from "../components/PurchasedList.vue";
 import {
@@ -122,7 +122,6 @@ export default {
   components: {
     HomePrompt,
     PurchasedList,
-    TheNav,
   },
   data() {
     return {

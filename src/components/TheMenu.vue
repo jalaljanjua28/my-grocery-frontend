@@ -5,7 +5,12 @@
         <div class="menu-bar">
           <el-popover placement="bottom" width="230" trigger="hover">
             <template #reference>
-              <el-button class="el-button-user" type="info" plain>
+              <el-button
+                class="el-button-user"
+                type="info"
+                plain
+                style="color: var(--danger-color) !important"
+              >
                 <i class="el-icon-s-custom"> User</i>
               </el-button>
             </template>
@@ -31,7 +36,11 @@
             </div>
           </el-popover>
           <router-link to="/SignUp" style="text-decoration: none">
-            <el-button class="el-button-signup" type="info" plain
+            <el-button
+              class="el-button-signup"
+              type="info"
+              plain
+              style="color: var(--danger-color) !important"
               ><i class="el-icon-user"> SignUp</i></el-button
             >
           </router-link>

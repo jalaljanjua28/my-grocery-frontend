@@ -171,7 +171,7 @@ h4 {
   text-align: center;
   flex: 1;
   padding: 20px;
-  max-width: 100%;
+  /* width: 1300px; */
   margin: 10px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -440,9 +440,9 @@ h4 {
   border: none;
   width: 100%;
 }
-.el-button--info.is-plain {
+/* .el-button--info.is-plain {
   color: var(--danger-color) !important;
-}
+} */
 /* .el-button--info.is-plain
   .el-button--warning.is-plain
   .el-button--danger.is-plain {
@@ -780,9 +780,9 @@ h4 {
 
 /* Toggle button styling */
 .navbar-toggle {
-  margin-left: -18px;
+  /* margin-left: -18px; */
   position: absolute;
-  top: -25px;
+  /* top: -25px; */
   width: 0;
   border-radius: 12px;
   background: linear-gradient(135deg, #4facfe, #00f2fe);
@@ -5047,7 +5047,7 @@ h4 {
   position: relative;
   padding: 20px;
   overflow: hidden;
-  width: 100%;
+  /* width: 100%; */
   height: 250vh;
 }
 
@@ -6517,8 +6517,8 @@ h4 {
 
   .search-inventory {
     display: flex;
-    width: 100%;
-    margin-left: -8px;
+    /* width: 100%; */
+    /* margin-left: -8px; */
   }
 
   .tab-content-container {
