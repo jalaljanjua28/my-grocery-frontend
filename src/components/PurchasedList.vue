@@ -407,6 +407,18 @@ export default {
     },
     async editItemName(item) {
       try {
+        // Check authentication state first
+        const isAuthenticated = await this.checkAuthState();
+        if (!isAuthenticated) {
+          this.$message({
+            message: "Please log in first",
+            type: "error",
+            duration: 3000,
+            showClose: true,
+          });
+          return;
+        }
+
         const newName = await this.$prompt(
           `Enter new name for "${item.name}":`,
           "Edit Item Name",
@@ -423,7 +435,7 @@ export default {
           await this.updateItemName(item, newName.value.trim());
         }
       } catch (error) {
-        // User cancelled the prompt
+        console.error("Edit item name error:", error);
         this.$message({
           message: "Name update cancelled",
           type: "info",
@@ -446,7 +458,40 @@ export default {
       }
 
       try {
+        // Force refresh the token to ensure it's valid
         const idToken = await currentUser.getIdToken(true);
+
+        // Debug: Log token info
+        console.log("Token obtained, length:", idToken.length);
+        console.log("Full token (for debugging):", idToken); // Remove this in production!
+
+        // Test the token with a working endpoint first
+        console.log("Testing token with addItem endpoint...");
+        const testResponse = await fetch(baseUrl + "/addItem/purchase-list", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({ itemName: "test-token-validation" }),
+        });
+
+        console.log("Test response status:", testResponse.status);
+        if (testResponse.status === 401) {
+          console.log("Token also fails on addItem endpoint");
+        } else {
+          console.log("Token works on addItem endpoint");
+        }
+
+        console.log("Now trying update_item_name endpoint...");
+
+        const requestBody = {
+          oldName: item.name,
+          newName: newName,
+          category: item.category,
+        };
+
+        console.log("Request body:", requestBody);
 
         const response = await fetch(baseUrl + "/update_item_name", {
           method: "POST",
@@ -455,33 +500,54 @@ export default {
             Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
-            oldName: item.name,
+            itemName: item.name, // Try using the same field name as other endpoints
             newName: newName,
             category: item.category,
           }),
         });
 
-        const data = await response.json();
+        console.log("Response status:", response.status);
+        console.log("Response headers:", [...response.headers.entries()]);
 
-        if (response.ok) {
-          this.$message({
-            message: `Item name successfully changed from "${item.name}" to "${newName}"!`,
-            type: "success",
-            duration: 4000,
-            showClose: true,
-          });
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error response body:", errorText);
 
-          // Reload after a short delay
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
-        } else {
-          throw new Error(data.message || "Failed to update item name");
+          if (response.status === 401) {
+            const tokenResult = await currentUser.getIdTokenResult(true);
+            console.log("Token claims:", tokenResult.claims);
+            console.log(
+              "Token expiration:",
+              new Date(tokenResult.expirationTime)
+            );
+            console.log("Current time:", new Date());
+
+            throw new Error(
+              "Authentication failed. Backend says token is invalid."
+            );
+          }
+
+          throw new Error(`Server error: ${response.status} - ${errorText}`);
         }
+
+        const data = await response.json();
+        console.log("Success response:", data);
+
+        this.$message({
+          message: `Item name successfully changed from "${item.name}" to "${newName}"!`,
+          type: "success",
+          duration: 4000,
+          showClose: true,
+        });
+
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
       } catch (error) {
         console.error("Error updating item name:", error);
+
         this.$message({
-          message: `Failed to update item name from "${item.name}" to "${newName}". Please try again.`,
+          message: `Failed to update item name: ${error.message}`,
           type: "error",
           duration: 5000,
           showClose: true,
@@ -547,6 +613,20 @@ export default {
           showClose: true,
         });
       }
+    },
+    async checkAuthState() {
+      return new Promise((resolve) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          unsubscribe();
+          if (user) {
+            console.log("User is authenticated:", user.email);
+            resolve(true);
+          } else {
+            console.log("User is not authenticated");
+            resolve(false);
+          }
+        });
+      });
     },
   },
 };
