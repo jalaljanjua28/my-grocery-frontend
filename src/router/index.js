@@ -16,6 +16,7 @@ import HealthPage from "../views/HealthPage.vue";
 import UserDefinedPrompt from "../views/UserDefinedPrompts.vue";
 import FirebaseAuth from "../views/LoginSignup.vue";
 import DeleteAll from "../components/DeleteAll.vue";
+import { auth } from "../Firebase.js";
 
 Vue.use(VueRouter);
 
@@ -108,6 +109,26 @@ router.beforeEach((to, from, next) => {
   store.commit("setLoading", true);
   next();
 });
+// Add route guard
+router.beforeEach(async (to, from, next) => {
+  // Wait for auth to initialize
+  await new Promise((resolve) => {
+    const unsubscribe = auth.onAuthStateChanged(() => {
+      unsubscribe();
+      resolve();
+    });
+  });
+
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const isAuthenticated = !!auth.currentUser;
+
+  if (requiresAuth && !isAuthenticated) {
+    next("/SignUp");
+  } else {
+    next();
+  }
+});
+
 router.afterEach(() => {
   setTimeout(() => {
     store.commit("setLoading", false);

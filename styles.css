@@ -351,7 +351,8 @@ h4 {
 
 .el-button.is-circle {
   margin: 5px;
-  padding: 10px;
+  padding: 5px;
+  margin-bottom: 20px;
   border-radius: var(--border-radius-circle);
 }
 
@@ -730,6 +731,7 @@ h4 {
   width: 100%;
   height: 40px;
   border-radius: 8px;
+  margin-left: 0 !important;
 }
 
 .sign-out-button {
@@ -1258,7 +1260,7 @@ h4 {
   border-radius: var(--border-radius-sm);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
-  width: fit-content !important;
+  width: auto !important;
 }
 
 .el-dialog__title {
@@ -1272,7 +1274,9 @@ h4 {
   color: var(--text-regular);
   font-size: 14px;
   word-break: break-all;
-  width: max-content;
+  margin-left: 10px;
+  margin-right: 10px;
+  /* width: max-content; */
 }
 
 .el-dialog__headerbtn .el-dialog__close {
@@ -3677,7 +3681,7 @@ h4 {
   position: relative;
   padding: 20px 0;
   min-height: 100vh;
-  width: max-content;
+  width: auto;
 }
 
 .inventory-page-container:before {
@@ -5048,7 +5052,7 @@ h4 {
   padding: 20px;
   overflow: hidden;
   /* width: 100%; */
-  height: 250vh;
+  height: auto;
 }
 
 .home-page-container::before {
@@ -5454,8 +5458,8 @@ h4 {
 
 .el-submenu .el-menu-item {
   display: flex;
-  height: 35px;
-  line-height: 30px;
+  height: 48px;
+  line-height: 42px;
   margin: 0;
   padding: 10px 0;
   min-width: 200px;

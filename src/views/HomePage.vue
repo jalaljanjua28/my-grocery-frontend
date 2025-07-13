@@ -67,9 +67,10 @@
             </span>
             <div>
               <purchased-list
-                :filteredItems="Food_nonexpired"
+                :filteredItems="Food_nonexpired || []"
                 :active-tab="outerActiveTab"
                 @item-deleted="handleItemDeleted()"
+                @price-updated="handlePriceUpdate"
               ></purchased-list>
             </div>
           </el-tab-pane>
@@ -80,7 +81,8 @@
             <div>
               <purchased-list
                 :active-tab="outerActiveTab"
-                :filteredItems="NonFood_nonexpired"
+                :filteredItems="NonFood_nonexpired || []"
+                @price-updated="handlePriceUpdate"
                 @item-deleted="handleItemDeleted()"
               ></purchased-list>
             </div>
@@ -133,36 +135,56 @@ export default {
       NonFood: [],
       Food_nonexpired: [],
       NonFood_nonexpired: [],
-      item: [],
+      items: [], // Add this line
       currentUser: null,
     };
   },
-  computed: {
-    filteredItems() {
-      console.log(this.items);
-      return this.items.filter((item) => item && item.category);
-    },
-  },
+  // computed: {
+  //   filteredItems() {
+  //     // For the "Not_Food" tab, return NonFood_nonexpired items
+  //     if (this.outerActiveTab === "Not_Food") {
+  //       console.log("NonFood items:", this.NonFood_nonexpired);
+  //       return this.NonFood_nonexpired
+  //         ? this.NonFood_nonexpired.filter((item) => item && item.category)
+  //         : [];
+  //     }
+  //     // For the "Food" tab, return Food_nonexpired items
+  //     else {
+  //       console.log("Food items:", this.Food_nonexpired);
+  //       return this.Food_nonexpired
+  //         ? this.Food_nonexpired.filter((item) => item && item.category)
+  //         : [];
+  //     }
+  //   },
+  // },
+
   async mounted() {
     try {
       const { Food_nonexpired, NonFood_nonexpired } =
         await fetchPurchasedListData();
-      this.Food_nonexpired = Food_nonexpired;
-      this.NonFood_nonexpired = NonFood_nonexpired;
+      this.Food_nonexpired = Food_nonexpired || [];
+      this.NonFood_nonexpired = NonFood_nonexpired || [];
+
+      // Combine both arrays for the filteredItems computed property
+      this.items = [...(Food_nonexpired || []), ...(NonFood_nonexpired || [])];
+
       const { Food_expired, NonFood_expired } = await fetchMasterExpiredData();
-      this.Food_expired = Food_expired;
-      this.NonFood_expired = NonFood_expired;
+      this.Food_expired = Food_expired || [];
+      this.NonFood_expired = NonFood_expired || [];
+
       const { Food, NonFood } = await fetchShoppingListData();
-      this.Food = Food;
-      this.NonFood = NonFood;
+      this.Food = Food || [];
+      this.NonFood = NonFood || [];
+
       this.fetchJokesWithTimestamp();
       setInterval(() => {
         this.fetchJokesWithTimestamp();
-      }, 3600000); // 3600000 milliseconds = 1 hour
+      }, 3600000);
     } catch (error) {
       console.error("Error loading data:", error);
     }
   },
+
   created() {
     // Retrieve the active tab from local storage on page load
     const storedOuterTab = localStorage.getItem("activeOuterTab");
@@ -179,6 +201,71 @@ export default {
     localStorage.setItem("activeOuterTab", this.outerActiveTab);
   },
   methods: {
+    methods: {
+      handlePriceUpdate(updateData) {
+        console.log("Price update received:", updateData);
+
+        // Find and update the item in Food_nonexpired
+        if (this.Food_nonexpired) {
+          const foodItemIndex = this.Food_nonexpired.findIndex(
+            (item) => (item.name || item.Name) === updateData.itemName
+          );
+          if (foodItemIndex !== -1) {
+            this.$set(
+              this.Food_nonexpired[foodItemIndex],
+              "price",
+              updateData.newPrice
+            );
+            this.$set(
+              this.Food_nonexpired[foodItemIndex],
+              "Price",
+              updateData.newPrice
+            );
+          }
+        }
+
+        // Find and update the item in NonFood_nonexpired
+        if (this.NonFood_nonexpired) {
+          const nonFoodItemIndex = this.NonFood_nonexpired.findIndex(
+            (item) => (item.name || item.Name) === updateData.itemName
+          );
+          if (nonFoodItemIndex !== -1) {
+            this.$set(
+              this.NonFood_nonexpired[nonFoodItemIndex],
+              "price",
+              updateData.newPrice
+            );
+            this.$set(
+              this.NonFood_nonexpired[nonFoodItemIndex],
+              "Price",
+              updateData.newPrice
+            );
+          }
+        }
+
+        // Update the combined items array if you're using it
+        if (this.items) {
+          const itemIndex = this.items.findIndex(
+            (item) => (item.name || item.Name) === updateData.itemName
+          );
+          if (itemIndex !== -1) {
+            this.$set(this.items[itemIndex], "price", updateData.newPrice);
+            this.$set(this.items[itemIndex], "Price", updateData.newPrice);
+          }
+        }
+      },
+
+      updateFilteredItems() {
+        // Recombine the arrays if needed
+        this.items = [
+          ...(this.Food_nonexpired || []),
+          ...(this.NonFood_nonexpired || []),
+        ];
+      },
+
+      // ... rest of your existing methods
+    },
+
     handleItemDeleted(itemToDelete) {
       this.items = this.items.filter((item) => item !== itemToDelete);
       // You can access the deleted item and target tab name here

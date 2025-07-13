@@ -87,6 +87,68 @@
             <span>Successfully signed in!</span>
           </div>
 
+          <!-- Show initialization status -->
+          <div v-if="initializationStatus" class="initialization-status">
+            <div v-if="initializationStatus.loading" class="loading-status">
+              <i class="el-icon-loading"></i>
+              <span>Setting up your account...</span>
+            </div>
+            <div
+              v-else-if="initializationStatus.success"
+              class="success-status"
+            >
+              <i class="el-icon-check"></i>
+              <span>Account setup completed!</span>
+              <p>{{ initializationStatus.message }}</p>
+            </div>
+            <div v-else-if="initializationStatus.error" class="error-status">
+              <i class="el-icon-warning"></i>
+              <span>Setup encountered issues</span>
+              <p>{{ initializationStatus.error }}</p>
+              <el-button
+                @click="retryInitialization"
+                size="small"
+                type="warning"
+              >
+                Retry Setup
+              </el-button>
+            </div>
+          </div>
+
+          <!-- Show file check results -->
+          <div v-if="fileCheckResults" class="file-check-results">
+            <div class="file-summary">
+              <h4>Account Status</h4>
+              <p>
+                <el-tag
+                  :type="
+                    fileCheckResults.setup_complete ? 'success' : 'warning'
+                  "
+                >
+                  {{
+                    fileCheckResults.setup_complete
+                      ? "Setup Complete"
+                      : "Setup Incomplete"
+                  }}
+                </el-tag>
+              </p>
+              <p>Total Files: {{ fileCheckResults.total_files }}</p>
+              <p
+                v-if="fileCheckResults.missing_files.count > 0"
+                class="warning-text"
+              >
+                Missing Files: {{ fileCheckResults.missing_files.count }}
+              </p>
+              <p
+                v-if="fileCheckResults.categories.Improper_Location.count > 0"
+                class="error-text"
+              >
+                Files in Wrong Location:
+                {{ fileCheckResults.categories.Improper_Location.count }}
+              </p>
+            </div>
+          </div>
+
           <div class="user-profile">
             <div class="user-avatar">
               <img
@@ -104,23 +166,75 @@
             </div>
           </div>
 
-          <el-button
-            @click="signOut"
-            type="danger"
-            plain
-            class="sign-out-button"
-          >
-            <i class="el-icon-switch-button"></i> Sign Out
-          </el-button>
+          <!-- Main action buttons -->
+          <div class="main-buttons">
+            <el-button
+              @click="$router.push('/')"
+              type="primary"
+              class="home-button"
+            >
+              <i class="el-icon-s-home"></i> Go to Home
+            </el-button>
 
-          <el-button
-            @click="$router.push('/')"
-            type="info"
-            plain
-            class="home-button"
-          >
-            <i class="el-icon-s-home"></i> Go to Home
-          </el-button>
+            <el-button
+              @click="signOut"
+              type="danger"
+              plain
+              class="sign-out-button"
+            >
+              <i class="el-icon-switch-button"></i> Sign Out
+            </el-button>
+          </div>
+
+          <!-- Debug/Admin buttons -->
+          <div class="admin-section">
+            <el-button
+              @click="showDebugOptions = !showDebugOptions"
+              type="text"
+              size="small"
+              class="debug-toggle"
+            >
+              {{ showDebugOptions ? "Hide" : "Show" }} Advanced Options
+            </el-button>
+
+            <div v-if="showDebugOptions" class="admin-buttons">
+              <div class="button-group">
+                <h4>File Management</h4>
+                <el-button
+                  @click="checkUserFiles"
+                  type="info"
+                  size="small"
+                  plain
+                >
+                  <i class="el-icon-document"></i> Check Files
+                </el-button>
+                <el-button
+                  @click="createMissingFiles"
+                  type="warning"
+                  size="small"
+                  plain
+                >
+                  <i class="el-icon-plus"></i> Create Missing Files
+                </el-button>
+                <el-button
+                  @click="initializeComplete"
+                  type="primary"
+                  size="small"
+                  plain
+                >
+                  <i class="el-icon-refresh"></i> Complete Setup
+                </el-button>
+                <el-button
+                  @click="cleanupUserFiles"
+                  type="danger"
+                  size="small"
+                  plain
+                >
+                  <i class="el-icon-delete"></i> Cleanup Files
+                </el-button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </el-main>
@@ -152,6 +266,9 @@ export default {
       errorMessage: "",
       isLoading: false,
       isGoogleLoading: false,
+      initializationStatus: null,
+      showDebugOptions: false,
+      fileCheckResults: null,
     };
   },
   mounted() {
@@ -163,11 +280,49 @@ export default {
         if (user) {
           this.currentUser = user;
           console.log("User is logged in:", user);
+          // Automatically check files when user is logged in
+          this.checkUserFiles();
         } else {
           console.log("No user is logged in");
+          this.fileCheckResults = null;
         }
       });
     },
+
+    validateForm() {
+      if (!this.email || !this.password) {
+        this.errorMessage = "Please fill in all fields";
+        return false;
+      }
+      if (this.password.length < 6) {
+        this.errorMessage = "Password must be at least 6 characters";
+        return false;
+      }
+      return true;
+    },
+
+    handleAuthError(error) {
+      switch (error.code) {
+        case "auth/user-not-found":
+          this.errorMessage = "No account found with this email";
+          break;
+        case "auth/wrong-password":
+          this.errorMessage = "Incorrect password";
+          break;
+        case "auth/email-already-in-use":
+          this.errorMessage = "Email is already registered";
+          break;
+        case "auth/weak-password":
+          this.errorMessage = "Password is too weak";
+          break;
+        case "auth/invalid-email":
+          this.errorMessage = "Invalid email address";
+          break;
+        default:
+          this.errorMessage = error.message;
+      }
+    },
+
     async signUpWithEmailPassword() {
       if (!this.validateForm()) return;
 
@@ -188,18 +343,9 @@ export default {
           localStorage.setItem("users", JSON.stringify(this.users));
         }
 
-        const idToken = await user.getIdToken();
-        await fetch(baseUrl + "/set-email-create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST,OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type,Authorization",
-          },
-          body: JSON.stringify({ email: user.email, idToken }),
-        });
+        // Initialize user account
+        await this.initializeUserAccount(user);
+
         this.currentUser = user;
         this.$message.success("Account created successfully!");
       } catch (error) {
@@ -209,6 +355,7 @@ export default {
         this.isLoading = false;
       }
     },
+
     async signInWithEmailPassword() {
       if (!this.validateForm()) return;
 
@@ -229,6 +376,9 @@ export default {
           localStorage.setItem("users", JSON.stringify(this.users));
         }
 
+        // Check if user needs initialization (for existing users)
+        await this.checkAndInitializeUser(user);
+
         this.currentUser = user;
         this.$message.success("Logged in successfully!");
       } catch (error) {
@@ -238,6 +388,7 @@ export default {
         this.isLoading = false;
       }
     },
+
     async signInWithGoogle() {
       this.isGoogleLoading = true;
       this.errorMessage = "";
@@ -253,18 +404,9 @@ export default {
           localStorage.setItem("users", JSON.stringify(this.users));
         }
 
-        const idToken = await user.getIdToken();
-        await fetch(baseUrl + "/set-email-create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST,OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type,Authorization",
-          },
-          body: JSON.stringify({ email: user.email, idToken }),
-        });
+        // Initialize user account
+        await this.initializeUserAccount(user);
+
         this.currentUser = user;
         this.$message.success("Signed in with Google successfully!");
       } catch (error) {
@@ -274,71 +416,269 @@ export default {
         this.isGoogleLoading = false;
       }
     },
+
     async signOut() {
       try {
         await firebaseSignOut(auth);
         this.currentUser = null;
-        this.$message.success("Signed out successfully");
+        this.users = [];
+        this.fileCheckResults = null;
+        this.initializationStatus = null;
+        localStorage.removeItem("users");
+        this.$message.success("Signed out successfully!");
       } catch (error) {
         console.error("Error signing out:", error);
         this.$message.error("Error signing out");
       }
     },
-    validateForm() {
-      if (!this.email) {
-        this.errorMessage = "Email is required";
-        return false;
-      }
 
-      if (!this.validateEmail(this.email)) {
-        this.errorMessage = "Please enter a valid email address";
-        return false;
-      }
+    async initializeUserAccount(user) {
+      this.initializationStatus = {
+        loading: true,
+        success: false,
+        error: null,
+        message: "",
+      };
 
-      if (!this.password) {
-        this.errorMessage = "Password is required";
-        return false;
-      }
+      try {
+        const idToken = await user.getIdToken();
 
-      if (!this.isLogin && this.password.length < 6) {
-        this.errorMessage = "Password must be at least 6 characters";
-        return false;
-      }
+        // Call the backend to create user folders and files
+        const response = await fetch(baseUrl + "/set-email-create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({ email: user.email, idToken }),
+        });
 
-      return true;
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("User initialization result:", result);
+
+        // Ensure complete initialization
+        await this.ensureCompleteInitialization(idToken);
+
+        this.initializationStatus = {
+          loading: false,
+          success: true,
+          error: null,
+          message: result.message || "Account setup completed successfully!",
+        };
+
+        // Check files after initialization
+        await this.checkUserFiles();
+      } catch (error) {
+        console.error("Error initializing user account:", error);
+        this.initializationStatus = {
+          loading: false,
+          success: false,
+          error: error.message,
+          message: "",
+        };
+      }
     },
-    validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
+
+    async checkAndInitializeUser(user) {
+      try {
+        const idToken = await user.getIdToken();
+
+        // Check if user files exist
+        const checkResponse = await fetch(baseUrl + "/check-user-files", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
+
+        if (checkResponse.ok) {
+          const checkResult = await checkResponse.json();
+          console.log("User files check:", checkResult);
+          this.fileCheckResults = checkResult;
+
+          // If user has very few files or setup is incomplete, initialize
+          if (checkResult.total_files < 20 || !checkResult.setup_complete) {
+            console.log("User needs initialization");
+            await this.ensureCompleteInitialization(idToken);
+          }
+        }
+      } catch (error) {
+        console.error("Error checking user initialization:", error);
+      }
     },
-    handleAuthError(error) {
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          this.errorMessage = "This email is already in use";
-          break;
-        case "auth/invalid-email":
-          this.errorMessage = "Invalid email format";
-          break;
-        case "auth/weak-password":
-          this.errorMessage = "Password is too weak";
-          break;
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-          this.errorMessage = "Invalid email or password";
-          break;
-        case "auth/too-many-requests":
-          this.errorMessage =
-            "Too many failed login attempts. Please try again later";
-          break;
-        case "auth/popup-closed-by-user":
-          this.errorMessage = "Sign in was cancelled";
-          break;
-        default:
-          this.errorMessage = "An error occurred during authentication";
+
+    async ensureCompleteInitialization(idToken) {
+      try {
+        const response = await fetch(baseUrl + "/initialize-user-complete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Complete initialization failed: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Complete initialization result:", result);
+        return result;
+      } catch (error) {
+        console.error("Error in complete initialization:", error);
+        throw error;
+      }
+    },
+
+    async retryInitialization() {
+      if (this.currentUser) {
+        await this.initializeUserAccount(this.currentUser);
+      }
+    },
+
+    // Debug/Admin methods
+    async checkUserFiles() {
+      try {
+        if (!this.currentUser) return;
+
+        const idToken = await this.currentUser.getIdToken();
+        const response = await fetch(baseUrl + "/check-user-files", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("User files:", result);
+          this.fileCheckResults = result;
+
+          const statusMessage = result.setup_complete
+            ? `✅ Setup complete! Found ${result.total_files} files`
+            : `⚠️ Setup incomplete. ${result.missing_files.count} missing files, ${result.categories.Improper_Location.count} misplaced files`;
+
+          this.$message({
+            message: statusMessage,
+            type: result.setup_complete ? "success" : "warning",
+            duration: 5000,
+          });
+        } else {
+          throw new Error("Failed to check files");
+        }
+      } catch (error) {
+        console.error("Error checking files:", error);
+        this.$message.error("Failed to check files");
+      }
+    },
+
+    async createMissingFiles() {
+      try {
+        const idToken = await this.currentUser.getIdToken();
+        const response = await fetch(
+          baseUrl + "/create-missing-chatgpt-files",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Missing files creation result:", result);
+          this.$message.success(
+            `Created ${result.created_files.length} missing files`
+          );
+          // Refresh file check
+          await this.checkUserFiles();
+        } else {
+          throw new Error("Failed to create missing files");
+        }
+      } catch (error) {
+        console.error("Error creating missing files:", error);
+        this.$message.error("Failed to create missing files");
+      }
+    },
+
+    async initializeComplete() {
+      try {
+        const idToken = await this.currentUser.getIdToken();
+        const response = await fetch(baseUrl + "/initialize-user-complete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Complete initialization result:", result);
+          this.$message.success(
+            `Setup completed! Created ${result.summary.created} files`
+          );
+          // Refresh file check
+          await this.checkUserFiles();
+        } else {
+          throw new Error("Failed to complete initialization");
+        }
+      } catch (error) {
+        console.error("Error completing initialization:", error);
+        this.$message.error("Failed to complete initialization");
+      }
+    },
+
+    async cleanupUserFiles() {
+      try {
+        // Show confirmation dialog
+        await this.$confirm(
+          "This will delete files that are outside the proper folder structure (ItemsList and ChatGPT folders). Continue?",
+          "Cleanup Files",
+          {
+            confirmButtonText: "Yes, Cleanup",
+            cancelButtonText: "Cancel",
+            type: "warning",
+          }
+        );
+
+        const idToken = await this.currentUser.getIdToken();
+        const response = await fetch(baseUrl + "/cleanup-user-files", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Cleanup result:", result);
+          this.$message.success(
+            `Cleanup completed! Deleted ${result.summary.files_deleted} files`
+          );
+          // Refresh file check
+          await this.checkUserFiles();
+        } else {
+          throw new Error("Failed to cleanup files");
+        }
+      } catch (error) {
+        if (error === "cancel") {
+          this.$message.info("Cleanup cancelled");
+        } else {
+          console.error("Error cleaning up files:", error);
+          this.$message.error("Failed to cleanup files");
+        }
       }
     },
   },
 };
 </script>
-
-<style scoped></style>

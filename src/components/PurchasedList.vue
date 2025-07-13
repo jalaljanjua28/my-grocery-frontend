@@ -57,6 +57,7 @@
           </el-tooltip>
         </template>
       </el-table-column>
+
       <!-- Price Column with Dialog -->
       <el-table-column width="120px" label="Price">
         <template slot-scope="scope">
@@ -68,12 +69,13 @@
                 icon="el-icon-edit-outline"
                 circle
                 class="action-button update-button"
-                @click="openPriceDialog(scope.row)"
+                @click.stop="openPriceDialog(scope.row)"
               ></el-button>
             </el-tooltip>
           </div>
         </template>
       </el-table-column>
+
       <!-- Info Column-->
       <el-table-column label="Info" width="100px">
         <template slot-scope="scope">
@@ -161,62 +163,27 @@
     </el-table>
 
     <!-- Price Update Dialog -->
-    <el-dialog
-      title="Update Price"
-      :visible.sync="priceDialogVisible"
-      width="30%"
-      center
-      class="price-dialog"
-    >
-      <div class="price-dialog-content">
-        <div class="item-info">
-          <div class="item-image-container">
-            <img
-              :src="currentItem.image"
-              :alt="currentItem.name"
-              class="item-thumbnail"
-            />
-          </div>
-          <div class="item-details">
-            <h4>{{ currentItem.name }}</h4>
-            <p>Current price: {{ currentItem.price }}</p>
-          </div>
-        </div>
-
-        <div class="price-input-container">
-          <label for="price-input">New Price:</label>
+    <el-dialog :visible.sync="dialogVisible2" title="Update Price">
+      <el-form :model="form">
+        <el-form-item label="Item Name">
           <el-input
-            id="price-input"
-            v-model="newPrice"
-            type="number"
+            v-model="form.item_name"
+            placeholder="Enter item name"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Price">
+          <el-input
+            v-model="form.price"
             placeholder="Enter new price"
-            class="price-input"
-            @keyup.enter.native="confirmPriceUpdate"
-          >
-            <template slot="prepend">$</template>
-          </el-input>
-        </div>
-
-        <div class="price-presets">
-          <span class="preset-label">Quick select:</span>
-          <div class="preset-buttons">
-            <el-button
-              v-for="preset in pricePresets"
-              :key="preset"
-              size="mini"
-              @click="newPrice = preset"
-              class="preset-button"
-            >
-              ${{ preset }}
-            </el-button>
-          </div>
-        </div>
+            type="number"
+            step="0.01"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible2 = false">Cancel</el-button>
+        <el-button type="primary" @click="updatePrice">Update</el-button>
       </div>
-
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="priceDialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="confirmPriceUpdate">Update</el-button>
-      </span>
     </el-dialog>
 
     <div class="decorative-footer">
@@ -237,6 +204,9 @@ import {
   Tooltip,
   Dialog,
   Input,
+  Form,
+  FormItem,
+  Row,
 } from "element-ui";
 
 const baseUrl = "http://127.0.0.1:8081/api";
@@ -250,6 +220,9 @@ export default {
     "el-tooltip": Tooltip,
     "el-dialog": Dialog,
     "el-input": Input,
+    "el-form": Form,
+    "el-form-item": FormItem,
+    "el-row": Row,
   },
   props: {
     activeTab: {
@@ -264,33 +237,117 @@ export default {
   },
   data() {
     return {
-      priceDialogVisible: false,
-      currentItem: {},
+      dialogVisible2: false,
+      form: {
+        item_name: "",
+        price: "",
+      },
+      currentItem: null,
       newPrice: "",
-      pricePresets: [1.99, 2.99, 3.99, 4.99, 9.99],
     };
   },
 
   methods: {
     openPriceDialog(item) {
+      console.log("Opening price dialog for:", item); // Debug log
       this.currentItem = { ...item };
-      this.newPrice = item.price;
-      this.priceDialogVisible = true;
+      this.form.item_name = item.name || item.Name;
+      this.form.price = (item.price || item.Price || "")
+        .toString()
+        .replace("$", ""); // Remove $ sign for editing
+      this.dialogVisible2 = true;
+      console.log("Dialog should be visible:", this.dialogVisible2); // Debug log
     },
 
-    confirmPriceUpdate() {
-      if (this.newPrice === "" || isNaN(this.newPrice)) {
+    // Updated updatePrice function to match nanexpiredlist.vue
+    async updatePrice() {
+      console.log("Update price called"); // Debug log
+
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
         this.$message({
-          message: "Please enter a valid price",
+          message: "User not authenticated",
           type: "error",
-          duration: 3000,
-          showClose: true,
         });
         return;
       }
 
-      this.updatePrice(this.currentItem);
-      this.priceDialogVisible = false;
+      const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
+      const userConfirmed = confirm(
+        "Are you sure you want to update the price?"
+      );
+
+      if (userConfirmed) {
+        const requestData = {
+          Name: this.form.item_name,
+          Price: parseFloat(this.form.price), // Ensure it's a number
+        };
+
+        console.log("Sending request:", requestData); // Debug log
+
+        try {
+          const response = await fetch(baseUrl + "/update_price", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+            body: JSON.stringify(requestData),
+          });
+
+          console.log("Response status:", response.status); // Debug log
+
+          if (!response.ok) {
+            throw new Error("Error updating price");
+          }
+
+          const data = await response.json();
+          console.log("Price updated:", data);
+
+          // Update the local item price immediately
+          const updatedPrice = `$${parseFloat(this.form.price).toFixed(2)}`;
+
+          // Find and update the item in the filteredItems array
+          const itemIndex = this.filteredItems.findIndex(
+            (item) => (item.name || item.Name) === this.form.item_name
+          );
+
+          if (itemIndex !== -1) {
+            // Update the item price locally
+            this.$set(this.filteredItems[itemIndex], "price", updatedPrice);
+            this.$set(this.filteredItems[itemIndex], "Price", updatedPrice);
+            console.log("Local price updated to:", updatedPrice);
+          }
+
+          // Emit event to parent component to update its data
+          this.$emit("price-updated", {
+            itemName: this.form.item_name,
+            newPrice: updatedPrice,
+          });
+
+          this.dialogVisible2 = false;
+          this.$message({
+            message: `Price updated successfully to ${updatedPrice}!`,
+            type: "success",
+          });
+
+          // Reset form
+          this.form.item_name = "";
+          this.form.price = "";
+          this.currentItem = null;
+
+          // Optional: Reload after a delay if needed
+          // setTimeout(() => {
+          //   location.reload();
+          // }, 1500);
+        } catch (error) {
+          console.error("Error updating price:", error.message);
+          this.$message({
+            message: "An error occurred while updating price: " + error.message,
+            type: "error",
+          });
+        }
+      }
     },
 
     async moveToFood(item) {
@@ -334,6 +391,7 @@ export default {
         location.reload();
       }, 2000);
     },
+
     async addItem(itemToAdd) {
       const currentUser = auth.currentUser;
       if (!currentUser) {
@@ -368,6 +426,7 @@ export default {
         }, 2000);
       }
     },
+
     async deleteItem(itemToDelete) {
       const currentUser = auth.currentUser;
       if (!currentUser) {
@@ -405,6 +464,7 @@ export default {
           });
       }
     },
+
     async editItemName(item) {
       try {
         // Check authentication state first
@@ -458,41 +518,7 @@ export default {
       }
 
       try {
-        // Force refresh the token to ensure it's valid
         const idToken = await currentUser.getIdToken(true);
-
-        // Debug: Log token info
-        console.log("Token obtained, length:", idToken.length);
-        console.log("Full token (for debugging):", idToken); // Remove this in production!
-
-        // Test the token with a working endpoint first
-        console.log("Testing token with addItem endpoint...");
-        const testResponse = await fetch(baseUrl + "/addItem/purchase-list", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-          body: JSON.stringify({ itemName: "test-token-validation" }),
-        });
-
-        console.log("Test response status:", testResponse.status);
-        if (testResponse.status === 401) {
-          console.log("Token also fails on addItem endpoint");
-        } else {
-          console.log("Token works on addItem endpoint");
-        }
-
-        console.log("Now trying update_item_name endpoint...");
-
-        const requestBody = {
-          oldName: item.name,
-          newName: newName,
-          category: item.category,
-        };
-
-        console.log("Request body:", requestBody);
-
         const response = await fetch(baseUrl + "/update_item_name", {
           method: "POST",
           headers: {
@@ -500,52 +526,34 @@ export default {
             Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
-            itemName: item.name, // Try using the same field name as other endpoints
+            itemName: item.name,
             newName: newName,
             category: item.category,
           }),
         });
 
-        console.log("Response status:", response.status);
-        console.log("Response headers:", [...response.headers.entries()]);
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error("Error response body:", errorText);
-
-          if (response.status === 401) {
-            const tokenResult = await currentUser.getIdTokenResult(true);
-            console.log("Token claims:", tokenResult.claims);
-            console.log(
-              "Token expiration:",
-              new Date(tokenResult.expirationTime)
-            );
-            console.log("Current time:", new Date());
-
-            throw new Error(
-              "Authentication failed. Backend says token is invalid."
-            );
-          }
-
-          throw new Error(`Server error: ${response.status} - ${errorText}`);
-        }
-
         const data = await response.json();
-        console.log("Success response:", data);
 
-        this.$message({
-          message: `Item name successfully changed from "${item.name}" to "${newName}"!`,
-          type: "success",
-          duration: 4000,
-          showClose: true,
-        });
+        if (response.ok) {
+          this.$message({
+            message: `Item name updated from "${item.name}" to "${newName}" successfully!`,
+            type: "success",
+            duration: 4000,
+            showClose: true,
+          });
 
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
+          // Update local item name
+          item.name = newName;
+
+          // Reload after a short delay
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
+        } else {
+          throw new Error(data.error || "Failed to update item name");
+        }
       } catch (error) {
         console.error("Error updating item name:", error);
-
         this.$message({
           message: `Failed to update item name: ${error.message}`,
           type: "error",
@@ -555,81 +563,14 @@ export default {
       }
     },
 
-    async updatePrice(item) {
-      const currentUser = auth.currentUser;
-      if (!currentUser) {
-        this.$message({
-          message: "Please log in to continue",
-          type: "error",
-          duration: 3000,
-          showClose: true,
-        });
-        return;
-      }
-
-      try {
-        const idToken = await currentUser.getIdToken(true);
-
-        const response = await fetch(baseUrl + "/update_price", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-          body: JSON.stringify({
-            Name: item.name,
-            Price: parseFloat(this.newPrice),
-          }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          this.$message({
-            message: `Price for "${item.name}" successfully updated from ${
-              item.price
-            } to $${parseFloat(this.newPrice).toFixed(2)}!`,
-            type: "success",
-            duration: 4000,
-            showClose: true,
-          });
-
-          // Update the local item price
-          item.price = `$${parseFloat(this.newPrice).toFixed(2)}`;
-
-          // Reload after a short delay
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
-        } else {
-          throw new Error(data.message || "Failed to update price");
-        }
-      } catch (error) {
-        console.error("Error updating price:", error);
-        this.$message({
-          message: `Failed to update price for "${item.name}". Please try again.`,
-          type: "error",
-          duration: 5000,
-          showClose: true,
-        });
-      }
-    },
     async checkAuthState() {
       return new Promise((resolve) => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
           unsubscribe();
-          if (user) {
-            console.log("User is authenticated:", user.email);
-            resolve(true);
-          } else {
-            console.log("User is not authenticated");
-            resolve(false);
-          }
+          resolve(!!user);
         });
       });
     },
   },
 };
 </script>
-
-<style scoped></style>
