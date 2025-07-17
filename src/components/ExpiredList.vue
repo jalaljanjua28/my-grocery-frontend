@@ -59,7 +59,7 @@
 <script>
 import { Table, TableColumn, Button, Tooltip } from "element-ui";
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
 export default {
   components: {
     "el-table": Table,
