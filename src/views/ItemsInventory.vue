@@ -1,280 +1,282 @@
 <template>
-  <div class="inventory-page-container">
-    <router-link to="/" style="text-decoration: none">
-      <el-page-header content="Items Inventory" class="custom-page-header">
-        <template slot="content">
-          <div class="page-title">
-            <i class="el-icon-goods"></i>
-            <span>Items Inventory</span>
-          </div>
-        </template>
-      </el-page-header>
-    </router-link>
-
-    <el-main class="main-content">
-      <div class="nav-buttons">
-        <router-link to="/recipes-page" class="router_link">
-          <el-button class="nav-button" type="info" plain
-            ><i class="el-icon-chicken"></i> Recipes
-          </el-button>
-        </router-link>
-        <router-link to="/health-page" class="router_link">
-          <el-button class="nav-button" type="success" plain
-            ><i class="el-icon-no-smoking"></i> Health
-          </el-button>
-        </router-link>
-        <router-link to="user-defined-prompt" class="router_link">
-          <el-button class="nav-button" type="warning" plain
-            ><i class="el-icon-s-order"></i> User Defined Prompt
-          </el-button>
-        </router-link>
-      </div>
-      <!-- Decorative food-themed header -->
-      <div class="decorative-food-header">
-        <div class="food-icon apple"></div>
-        <div class="food-icon banana"></div>
-        <div class="food-icon carrot"></div>
-        <div class="food-icon broccoli"></div>
-        <div class="food-icon orange"></div>
-      </div>
-      <el-card class="inventory-card">
-        <div class="card-decoration left-inventorylist-decoration">
-          <div class="food-icon tomato"></div>
-          <div class="food-icon grapes"></div>
-          <div class="food-icon avocado"></div>
-        </div>
-
-        <!-- Enhanced Search Container -->
-        <div class="search-inventory">
-          <div class="search-inventory-header">
-            <i class="el-icon-search"></i>
-            <h3>Find Items</h3>
-          </div>
-          <search-inventory
-            :ExpiredFood="Food_expired"
-            :ExpiredNonFood="NonFood_expired"
-            :NonExpiredFood="Food_nonexpired"
-            :NonExpiredNonFood="NonFood_nonexpired"
-            :itemsFood="Food"
-            :itemsNonFood="NonFood"
-            class="enhanced-search"
-          />
-        </div>
-
-        <!-- Enhanced Tabs -->
-        <el-tabs
-          :tab-position="tabPosition"
-          style="height: auto"
-          v-model="outerActiveTab"
-          @tab-click="handleOuterTabClick"
-          class="custom-tabs"
-        >
-          <!-- Non - Expired Tab -->
-          <el-tab-pane name="a" label="Non Expired">
-            <span
-              slot="label"
-              class="el-tabs__label"
-              style="font-size: x-large"
-            >
-              <div class="tab-label-container">
-                <i class="el-icon-success"></i>
-                <span>Non Expired</span>
-                <div class="tab-indicator non-expired-indicator"></div>
-              </div>
-            </span>
-            <el-tabs
-              v-model="innerActiveTab"
-              @tab-click="handleInnerTabClick"
-              class="inner-tabs"
-            >
-              <el-tab-pane name="1" label="Food">
-                <span slot="label" class="el-tabs__sublabel">
-                  <div class="tab-label-container">
-                    <i class="el-icon-food"></i>
-                    <span>Food</span>
-                    <div class="tab-indicator food-indicator"></div>
-                  </div>
-                </span>
-                <div class="tab-content-container">
-                  <non-expired-list
-                    :items="Food_nonexpired"
-                    @item-deleted="handleItemDeleted()"
-                  ></non-expired-list>
-                </div>
-              </el-tab-pane>
-              <el-tab-pane name="2" label="Not Food">
-                <span slot="label" class="el-tabs__sublabel">
-                  <div class="tab-label-container">
-                    <i class="el-icon-bicycle"></i>
-                    <span>Non Food</span>
-                    <div class="tab-indicator non-food-indicator"></div>
-                  </div>
-                </span>
-                <div class="tab-content-container">
-                  <non-expired-list
-                    :items="NonFood_nonexpired"
-                    @item-deleted="handleItemDeleted()"
-                  ></non-expired-list>
-                </div>
-              </el-tab-pane>
-            </el-tabs>
-          </el-tab-pane>
-
-          <!-- Expired Tab -->
-          <el-tab-pane name="b" label="Expired">
-            <span
-              slot="label"
-              class="el-tabs__label"
-              style="font-size: x-large"
-            >
-              <div class="tab-label-container">
-                <i class="el-icon-error"></i>
-                <span>Expired</span>
-                <div class="tab-indicator expired-indicator"></div>
-              </div>
-            </span>
-            <el-tabs
-              v-model="innerActiveTab"
-              @tab-click="handleInnerTabClick"
-              class="inner-tabs"
-            >
-              <el-tab-pane name="3" label="Food">
-                <span slot="label" class="el-tabs__sublabel">
-                  <div class="tab-label-container">
-                    <i class="el-icon-food"></i>
-                    <span>Food</span>
-                    <div class="tab-indicator food-indicator"></div>
-                  </div>
-                </span>
-                <div class="tab-content-container">
-                  <expired-list
-                    :items="Food_expired"
-                    @item-deleted="handleItemDeleted"
-                  ></expired-list>
-                </div>
-              </el-tab-pane>
-              <el-tab-pane name="4" label="Not Food">
-                <span slot="label" class="el-tabs__sublabel">
-                  <div class="tab-label-container">
-                    <i class="el-icon-bicycle"></i>
-                    <span>Non Food</span>
-                    <div class="tab-indicator non-food-indicator"></div>
-                  </div>
-                </span>
-                <div class="tab-content-container">
-                  <expired-list
-                    :items="NonFood_expired"
-                    @item-deleted="handleItemDeleted()"
-                  ></expired-list>
-                </div>
-              </el-tab-pane>
-            </el-tabs>
-          </el-tab-pane>
-
-          <!-- Shopping List Tab -->
-          <el-tab-pane name="c" label="Shopping">
-            <span
-              slot="label"
-              class="el-tabs__label"
-              style="font-size: x-large"
-            >
-              <div class="tab-label-container">
-                <i class="el-icon-s-claim"></i>
-                <span>Shopping List</span>
-                <div class="tab-indicator shopping-indicator"></div>
-              </div>
-            </span>
-            <el-tabs
-              v-model="innerActiveTab"
-              @tab-click="handleInnerTabClick"
-              class="inner-tabs"
-            >
-              <el-tab-pane name="5" label="Food">
-                <span slot="label" class="el-tabs__sublabel">
-                  <div class="tab-label-container">
-                    <i class="el-icon-food"></i>
-                    <span>Food</span>
-                    <div class="tab-indicator food-indicator"></div>
-                  </div>
-                </span>
-                <div class="tab-content-container">
-                  <shopping-list
-                    :items="Food"
-                    @item-deleted="handleItemDeleted()"
-                  ></shopping-list>
-                </div>
-              </el-tab-pane>
-              <el-tab-pane name="6" label="Not Food">
-                <span slot="label" class="el-tabs__sublabel">
-                  <div class="tab-label-container">
-                    <i class="el-icon-bicycle"></i>
-                    <span>Non Food</span>
-                    <div class="tab-indicator non-food-indicator"></div>
-                  </div>
-                </span>
-                <div class="tab-content-container">
-                  <shopping-list
-                    :items="NonFood"
-                    @item-deleted="handleItemDeleted()"
-                  ></shopping-list>
-                </div>
-              </el-tab-pane>
-            </el-tabs>
-          </el-tab-pane>
-        </el-tabs>
-
-        <div class="add-item-container">
-          <el-button
-            @click="openDialog"
-            class="add-item-button"
-            type="success"
-            plain
-          >
-            <i class="el-icon-plus"></i> Add Manually to Shopping
-          </el-button>
-          <el-dialog :visible.sync="dialogVisible" class="custom-dialog">
-            <div class="dialog-header-decoration">
-              <div class="food-icon strawberry"></div>
-              <h3>Add New Item</h3>
-              <div class="food-icon pineapple"></div>
+  <el-container>
+    <div class="inventory-page-container">
+      <router-link to="/" style="text-decoration: none">
+        <el-page-header content="Items Inventory" class="custom-page-header">
+          <template slot="content">
+            <div class="page-title">
+              <i class="el-icon-goods"></i>
+              <span>Items Inventory</span>
             </div>
-            <add-items @item-added="closeDialog" />
-          </el-dialog>
-        </div>
+          </template>
+        </el-page-header>
+      </router-link>
 
-        <div class="card-decoration right-decoration">
-          <div class="food-icon watermelon"></div>
-          <div class="food-icon peach"></div>
-          <div class="food-icon potato"></div>
+      <el-main class="main-content">
+        <div class="nav-buttons">
+          <router-link to="/recipes-page" class="router_link">
+            <el-button class="nav-button" type="info" plain
+              ><i class="el-icon-chicken"></i> Recipes
+            </el-button>
+          </router-link>
+          <router-link to="/health-page" class="router_link">
+            <el-button class="nav-button" type="success" plain
+              ><i class="el-icon-no-smoking"></i> Health
+            </el-button>
+          </router-link>
+          <router-link to="user-defined-prompt" class="router_link">
+            <el-button class="nav-button" type="warning" plain
+              ><i class="el-icon-s-order"></i> User Defined Prompt
+            </el-button>
+          </router-link>
         </div>
-      </el-card>
-      <delete-all></delete-all>
+        <!-- Decorative food-themed header -->
+        <div class="decorative-food-header">
+          <div class="food-icon apple"></div>
+          <div class="food-icon banana"></div>
+          <div class="food-icon carrot"></div>
+          <div class="food-icon broccoli"></div>
+          <div class="food-icon orange"></div>
+        </div>
+        <el-card class="inventory-card">
+          <div class="card-decoration left-inventorylist-decoration">
+            <div class="food-icon tomato"></div>
+            <div class="food-icon grapes"></div>
+            <div class="food-icon avocado"></div>
+          </div>
 
-      <!-- Enhanced Frequency List Card -->
-      <el-card class="frequency-card">
-        <div class="frequency-header">
-          <i class="el-icon-data-analysis"></i>
-          <h3>Item Frequency Analysis</h3>
-        </div>
-        <div class="frequency-description">
-          <p>
-            Track how often you purchase different items to optimize your
-            shopping habits.
-          </p>
-        </div>
-        <frequency-list></frequency-list>
-      </el-card>
-    </el-main>
+          <!-- Enhanced Search Container -->
+          <div class="search-inventory">
+            <div class="search-inventory-header">
+              <i class="el-icon-search"></i>
+              <h3>Find Items</h3>
+            </div>
+            <search-inventory
+              :ExpiredFood="Food_expired"
+              :ExpiredNonFood="NonFood_expired"
+              :NonExpiredFood="Food_nonexpired"
+              :NonExpiredNonFood="NonFood_nonexpired"
+              :itemsFood="Food"
+              :itemsNonFood="NonFood"
+              class="enhanced-search"
+            />
+          </div>
 
-    <!-- Decorative food-themed footer -->
-    <div class="decorative-food-footer">
-      <div class="food-icon mango"></div>
-      <div class="food-icon cherry"></div>
-      <div class="food-icon lemon"></div>
-      <div class="food-icon corn"></div>
-      <div class="food-icon mushroom"></div>
+          <!-- Enhanced Tabs -->
+          <el-tabs
+            :tab-position="tabPosition"
+            style="height: auto"
+            v-model="outerActiveTab"
+            @tab-click="handleOuterTabClick"
+            class="custom-tabs"
+          >
+            <!-- Non - Expired Tab -->
+            <el-tab-pane name="a" label="Non Expired">
+              <span
+                slot="label"
+                class="el-tabs__label"
+                style="font-size: x-large"
+              >
+                <div class="tab-label-container">
+                  <i class="el-icon-success"></i>
+                  <span>Non Expired</span>
+                  <div class="tab-indicator non-expired-indicator"></div>
+                </div>
+              </span>
+              <el-tabs
+                v-model="innerActiveTab"
+                @tab-click="handleInnerTabClick"
+                class="inner-tabs"
+              >
+                <el-tab-pane name="1" label="Food">
+                  <span slot="label" class="el-tabs__sublabel">
+                    <div class="tab-label-container">
+                      <i class="el-icon-food"></i>
+                      <span>Food</span>
+                      <div class="tab-indicator food-indicator"></div>
+                    </div>
+                  </span>
+                  <div class="tab-content-container">
+                    <non-expired-list
+                      :items="Food_nonexpired"
+                      @item-deleted="handleItemDeleted()"
+                    ></non-expired-list>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane name="2" label="Not Food">
+                  <span slot="label" class="el-tabs__sublabel">
+                    <div class="tab-label-container">
+                      <i class="el-icon-bicycle"></i>
+                      <span>Non Food</span>
+                      <div class="tab-indicator non-food-indicator"></div>
+                    </div>
+                  </span>
+                  <div class="tab-content-container">
+                    <non-expired-list
+                      :items="NonFood_nonexpired"
+                      @item-deleted="handleItemDeleted()"
+                    ></non-expired-list>
+                  </div>
+                </el-tab-pane>
+              </el-tabs>
+            </el-tab-pane>
+
+            <!-- Expired Tab -->
+            <el-tab-pane name="b" label="Expired">
+              <span
+                slot="label"
+                class="el-tabs__label"
+                style="font-size: x-large"
+              >
+                <div class="tab-label-container">
+                  <i class="el-icon-error"></i>
+                  <span>Expired</span>
+                  <div class="tab-indicator expired-indicator"></div>
+                </div>
+              </span>
+              <el-tabs
+                v-model="innerActiveTab"
+                @tab-click="handleInnerTabClick"
+                class="inner-tabs"
+              >
+                <el-tab-pane name="3" label="Food">
+                  <span slot="label" class="el-tabs__sublabel">
+                    <div class="tab-label-container">
+                      <i class="el-icon-food"></i>
+                      <span>Food</span>
+                      <div class="tab-indicator food-indicator"></div>
+                    </div>
+                  </span>
+                  <div class="tab-content-container">
+                    <expired-list
+                      :items="Food_expired"
+                      @item-deleted="handleItemDeleted"
+                    ></expired-list>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane name="4" label="Not Food">
+                  <span slot="label" class="el-tabs__sublabel">
+                    <div class="tab-label-container">
+                      <i class="el-icon-bicycle"></i>
+                      <span>Non Food</span>
+                      <div class="tab-indicator non-food-indicator"></div>
+                    </div>
+                  </span>
+                  <div class="tab-content-container">
+                    <expired-list
+                      :items="NonFood_expired"
+                      @item-deleted="handleItemDeleted()"
+                    ></expired-list>
+                  </div>
+                </el-tab-pane>
+              </el-tabs>
+            </el-tab-pane>
+
+            <!-- Shopping List Tab -->
+            <el-tab-pane name="c" label="Shopping">
+              <span
+                slot="label"
+                class="el-tabs__label"
+                style="font-size: x-large"
+              >
+                <div class="tab-label-container">
+                  <i class="el-icon-s-claim"></i>
+                  <span>Shopping List</span>
+                  <div class="tab-indicator shopping-indicator"></div>
+                </div>
+              </span>
+              <el-tabs
+                v-model="innerActiveTab"
+                @tab-click="handleInnerTabClick"
+                class="inner-tabs"
+              >
+                <el-tab-pane name="5" label="Food">
+                  <span slot="label" class="el-tabs__sublabel">
+                    <div class="tab-label-container">
+                      <i class="el-icon-food"></i>
+                      <span>Food</span>
+                      <div class="tab-indicator food-indicator"></div>
+                    </div>
+                  </span>
+                  <div class="tab-content-container">
+                    <shopping-list
+                      :items="Food"
+                      @item-deleted="handleItemDeleted()"
+                    ></shopping-list>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane name="6" label="Not Food">
+                  <span slot="label" class="el-tabs__sublabel">
+                    <div class="tab-label-container">
+                      <i class="el-icon-bicycle"></i>
+                      <span>Non Food</span>
+                      <div class="tab-indicator non-food-indicator"></div>
+                    </div>
+                  </span>
+                  <div class="tab-content-container">
+                    <shopping-list
+                      :items="NonFood"
+                      @item-deleted="handleItemDeleted()"
+                    ></shopping-list>
+                  </div>
+                </el-tab-pane>
+              </el-tabs>
+            </el-tab-pane>
+          </el-tabs>
+
+          <div class="add-item-container">
+            <el-button
+              @click="openDialog"
+              class="add-item-button"
+              type="success"
+              plain
+            >
+              <i class="el-icon-plus"></i> Add Manually to Shopping
+            </el-button>
+            <el-dialog :visible.sync="dialogVisible" class="custom-dialog">
+              <div class="dialog-header-decoration">
+                <div class="food-icon strawberry"></div>
+                <h3>Add New Item</h3>
+                <div class="food-icon pineapple"></div>
+              </div>
+              <add-items @item-added="closeDialog" />
+            </el-dialog>
+          </div>
+
+          <div class="card-decoration right-decoration">
+            <div class="food-icon watermelon"></div>
+            <div class="food-icon peach"></div>
+            <div class="food-icon potato"></div>
+          </div>
+        </el-card>
+        <delete-all></delete-all>
+
+        <!-- Enhanced Frequency List Card -->
+        <el-card class="frequency-card">
+          <div class="frequency-header">
+            <i class="el-icon-data-analysis"></i>
+            <h3>Item Frequency Analysis</h3>
+          </div>
+          <div class="frequency-description">
+            <p>
+              Track how often you purchase different items to optimize your
+              shopping habits.
+            </p>
+          </div>
+          <frequency-list></frequency-list>
+        </el-card>
+      </el-main>
+
+      <!-- Decorative food-themed footer -->
+      <div class="decorative-food-footer">
+        <div class="food-icon mango"></div>
+        <div class="food-icon cherry"></div>
+        <div class="food-icon lemon"></div>
+        <div class="food-icon corn"></div>
+        <div class="food-icon mushroom"></div>
+      </div>
     </div>
-  </div>
+  </el-container>
 </template>
 
 <script>

@@ -3,8 +3,15 @@
     <!-- Animated gradient background -->
     <div class="header-background"></div>
     <!-- Left decoration with interactive food icons -->
-    <div class="header-decoration left-decoration">
-      <div class="header-decoration-content">
+    <div
+      style="
+        align-items: center;
+        flex-direction: row;
+        display: flex;
+        justify-content: center;
+      "
+    >
+      <div>
         <div class="food-icon apple" title="Fresh Produce">
           <div class="icon-tooltip">Fresh Produce</div>
         </div>
@@ -39,18 +46,21 @@
     </div>
 
     <!-- Right decoration with interactive food icons -->
-    <div class="header-decoration right-decoration">
-      <the-menu class="menu-component"></the-menu>
-
-      <div class="header-decoration-content">
-        <!-- Menu component -->
-        <div>
-          <div class="food-icon banana" title="Fruits">
-            <div class="icon-tooltip">Fruits</div>
-          </div>
-          <div class="food-icon orange" title="Citrus">
-            <div class="icon-tooltip">Citrus</div>
-          </div>
+    <div
+      style="
+        align-items: center;
+        flex-direction: row;
+        display: flex;
+        justify-content: center;
+      "
+    >
+      <the-menu></the-menu>
+      <div style="flex-direction: column">
+        <div class="food-icon banana" title="Fruits">
+          <div class="icon-tooltip">Fruits</div>
+        </div>
+        <div class="food-icon orange" title="Citrus">
+          <div class="icon-tooltip">Citrus</div>
         </div>
       </div>
     </div>
