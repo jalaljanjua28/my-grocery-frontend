@@ -8,7 +8,8 @@ import { auth, onAuthStateChanged } from "../Firebase.js"; // Adjust the path as
 
 // Create a custom Axios instance with a progress event
 const axiosInstance = axios.create();
-axiosInstance.defaults.baseURL = "http://127.0.0.1:8081/api";
+axiosInstance.defaults.baseURL =
+  "https://my-grocery-app-888361723877.us-central1.run.app/api";
 
 export default {
   data() {
