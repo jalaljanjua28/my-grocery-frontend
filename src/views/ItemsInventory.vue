@@ -265,16 +265,15 @@
           </div>
           <frequency-list></frequency-list>
         </el-card>
+        <!-- Decorative food-themed footer -->
+        <div class="decorative-food-footer">
+          <div class="food-icon mango"></div>
+          <div class="food-icon cherry"></div>
+          <div class="food-icon lemon"></div>
+          <div class="food-icon corn"></div>
+          <div class="food-icon mushroom"></div>
+        </div>
       </el-main>
-
-      <!-- Decorative food-themed footer -->
-      <div class="decorative-food-footer">
-        <div class="food-icon mango"></div>
-        <div class="food-icon cherry"></div>
-        <div class="food-icon lemon"></div>
-        <div class="food-icon corn"></div>
-        <div class="food-icon mushroom"></div>
-      </div>
     </div>
   </el-container>
 </template>

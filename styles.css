@@ -333,7 +333,7 @@ h4 {
   font-weight: bold;
   cursor: pointer;
   outline: none;
-  border: 1px solid transparent;
+  /* border: none !important; */
   /* margin-top: 10px; */
   /* margin-left: 20px; */
   /* margin-right: 20px; */
@@ -436,7 +436,7 @@ h4 {
 
 /* Plain buttons - consolidated */
 .el-button.is-plain {
-  border: none;
+  /* border: none; */
   width: 100%;
 }
 
@@ -668,7 +668,7 @@ h4 {
 .upload-button {
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
   /* Consider using variables */
-  border: none;
+  /* border: none; */
 }
 
 .auth-button {
@@ -786,7 +786,8 @@ h4 {
 
 /* Toggle button styling */
 .navbar-toggle {
-  /* margin-left: -18px; */
+  margin-left: 10px;
+  margin-top: 10px;
   position: absolute;
   /* top: -25px; */
   width: 0;
@@ -1242,7 +1243,7 @@ h4 {
   color: var(--text-primary);
   transition: 0.3s;
   margin-bottom: var(--spacing-xl);
-  background-color: mediumaquamarine;
+  background-color: none;
 }
 
 .el-card__body {
@@ -1972,7 +1973,12 @@ h4 {
   animation: fadeIn 0.8s ease-in-out;
   min-height: 100vh;
 }
-
+/* .prompt-decoration bottom-decoration {
+  display: flex !important;
+  justify-content: space-around;
+  margin: 0 auto;
+  max-width: 600px;
+} */
 .user-prompts-container:before {
   content: "";
   position: fixed;
@@ -1981,7 +1987,6 @@ h4 {
   /* width: 100%; */
   height: 100%;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmNWY1ZjUiPjwvcmVjdD4KPC9zdmc+");
-
   z-index: -1;
 }
 
@@ -2057,11 +2062,11 @@ h4 {
 .prompt-selection {
   margin-bottom: 30px;
   padding: 20px;
-  background-color: var(--background-color);
-  /* Use variable */
+  /* background-color: var(--background-color); */
   border-radius: 10px;
   box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
+  border: 2px solid black;
 }
 
 .prompt-selection:hover {
@@ -2093,7 +2098,7 @@ h4 {
   display: flex;
   align-items: center;
   padding: 8px 0;
-  flex-direction: column;
+  flex-direction: row;
   background: snow;
 }
 
@@ -2678,7 +2683,7 @@ h4 {
 /* Social links */
 .social-links {
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
   justify-content: center;
 }
@@ -6597,9 +6602,9 @@ h4 {
 
 /* Large devices (desktops) */
 @media screen and (max-width: 945px) {
-  .el-container {
+  /* .el-container {
     width: fit-content !important;
-  }
+  } */
 
   .content-decoration {
     display: none;

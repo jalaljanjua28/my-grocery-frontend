@@ -387,13 +387,22 @@
           </el-alert>
         </div>
       </el-card>
-    </el-main>
-
-    <div class="prompt-decoration bottom-decoration">
-      <div class="decoration-item" v-for="i in 5" :key="`bottom-${i}`">
-        <i :class="`el-icon-${promptIcons[(i + 5) % promptIcons.length]}`"></i>
+      <div
+        class="prompt-decoration bottom-decoration"
+        style="
+          display: flex;
+          justify-content: space-around;
+          margin: 0 auto;
+          max-width: 600px;
+        "
+      >
+        <div class="decoration-item" v-for="i in 5" :key="`bottom-${i}`">
+          <i
+            :class="`el-icon-${promptIcons[(i + 5) % promptIcons.length]}`"
+          ></i>
+        </div>
       </div>
-    </div>
+    </el-main>
   </div>
 </template>
 

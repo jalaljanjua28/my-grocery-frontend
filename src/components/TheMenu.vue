@@ -9,7 +9,10 @@
                 class="el-button-user"
                 type="info"
                 plain
-                style="color: var(--danger-color) !important"
+                style="
+                  color: var(--danger-color) !important;
+                  border: none !important;
+                "
               >
                 <i class="el-icon-s-custom"> User</i>
               </el-button>
@@ -40,7 +43,10 @@
               class="el-button-signup"
               type="info"
               plain
-              style="color: var(--danger-color) !important"
+              style="
+                color: var(--danger-color) !important;
+                border: none !important;
+              "
               ><i class="el-icon-user"> SignUp</i></el-button
             >
           </router-link>
