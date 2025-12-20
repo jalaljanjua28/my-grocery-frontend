@@ -117,7 +117,7 @@ import {
 } from "@/plugins/Dataservice.js";
 import { auth } from "../Firebase.js";
 
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   components: {
