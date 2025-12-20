@@ -19,7 +19,7 @@
         </router-link>
         <router-link to="/items-inventory" class="router_link">
           <el-button class="nav-button" type="success" plain
-            ><i class="el-icon-no-smoking"></i> Health
+            ><i class="el-icon-no-smoking"></i> Items Inventory
           </el-button>
         </router-link>
         <router-link to="user-defined-prompt" class="router_link">

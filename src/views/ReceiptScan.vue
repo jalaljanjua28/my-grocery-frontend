@@ -1,198 +1,206 @@
 <template>
-  <div class="receipt-scan-container">
-    <router-link to="/" style="text-decoration: none">
-      <el-page-header content="Receipt Scan" class="custom-page-header">
-        <template slot="content">
-          <div class="page-title">
-            <i class="el-icon-camera"></i>
-            <span>Receipt Scan</span>
+  <el-container>
+    <div class="receipt-scan-container">
+      <router-link to="/" style="text-decoration: none">
+        <el-page-header content="Receipt Scan" class="custom-page-header">
+          <template slot="content">
+            <div class="page-title">
+              <i class="el-icon-camera"></i>
+              <span>Receipt Scan</span>
+            </div>
+          </template>
+        </el-page-header>
+      </router-link>
+      <el-main class="main-content">
+        <!-- Animated header section -->
+        <div class="scan-header">
+          <div class="scan-icon-container">
+            <i class="el-icon-camera scan-icon"></i>
           </div>
-        </template>
-      </el-page-header>
-    </router-link>
-    <el-main class="main-content">
-      <!-- Animated header section -->
-      <div class="scan-header">
-        <div class="scan-icon-container">
-          <i class="el-icon-camera scan-icon"></i>
+          <h2 class="scan-title">Scan Your Receipt</h2>
+          <p class="scan-subtitle">
+            Upload a clear image of your receipt to extract items automatically
+          </p>
         </div>
-        <h2 class="scan-title">Scan Your Receipt</h2>
-        <p class="scan-subtitle">
-          Upload a clear image of your receipt to extract items automatically
-        </p>
-      </div>
 
-      <!-- Upload container with visual enhancements -->
-      <div class="upload-container">
-        <div class="upload-area">
-          <el-upload
-            class="upload-demo"
-            action="https://my-grocery-app-888361723877.us-central1.run.app/api/image-process-upload"
-            ref="fileInput"
-            :auto-upload="false"
-            :on-change="onFileChange"
-            accept="image/*"
-            drag
-          >
-            <i class="el-icon-upload upload-icon"></i>
-            <div class="el-upload__text">
-              <span>Drop your receipt image here or </span>
-              <el-button type="text" class="browse-text">browse</el-button>
-            </div>
-            <div class="el-upload__tip" slot="tip">
-              <div class="tip-container">
-                <i class="el-icon-warning-outline tip-icon"></i>
-                <span>Use Microsoft Lens for best image quality</span>
+        <!-- Upload container with visual enhancements -->
+        <div class="upload-container">
+          <div class="upload-area">
+            <el-upload
+              class="upload-demo"
+              action="https://my-grocery-app-888361723877.us-central1.run.app/api/image-process-upload"
+              ref="fileInput"
+              :auto-upload="false"
+              :on-change="onFileChange"
+              accept="image/*"
+              drag
+            >
+              <i class="el-icon-upload upload-icon"></i>
+              <div class="el-upload__text">
+                <span>Drop your receipt image here or </span>
+                <el-button type="text" class="browse-text">browse</el-button>
               </div>
-            </div>
-          </el-upload>
+              <div class="el-upload__tip" slot="tip">
+                <div class="tip-container">
+                  <i class="el-icon-warning-outline tip-icon"></i>
+                  <span>Use Microsoft Lens for best image quality</span>
+                </div>
+              </div>
+            </el-upload>
 
-          <div class="action-buttons">
-            <el-button
-              size="medium"
-              type="primary"
-              icon="el-icon-view"
-              class="action-button compare-button"
-              @click="checkProccessedImage"
-              :loading="isLoading"
-            >
-              Compare Results
-            </el-button>
-
-            <el-button
-              v-if="checkStatus"
-              size="medium"
-              type="success"
-              icon="el-icon-upload"
-              class="action-button upload-button"
-              @click="uploadImageProcess"
-            >
-              Upload to Server
-            </el-button>
-          </div>
-
-          <!-- Status indicators -->
-          <div class="status-container">
-            <div v-if="showStatus" class="status-indicator processing">
-              <i class="el-icon-loading"></i>
-              <span>Processing image...</span>
-            </div>
-
-            <div
-              v-if="checkStatus && !showStatus"
-              class="status-indicator compare"
-            >
-              <i class="el-icon-check"></i>
-              <span
-                >Compare the result of the image and the extracted OCR and
-                choose the best possible image</span
+            <div class="action-buttons">
+              <el-button
+                size="medium"
+                type="primary"
+                icon="el-icon-view"
+                class="action-button compare-button"
+                @click="checkProccessedImage"
+                :loading="isLoading"
               >
+                Compare Results
+              </el-button>
+
+              <el-button
+                v-if="checkStatus"
+                size="medium"
+                type="success"
+                icon="el-icon-upload"
+                class="action-button upload-button"
+                @click="uploadImageProcess"
+              >
+                Upload to Server
+              </el-button>
             </div>
 
-            <div v-if="completionStatus" class="status-indicator success">
-              <i class="el-icon-success"></i>
-              <span>Image Uploaded Successfully!</span>
-            </div>
-          </div>
-        </div>
-      </div>
+            <!-- Status indicators -->
+            <div class="status-container">
+              <div v-if="showStatus" class="status-indicator processing">
+                <i class="el-icon-loading"></i>
+                <span>Processing image...</span>
+              </div>
 
-      <!-- Preview section with enhanced styling -->
-      <div v-if="imageSrc || ocrText" class="preview-section">
-        <h3 class="preview-title">
-          <i class="el-icon-document-checked"></i>
-          Preview Results
-        </h3>
-
-        <div class="preview-container">
-          <!-- Image preview with decorative elements -->
-          <div v-if="imageSrc" class="image-preview-container">
-            <div class="preview-header">
-              <i class="el-icon-picture-outline"></i>
-              <h4>Captured Image</h4>
-            </div>
-            <div class="image-frame">
-              <img :src="imageSrc" alt="Captured Image" class="preview-image" />
-              <div class="image-overlay"></div>
-            </div>
-          </div>
-
-          <!-- OCR text preview with enhanced styling -->
-          <div v-if="ocrText" class="ocr-preview-container">
-            <div class="preview-header">
-              <i class="el-icon-document"></i>
-              <h4>OCR Extracted Text</h4>
-            </div>
-            <div class="ocr-frame">
-              <pre class="ocr-text">{{ ocrText }}</pre>
-              <div class="ocr-controls">
-                <el-button
-                  type="text"
-                  icon="el-icon-copy-document"
-                  class="copy-button"
-                  @click="copyOcrText"
+              <div
+                v-if="checkStatus && !showStatus"
+                class="status-indicator compare"
+              >
+                <i class="el-icon-check"></i>
+                <span
+                  >Compare the result of the image and the extracted OCR and
+                  choose the best possible image</span
                 >
-                  Copy Text
-                </el-button>
+              </div>
+
+              <div v-if="completionStatus" class="status-indicator success">
+                <i class="el-icon-success"></i>
+                <span>Image Uploaded Successfully!</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Instructions section -->
-      <div class="instructions-section">
-        <h3 class="instructions-title">
-          <i class="el-icon-info"></i>
-          How to get the best results
-        </h3>
+        <!-- Preview section with enhanced styling -->
+        <div v-if="imageSrc || ocrText" class="preview-section">
+          <h3 class="preview-title">
+            <i class="el-icon-document-checked"></i>
+            Preview Results
+          </h3>
 
-        <div class="instructions-container">
-          <div class="instruction-step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-              <h4>Take a clear photo</h4>
-              <p>
-                Use good lighting and make sure the receipt is flat and fully
-                visible
-              </p>
+          <div class="preview-container">
+            <!-- Image preview with decorative elements -->
+            <div v-if="imageSrc" class="image-preview-container">
+              <div class="preview-header">
+                <i class="el-icon-picture-outline"></i>
+                <h4>Captured Image</h4>
+              </div>
+              <div class="image-frame">
+                <img
+                  :src="imageSrc"
+                  alt="Captured Image"
+                  class="preview-image"
+                />
+                <div class="image-overlay"></div>
+              </div>
             </div>
-          </div>
 
-          <div class="instruction-step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-              <h4>Use Microsoft Lens</h4>
-              <p>
-                This app helps to enhance receipt images for better OCR results
-              </p>
-            </div>
-          </div>
-
-          <div class="instruction-step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h4>Compare results</h4>
-              <p>
-                Check the extracted text against your receipt to ensure accuracy
-              </p>
-            </div>
-          </div>
-
-          <div class="instruction-step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-              <h4>Upload to server</h4>
-              <p>
-                When satisfied with the results, upload to add items to your
-                inventory
-              </p>
+            <!-- OCR text preview with enhanced styling -->
+            <div v-if="ocrText" class="ocr-preview-container">
+              <div class="preview-header">
+                <i class="el-icon-document"></i>
+                <h4>OCR Extracted Text</h4>
+              </div>
+              <div class="ocr-frame">
+                <pre class="ocr-text">{{ ocrText }}</pre>
+                <div class="ocr-controls">
+                  <el-button
+                    type="text"
+                    icon="el-icon-copy-document"
+                    class="copy-button"
+                    @click="copyOcrText"
+                  >
+                    Copy Text
+                  </el-button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </el-main>
-  </div>
+
+        <!-- Instructions section -->
+        <div class="instructions-section">
+          <h3 class="instructions-title">
+            <i class="el-icon-info"></i>
+            How to get the best results
+          </h3>
+
+          <div class="instructions-container">
+            <div class="instruction-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Take a clear photo</h4>
+                <p>
+                  Use good lighting and make sure the receipt is flat and fully
+                  visible
+                </p>
+              </div>
+            </div>
+
+            <div class="instruction-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Use Microsoft Lens</h4>
+                <p>
+                  This app helps to enhance receipt images for better OCR
+                  results
+                </p>
+              </div>
+            </div>
+
+            <div class="instruction-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Compare results</h4>
+                <p>
+                  Check the extracted text against your receipt to ensure
+                  accuracy
+                </p>
+              </div>
+            </div>
+
+            <div class="instruction-step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Upload to server</h4>
+                <p>
+                  When satisfied with the results, upload to add items to your
+                  inventory
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </el-main>
+    </div>
+  </el-container>
 </template>
 
 <script>

@@ -3,7 +3,7 @@
     <div class="nav-buttons">
       <router-link to="items-inventory" class="router_link">
         <el-button class="nav-button" type="success" plain
-          ><i class="el-icon-goods"></i> Items
+          ><i class="el-icon-goods"></i> Inventory
         </el-button>
       </router-link>
       <router-link to="/recipes-page" class="router_link">
