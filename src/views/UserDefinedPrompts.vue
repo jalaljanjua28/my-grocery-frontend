@@ -11,6 +11,13 @@
       </el-page-header>
     </router-link>
     <el-main class="main-content">
+      <div class="decorative-food-header">
+        <div class="food-icon apple"></div>
+        <div class="food-icon banana"></div>
+        <div class="food-icon carrot"></div>
+        <div class="food-icon broccoli"></div>
+        <div class="food-icon orange"></div>
+      </div>
       <el-card class="prompt-card">
         <!-- <div class="prompt-decoration top-decoration">
           <div class="decoration-item" v-for="i in 5" :key="`top-${i}`">
@@ -18,13 +25,7 @@
           </div>
         </div> -->
         <!-- Decorative food-themed header -->
-        <div class="decorative-food-header">
-          <div class="food-icon apple"></div>
-          <div class="food-icon banana"></div>
-          <div class="food-icon carrot"></div>
-          <div class="food-icon broccoli"></div>
-          <div class="food-icon orange"></div>
-        </div>
+
         <div class="card-header">
           <i class="el-icon-chat-dot-round"></i>
           <h2>Custom Prompts</h2>
@@ -387,20 +388,12 @@
           </el-alert>
         </div>
       </el-card>
-      <div
-        class="prompt-decoration bottom-decoration"
-        style="
-          display: flex;
-          justify-content: space-around;
-          margin: 0 auto;
-          max-width: 600px;
-        "
-      >
-        <div class="decoration-item" v-for="i in 5" :key="`bottom-${i}`">
-          <i
-            :class="`el-icon-${promptIcons[(i + 5) % promptIcons.length]}`"
-          ></i>
-        </div>
+      <div class="decorative-food-footer">
+        <div class="food-icon mango"></div>
+        <div class="food-icon cherry"></div>
+        <div class="food-icon lemon"></div>
+        <div class="food-icon corn"></div>
+        <div class="food-icon mushroom"></div>
       </div>
     </el-main>
   </div>

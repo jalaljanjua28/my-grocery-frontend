@@ -244,7 +244,9 @@ h4 {
   font-size: 12px;
   color: var(--black);
 }
-
+.el-select-dropdown__wrap el-scrollbar__wrap {
+  margin-bottom: 0px !important;
+}
 .el-select-dropdown {
   position: absolute;
   z-index: 1001;
@@ -795,7 +797,7 @@ h4 {
   background: linear-gradient(135deg, #4facfe, #00f2fe);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   border: none;
-  padding: 26px;
+  padding: 13px 31px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1519,7 +1521,7 @@ h4 {
 .page-title {
   display: flex;
   align-items: center;
-  font-size: 24px;
+  font-size: 18px;
   color: var(--text-primary);
 }
 
@@ -2098,8 +2100,8 @@ h4 {
   display: flex;
   align-items: center;
   padding: 8px 0;
-  flex-direction: row;
-  background: snow;
+  flex-direction: column;
+  /* background: snow; */
 }
 
 .option-content i {
@@ -2896,8 +2898,7 @@ h4 {
   margin-bottom: 30px;
   padding: 25px;
   max-width: 800px;
-  background: linear-gradient(135deg, var(--background-color) 0%, #c3cfe2 100%);
-  /* Use variable */
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
