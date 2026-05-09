@@ -1,13 +1,7 @@
 <template>
   <div class="home-page-container">
     <!-- Decorative food-themed header -->
-    <div class="decorative-food-header">
-      <div class="food-icon apple"></div>
-      <div class="food-icon banana"></div>
-      <div class="food-icon carrot"></div>
-      <div class="food-icon broccoli"></div>
-      <div class="food-icon orange"></div>
-    </div>
+
     <div class="nav-buttons">
       <router-link to="items-inventory" class="router_link">
         <el-button class="nav-button" type="success" plain
@@ -35,7 +29,13 @@
         </el-button>
       </router-link>
     </div>
-
+    <div class="decorative-food-header">
+      <div class="food-icon apple"></div>
+      <div class="food-icon banana"></div>
+      <div class="food-icon carrot"></div>
+      <div class="food-icon broccoli"></div>
+      <div class="food-icon orange"></div>
+    </div>
     <div v-if="displayJokes" class="jokes-container">
       <el-card class="jokes-box">
         <div class="jokes-header">
@@ -49,6 +49,15 @@
       </el-card>
     </div>
     <el-card class="main-content-card">
+      <div class="decorative-header">
+        <div class="fruit-decoration apple"></div>
+        <div class="fruit-decoration banana"></div>
+        <div class="fruit-decoration orange"></div>
+        <h3 class="table-title">Your Purchased Items</h3>
+        <div class="fruit-decoration carrot"></div>
+        <div class="fruit-decoration broccoli"></div>
+        <div class="fruit-decoration pineapple"></div>
+      </div>
       <div class="card-decoration left-list-decoration">
         <div class="food-icon tomato"></div>
         <div class="food-icon grapes"></div>
@@ -208,18 +217,18 @@ export default {
         // Find and update the item in Food_nonexpired
         if (this.Food_nonexpired) {
           const foodItemIndex = this.Food_nonexpired.findIndex(
-            (item) => (item.name || item.Name) === updateData.itemName
+            (item) => (item.name || item.Name) === updateData.itemName,
           );
           if (foodItemIndex !== -1) {
             this.$set(
               this.Food_nonexpired[foodItemIndex],
               "price",
-              updateData.newPrice
+              updateData.newPrice,
             );
             this.$set(
               this.Food_nonexpired[foodItemIndex],
               "Price",
-              updateData.newPrice
+              updateData.newPrice,
             );
           }
         }
@@ -227,18 +236,18 @@ export default {
         // Find and update the item in NonFood_nonexpired
         if (this.NonFood_nonexpired) {
           const nonFoodItemIndex = this.NonFood_nonexpired.findIndex(
-            (item) => (item.name || item.Name) === updateData.itemName
+            (item) => (item.name || item.Name) === updateData.itemName,
           );
           if (nonFoodItemIndex !== -1) {
             this.$set(
               this.NonFood_nonexpired[nonFoodItemIndex],
               "price",
-              updateData.newPrice
+              updateData.newPrice,
             );
             this.$set(
               this.NonFood_nonexpired[nonFoodItemIndex],
               "Price",
-              updateData.newPrice
+              updateData.newPrice,
             );
           }
         }
@@ -246,7 +255,7 @@ export default {
         // Update the combined items array if you're using it
         if (this.items) {
           const itemIndex = this.items.findIndex(
-            (item) => (item.name || item.Name) === updateData.itemName
+            (item) => (item.name || item.Name) === updateData.itemName,
           );
           if (itemIndex !== -1) {
             this.$set(this.items[itemIndex], "price", updateData.newPrice);
@@ -295,7 +304,7 @@ export default {
               "Content-Type": "application/json",
               Authorization: `Bearer ${idToken}`,
             },
-          }
+          },
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

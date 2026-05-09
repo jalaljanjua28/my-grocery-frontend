@@ -8,19 +8,31 @@
         align-items: center;
         flex-direction: row;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
       "
     >
-      <div>
+      <!-- <div>
         <div class="food-icon apple" title="Fresh Produce">
           <div class="icon-tooltip">Fresh Produce</div>
         </div>
         <div class="food-icon carrot" title="Vegetables">
           <div class="icon-tooltip">Vegetables</div>
         </div>
-      </div>
+      </div> -->
+
       <header-logo class="logo-component"></header-logo>
+
+      <the-menu></the-menu>
+      <!-- <div style="flex-direction: column">
+        <div class="food-icon banana" title="Fruits">
+          <div class="icon-tooltip">Fruits</div>
+        </div>
+        <div class="food-icon orange" title="Citrus">
+          <div class="icon-tooltip">Citrus</div>
+        </div>
+      </div> -->
     </div>
+
     <!-- Navigation component -->
     <!-- Enhanced search container with animations -->
     <div class="search-header">
@@ -46,24 +58,7 @@
     </div>
 
     <!-- Right decoration with interactive food icons -->
-    <div
-      style="
-        align-items: center;
-        flex-direction: row;
-        display: flex;
-        justify-content: center;
-      "
-    >
-      <the-menu></the-menu>
-      <div style="flex-direction: column">
-        <div class="food-icon banana" title="Fruits">
-          <div class="icon-tooltip">Fruits</div>
-        </div>
-        <div class="food-icon orange" title="Citrus">
-          <div class="icon-tooltip">Citrus</div>
-        </div>
-      </div>
-    </div>
+
     <!-- Floating food icons background with enhanced animations -->
     <div class="floating-food-icons">
       <div class="floating-icon strawberry" title="Berries"></div>
