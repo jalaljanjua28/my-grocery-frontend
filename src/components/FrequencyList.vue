@@ -36,7 +36,7 @@
 
 <script>
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   data() {
@@ -67,11 +67,11 @@ export default {
         if (response.ok) {
           // Transform the object into an array of objects with itemName and frequency properties
           const sortedItemFrequency = Object.entries(
-            responseData.sorted_item_frequency
+            responseData.sorted_item_frequency,
           ).map(([itemName, frequency]) => ({ itemName, frequency }));
           // Sort the array in descending order based on the frequency
           this.sortedItemFrequency = sortedItemFrequency.sort(
-            (a, b) => b.frequency - a.frequency
+            (a, b) => b.frequency - a.frequency,
           );
         } else {
           this.responseMessage = responseData.error;

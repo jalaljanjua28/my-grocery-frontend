@@ -79,7 +79,7 @@
                   fetchData(
                     'gpt',
                     '/allergy-information-using-gpt',
-                    'AllergyInformation'
+                    'AllergyInformation',
                   )
                 "
                 :loading="isLoading"
@@ -167,7 +167,7 @@
                   fetchData(
                     'gpt',
                     '/healthier-alternatives-using-gpt',
-                    'alternatives'
+                    'alternatives',
                   )
                 "
                 :loading="isLoading"
@@ -243,7 +243,7 @@
                   fetchData(
                     'gpt',
                     '/healthy-eating-advice-using-gpt',
-                    'eatingAdviceList'
+                    'eatingAdviceList',
                   )
                 "
                 :loading="isLoading"
@@ -325,7 +325,7 @@
                   fetchData(
                     'gpt',
                     '/health-advice-using-gpt',
-                    'healthAdviceList'
+                    'healthAdviceList',
                   )
                 "
                 :loading="isLoading"
@@ -405,7 +405,7 @@
                   fetchData(
                     'gpt',
                     '/healthy-items-usage-using-gpt',
-                    'suggestions'
+                    'suggestions',
                   )
                 "
                 :loading="isLoading"
@@ -479,7 +479,7 @@
                     <span
                       v-html="
                         formatText(
-                          item['Health-wise Incompatibility Information']
+                          item['Health-wise Incompatibility Information'],
                         )
                       "
                     ></span>
@@ -513,7 +513,7 @@
                   fetchData(
                     'gpt',
                     '/health_incompatibilities_using_gpt',
-                    'healthIncompatibilities'
+                    'healthIncompatibilities',
                   )
                 "
                 :loading="isLoading"
@@ -613,7 +613,7 @@
                   fetchData(
                     'gpt',
                     '/nutritional-analysis-using-gpt',
-                    'nutritionalAnalysis'
+                    'nutritionalAnalysis',
                   )
                 "
                 :loading="isLoading"
@@ -706,7 +706,7 @@
                   fetchData(
                     'gpt',
                     '/nutritional-value-using-gpt',
-                    'nutritionalValue'
+                    'nutritionalValue',
                   )
                 "
                 :loading="isLoading"
@@ -735,7 +735,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -776,7 +776,7 @@ export default {
         (item) =>
           (item["Food Item"] && item["Food Item"].trim() !== "") ||
           (item["Allergy Information"] &&
-            item["Allergy Information"].trim() !== "")
+            item["Allergy Information"].trim() !== ""),
       );
     },
 
@@ -788,7 +788,7 @@ export default {
         (item) =>
           (item["Food Item"] && item["Food Item"].trim() !== "") ||
           (item["Healthy Alternative"] &&
-            item["Healthy Alternative"].trim() !== "")
+            item["Healthy Alternative"].trim() !== ""),
       );
     },
 
@@ -797,7 +797,7 @@ export default {
         return false;
       }
       return this.eatingAdviceList.some(
-        (item) => item["Health Advice"] && item["Health Advice"].trim() !== ""
+        (item) => item["Health Advice"] && item["Health Advice"].trim() !== "",
       );
     },
 
@@ -808,7 +808,7 @@ export default {
       return this.healthAdviceList.some(
         (advice) =>
           (advice.Prompt && advice.Prompt.trim() !== "") ||
-          (advice["Health Advice"] && advice["Health Advice"].trim() !== "")
+          (advice["Health Advice"] && advice["Health Advice"].trim() !== ""),
       );
     },
 
@@ -819,7 +819,7 @@ export default {
       return this.suggestions.some(
         (item) =>
           (item["Food Item"] && item["Food Item"].trim() !== "") ||
-          (item["Suggestion"] && item["Suggestion"].trim() !== "")
+          (item["Suggestion"] && item["Suggestion"].trim() !== ""),
       );
     },
 
@@ -866,7 +866,7 @@ export default {
         (item) =>
           (item["Food Item"] && item["Food Item"].trim() !== "") ||
           (item["Nutritional Advice"] &&
-            item["Nutritional Advice"].trim() !== "")
+            item["Nutritional Advice"].trim() !== ""),
       );
     },
   },
@@ -894,19 +894,19 @@ export default {
       // Enhance health warnings with better formatting
       formattedText = formattedText.replace(
         /(Warning:|Caution:|Alert:|Note:|Important:)/gi,
-        '<span class="health-warning-title">$1</span><br>'
+        '<span class="health-warning-title">$1</span><br>',
       );
 
       // Enhance benefits section
       formattedText = formattedText.replace(
         /(Benefits:|Advantages:|Pros:|Positives:)/gi,
-        '<span class="health-benefit-title">$1</span><br>'
+        '<span class="health-benefit-title">$1</span><br>',
       );
 
       // Format nutritional information
       formattedText = formattedText.replace(
         /(Contains:|Rich in:|High in:|Source of:)(\s*[\w\s,]+)/gi,
-        '<span class="nutrition-highlight"><i class="el-icon-star-on"></i> $1$2</span>'
+        '<span class="nutrition-highlight"><i class="el-icon-star-on"></i> $1$2</span>',
       );
 
       return formattedText;
@@ -921,42 +921,42 @@ export default {
             await this.fetchData(
               "json",
               "/allergy-information-using-json",
-              "AllergyInformation"
+              "AllergyInformation",
             );
             await this.fetchData(
               "json",
               "/healthier-alternatives-using-json",
-              "alternatives"
+              "alternatives",
             );
             await this.fetchData(
               "json",
               "/healthy-eating-advice-using-json",
-              "eatingAdviceList"
+              "eatingAdviceList",
             );
             await this.fetchData(
               "json",
               "/healthy-items-usage-using-json",
-              "suggestions"
+              "suggestions",
             );
             await this.fetchData(
               "json",
               "/health_incompatibilities_using_json",
-              "healthIncompatibilities"
+              "healthIncompatibilities",
             );
             await this.fetchData(
               "json",
               "/nutritional-analysis-using-json",
-              "nutritionalAnalysis"
+              "nutritionalAnalysis",
             );
             await this.fetchData(
               "json",
               "/nutritional-value-using-json",
-              "nutritionalValue"
+              "nutritionalValue",
             );
             await this.fetchData(
               "json",
               "/health-advice-using-json",
-              "healthAdviceList"
+              "healthAdviceList",
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -1015,7 +1015,7 @@ export default {
           console.log(data[property]);
         } else {
           console.error(
-            `Property '${property}' not found in the server response.`
+            `Property '${property}' not found in the server response.`,
           );
           this[property] = []; // Ensure property is set to an empty array if not found
         }

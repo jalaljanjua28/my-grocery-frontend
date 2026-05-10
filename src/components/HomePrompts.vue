@@ -32,7 +32,7 @@
                     <span
                       v-html="
                         formatNumberedList(
-                          suggestion['Food Waste Reduction Suggestion']
+                          suggestion['Food Waste Reduction Suggestion'],
                         )
                       "
                     ></span>
@@ -123,7 +123,7 @@
                 fetchData(
                   'gpt',
                   '/ethical-eating-suggestion-using-gpt',
-                  'ethicalEatingSuggestions'
+                  'ethicalEatingSuggestions',
                 )
               "
               :loading="isLoading"
@@ -351,7 +351,7 @@
                 fetchData(
                   'gpt',
                   '/food-handling-advice-using-gpt',
-                  'handlingadvice'
+                  'handlingadvice',
                 )
               "
               :loading="isLoading"
@@ -422,7 +422,7 @@
 <script>
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth"; // Correctly import onAuthStateChanged from firebase/auth
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   data() {
@@ -452,7 +452,7 @@ export default {
       return this.foodWasteReductionSuggestions.some(
         (suggestion) =>
           suggestion["Food Waste Reduction Suggestion"] &&
-          suggestion["Food Waste Reduction Suggestion"].trim() !== ""
+          suggestion["Food Waste Reduction Suggestion"].trim() !== "",
       );
     },
 
@@ -481,7 +481,7 @@ export default {
       return this.funFacts.some(
         (fact) =>
           (fact["Food Item"] && fact["Food Item"].trim() !== "") ||
-          (fact["Fun Facts"] && fact["Fun Facts"].trim() !== "")
+          (fact["Fun Facts"] && fact["Fun Facts"].trim() !== ""),
       );
     },
 
@@ -490,7 +490,7 @@ export default {
         return false;
       }
       return this.cookingTips.some(
-        (tip) => tip["Cooking Tip"] && tip["Cooking Tip"].trim() !== ""
+        (tip) => tip["Cooking Tip"] && tip["Cooking Tip"].trim() !== "",
       );
     },
 
@@ -499,7 +499,7 @@ export default {
         return false;
       }
       return this.currentTrends.some(
-        (trend) => trend["Fun Facts"] && trend["Fun Facts"].trim() !== ""
+        (trend) => trend["Fun Facts"] && trend["Fun Facts"].trim() !== "",
       );
     },
 
@@ -510,7 +510,8 @@ export default {
       return this.handlingadvice.some(
         (advice) =>
           (advice["Food Item"] && advice["Food Item"].trim() !== "") ||
-          (advice["Handling Advice"] && advice["Handling Advice"].trim() !== "")
+          (advice["Handling Advice"] &&
+            advice["Handling Advice"].trim() !== ""),
       );
     },
 
@@ -524,7 +525,7 @@ export default {
       return this.moodChangerSuggestions.some(
         (suggestion) =>
           suggestion["Food Suggestion"] &&
-          suggestion["Food Suggestion"].trim() !== ""
+          suggestion["Food Suggestion"].trim() !== "",
       );
     },
   },
@@ -543,37 +544,37 @@ export default {
             await this.fetchData(
               "json",
               "/ethical-eating-suggestion-using-json",
-              "ethicalEatingSuggestions"
+              "ethicalEatingSuggestions",
             );
             await this.fetchData(
               "json",
               "/get-fun-facts-using-json",
-              "funFacts"
+              "funFacts",
             );
             await this.fetchData(
               "json",
               "/food-waste-reduction-using-json",
-              "foodWasteReductionSuggestions"
+              "foodWasteReductionSuggestions",
             );
             await this.fetchData(
               "json",
               "/food-handling-advice-using-json",
-              "handlingadvice"
+              "handlingadvice",
             );
             await this.fetchData(
               "json",
               "/current-trends-using-json",
-              "currentTrends"
+              "currentTrends",
             );
             await this.fetchData(
               "json",
               "/cooking-tips-using-json",
-              "cookingTips"
+              "cookingTips",
             );
             await this.fetchData(
               "json",
               "/mood-changer-using-json",
-              "moodChangerSuggestions"
+              "moodChangerSuggestions",
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -629,7 +630,7 @@ export default {
           console.log(data[property]);
         } else {
           console.error(
-            `Property '${property}' not found in the server response.`
+            `Property '${property}' not found in the server response.`,
           );
           this[property] = []; // Ensure property is set to an empty array if not found
         }

@@ -1,5 +1,5 @@
 // DataService.js
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -83,7 +83,7 @@ export async function fetchMasterNonexpiredData() {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${idToken}`,
               },
-            }
+            },
           );
 
           if (!response.ok) {
@@ -138,7 +138,7 @@ function processData(data) {
   try {
     const base64Data = data.data;
     const binaryData = new Uint8Array(
-      [...atob(base64Data)].map((char) => char.charCodeAt(0))
+      [...atob(base64Data)].map((char) => char.charCodeAt(0)),
     );
     const textDecoder = new TextDecoder();
     const decodedData = textDecoder.decode(binaryData);
@@ -155,11 +155,11 @@ function processData(data) {
         status: item.Status,
         days_left: item.Days_Until_Expiry,
         category: "Food", // Add this line
-      })
+      }),
     );
     // Process NonFood data
     const NonFood = parsedData.Not_Food.filter(
-      (item) => item.Name !== "TestFNE"
+      (item) => item.Name !== "TestFNE",
     ).map((item, index) => ({
       id: index,
       name: item.Name,

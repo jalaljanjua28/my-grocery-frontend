@@ -90,7 +90,7 @@
                     fetchData(
                       'gpt',
                       '/fusion-cuisine-suggestions-using-gpt',
-                      'fusionSuggestions'
+                      'fusionSuggestions',
                     )
                   "
                   :loading="isLoading"
@@ -175,7 +175,7 @@
                     fetchData(
                       'gpt',
                       '/user-defined-dish-using-gpt',
-                      'definedDishes'
+                      'definedDishes',
                     )
                   "
                   :loading="isLoading"
@@ -268,7 +268,7 @@
                     fetchData(
                       'gpt',
                       '/unique-recipes-using-gpt',
-                      'uniqueRecipes'
+                      'uniqueRecipes',
                     )
                   "
                   :loading="isLoading"
@@ -495,7 +495,7 @@
 <script>
 import { auth } from "../Firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   data() {
@@ -531,7 +531,7 @@ export default {
       return this.fusionSuggestions.some(
         (suggestion) =>
           suggestion["Fusion Cuisine Suggestion"] &&
-          suggestion["Fusion Cuisine Suggestion"].trim() !== ""
+          suggestion["Fusion Cuisine Suggestion"].trim() !== "",
       );
     },
 
@@ -540,7 +540,7 @@ export default {
         return false;
       }
       return this.definedDishes.some(
-        (dish) => dish["Fun Facts"] && dish["Fun Facts"].trim() !== ""
+        (dish) => dish["Fun Facts"] && dish["Fun Facts"].trim() !== "",
       );
     },
 
@@ -551,7 +551,7 @@ export default {
       return this.uniqueRecipes.some(
         (recipe) =>
           (recipe["Recipe"] && recipe["Recipe"].trim() !== "") ||
-          (recipe["Encouragement"] && recipe["Encouragement"].trim() !== "")
+          (recipe["Encouragement"] && recipe["Encouragement"].trim() !== ""),
       );
     },
 
@@ -562,7 +562,7 @@ export default {
       return this.dietSchedule.some(
         (meal) =>
           (meal["Food Item"] && meal["Food Item"].trim() !== "") ||
-          (meal["Meal Suggestion"] && meal["Meal Suggestion"].trim() !== "")
+          (meal["Meal Suggestion"] && meal["Meal Suggestion"].trim() !== ""),
       );
     },
 
@@ -605,19 +605,19 @@ export default {
       // Enhance recipe instructions with better formatting
       formattedText = formattedText.replace(
         /(Instructions:|Directions:|Method:|Steps:|Preparation:|Procedure:)/gi,
-        '<span class="recipe-section-title">$1</span><br>'
+        '<span class="recipe-section-title">$1</span><br>',
       );
 
       // Enhance ingredients section
       formattedText = formattedText.replace(
         /(Ingredients:|You will need:|What you'll need:)/gi,
-        '<span class="recipe-section-title">$1</span><br>'
+        '<span class="recipe-section-title">$1</span><br>',
       );
 
       // Format cooking times
       formattedText = formattedText.replace(
         /(Cook time:|Cooking time:|Prep time:|Preparation time:|Total time:)(\s*\d+\s*\w+)/gi,
-        '<span class="cooking-time"><i class="el-icon-time"></i> $1$2</span>'
+        '<span class="cooking-time"><i class="el-icon-time"></i> $1$2</span>',
       );
 
       return formattedText;
@@ -632,27 +632,27 @@ export default {
             await this.fetchData(
               "json",
               "/fusion-cuisine-suggestions-using-json",
-              "fusionSuggestions"
+              "fusionSuggestions",
             );
             await this.fetchData(
               "json",
               "/user-defined-dish-using-json",
-              "definedDishes"
+              "definedDishes",
             );
             await this.fetchData(
               "json",
               "/unique-recipes-using-json",
-              "uniqueRecipes"
+              "uniqueRecipes",
             );
             await this.fetchData(
               "json",
               "/diet-schedule-using-json",
-              "dietSchedule"
+              "dietSchedule",
             );
             await this.fetchData(
               "json",
               "/recipes-using-json",
-              "generatedRecipes"
+              "generatedRecipes",
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -711,7 +711,7 @@ export default {
           console.log(data[property]);
         } else {
           console.error(
-            `Property '${property}' not found in the server response.`
+            `Property '${property}' not found in the server response.`,
           );
           this[property] = []; // Ensure property is set to an empty array if not found
         }

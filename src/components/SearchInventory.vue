@@ -90,7 +90,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+const baseUrl = "http://127.0.0.1:8081/api";
 
 export default {
   data() {
@@ -185,7 +185,7 @@ export default {
       let filteredItemsByCategory = [];
       if (this.select === "1") {
         filteredItemsByCategory = this.NonExpiredFood.concat(
-          this.NonExpiredNonFood
+          this.NonExpiredNonFood,
         );
       } else if (this.select === "2") {
         filteredItemsByCategory = this.ExpiredFood.concat(this.ExpiredNonFood);
@@ -206,7 +206,7 @@ export default {
       this.filteredItems = filteredItemsByCategory.filter(
         (item) =>
           item.name.toLowerCase().includes(searchValue) ||
-          item.status.toLowerCase().includes(searchValue)
+          item.status.toLowerCase().includes(searchValue),
       );
       this.searchQuery = "";
       this.dialogTableVisible = true;
@@ -225,7 +225,7 @@ export default {
       this.filteredItems = allItems.filter(
         (item) =>
           item.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          item.status.toLowerCase().includes(this.searchQuery.toLowerCase())
+          item.status.toLowerCase().includes(this.searchQuery.toLowerCase()),
       );
     },
   },
