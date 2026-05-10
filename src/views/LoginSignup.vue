@@ -242,7 +242,7 @@
 </template>
 
 <script>
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
 
 import {
   signInWithPopup,
@@ -333,7 +333,7 @@ export default {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           this.email,
-          this.password
+          this.password,
         );
         const user = userCredential.user;
         console.log("User signed up:", user);
@@ -366,7 +366,7 @@ export default {
         const userCredential = await signInWithEmailAndPassword(
           auth,
           this.email,
-          this.password
+          this.password,
         );
         const user = userCredential.user;
         console.log("User signed in:", user);
@@ -450,7 +450,7 @@ export default {
             "Content-Type": "application/json",
             Authorization: `Bearer ${idToken}`,
           },
-          body: JSON.stringify({ email: user.email, idToken }),
+          body: JSON.stringify({ idToken }),
         });
 
         if (!response.ok) {
@@ -589,14 +589,14 @@ export default {
               "Content-Type": "application/json",
               Authorization: `Bearer ${idToken}`,
             },
-          }
+          },
         );
 
         if (response.ok) {
           const result = await response.json();
           console.log("Missing files creation result:", result);
           this.$message.success(
-            `Created ${result.created_files.length} missing files`
+            `Created ${result.created_files.length} missing files`,
           );
           // Refresh file check
           await this.checkUserFiles();
@@ -624,7 +624,7 @@ export default {
           const result = await response.json();
           console.log("Complete initialization result:", result);
           this.$message.success(
-            `Setup completed! Created ${result.summary.created} files`
+            `Setup completed! Created ${result.summary.created} files`,
           );
           // Refresh file check
           await this.checkUserFiles();
@@ -647,7 +647,7 @@ export default {
             confirmButtonText: "Yes, Cleanup",
             cancelButtonText: "Cancel",
             type: "warning",
-          }
+          },
         );
 
         const idToken = await this.currentUser.getIdToken();
@@ -663,7 +663,7 @@ export default {
           const result = await response.json();
           console.log("Cleanup result:", result);
           this.$message.success(
-            `Cleanup completed! Deleted ${result.summary.files_deleted} files`
+            `Cleanup completed! Deleted ${result.summary.files_deleted} files`,
           );
           // Refresh file check
           await this.checkUserFiles();

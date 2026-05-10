@@ -172,7 +172,7 @@ h4 {
   flex: 1;
   padding: 20px;
   /* width: 1300px; */
-  margin: 10px;
+  /* margin: 10px; */
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   background-color: var(--transparent-white);
@@ -238,7 +238,6 @@ h4 {
 .el-input--suffix {
   padding-right: 0;
 }
-
 /* Select styles */
 .el-select {
   font-size: 12px;
@@ -301,7 +300,7 @@ h4 {
 .el-button {
   border-radius: var(--border-radius-lg);
   transition: all 0.3s ease;
-  padding: 10px 24px;
+  padding: 8px 15px;
   font-size: medium;
   font-weight: bold;
   cursor: pointer;
@@ -438,7 +437,7 @@ h4 {
 
 /* Plain buttons - consolidated */
 .el-button.is-plain {
-  /* border: none; */
+  border: none;
   width: 100%;
 }
 
@@ -742,11 +741,11 @@ h4 {
   justify-content: space-around;
   align-items: center;
   padding: 10px 20px;
-  background-color: mintcream;
-  border-bottom: 1px solid #e4e7ed;
-  margin-bottom: 20px;
+  /* background-color: mintcream; */
+  /* border-bottom: 1px solid #e4e7ed; */
+  /* margin-bottom: 20px; */
   min-height: 60px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -768,6 +767,7 @@ h4 {
   font-size: 14px;
   font-weight: 500;
   transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
 .nav-button:hover {
@@ -1554,7 +1554,6 @@ h4 {
 .item-expiry {
   margin-bottom: var(--spacing-sm);
 }
-
 /* Offer items */
 .offer-item {
   display: flex;
@@ -1738,7 +1737,7 @@ h4 {
 
 /* Logo and branding */
 .logo-text {
-  height: 27px;
+  height: 18px;
   display: flex;
   font-size: 2em;
   font-weight: bolder;
@@ -1756,10 +1755,8 @@ h4 {
   align-items: center;
   flex-direction: row;
   border-bottom: none;
-  margin-left: var(--spacing-sm);
+  margin-left: var(--spacing-sm) !important;
   height: 0;
-  /* This might hide the container */
-  margin-left: 15px;
 }
 
 .header-title {
@@ -3801,7 +3798,7 @@ h4 {
 .search-inventory-header h3 {
   margin: 0;
   color: #67c23a;
-  font-size: x-large;
+  font-size: small;
 }
 .enhanced-search {
   width: 100%;
@@ -4755,16 +4752,15 @@ h4 {
 /* Header */
 
 .header {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
   padding: 0 20px;
   background-color: #fff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
   z-index: 10;
-  /* min-height: 90px; */
   transition: all 0.5s ease;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -6616,7 +6612,7 @@ h4 {
   } */
 
   .logo-container {
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     background: none !important;
   }
 
@@ -6632,12 +6628,12 @@ h4 {
     margin-bottom: var(--spacing-sm);
   }
 
-  .el-button--info.is-plain,
+  /* .el-button--info.is-plain,
   .el-button--danger.is-plain,
   .el-button--warning.is-plain {
     width: 100% !important;
     margin-left: 0 !important;
-  }
+  } */
   /* .el-button--warning.is-plain,
   .el-button--warning.is-plain,
   .el-button--danger.is-plain {
@@ -6715,6 +6711,323 @@ h4 {
 
   .status-text {
     max-width: 150px;
+  }
+}
+
+/* Responsive layout hardening */
+html,
+body,
+#app {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.el-main,
+.main-content,
+.home-page-container,
+.inventory-page-container,
+.receipt-scan-container,
+.about-us-container,
+.account-page-container,
+.faqs-container,
+.user-prompts-container,
+.login-signup-container,
+.recipe-prompts-container,
+.health-prompts-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.header,
+.scan-header,
+.about-header,
+.account-header,
+.faq-header,
+.auth-card,
+.faq-content,
+.instructions-section,
+.preview-section,
+.about-content,
+.account-content,
+.feedback-form,
+.search-header,
+.search-inventory-header {
+  width: 100%;
+  max-width: 100%;
+}
+
+.preview-container,
+.data-stats,
+.form-actions,
+.nav-buttons,
+.add-item-container,
+.offer-item-details,
+.ocr-dev {
+  flex-wrap: wrap;
+}
+
+.responsive-table,
+.el-table,
+.table-wrapper {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.image-preview,
+.image-frame,
+.ocr-frame {
+  max-width: 100%;
+}
+
+.feedback-form {
+  width: 100%;
+}
+
+.search-inventory-header {
+  width: 35%;
+}
+
+.header {
+  height: auto !important;
+  min-height: 96px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-decoration,
+.left-header,
+.search-inventory,
+.searchDev {
+  min-width: 0;
+}
+
+.search-inventory {
+  width: 100%;
+  max-width: 100%;
+}
+
+.el-upload-dragger,
+.upload-demo,
+.upload-container,
+.preview-container,
+.image-preview-container,
+.ocr-preview-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-sidebar {
+    width: min(280px, 85vw);
+  }
+
+  .header {
+    padding: 12px 15px;
+  }
+
+  .logo-text {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+  }
+
+  .responsive-table {
+    min-width: 720px;
+  }
+
+  .suggestion-card {
+    width: calc(50% - 20px);
+  }
+
+  .offer-item-image {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .el-main {
+    padding: 12px;
+  }
+
+  .nav-buttons,
+  .header,
+  .search-inventory,
+  .search-header,
+  .search-inventory-header,
+  .selection-header,
+  .results-header,
+  .dialog-header-decoration,
+  .frequency-header {
+    gap: 10px;
+  }
+
+  .nav-buttons,
+  .header-decoration,
+  .left-header,
+  .offer-item-details,
+  .form-actions,
+  .data-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .router_link,
+  .router-link-active,
+  .nav-button,
+  .generate-button,
+  .submit-button,
+  .update-button,
+  .save-button,
+  .delete-button,
+  .export-button,
+  .contact-button,
+  .action-button {
+    width: 100%;
+  }
+
+  .preview-container,
+  .ocr-dev,
+  .add-item-container {
+    flex-direction: column;
+  }
+
+  .suggestion-card {
+    width: 100%;
+    margin: 10px 0;
+    min-width: 0;
+  }
+
+  .offer-item {
+    margin: 0;
+  }
+
+  .offer-item-image {
+    width: 130px;
+    height: 130px;
+  }
+
+  .table-wrapper {
+    padding: 12px;
+  }
+
+  .responsive-table {
+    min-width: 640px;
+  }
+
+  .image-preview {
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+  }
+
+  .image-frame,
+  .ocr-frame {
+    height: 280px;
+  }
+
+  .footer-column {
+    margin-left: 0;
+  }
+
+  .status-text {
+    white-space: normal;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    padding: 10px;
+    min-height: auto;
+  }
+
+  .nav-sidebar {
+    width: min(260px, 88vw);
+  }
+
+  .custom-page-header,
+  .results-container,
+  .prompt-selection,
+  .prompt-input-container,
+  .tab-content-container,
+  .search-inventory,
+  .inventory-card,
+  .upload-area,
+  .faq-content,
+  .instructions-section,
+  .auth-card,
+  .about-header,
+  .account-header,
+  .faq-header,
+  .scan-header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .table-wrapper {
+    padding: 10px;
+  }
+
+  .responsive-table {
+    min-width: 560px;
+  }
+
+  .table-image,
+  .image-container {
+    width: 48px;
+    height: 48px;
+  }
+
+  .food-icon,
+  .fruit-decoration,
+  .non-food-decoration {
+    width: 28px;
+    height: 28px;
+  }
+
+  .logo-text {
+    font-size: 1.25rem;
+  }
+
+  .header-title,
+  .scan-title,
+  .about-title,
+  .account-title,
+  .faq-title {
+    font-size: 1.4rem !important;
+  }
+
+  .preview-title,
+  .instructions-title,
+  .table-title {
+    font-size: 1.1rem !important;
+  }
+
+  .image-frame,
+  .ocr-frame {
+    height: 220px;
+  }
+
+  .el-dialog {
+    width: calc(100vw - 24px) !important;
+    margin: 20px auto;
   }
 }
 

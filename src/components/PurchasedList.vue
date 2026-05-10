@@ -1,15 +1,5 @@
 <template>
   <div class="table-wrapper">
-    <div class="decorative-header">
-      <div class="fruit-decoration apple"></div>
-      <div class="fruit-decoration banana"></div>
-      <div class="fruit-decoration orange"></div>
-      <h3 class="table-title">Your Purchased Items</h3>
-      <div class="fruit-decoration carrot"></div>
-      <div class="fruit-decoration broccoli"></div>
-      <div class="fruit-decoration pineapple"></div>
-    </div>
-
     <el-table :data="filteredItems" class="responsive-table">
       <el-table-column width="90px !important" label="Image" prop="image">
         <template slot-scope="scope">
@@ -209,7 +199,7 @@ import {
   Row,
 } from "element-ui";
 
-const baseUrl = "http://127.0.0.1:8081/api";
+const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
 
 export default {
   components: {
@@ -274,7 +264,7 @@ export default {
 
       const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
       const userConfirmed = confirm(
-        "Are you sure you want to update the price?"
+        "Are you sure you want to update the price?",
       );
 
       if (userConfirmed) {
@@ -309,7 +299,7 @@ export default {
 
           // Find and update the item in the filteredItems array
           const itemIndex = this.filteredItems.findIndex(
-            (item) => (item.name || item.Name) === this.form.item_name
+            (item) => (item.name || item.Name) === this.form.item_name,
           );
 
           if (itemIndex !== -1) {
@@ -364,7 +354,7 @@ export default {
           confirmButtonText: "Yes",
           cancelButtonText: "No",
           type: "warning",
-        }
+        },
       ).catch(() => false);
       if (!confirmMove) {
         return;
@@ -488,7 +478,7 @@ export default {
             inputPattern: /^.{1,50}$/,
             inputErrorMessage: "Name must be between 1-50 characters",
             inputValue: item.name,
-          }
+          },
         );
 
         if (newName.value && newName.value.trim() !== item.name) {

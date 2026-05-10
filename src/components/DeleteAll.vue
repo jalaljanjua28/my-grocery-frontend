@@ -111,7 +111,7 @@ export default {
           cancelButtonText: "Cancel",
           type: "warning",
           confirmButtonClass: "el-button--danger",
-        }
+        },
       )
         .then(() => {
           this.deleteItems(option);
@@ -133,7 +133,7 @@ export default {
           cancelButtonText: "Cancel",
           type: "error",
           confirmButtonClass: "el-button--danger",
-        }
+        },
       )
         .then(() => {
           this.deleteAllCategories();
@@ -242,7 +242,7 @@ export default {
 .delete-all-container {
   padding: 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 .delete-card {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

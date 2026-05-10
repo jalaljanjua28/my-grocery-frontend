@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "target": "es5",
+    "target": "es2015",
     "module": "esnext",
     "baseUrl": "./",
     "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
     "paths": {
       "@/*": ["src/*"]
     },
