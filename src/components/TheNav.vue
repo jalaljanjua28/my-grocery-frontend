@@ -61,13 +61,6 @@
               <i class="el-icon-user"></i>
               <span>Account & Shopping</span>
             </template>
-
-            <!-- <el-menu-item index="1-1" class="submenu-item">
-              <router-link to="/account-page" class="menu-link">
-                <i class="el-icon-user"></i>
-                <span>My Account</span>
-              </router-link>
-            </el-menu-item> -->
           </el-submenu>
 
           <!-- Inventory section -->

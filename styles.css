@@ -81,8 +81,7 @@ body {
   overflow: visible !important;
   overflow-x: visible;
   overflow-y: visible;
-  /* Prevent scrolling on small screens
-   /* Don't hide horizontal overflow */
+  /* Allow scrolling on small screens; don't hide horizontal overflow */
 }
 
 p {
@@ -206,18 +205,103 @@ h4 {
   font-size: 12px;
   width: 100%;
 }
+.el-input-group {
+  line-height: normal;
+  display: inline-table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid;
+}
+.el-input-group__append,
+.el-input-group__prepend {
+  background-color: slategray;
+  color: #909399;
+  vertical-align: middle;
+  display: table-cell;
+  position: relative;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  padding: 0 20px;
+  width: 1px;
+  white-space: nowrap;
+}
+/* Search bars (homepage + inventory) */
+.input-with-select,
+.enhanced-search {
+  width: 100%;
+}
+
+/* Make the input itself feel like a designed search box */
+.input-with-select .el-input__inner,
+.enhanced-search .el-input__inner {
+  /* border: 3px solid var(--black); */
+  /* border-radius: 12px; */
+  /* background: rgba(255, 255, 255, 0.88) !important; */
+  /* box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.12); */
+  padding-left: 12px;
+  padding-right: 42px; /* room for icon */
+  height: 48px;
+}
+
+/* Icon button alignment (suffix-icon) */
+.input-with-select .el-input__icon,
+.enhanced-search .el-input__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 100%;
+  color: var(--black);
+  font-size: 22px;
+}
+
+/* The prepended select box inside the input */
+.input-with-select .el-input__prefix,
+.enhanced-search .el-input__prefix {
+  background: transparent !important;
+}
+
+/* Select inside search */
+.input-with-select .el-select .el-input__inner,
+.enhanced-search .el-select .el-input__inner {
+  border: none !important;
+  background: transparent !important;
+  height: 100%;
+  padding-left: 0;
+  box-shadow: none;
+}
+
+/* Search-inventory header */
+.search-inventory-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border: 2px dashed rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Ensure the select dropdown items look consistent (search-only) */
+.input-with-select .el-select-dropdown,
+.enhanced-search .el-select-dropdown {
+  border: 2px solid var(--black) !important;
+  border-radius: 12px !important;
+}
 
 .el-input__inner {
   box-sizing: border-box;
-  color: var(--black);
-  border: 3px solid var(--black);
+  /* color: var(--black);
+  border: 3px solid var(--black); */
   display: inline-block;
   height: 38px;
   outline: 0;
   padding: 0 6px;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   width: 100%;
-  border-radius: var(--border-radius-sm);
+  /* border-radius: var(--border-radius-sm); */
 }
 
 .el-input__icon {
@@ -243,7 +327,7 @@ h4 {
   font-size: 12px;
   color: var(--black);
 }
-.el-select-dropdown__wrap el-scrollbar__wrap {
+.el-select-dropdown__wrap .el-scrollbar__wrap {
   margin-bottom: 0px !important;
 }
 .el-select-dropdown {
@@ -264,7 +348,7 @@ h4 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--text-regular);
+  color: black;
   height: 50px;
   line-height: 34px;
   /* Inconsistent with height */
@@ -788,9 +872,9 @@ h4 {
 
 /* Toggle button styling */
 .navbar-toggle {
-  margin-left: 10px;
-  margin-top: 10px;
-  position: absolute;
+  /* margin-left: 10px;
+  margin-top: 10px; */
+  /* position: absolute; */
   /* top: -25px; */
   width: 0;
   border-radius: 12px;
@@ -873,7 +957,7 @@ h4 {
 
 /* Sidebar navigation */
 .nav-sidebar {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 250px;
@@ -1238,14 +1322,9 @@ h4 {
 
 /* 8. Cards and Containers */
 .el-card {
-  border-radius: var(--border-radius-lg) !important;
-  border: 2px solid var(--success-color);
-  /* Use variable */
-  overflow: hidden;
-  color: var(--text-primary);
   transition: 0.3s;
   margin-bottom: var(--spacing-xl);
-  background-color: none;
+  background-color: transparent !important;
 }
 
 .el-card__body {
@@ -1254,12 +1333,11 @@ h4 {
   flex-direction: column;
 }
 
-.el-card.is-always-shadow,
+/* .el-card.is-always-shadow,
 .el-card.is-hover-shadow:focus,
 .el-card.is-hover-shadow:hover {
   box-shadow: 0 19px 12px 0 rgb(43 47 50);
-  /* Consider using a variable */
-}
+} */
 
 /* Dialog */
 .el-dialog {
@@ -1843,10 +1921,101 @@ h4 {
 
 /* Specific Page Styles - Consolidated */
 
-/* Recipe Prompt */
-.recipe-prompts-container {
+/* -------------------------
+   Homepage: visual polish
+-------------------------- */
+.home-page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.nav-buttons {
+  width: 100%;
+  gap: 10px;
+  padding: 14px 12px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+/* Main purchased list card area */
+.main-content-card {
+  width: 100%;
+  border-radius: 14px;
+  border: 2px solid var(--black);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
+  padding: 14px 14px 18px;
+  box-sizing: border-box;
+}
+
+/* Decorative header/footer should be present but not steal focus */
+.decorative-food-header,
+.decorative-food-footer {
+  opacity: 0.75;
+  transform: translateZ(0);
+}
+
+.food-icon {
+  /* fallback in case some icons use this base */
+  filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.1));
+}
+
+/* Tabs should sit inside a section-like block */
+.custom-tabs {
+  width: 100%;
+}
+
+.el-tabs {
+  background: rgba(245, 247, 250, 0.6);
+  border-radius: 12px;
+  border: 2px dashed rgba(0, 0, 0, 0.35);
+  padding: 6px 6px 10px;
+  box-sizing: border-box;
+}
+
+/* Increase header separation for readability */
+.el-tabs__item {
+  font-size: 16px !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  padding: 0 16px !important;
+}
+
+/* Make the section titles feel bold */
+.table-title,
+.main-content-card .table-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin: 4px 0 10px;
+  color: var(--black);
+}
+
+/* ensure deep content isn't flush to edges */
+.main-content-card section {
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* Homepage text rhythm (keep global base, but improve homepage readability) */
+.home-page-container p {
+  line-height: 1.65;
+}
+
+/* Shared container styling (applies to all *.container classnames) */
+/* [class$="container"] {
   padding: 20px 10px;
   animation: fadeIn 0.8s ease-in-out;
+} */
+
+/* Recipe Prompt */
+.recipe-prompts-container {
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
 }
 
 .recipe-prompts-container:before {
@@ -1877,12 +2046,14 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 0;
+  padding: 16px 0;
   margin-bottom: 20px;
-  background: linear-gradient(to right, #f0f9eb, #e1f3d8);
-  /* Consider using variables */
+  background: linear-gradient(
+    to right,
+    rgba(103, 194, 58, 0.18),
+    rgba(103, 194, 58, 0.06)
+  );
   border-bottom: 2px dashed var(--success-color);
-  /* Use variable */
 }
 
 .recipe-card .card-header i {
@@ -1907,8 +2078,8 @@ h4 {
 /* Health Prompt */
 .health-prompts-container {
   /* position: relative; */
-  padding: 20px 10px;
-  animation: fadeIn 0.8s ease-in-out;
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
   /* background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0wIDBoNXY1SDB6Ii8+PHBhdGggZmlsbD0iI2Y1ZjVmNSIgZD0iTTAgMGgxdjFIMHoiLz48L3N2Zz4=); */
 }
 
@@ -1940,12 +2111,14 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 0;
+  padding: 16px 0;
   margin-bottom: 20px;
-  background: linear-gradient(to right, #ecf5ff, #d7ebff);
-  /* Consider using variables */
+  background: linear-gradient(
+    to right,
+    rgba(64, 158, 255, 0.18),
+    rgba(64, 158, 255, 0.06)
+  );
   border-bottom: 2px dashed var(--primary-color);
-  /* Use variable */
 }
 
 .health-card .card-header i {
@@ -1968,8 +2141,8 @@ h4 {
 /* User Defined Prompt */
 .user-prompts-container {
   position: relative;
-  padding: 20px 0;
-  animation: fadeIn 0.8s ease-in-out;
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
   min-height: 100vh;
 }
 /* .prompt-decoration bottom-decoration {
@@ -2008,12 +2181,14 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  padding: 16px 0;
   margin-bottom: 20px;
-  background: linear-gradient(to right, #ecf5ff, #d7ebff);
-  /* Consider using variables */
+  background: linear-gradient(
+    to right,
+    rgba(64, 158, 255, 0.18),
+    rgba(64, 158, 255, 0.06)
+  );
   border-bottom: 2px dashed var(--primary-color);
-  /* Use variable */
   position: relative;
   overflow: hidden;
 }
@@ -2871,10 +3046,10 @@ h4 {
 
 /* About Us Page */
 .about-us-container {
-  animation: fadeIn 0.5s ease-in-out;
   position: relative;
   min-height: 100vh;
-  padding: 20px 0;
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
 }
 
 .about-us-container:before {
@@ -3172,8 +3347,8 @@ h4 {
 
 /* Account Page */
 .account-page-container {
-  animation: fadeIn 0.5s ease-in-out;
-  position: relative;
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
   min-height: 100vh;
 }
 
@@ -3401,10 +3576,10 @@ h4 {
 
 /* FAQs Page */
 .faqs-container {
-  animation: fadeIn 0.5s ease-in-out;
   position: relative;
   min-height: 100vh;
-  padding: 20px 0;
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
 }
 
 .faqs-container:before {
@@ -3681,8 +3856,8 @@ h4 {
 /* Items Inventory Page */
 .inventory-page-container {
   position: relative;
-  padding: 20px 0;
-  min-height: 100vh;
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
   /* width: 1200px; */
 }
 
@@ -3701,10 +3876,10 @@ h4 {
 .inventory-card {
   position: relative;
   margin-bottom: 30px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border: 2px solid var(--success-color);
-  overflow: visible;
+  /* border-radius: 12px; */
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); */
+  /* border: 2px solid var(--success-color); */
+  /* overflow: visible; */
   padding: 20px 0px;
   width: 100%;
 }
@@ -3749,13 +3924,6 @@ h4 {
   margin-top: 244px;
 }
 
-/* Search container */
-.search-inventory {
-  padding: 20px;
-  background-color: #f0f9eb;
-  border-left: 4px solid #67c23a;
-  border-radius: 10px;
-}
 /* .search-homepage {
   padding: 20px;
   background-color: #f0f9eb;
@@ -3765,14 +3933,14 @@ h4 {
 .el-col-12 {
   width: 100%;
 }
-.search-header {
+/* .search-header {
   display: flex;
   align-items: center;
   margin-bottom: -1px;
   width: 150%;
-}
+} */
 
-.search-header i {
+/* .search-header i {
   font-size: 24px;
   color: #67c23a;
   margin-right: 10px;
@@ -3781,13 +3949,7 @@ h4 {
 .search-header h3 {
   margin: 0;
   color: #67c23a;
-}
-.search-inventory-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: -1px;
-  /* width: 100%; */
-}
+} */
 
 .search-inventory-header i {
   font-size: 24px;
@@ -3870,7 +4032,7 @@ h4 {
 /* Frequency card */
 .frequency-card {
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); */
   border: none;
   padding: 20px;
   margin-bottom: 30px;
@@ -4191,10 +4353,9 @@ h4 {
 
 /* Receipt Scan Page */
 .receipt-scan-container {
-  animation: fadeIn 0.5s ease-in-out;
   position: relative;
-  padding: 20px 0;
-  min-height: 100vh;
+  padding: 20px 10px !important;
+  animation: fadeIn 0.8s ease-in-out !important;
   /* width: 800px; */
 }
 
@@ -4853,11 +5014,13 @@ h4 {
   display: flex;
   align-items: center;
   flex: 1;
-  background-color: hsla(0, 0%, 100%, 0.8);
   border-radius: 30px;
-  padding: 0px 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  padding: 15px 10px !important;
+  background-color: #f0f9eb;
+  border-left: 4px solid #67c23a;
+  border-radius: 10px;
 }
 
 .search-inventory:hover {
@@ -5136,10 +5299,10 @@ h4 {
 .main-content-card {
   position: relative;
   margin: 30px 0;
-  border-radius: 12px;
+  /* border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--success-color);
-  overflow: visible;
+  overflow: visible; */
 }
 
 /* Custom tabs */
@@ -6765,7 +6928,6 @@ svg {
 .about-content,
 .account-content,
 .feedback-form,
-.search-header,
 .search-inventory-header {
   width: 100%;
   max-width: 100%;
@@ -6799,7 +6961,7 @@ svg {
 }
 
 .search-inventory-header {
-  width: 35%;
+  width: fit-content;
 }
 
 .header {
@@ -6870,7 +7032,6 @@ svg {
   .nav-buttons,
   .header,
   .search-inventory,
-  .search-header,
   .search-inventory-header,
   .selection-header,
   .results-header,
@@ -7085,9 +7246,9 @@ svg {
     border: 2px solid black !important;
   }
 
-  .el-card {
+  /* .el-card {
     border: 2px solid black !important;
-  }
+  } */
 
   .el-table th {
     background-color: #000 !important;
@@ -7116,7 +7277,6 @@ svg {
     color: var(--text-primary);
   }
 
-  .dark-mode-enabled .el-card,
   .dark-mode-enabled .el-dialog,
   .dark-mode-enabled .el-select-dropdown,
   .dark-mode-enabled .el-dropdown-menu {
@@ -7291,10 +7451,10 @@ svg {
     display: none !important;
   }
 
-  .el-card {
+  /* .el-card {
     box-shadow: none !important;
     border: 1px solid #ddd;
-  }
+  } */
 
   .el-table {
     width: 100% !important;

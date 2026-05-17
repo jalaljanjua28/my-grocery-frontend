@@ -3,35 +3,9 @@
     <!-- Animated gradient background -->
     <div class="header-background"></div>
     <!-- Left decoration with interactive food icons -->
-    <div
-      style="
-        align-items: center;
-        flex-direction: row;
-        display: flex;
-        justify-content: space-between;
-      "
-    >
-      <!-- <div>
-        <div class="food-icon apple" title="Fresh Produce">
-          <div class="icon-tooltip">Fresh Produce</div>
-        </div>
-        <div class="food-icon carrot" title="Vegetables">
-          <div class="icon-tooltip">Vegetables</div>
-        </div>
-      </div> -->
-
-      <header-logo class="logo-component"></header-logo>
-
-      <the-menu></the-menu>
-      <!-- <div style="flex-direction: column">
-        <div class="food-icon banana" title="Fruits">
-          <div class="icon-tooltip">Fruits</div>
-        </div>
-        <div class="food-icon orange" title="Citrus">
-          <div class="icon-tooltip">Citrus</div>
-        </div>
-      </div> -->
-    </div>
+    <header-logo class="logo-component"></header-logo>
+    <the-menu></the-menu>
+    <the-nav></the-nav>
 
     <!-- Navigation component -->
     <!-- Enhanced search container with animations -->
@@ -73,7 +47,7 @@
 <script>
 import TheMenu from "./TheMenu.vue";
 import SearchInventory from "./SearchInventory.vue";
-// import TheNav from "./TheNav.vue";
+import TheNav from "./TheNav.vue";
 import {
   fetchMasterExpiredData,
   fetchShoppingListData,
@@ -85,7 +59,7 @@ export default {
     TheMenu,
     SearchInventory,
     HeaderLogo,
-    // TheNav,
+    TheNav,
   },
   data() {
     return {
@@ -137,4 +111,148 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Header layout */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(245, 247, 250, 0.72);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+/* Animated background layer */
+.header-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background: radial-gradient(
+      circle at 10% 10%,
+      rgba(103, 194, 58, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(64, 158, 255, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(229, 162, 60, 0.22),
+      transparent 45%
+    );
+  animation: headerFloat 8s ease-in-out infinite;
+}
+
+@keyframes headerFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Left + menu + search containers inside the header */
+.search-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+/* Food icon rows */
+.floating-food-icons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-icon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.12);
+  animation: floatingIcon 7s ease-in-out infinite;
+}
+
+@keyframes floatingIcon {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px) rotate(10deg);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+
+/* Use titles as tooltip targets already; we style the tooltip */
+.icon-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 10;
+}
+
+.food-icon {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(0, 0, 0, 0.75);
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food-icon:hover .icon-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive: keep search readable on small screens */
+@media (max-width: 600px) {
+  .header {
+    padding: 8px 10px;
+  }
+  .search-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+</style>

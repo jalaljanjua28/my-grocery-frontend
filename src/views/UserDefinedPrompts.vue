@@ -445,7 +445,7 @@ export default {
       return this.foodWasteReductionSuggestions.some(
         (suggestion) =>
           suggestion["Food Waste Reduction Suggestion"] &&
-          suggestion["Food Waste Reduction Suggestion"].trim() !== ""
+          suggestion["Food Waste Reduction Suggestion"].trim() !== "",
       );
     },
 
@@ -459,7 +459,7 @@ export default {
       return this.moodChangerSuggestions.some(
         (suggestion) =>
           suggestion["Food Suggestion"] &&
-          suggestion["Food Suggestion"].trim() !== ""
+          suggestion["Food Suggestion"].trim() !== "",
       );
     },
 
@@ -470,7 +470,7 @@ export default {
       return this.fusionSuggestions.some(
         (suggestion) =>
           suggestion["Fusion Cuisine Suggestion"] &&
-          suggestion["Fusion Cuisine Suggestion"].trim() !== ""
+          suggestion["Fusion Cuisine Suggestion"].trim() !== "",
       );
     },
 
@@ -479,7 +479,7 @@ export default {
         return false;
       }
       return this.definedDishes.some(
-        (dish) => dish["Fun Facts"] && dish["Fun Facts"].trim() !== ""
+        (dish) => dish["Fun Facts"] && dish["Fun Facts"].trim() !== "",
       );
     },
 
@@ -490,7 +490,7 @@ export default {
       return this.uniqueRecipes.some(
         (recipe) =>
           (recipe["Recipe"] && recipe["Recipe"].trim() !== "") ||
-          (recipe["Encouragement"] && recipe["Encouragement"].trim() !== "")
+          (recipe["Encouragement"] && recipe["Encouragement"].trim() !== ""),
       );
     },
   },
@@ -549,31 +549,31 @@ export default {
           return offset === 0
             ? `<span class="list-number">${p1}</span>`
             : `<br><br><span class="list-number">${p1}</span>`;
-        }
+        },
       );
 
       // Format recipe steps
       formattedText = formattedText.replace(
         /(Step \d+:)/gi,
-        '<span class="recipe-step">$1</span>'
+        '<span class="recipe-step">$1</span>',
       );
 
       // Format ingredients
       formattedText = formattedText.replace(
         /(Ingredients:|Ingredients)/gi,
-        '<span class="ingredients-title">$1</span>'
+        '<span class="ingredients-title">$1</span>',
       );
 
       // Format instructions
       formattedText = formattedText.replace(
         /(Instructions:|Directions:|Method:)/gi,
-        '<span class="instructions-title">$1</span>'
+        '<span class="instructions-title">$1</span>',
       );
 
       // Format tips and notes
       formattedText = formattedText.replace(
         /(Tip:|Note:|Hint:)/gi,
-        '<span class="tip-title">$1</span>'
+        '<span class="tip-title">$1</span>',
       );
 
       return formattedText;
@@ -588,27 +588,27 @@ export default {
             await this.fetchData(
               "json",
               "/food-waste-reduction-using-json",
-              "foodWasteReductionSuggestions"
+              "foodWasteReductionSuggestions",
             );
             await this.fetchData(
               "json",
               "/mood-changer-using-json",
-              "moodChangerSuggestions"
+              "moodChangerSuggestions",
             );
             await this.fetchData(
               "json",
               "/fusion-cuisine-suggestions-using-json",
-              "fusionSuggestions"
+              "fusionSuggestions",
             );
             await this.fetchData(
               "json",
               "/user-defined-dish-using-json",
-              "definedDishes"
+              "definedDishes",
             );
             await this.fetchData(
               "json",
               "/unique-recipes-using-json",
-              "uniqueRecipes"
+              "uniqueRecipes",
             );
           } catch (error) {
             console.error("Error loading data:", error);
@@ -665,7 +665,7 @@ export default {
           console.log(data[property]);
         } else {
           console.error(
-            `Property '${property}' not found in the server response.`
+            `Property '${property}' not found in the server response.`,
           );
           this[property] = []; // Ensure property is set to an empty array if not found
         }
@@ -739,13 +739,12 @@ export default {
       this.resetDisplays();
       this.loading = true;
 
-      // Set timeout to simulate loading
       setTimeout(() => {
         if (this.selectedPrompt === "foodWasteReduction") {
           this.fetchData(
             "gpt",
             "/food-waste-reduction-using-gpt",
-            "foodWasteReductionSuggestions"
+            "foodWasteReductionSuggestions",
           ).then(() => {
             this.displayWasteReduction = true;
             this.loading = false;
@@ -754,7 +753,7 @@ export default {
           this.fetchData(
             "gpt",
             "/mood-changer-using-gpt",
-            "moodChangerSuggestions"
+            "moodChangerSuggestions",
           ).then(() => {
             this.displayMood = true;
             this.loading = false;
@@ -763,7 +762,7 @@ export default {
           this.fetchData(
             "gpt",
             "/fusion-cuisine-suggestions-using-gpt",
-            "fusionSuggestions"
+            "fusionSuggestions",
           ).then(() => {
             this.displaySuggestions = true;
             this.loading = false;
@@ -772,7 +771,7 @@ export default {
           this.fetchData(
             "gpt",
             "/user-defined-dish-using-gpt",
-            "definedDishes"
+            "definedDishes",
           ).then(() => {
             this.displayDishes = true;
             this.loading = false;
@@ -781,7 +780,7 @@ export default {
           this.fetchData(
             "gpt",
             "/unique-recipes-using-gpt",
-            "uniqueRecipes"
+            "uniqueRecipes",
           ).then(() => {
             this.displayRecipe = true;
             this.loading = false;
@@ -807,4 +806,20 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Remove Element UI card chrome: keep only dropdown/title content visible */
+.prompt-card {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  color: #303133;
+  transition: 0.3s;
+}
+
+/* Remove Element UI inner wrapper padding */
+:deep(.prompt-card .el-card__body) {
+  padding: 0 !important;
+}
+</style>

@@ -382,4 +382,21 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.inventory-card,
+.frequency-card {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  color: #303133;
+  transition: 0.3s;
+}
+
+/* Remove inner wrapper padding so only the content (title/dropdown) shows without a boxed feel */
+:deep(.inventory-card .el-card__body),
+:deep(.frequency-card .el-card__body) {
+  padding: 0 !important;
+}
+</style>

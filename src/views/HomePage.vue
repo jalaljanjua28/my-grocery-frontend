@@ -1,7 +1,6 @@
 <template>
   <div class="home-page-container">
     <!-- Decorative food-themed header -->
-
     <div class="nav-buttons">
       <router-link to="items-inventory" class="router_link">
         <el-button class="nav-button" type="success" plain
@@ -325,4 +324,19 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-card {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  color: #303133;
+  transition: 0.3s;
+}
+
+/* Element UI renders inner wrappers too */
+:deep(.el-card__body) {
+  padding: 0 !important; /* keeps only title + dropdown visually clean */
+}
+</style>

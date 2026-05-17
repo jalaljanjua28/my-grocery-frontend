@@ -231,22 +231,27 @@ export default {
 
 <style scoped>
 .el-card__body {
-  padding: var(--spacing-sm) !important;
+  padding: 0 !important;
   display: flex;
   flex-direction: column;
 }
+
 .el-row {
   display: flex;
   flex-direction: column;
 }
+
 .delete-all-container {
   padding: 20px;
   max-width: 1200px;
   /* margin: 0 auto; */
 }
+
 .delete-card {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
   position: relative;
 }
 
