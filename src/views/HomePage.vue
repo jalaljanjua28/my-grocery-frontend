@@ -1,6 +1,13 @@
 <template>
   <div class="home-page-container">
     <!-- Decorative food-themed header -->
+    <div class="decorative-food-header">
+      <div class="food-icon apple"></div>
+      <div class="food-icon banana"></div>
+      <div class="food-icon carrot"></div>
+      <div class="food-icon broccoli"></div>
+      <div class="food-icon orange"></div>
+    </div>
     <div class="nav-buttons">
       <router-link to="items-inventory" class="router_link">
         <el-button class="nav-button" type="success" plain
@@ -27,13 +34,6 @@
           ><i class="el-icon-camera"></i> Receipt Scanner
         </el-button>
       </router-link>
-    </div>
-    <div class="decorative-food-header">
-      <div class="food-icon apple"></div>
-      <div class="food-icon banana"></div>
-      <div class="food-icon carrot"></div>
-      <div class="food-icon broccoli"></div>
-      <div class="food-icon orange"></div>
     </div>
     <div v-if="displayJokes" class="jokes-container">
       <el-card class="jokes-box">

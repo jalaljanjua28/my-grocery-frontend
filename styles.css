@@ -1988,7 +1988,7 @@ h4 {
 /* Make the section titles feel bold */
 .table-title,
 .main-content-card .table-title {
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 800;
   letter-spacing: 0.2px;
   margin: 4px 0 10px;

@@ -4,8 +4,7 @@
     <div class="header-background"></div>
     <!-- Left decoration with interactive food icons -->
     <header-logo class="logo-component"></header-logo>
-    <the-menu></the-menu>
-    <the-nav></the-nav>
+    <div class="menu-nav"><the-menu></the-menu> <the-nav></the-nav></div>
 
     <!-- Navigation component -->
     <!-- Enhanced search container with animations -->
@@ -127,7 +126,12 @@ export default {
   backdrop-filter: blur(6px);
   overflow: hidden;
 }
-
+.menu-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
 /* Animated background layer */
 .header-background {
   position: absolute;
@@ -248,11 +252,65 @@ export default {
 /* Responsive: keep search readable on small screens */
 @media (max-width: 600px) {
   .header {
-    padding: 8px 10px;
-  }
-  .search-header {
+    padding: 10px 12px;
     flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 10px;
+    min-height: auto;
+  }
+
+  .logo-component {
+    align-self: center;
+    margin-bottom: 2px;
+  }
+
+  .menu-nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    order: 2;
+  }
+
+  .menu-nav > * {
+    width: 100%;
+  }
+
+  .search-header {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
     gap: 8px;
+    padding: 4px 0 0;
+    order: 3;
+  }
+
+  .search-decoration {
+    display: none;
+  }
+
+  .searchDev {
+    width: 100%;
+  }
+
+  .food-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .floating-food-icons {
+    display: none;
+  }
+
+  .header-background {
+    opacity: 0.18;
+  }
+
+  .icon-tooltip {
+    display: none;
   }
 }
 </style>
