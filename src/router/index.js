@@ -130,9 +130,7 @@ router.beforeEach(async (to, from, next) => {
 });
 
 router.afterEach(() => {
-  setTimeout(() => {
-    store.commit("setLoading", false);
-  }, 1000);
+  store.commit("setLoading", false);
 });
 
 export default router;
