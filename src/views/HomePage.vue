@@ -126,7 +126,7 @@ import {
 } from "@/plugins/Dataservice.js";
 import { auth } from "../Firebase.js";
 
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+import { API_BASE_URL as baseUrl } from "@/config.js";
 
 export default {
   components: {
@@ -209,69 +209,65 @@ export default {
     localStorage.setItem("activeOuterTab", this.outerActiveTab);
   },
   methods: {
-    methods: {
-      handlePriceUpdate(updateData) {
-        console.log("Price update received:", updateData);
+    handlePriceUpdate(updateData) {
+      console.log("Price update received:", updateData);
 
-        // Find and update the item in Food_nonexpired
-        if (this.Food_nonexpired) {
-          const foodItemIndex = this.Food_nonexpired.findIndex(
-            (item) => (item.name || item.Name) === updateData.itemName,
+      // Find and update the item in Food_nonexpired
+      if (this.Food_nonexpired) {
+        const foodItemIndex = this.Food_nonexpired.findIndex(
+          (item) => (item.name || item.Name) === updateData.itemName,
+        );
+        if (foodItemIndex !== -1) {
+          this.$set(
+            this.Food_nonexpired[foodItemIndex],
+            "price",
+            updateData.newPrice,
           );
-          if (foodItemIndex !== -1) {
-            this.$set(
-              this.Food_nonexpired[foodItemIndex],
-              "price",
-              updateData.newPrice,
-            );
-            this.$set(
-              this.Food_nonexpired[foodItemIndex],
-              "Price",
-              updateData.newPrice,
-            );
-          }
-        }
-
-        // Find and update the item in NonFood_nonexpired
-        if (this.NonFood_nonexpired) {
-          const nonFoodItemIndex = this.NonFood_nonexpired.findIndex(
-            (item) => (item.name || item.Name) === updateData.itemName,
+          this.$set(
+            this.Food_nonexpired[foodItemIndex],
+            "Price",
+            updateData.newPrice,
           );
-          if (nonFoodItemIndex !== -1) {
-            this.$set(
-              this.NonFood_nonexpired[nonFoodItemIndex],
-              "price",
-              updateData.newPrice,
-            );
-            this.$set(
-              this.NonFood_nonexpired[nonFoodItemIndex],
-              "Price",
-              updateData.newPrice,
-            );
-          }
         }
+      }
 
-        // Update the combined items array if you're using it
-        if (this.items) {
-          const itemIndex = this.items.findIndex(
-            (item) => (item.name || item.Name) === updateData.itemName,
+      // Find and update the item in NonFood_nonexpired
+      if (this.NonFood_nonexpired) {
+        const nonFoodItemIndex = this.NonFood_nonexpired.findIndex(
+          (item) => (item.name || item.Name) === updateData.itemName,
+        );
+        if (nonFoodItemIndex !== -1) {
+          this.$set(
+            this.NonFood_nonexpired[nonFoodItemIndex],
+            "price",
+            updateData.newPrice,
           );
-          if (itemIndex !== -1) {
-            this.$set(this.items[itemIndex], "price", updateData.newPrice);
-            this.$set(this.items[itemIndex], "Price", updateData.newPrice);
-          }
+          this.$set(
+            this.NonFood_nonexpired[nonFoodItemIndex],
+            "Price",
+            updateData.newPrice,
+          );
         }
-      },
+      }
 
-      updateFilteredItems() {
-        // Recombine the arrays if needed
-        this.items = [
-          ...(this.Food_nonexpired || []),
-          ...(this.NonFood_nonexpired || []),
-        ];
-      },
+      // Update the combined items array if you're using it
+      if (this.items) {
+        const itemIndex = this.items.findIndex(
+          (item) => (item.name || item.Name) === updateData.itemName,
+        );
+        if (itemIndex !== -1) {
+          this.$set(this.items[itemIndex], "price", updateData.newPrice);
+          this.$set(this.items[itemIndex], "Price", updateData.newPrice);
+        }
+      }
+    },
 
-      // ... rest of your existing methods
+    updateFilteredItems() {
+      // Recombine the arrays if needed
+      this.items = [
+        ...(this.Food_nonexpired || []),
+        ...(this.NonFood_nonexpired || []),
+      ];
     },
 
     handleItemDeleted(itemToDelete) {

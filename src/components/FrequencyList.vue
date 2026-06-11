@@ -36,7 +36,7 @@
 
 <script>
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+import { API_BASE_URL as baseUrl } from "@/config.js";
 
 export default {
   data() {

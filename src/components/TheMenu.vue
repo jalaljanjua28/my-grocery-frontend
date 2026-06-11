@@ -53,7 +53,7 @@ import {
   signOut as firebaseSignOut,
 } from "firebase/auth"; // Adjust the path as necessary
 
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+import { API_BASE_URL as baseUrl } from "@/config.js";
 
 export default {
   components: {},

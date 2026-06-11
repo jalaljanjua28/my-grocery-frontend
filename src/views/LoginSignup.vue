@@ -242,7 +242,7 @@
 </template>
 
 <script>
-const baseUrl = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+import { API_BASE_URL as baseUrl } from "@/config.js";
 
 import {
   signInWithPopup,

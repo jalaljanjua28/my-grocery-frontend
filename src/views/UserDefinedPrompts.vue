@@ -400,7 +400,7 @@
 </template>
 
 <script>
-const baseURL = "https://my-grocery-app-888361723877.us-central1.run.app/api";
+import { API_BASE_URL as baseURL } from "@/config.js";
 import { auth } from "../Firebase.js";
 
 export default {

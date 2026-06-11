@@ -28,7 +28,7 @@
           <div class="upload-area">
             <el-upload
               class="upload-demo"
-              action="https://my-grocery-app-888361723877.us-central1.run.app/api/image-process-upload"
+              :action="uploadUrl"
               ref="fileInput"
               :auto-upload="false"
               :on-change="onFileChange"
@@ -206,11 +206,11 @@
 <script>
 import axios from "axios";
 import { auth } from "../Firebase.js"; // Assuming this is your Firebase initialization file
+import { API_BASE_URL } from "@/config.js";
 
 // Create a custom Axios instance with a progress event
 const axiosInstance = axios.create();
-axiosInstance.defaults.baseURL =
-  "https://my-grocery-app-888361723877.us-central1.run.app/api"; // Set your API base URL
+axiosInstance.defaults.baseURL = API_BASE_URL;
 
 export default {
   data() {
@@ -223,6 +223,7 @@ export default {
       completionStatus: false,
       isLoading: false,
       uploadProgress: 0,
+      uploadUrl: API_BASE_URL + "/image-process-upload",
     };
   },
   methods: {
