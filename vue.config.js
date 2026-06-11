@@ -1,5 +1,13 @@
 module.exports = {
   transpileDependencies: ["body-parser"],
+  devServer: {
+    port: 5000,
+    host: "0.0.0.0",
+    allowedHosts: "all",
+    client: {
+      webSocketURL: "auto://0.0.0.0:0/ws",
+    },
+  },
   configureWebpack: {
     resolve: {
       alias: {
@@ -12,11 +20,9 @@ module.exports = {
       .rule("vue")
       .use("vue-loader")
       .tap((options) => {
-        // Set the parser options for the Vue loader
         options.parserOptions = {
           parser: "babel-eslint",
         };
-
         return options;
       });
   },

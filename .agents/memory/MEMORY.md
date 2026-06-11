@@ -1,0 +1,1 @@
+- [npm-install-quirks](npm-install-quirks.md) — npm 10.8.2 crashes with `Invalid Version` when volar-service-vetur or similar packages with lodash deps are present
