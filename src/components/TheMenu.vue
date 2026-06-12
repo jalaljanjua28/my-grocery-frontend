@@ -1,25 +1,22 @@
 <template>
-  <div>
-    <el-popover placement="bottom" width="230" trigger="hover">
+  <div class="user-menu-row">
+    <el-popover placement="bottom-start" width="230" trigger="hover">
       <template #reference>
-        <el-button
-          class="el-button-user"
-          type="info"
-          plain
-          style="color: var(--danger-color) !important; border: none !important"
-        >
-          <i class="el-icon-s-custom"> User</i>
-        </el-button>
+        <button class="header-btn user-btn">
+          <i class="el-icon-s-custom"></i>
+          <span>User</span>
+        </button>
       </template>
-      <div>
-        <h3>Signed In User</h3>
-        <p style="color: red"><strong>Email:</strong> {{ email }}</p>
+      <div class="user-popover">
+        <h3 class="popover-title">Signed In User</h3>
+        <p class="popover-email"><strong>Email:</strong> {{ email || "—" }}</p>
         <el-button
           v-if="currentUser"
           @click="signOut"
           type="danger"
           plain
           size="small"
+          style="width:100%;margin-top:8px"
           >Sign Out</el-button
         >
         <el-button
@@ -27,19 +24,18 @@
           @click="signInWithGoogle"
           type="primary"
           plain
+          size="small"
+          style="width:100%;margin-top:8px"
           >Sign in with Google</el-button
         >
-        <!-- Add more user details here -->
       </div>
     </el-popover>
+
     <router-link to="/SignUp" style="text-decoration: none">
-      <el-button
-        class="el-button-signup"
-        type="info"
-        plain
-        style="color: var(--danger-color) !important; border: none !important"
-        ><i class="el-icon-user"> SignUp</i></el-button
-      >
+      <button class="header-btn signup-btn">
+        <i class="el-icon-user"></i>
+        <span>SignUp</span>
+      </button>
     </router-link>
   </div>
 </template>
@@ -123,8 +119,68 @@ export default {
 };
 </script>
 <style scoped>
-.el-button--info.is-plain {
-  background: none !important;
-  color: white !important;
+.user-menu-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1.5px solid transparent;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.7);
+  color: #555;
+}
+
+.header-btn:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+.user-btn {
+  border-color: rgba(103, 194, 58, 0.4);
+  color: #409eff;
+}
+
+.user-btn:hover {
+  background: rgba(64, 158, 255, 0.08);
+  border-color: #409eff;
+}
+
+.signup-btn {
+  border-color: rgba(230, 57, 70, 0.35);
+  color: #e63946;
+}
+
+.signup-btn:hover {
+  background: rgba(230, 57, 70, 0.07);
+  border-color: #e63946;
+}
+
+.user-popover {
+  padding: 4px 0;
+}
+
+.popover-title {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #303133;
+}
+
+.popover-email {
+  font-size: 13px;
+  color: #e63946;
+  margin: 0 0 4px;
+  word-break: break-all;
 }
 </style>
