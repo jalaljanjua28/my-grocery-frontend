@@ -1,401 +1,184 @@
 <template>
-  <div class="user-prompts-container">
-    <router-link to="/" style="text-decoration: none">
-      <el-page-header content="User Defined Prompt" class="custom-page-header">
-        <template slot="content">
-          <div class="page-title">
-            <i class="el-icon-box"></i>
-            <span>User Defined Prompt</span>
-          </div>
-        </template>
-      </el-page-header>
-    </router-link>
-    <el-main class="main-content">
-      <div class="decorative-food-header">
-        <div class="food-icon apple"></div>
-        <div class="food-icon banana"></div>
-        <div class="food-icon carrot"></div>
-        <div class="food-icon broccoli"></div>
-        <div class="food-icon orange"></div>
+  <div class="prompts-page">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <router-link to="/" class="back-link">
+        <span class="back-arrow">←</span> Home
+      </router-link>
+      <div class="page-title">
+        <span>🤖</span>
+        <h2>Custom AI Prompts</h2>
       </div>
-      <el-card class="prompt-card">
-        <!-- <div class="prompt-decoration top-decoration">
-          <div class="decoration-item" v-for="i in 5" :key="`top-${i}`">
-            <i :class="`el-icon-${promptIcons[i % promptIcons.length]}`"></i>
-          </div>
-        </div> -->
-        <!-- Decorative food-themed header -->
+      <div class="header-badge">Powered by GPT</div>
+    </div>
 
-        <div class="card-header">
-          <i class="el-icon-chat-dot-round"></i>
-          <h2>Custom Prompts</h2>
-          <i class="el-icon-chat-dot-round"></i>
+    <!-- Food strip -->
+    <div class="food-strip">
+      <span class="fs-icon">🍎</span><span class="fs-icon">🥦</span><span class="fs-icon">🍊</span><span class="fs-icon">🥕</span><span class="fs-icon">🍌</span>
+    </div>
+
+    <!-- Main prompt card -->
+    <div class="prompt-card">
+
+      <!-- Select prompt type -->
+      <div class="select-section">
+        <div class="select-label">
+          <i class="el-icon-magic-stick"></i>
+          <span>Choose a prompt type</span>
         </div>
-
-        <div class="prompt-selection">
-          <div class="selection-header">
-            <i class="el-icon-magic-stick"></i>
-            <span>Select a prompt type to begin</span>
-          </div>
-
-          <el-select
-            v-model="selectedPrompt"
-            placeholder="Select Prompt"
-            class="prompt-select"
-          >
-            <el-option label="Food Waste Reduction" value="foodWasteReduction">
-              <div class="option-content">
-                <i class="el-icon-delete"></i>
-                <span>Food Waste Reduction</span>
-              </div>
-            </el-option>
-            <el-option label="Mood Changer" value="moodChanger">
-              <div class="option-content">
-                <i class="el-icon-sunny"></i>
-                <span>Mood Changer</span>
-              </div>
-            </el-option>
-            <el-option
-              label="Food Cuisine Suggestions"
-              value="cusineSuggestion"
-            >
-              <div class="option-content">
-                <i class="el-icon-dish"></i>
-                <span>Food Cuisine Suggestions</span>
-              </div>
-            </el-option>
-            <el-option label="Defined Dishes" value="definedDishes">
-              <div class="option-content">
-                <i class="el-icon-food"></i>
-                <span>Defined Dishes</span>
-              </div>
-            </el-option>
-            <el-option label="Unique Recipe" value="uniqueRecipes">
-              <div class="option-content">
-                <i class="el-icon-notebook-2"></i>
-                <span>Unique Recipe</span>
-              </div>
-            </el-option>
-          </el-select>
-        </div>
-
-        <div class="prompt-input-container" v-if="selectedPrompt">
-          <div class="input-header">
-            <i :class="getPromptIcon()"></i>
-            <span>{{ getPromptTitle() }}</span>
-          </div>
-
-          <el-autocomplete
-            popper-class="my-autocomplete"
-            v-model="selectedOption"
-            :fetch-suggestions="querySearch"
-            placeholder="Type or select a prompt"
-            class="prompt-autocomplete"
-            @select="handleSelect"
-          >
-            <i
-              class="el-icon-remove-outline el-input__icon"
-              slot="suffix"
-              @click="handleIconClick"
-            >
-            </i>
-            <template slot-scope="{ item }">
-              <div class="suggestion-option">
-                <i :class="getPromptIcon()"></i>
-                <span>{{ item }}</span>
-              </div>
-            </template>
-          </el-autocomplete>
-        </div>
-
-        <div v-if="loading" class="loading-container">
-          <div class="loading-spinner">
-            <i class="el-icon-loading"></i>
-            <span>Generating your custom content...</span>
-          </div>
-        </div>
-
-        <!-- Food Waste Reduction Section -->
-        <div v-if="displayWasteReduction && !loading" class="results-container">
-          <div class="results-header waste-reduction-header">
-            <i class="el-icon-delete"></i>
-            <h3>Food Waste Reduction Suggestions</h3>
-          </div>
-
-          <div
-            v-for="(suggestion, index) in foodWasteReductionSuggestions"
-            :key="index"
-            class="suggestion-item waste-reduction-item"
-          >
-            <p
-              v-if="
-                suggestion['Food Waste Reduction Suggestion'] &&
-                suggestion['Food Waste Reduction Suggestion'].trim()
-              "
-              class="suggestion-content"
-            >
-              <span
-                v-html="
-                  formatText(suggestion['Food Waste Reduction Suggestion'])
-                "
-              ></span>
-            </p>
-            <div class="suggestion-footer">
-              <span class="suggestion-tag waste-tag">Waste Reduction</span>
-              <span class="suggestion-number">Tip #{{ index + 1 }}</span>
-            </div>
-            <div
-              class="fancy-divider"
-              v-if="index < foodWasteReductionSuggestions.length - 1"
-            ></div>
-          </div>
-
-          <el-alert
-            v-if="
-              displayWasteReduction &&
-              (!foodWasteReductionSuggestions.length ||
-                !hasValidFoodWasteReductionSuggestions)
-            "
-            title="No Food Waste Reduction Suggestions"
-            type="info"
-            show-icon
-            class="custom-alert"
-          >
-            <template slot="title">
-              <span class="alert-title"
-                >No Food Waste Reduction Suggestions</span
-              >
-            </template>
-            <div class="alert-content">
-              Please select a prompt from the dropdown or try a different query.
-            </div>
-          </el-alert>
-        </div>
-
-        <!-- Mood Changer Section -->
-        <div v-if="displayMood && !loading" class="results-container">
-          <div class="results-header mood-header">
-            <i class="el-icon-sunny"></i>
-            <h3>Mood Changer Suggestions</h3>
-          </div>
-
-          <div
-            v-for="(suggestion, index) in moodChangerSuggestions"
-            :key="index"
-            class="suggestion-item mood-item"
-          >
-            <p
-              v-if="
-                suggestion['Food Suggestion'] &&
-                suggestion['Food Suggestion'].trim()
-              "
-              class="suggestion-content"
-            >
-              <span v-html="formatText(suggestion['Food Suggestion'])"></span>
-            </p>
-            <div class="suggestion-footer">
-              <span class="suggestion-tag mood-tag">Mood Enhancer</span>
-              <span class="suggestion-number">Suggestion #{{ index + 1 }}</span>
-            </div>
-            <div
-              class="fancy-divider"
-              v-if="index < moodChangerSuggestions.length - 1"
-            ></div>
-          </div>
-
-          <el-alert
-            v-if="
-              displayMood &&
-              (!moodChangerSuggestions.length ||
-                !hasValidMoodChangerSuggestions)
-            "
-            title="No Mood Changer Suggestions"
-            type="info"
-            show-icon
-            class="custom-alert"
-          >
-            <template slot="title">
-              <span class="alert-title">No Mood Changer Suggestions</span>
-            </template>
-            <div class="alert-content">
-              Please select from the box for a Mood changer suggestions or try a
-              different query.
-            </div>
-          </el-alert>
-        </div>
-
-        <!-- Fusion Cuisine Suggestions Section -->
-        <div v-if="displaySuggestions && !loading" class="results-container">
-          <div class="results-header fusion-header">
-            <i class="el-icon-dish"></i>
-            <h3>Fusion Cuisine Suggestions</h3>
-          </div>
-
-          <div
-            v-for="(suggestion, index) in fusionSuggestions"
-            :key="index"
-            class="suggestion-item fusion-item"
-          >
-            <p
-              v-if="
-                suggestion['Fusion Cuisine Suggestion'] &&
-                suggestion['Fusion Cuisine Suggestion'].trim()
-              "
-              class="suggestion-content"
-            >
-              <span
-                v-html="formatText(suggestion['Fusion Cuisine Suggestion'])"
-              ></span>
-            </p>
-            <div class="suggestion-footer">
-              <span class="suggestion-tag fusion-tag">Fusion Cuisine</span>
-              <span class="suggestion-number">Idea #{{ index + 1 }}</span>
-            </div>
-            <div
-              class="fancy-divider"
-              v-if="index < fusionSuggestions.length - 1"
-            ></div>
-          </div>
-
-          <el-alert
-            v-if="
-              displaySuggestions &&
-              (!fusionSuggestions.length || !hasValidFusionSuggestions)
-            "
-            title="No Fusion Cuisine Suggestions"
-            type="info"
-            show-icon
-            class="custom-alert"
-          >
-            <template slot="title">
-              <span class="alert-title">No Fusion Cuisine Suggestions</span>
-            </template>
-            <div class="alert-content">
-              Please select from the box for a Fusion Cuisine suggestions or try
-              a different query.
-            </div>
-          </el-alert>
-        </div>
-
-        <!-- Defined Dishes Section -->
-        <div v-if="displayDishes && !loading" class="results-container">
-          <div class="results-header dishes-header">
-            <i class="el-icon-food"></i>
-            <h3>Defined Dishes & Fun Facts</h3>
-          </div>
-
-          <div
-            v-for="(fact, index) in definedDishes"
-            :key="index"
-            class="suggestion-item dishes-item"
-          >
-            <p
-              v-if="fact['Fun Facts'] && fact['Fun Facts'].trim()"
-              class="suggestion-content"
-            >
-              <span v-html="formatText(fact['Fun Facts'])"></span>
-            </p>
-            <div class="suggestion-footer">
-              <span class="suggestion-tag dishes-tag">Fun Facts</span>
-              <span class="suggestion-number">Fact #{{ index + 1 }}</span>
-            </div>
-            <div
-              class="fancy-divider"
-              v-if="index < definedDishes.length - 1"
-            ></div>
-          </div>
-
-          <el-alert
-            v-if="
-              displayDishes && (!definedDishes.length || !hasValidDefinedDishes)
-            "
-            title="No Fun Facts"
-            type="info"
-            show-icon
-            class="custom-alert"
-          >
-            <template slot="title">
-              <span class="alert-title">No Fun Facts Available</span>
-            </template>
-            <div class="alert-content">
-              Please select from the box for User Defined Dishes and Fun Facts
-              or try a different query.
-            </div>
-          </el-alert>
-        </div>
-
-        <!-- Unique Recipes Section -->
-        <div v-if="displayRecipe && !loading" class="results-container">
-          <div class="results-header recipe-header">
-            <i class="el-icon-notebook-2"></i>
-            <h3>Unique Recipes</h3>
-          </div>
-
-          <div
-            v-for="(recipe, index) in uniqueRecipes"
-            :key="index"
-            class="suggestion-item recipe-item"
-          >
-            <div
-              v-if="recipe['Recipe'] && recipe['Recipe'].trim()"
-              class="recipe-content"
-            >
-              <div class="recipe-title">Recipe</div>
-              <p class="suggestion-content">
-                <span v-html="formatText(recipe['Recipe'])"></span>
-              </p>
-            </div>
-
-            <div
-              v-if="recipe['Encouragement'] && recipe['Encouragement'].trim()"
-              class="encouragement-content"
-            >
-              <div class="encouragement-title">
-                <i class="el-icon-star-on"></i>
-                <span>Chef's Encouragement</span>
-              </div>
-              <p class="suggestion-content">
-                <span v-html="formatText(recipe['Encouragement'])"></span>
-              </p>
-            </div>
-
-            <div class="suggestion-footer">
-              <span class="suggestion-tag recipe-tag">Unique Recipe</span>
-              <span class="suggestion-number">Recipe #{{ index + 1 }}</span>
-            </div>
-            <div
-              class="fancy-divider"
-              v-if="index < uniqueRecipes.length - 1"
-            ></div>
-          </div>
-
-          <el-alert
-            v-if="
-              displayRecipe && (!uniqueRecipes.length || !hasValidUniqueRecipes)
-            "
-            title="No Recipes"
-            type="info"
-            show-icon
-            class="custom-alert"
-          >
-            <template slot="title">
-              <span class="alert-title">No Unique Recipes Available</span>
-            </template>
-            <div class="alert-content">
-              Please select from the box for New Recipes or try a different
-              query.
-            </div>
-          </el-alert>
-        </div>
-      </el-card>
-      <div class="decorative-food-footer">
-        <div class="food-icon mango"></div>
-        <div class="food-icon cherry"></div>
-        <div class="food-icon lemon"></div>
-        <div class="food-icon corn"></div>
-        <div class="food-icon mushroom"></div>
+        <el-select v-model="selectedPrompt" placeholder="Select Prompt" class="prompt-select">
+          <el-option label="Food Waste Reduction" value="foodWasteReduction">
+            <span class="opt-icon">♻️</span> Food Waste Reduction
+          </el-option>
+          <el-option label="Mood Changer" value="moodChanger">
+            <span class="opt-icon">😊</span> Mood Changer
+          </el-option>
+          <el-option label="Food Cuisine Suggestions" value="cusineSuggestion">
+            <span class="opt-icon">🍜</span> Food Cuisine Suggestions
+          </el-option>
+          <el-option label="Defined Dishes" value="definedDishes">
+            <span class="opt-icon">🍽️</span> Defined Dishes
+          </el-option>
+          <el-option label="Unique Recipe" value="uniqueRecipes">
+            <span class="opt-icon">📖</span> Unique Recipe
+          </el-option>
+        </el-select>
       </div>
-    </el-main>
+
+      <!-- Input area -->
+      <div class="input-section" v-if="selectedPrompt">
+        <div class="input-label">
+          <i :class="getPromptIcon()"></i>
+          <span>{{ getPromptTitle() }}</span>
+        </div>
+        <el-autocomplete
+          popper-class="my-autocomplete"
+          v-model="selectedOption"
+          :fetch-suggestions="querySearch"
+          placeholder="Type or select a prompt…"
+          class="prompt-autocomplete"
+          @select="handleSelect"
+        >
+          <i class="el-icon-remove-outline el-input__icon" slot="suffix" @click="handleIconClick"></i>
+          <template slot-scope="{ item }">
+            <div class="suggestion-option">
+              <i :class="getPromptIcon()"></i>
+              <span>{{ item }}</span>
+            </div>
+          </template>
+        </el-autocomplete>
+      </div>
+
+      <!-- Loading -->
+      <div v-if="loading" class="loading-state">
+        <div class="spinner"></div>
+        <span>Generating your custom content…</span>
+      </div>
+
+      <!-- ── Results ── -->
+
+      <!-- Food Waste Reduction -->
+      <div v-if="displayWasteReduction && !loading" class="results-section">
+        <div class="results-header" style="--accent:#4caf50">
+          <span class="rh-icon">♻️</span>
+          <h3>Food Waste Reduction Suggestions</h3>
+        </div>
+        <div v-for="(s, i) in foodWasteReductionSuggestions" :key="i" class="result-card">
+          <p v-if="s['Food Waste Reduction Suggestion'] && s['Food Waste Reduction Suggestion'].trim()" class="result-text">
+            <span v-html="formatText(s['Food Waste Reduction Suggestion'])"></span>
+          </p>
+          <div class="result-footer">
+            <span class="result-tag" style="--tc:#4caf50">Waste Reduction</span>
+            <span class="result-num">Tip #{{ i + 1 }}</span>
+          </div>
+        </div>
+        <el-alert v-if="displayWasteReduction && (!foodWasteReductionSuggestions.length || !hasValidFoodWasteReductionSuggestions)" title="No suggestions yet — select a prompt to begin." type="info" show-icon :closable="false" class="empty-alert"></el-alert>
+      </div>
+
+      <!-- Mood Changer -->
+      <div v-if="displayMood && !loading" class="results-section">
+        <div class="results-header" style="--accent:#ff9800">
+          <span class="rh-icon">😊</span>
+          <h3>Mood Changer Suggestions</h3>
+        </div>
+        <div v-for="(s, i) in moodChangerSuggestions" :key="i" class="result-card">
+          <p v-if="s['Food Suggestion'] && s['Food Suggestion'].trim()" class="result-text">
+            <span v-html="formatText(s['Food Suggestion'])"></span>
+          </p>
+          <div class="result-footer">
+            <span class="result-tag" style="--tc:#ff9800">Mood Enhancer</span>
+            <span class="result-num">Suggestion #{{ i + 1 }}</span>
+          </div>
+        </div>
+        <el-alert v-if="displayMood && (!moodChangerSuggestions.length || !hasValidMoodChangerSuggestions)" title="No suggestions yet — select a prompt to begin." type="info" show-icon :closable="false" class="empty-alert"></el-alert>
+      </div>
+
+      <!-- Fusion Cuisine -->
+      <div v-if="displaySuggestions && !loading" class="results-section">
+        <div class="results-header" style="--accent:#9c27b0">
+          <span class="rh-icon">🍜</span>
+          <h3>Fusion Cuisine Suggestions</h3>
+        </div>
+        <div v-for="(s, i) in fusionSuggestions" :key="i" class="result-card">
+          <p v-if="s['Fusion Cuisine Suggestion'] && s['Fusion Cuisine Suggestion'].trim()" class="result-text">
+            <span v-html="formatText(s['Fusion Cuisine Suggestion'])"></span>
+          </p>
+          <div class="result-footer">
+            <span class="result-tag" style="--tc:#9c27b0">Fusion Cuisine</span>
+            <span class="result-num">Idea #{{ i + 1 }}</span>
+          </div>
+        </div>
+        <el-alert v-if="displaySuggestions && (!fusionSuggestions.length || !hasValidFusionSuggestions)" title="No suggestions yet — select a prompt to begin." type="info" show-icon :closable="false" class="empty-alert"></el-alert>
+      </div>
+
+      <!-- Defined Dishes -->
+      <div v-if="displayDishes && !loading" class="results-section">
+        <div class="results-header" style="--accent:#2196f3">
+          <span class="rh-icon">🍽️</span>
+          <h3>Defined Dishes &amp; Fun Facts</h3>
+        </div>
+        <div v-for="(fact, i) in definedDishes" :key="i" class="result-card">
+          <p v-if="fact['Fun Facts'] && fact['Fun Facts'].trim()" class="result-text">
+            <span v-html="formatText(fact['Fun Facts'])"></span>
+          </p>
+          <div class="result-footer">
+            <span class="result-tag" style="--tc:#2196f3">Fun Facts</span>
+            <span class="result-num">Fact #{{ i + 1 }}</span>
+          </div>
+        </div>
+        <el-alert v-if="displayDishes && (!definedDishes.length || !hasValidDefinedDishes)" title="No facts yet — select a prompt to begin." type="info" show-icon :closable="false" class="empty-alert"></el-alert>
+      </div>
+
+      <!-- Unique Recipes -->
+      <div v-if="displayRecipe && !loading" class="results-section">
+        <div class="results-header" style="--accent:#e53935">
+          <span class="rh-icon">📖</span>
+          <h3>Unique Recipes</h3>
+        </div>
+        <div v-for="(recipe, i) in uniqueRecipes" :key="i" class="result-card">
+          <div v-if="recipe['Recipe'] && recipe['Recipe'].trim()" class="recipe-block">
+            <div class="recipe-block-title">Recipe</div>
+            <p class="result-text"><span v-html="formatText(recipe['Recipe'])"></span></p>
+          </div>
+          <div v-if="recipe['Encouragement'] && recipe['Encouragement'].trim()" class="encourage-block">
+            <div class="encourage-title">⭐ Chef's Encouragement</div>
+            <p class="result-text encourage-text"><span v-html="formatText(recipe['Encouragement'])"></span></p>
+          </div>
+          <div class="result-footer">
+            <span class="result-tag" style="--tc:#e53935">Unique Recipe</span>
+            <span class="result-num">Recipe #{{ i + 1 }}</span>
+          </div>
+        </div>
+        <el-alert v-if="displayRecipe && (!uniqueRecipes.length || !hasValidUniqueRecipes)" title="No recipes yet — select a prompt to begin." type="info" show-icon :closable="false" class="empty-alert"></el-alert>
+      </div>
+
+    </div>
+
+    <!-- Footer food strip -->
+    <div class="food-strip bottom-strip">
+      <span class="fs-icon">🥭</span><span class="fs-icon">🍒</span><span class="fs-icon">🍋</span><span class="fs-icon">🌽</span><span class="fs-icon">🍄</span>
+    </div>
   </div>
 </template>
 
@@ -420,406 +203,311 @@ export default {
       displayDishes: false,
       displayRecipe: false,
       currentUser: null,
-      promptIcons: [
-        "chat-dot-round",
-        "magic-stick",
-        "notebook-2",
-        "food",
-        "dish",
-        "delete",
-        "sunny",
-        "star-on",
-        "fork-spoon",
-        "chicken",
-      ],
     };
   },
   computed: {
     hasValidFoodWasteReductionSuggestions() {
-      if (
-        !this.foodWasteReductionSuggestions ||
-        this.foodWasteReductionSuggestions.length === 0
-      ) {
-        return false;
-      }
-      return this.foodWasteReductionSuggestions.some(
-        (suggestion) =>
-          suggestion["Food Waste Reduction Suggestion"] &&
-          suggestion["Food Waste Reduction Suggestion"].trim() !== "",
-      );
+      return (this.foodWasteReductionSuggestions || []).some(s => s["Food Waste Reduction Suggestion"]?.trim());
     },
-
     hasValidMoodChangerSuggestions() {
-      if (
-        !this.moodChangerSuggestions ||
-        this.moodChangerSuggestions.length === 0
-      ) {
-        return false;
-      }
-      return this.moodChangerSuggestions.some(
-        (suggestion) =>
-          suggestion["Food Suggestion"] &&
-          suggestion["Food Suggestion"].trim() !== "",
-      );
+      return (this.moodChangerSuggestions || []).some(s => s["Food Suggestion"]?.trim());
     },
-
     hasValidFusionSuggestions() {
-      if (!this.fusionSuggestions || this.fusionSuggestions.length === 0) {
-        return false;
-      }
-      return this.fusionSuggestions.some(
-        (suggestion) =>
-          suggestion["Fusion Cuisine Suggestion"] &&
-          suggestion["Fusion Cuisine Suggestion"].trim() !== "",
-      );
+      return (this.fusionSuggestions || []).some(s => s["Fusion Cuisine Suggestion"]?.trim());
     },
-
     hasValidDefinedDishes() {
-      if (!this.definedDishes || this.definedDishes.length === 0) {
-        return false;
-      }
-      return this.definedDishes.some(
-        (dish) => dish["Fun Facts"] && dish["Fun Facts"].trim() !== "",
-      );
+      return (this.definedDishes || []).some(d => d["Fun Facts"]?.trim());
     },
-
     hasValidUniqueRecipes() {
-      if (!this.uniqueRecipes || this.uniqueRecipes.length === 0) {
-        return false;
-      }
-      return this.uniqueRecipes.some(
-        (recipe) =>
-          (recipe["Recipe"] && recipe["Recipe"].trim() !== "") ||
-          (recipe["Encouragement"] && recipe["Encouragement"].trim() !== ""),
-      );
+      return (this.uniqueRecipes || []).some(r => r["Recipe"]?.trim() || r["Encouragement"]?.trim());
     },
   },
-  mounted() {
-    this.checkAuthState();
-  },
+  mounted() { this.checkAuthState(); },
   methods: {
     getPromptIcon() {
-      switch (this.selectedPrompt) {
-        case "foodWasteReduction":
-          return "el-icon-delete";
-        case "moodChanger":
-          return "el-icon-sunny";
-        case "cusineSuggestion":
-          return "el-icon-dish";
-        case "definedDishes":
-          return "el-icon-food";
-        case "uniqueRecipes":
-          return "el-icon-notebook-2";
-        default:
-          return "el-icon-chat-dot-round";
-      }
+      const map = { foodWasteReduction: "el-icon-delete", moodChanger: "el-icon-sunny", cusineSuggestion: "el-icon-dish", definedDishes: "el-icon-food", uniqueRecipes: "el-icon-notebook-2" };
+      return map[this.selectedPrompt] || "el-icon-chat-dot-round";
     },
-
     getPromptTitle() {
-      switch (this.selectedPrompt) {
-        case "foodWasteReduction":
-          return "Food Waste Reduction Prompt";
-        case "moodChanger":
-          return "Mood Changer Prompt";
-        case "cusineSuggestion":
-          return "Fusion Cuisine Prompt";
-        case "definedDishes":
-          return "Defined Dishes Prompt";
-        case "uniqueRecipes":
-          return "Unique Recipe Prompt";
-        default:
-          return "Custom Prompt";
-      }
+      const map = { foodWasteReduction: "Food Waste Reduction Prompt", moodChanger: "Mood Changer Prompt", cusineSuggestion: "Fusion Cuisine Prompt", definedDishes: "Defined Dishes Prompt", uniqueRecipes: "Unique Recipe Prompt" };
+      return map[this.selectedPrompt] || "Custom Prompt";
     },
-
-    handleIconClick() {
-      this.selectedOption = "";
-    },
-
+    handleIconClick() { this.selectedOption = ""; },
     formatText(text) {
       if (!text) return "";
-
-      // Add line breaks for general text that might need formatting
-      let formattedText = text.replace(/\.\s+(?=[A-Z])/g, ".<br><br>");
-
-      // Format numbered lists
-      formattedText = formattedText.replace(
-        /(\d+\.\s)/g,
-        (match, p1, offset) => {
-          return offset === 0
-            ? `<span class="list-number">${p1}</span>`
-            : `<br><br><span class="list-number">${p1}</span>`;
-        },
-      );
-
-      // Format recipe steps
-      formattedText = formattedText.replace(
-        /(Step \d+:)/gi,
-        '<span class="recipe-step">$1</span>',
-      );
-
-      // Format ingredients
-      formattedText = formattedText.replace(
-        /(Ingredients:|Ingredients)/gi,
-        '<span class="ingredients-title">$1</span>',
-      );
-
-      // Format instructions
-      formattedText = formattedText.replace(
-        /(Instructions:|Directions:|Method:)/gi,
-        '<span class="instructions-title">$1</span>',
-      );
-
-      // Format tips and notes
-      formattedText = formattedText.replace(
-        /(Tip:|Note:|Hint:)/gi,
-        '<span class="tip-title">$1</span>',
-      );
-
-      return formattedText;
+      let t = text.replace(/\.\s+(?=[A-Z])/g, ".<br><br>");
+      t = t.replace(/(\d+\.\s)/g, (m, p1, offset) => offset === 0 ? `<span class="list-number">${p1}</span>` : `<br><br><span class="list-number">${p1}</span>`);
+      t = t.replace(/(Step \d+:)/gi, '<span class="recipe-step">$1</span>');
+      t = t.replace(/(Ingredients:|Ingredients)/gi, '<span class="ingredients-title">$1</span>');
+      t = t.replace(/(Instructions:|Directions:|Method:)/gi, '<span class="instructions-title">$1</span>');
+      t = t.replace(/(Tip:|Note:|Hint:)/gi, '<span class="tip-title">$1</span>');
+      return t;
     },
-
     checkAuthState() {
       auth.onAuthStateChanged(async (user) => {
         if (user) {
           this.currentUser = user;
-          console.log("User is logged in:", user.email);
           try {
-            await this.fetchData(
-              "json",
-              "/food-waste-reduction-using-json",
-              "foodWasteReductionSuggestions",
-            );
-            await this.fetchData(
-              "json",
-              "/mood-changer-using-json",
-              "moodChangerSuggestions",
-            );
-            await this.fetchData(
-              "json",
-              "/fusion-cuisine-suggestions-using-json",
-              "fusionSuggestions",
-            );
-            await this.fetchData(
-              "json",
-              "/user-defined-dish-using-json",
-              "definedDishes",
-            );
-            await this.fetchData(
-              "json",
-              "/unique-recipes-using-json",
-              "uniqueRecipes",
-            );
-          } catch (error) {
-            console.error("Error loading data:", error);
-          }
-        } else {
-          console.log("User is not logged in");
-          this.currentUser = null;
+            await this.fetchData("json", "/food-waste-reduction-using-json", "foodWasteReductionSuggestions");
+            await this.fetchData("json", "/mood-changer-using-json", "moodChangerSuggestions");
+            await this.fetchData("json", "/fusion-cuisine-suggestions-using-json", "fusionSuggestions");
+            await this.fetchData("json", "/user-defined-dish-using-json", "definedDishes");
+            await this.fetchData("json", "/unique-recipes-using-json", "uniqueRecipes");
+          } catch (e) { console.error(e); }
         }
       });
     },
-
     async fetchData(type, endpoint, property) {
       try {
-        const currentUser = auth.currentUser;
-        if (!currentUser) {
-          throw new Error("User not authenticated");
-        }
-        const idToken = await currentUser.getIdToken(/* forceRefresh */ true);
-        console.log("idToken", idToken);
+        const user = auth.currentUser;
+        if (!user) throw new Error("User not authenticated");
+        const idToken = await user.getIdToken(true);
         this.loading = true;
         let response;
         if (type === "json") {
-          response = await fetch(baseURL + endpoint, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${idToken}`,
-            },
-          });
-        } else if (type === "gpt") {
-          await fetch(baseURL + endpoint, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${idToken}`,
-            },
-            body: JSON.stringify({ prompt: this.selectedOption }),
-          });
-          response = await fetch(baseURL + endpoint, {
-            headers: {
-              Authorization: `Bearer ${idToken}`,
-            },
-          });
+          response = await fetch(baseURL + endpoint, { headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` } });
         } else {
-          throw new Error("Invalid request type.");
+          await fetch(baseURL + endpoint, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` }, body: JSON.stringify({ prompt: this.selectedOption }) });
+          response = await fetch(baseURL + endpoint, { headers: { Authorization: `Bearer ${idToken}` } });
         }
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
-        console.log("Data Received:", data);
-        if (property in data) {
-          this[property] = data[property] || [];
-          console.log(data[property]);
-        } else {
-          console.error(
-            `Property '${property}' not found in the server response.`,
-          );
-          this[property] = []; // Ensure property is set to an empty array if not found
-        }
+        this[property] = data[property] || [];
         this.loading = false;
-      } catch (error) {
-        console.error("Error in fetchData:", error);
-        this.loading = false;
-      }
+      } catch (e) { console.error(e); this.loading = false; }
     },
-
     querySearch(queryString, cb) {
-      let suggestions = [];
-      if (this.selectedPrompt === "foodWasteReduction") {
-        suggestions = [
-          "How can I reduce food waste with the items in my inventory?",
-          "What are creative ways to use leftover vegetables?",
-          "Tips for preserving fruits and vegetables longer",
-          "How to properly store food to reduce waste",
-          "Recipes that use food scraps",
-        ];
-      } else if (this.selectedPrompt === "moodChanger") {
-        suggestions = [
-          "What foods can improve my mood when I'm feeling down?",
-          "Foods that boost energy and focus",
-          "Comfort foods that are also healthy",
-          "Foods that help reduce stress and anxiety",
-          "Mood-boosting snacks for work",
-        ];
-      } else if (this.selectedPrompt === "cusineSuggestion") {
-        suggestions = [
-          "Fusion cuisine ideas combining Italian and Asian flavors",
-          "Mexican-Mediterranean fusion dishes",
-          "Creative fusion desserts",
-          "Fusion breakfast ideas",
-          "Modern fusion cuisine trends",
-        ];
-      } else if (this.selectedPrompt === "definedDishes") {
-        suggestions = [
-          "Tell me interesting facts about pasta dishes",
-          "Fun facts about chocolate desserts",
-          "History of curry dishes around the world",
-          "Interesting facts about breakfast foods globally",
-          "Cultural significance of bread in different countries",
-        ];
-      } else if (this.selectedPrompt === "uniqueRecipes") {
-        suggestions = [
-          "Create a unique recipe using chicken and seasonal vegetables",
-          "Innovative dessert recipe with chocolate and fruit",
-          "Quick and easy dinner recipe with pantry staples",
-          "Healthy breakfast recipe that's ready in 10 minutes",
-          "Vegetarian main dish that will impress dinner guests",
-        ];
-      }
-
-      const results = queryString
-        ? suggestions.filter(this.createFilter(queryString))
-        : suggestions;
-      cb(results);
-    },
-
-    createFilter(queryString) {
-      return (suggestion) => {
-        return (
-          suggestion.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-        );
+      const map = {
+        foodWasteReduction: ["How can I reduce food waste with the items in my inventory?", "What are creative ways to use leftover vegetables?", "Tips for preserving fruits and vegetables longer", "How to properly store food to reduce waste", "Recipes that use food scraps"],
+        moodChanger: ["What foods can help improve my mood?", "Suggest comfort foods for a stressful day", "Foods that boost energy and happiness", "Light and refreshing foods for a hot day", "Warm and cozy foods for a cold day"],
+        cusineSuggestion: ["Suggest fusion dishes combining Italian and Asian cuisines", "Creative Mediterranean and Latin American fusion ideas", "Modern twists on traditional Middle Eastern dishes", "Innovative combinations of Indian and Mexican cuisine", "Unique French and Japanese fusion recipes"],
+        definedDishes: ["Tell me about the history of Pizza", "What are interesting facts about Sushi?", "The origin and cultural significance of Tacos", "Fun facts about Pasta and Italian cuisine", "Historical background of Curry dishes"],
+        uniqueRecipes: ["Create a unique recipe using chicken and vegetables", "Innovative dessert recipe using seasonal fruits", "Creative vegetarian main course recipe", "Unique seafood dish with Asian influences", "Novel breakfast recipe using common pantry items"],
       };
+      const list = map[this.selectedPrompt] || [];
+      cb(queryString ? list.filter(i => i.toLowerCase().includes(queryString.toLowerCase())) : list);
     },
-
     handleSelect(item) {
       this.selectedOption = item;
-      this.resetDisplays();
-      this.loading = true;
-
-      setTimeout(() => {
-        if (this.selectedPrompt === "foodWasteReduction") {
-          this.fetchData(
-            "gpt",
-            "/food-waste-reduction-using-gpt",
-            "foodWasteReductionSuggestions",
-          ).then(() => {
-            this.displayWasteReduction = true;
-            this.loading = false;
-          });
-        } else if (this.selectedPrompt === "moodChanger") {
-          this.fetchData(
-            "gpt",
-            "/mood-changer-using-gpt",
-            "moodChangerSuggestions",
-          ).then(() => {
-            this.displayMood = true;
-            this.loading = false;
-          });
-        } else if (this.selectedPrompt === "cusineSuggestion") {
-          this.fetchData(
-            "gpt",
-            "/fusion-cuisine-suggestions-using-gpt",
-            "fusionSuggestions",
-          ).then(() => {
-            this.displaySuggestions = true;
-            this.loading = false;
-          });
-        } else if (this.selectedPrompt === "definedDishes") {
-          this.fetchData(
-            "gpt",
-            "/user-defined-dish-using-gpt",
-            "definedDishes",
-          ).then(() => {
-            this.displayDishes = true;
-            this.loading = false;
-          });
-        } else if (this.selectedPrompt === "uniqueRecipes") {
-          this.fetchData(
-            "gpt",
-            "/unique-recipes-using-gpt",
-            "uniqueRecipes",
-          ).then(() => {
-            this.displayRecipe = true;
-            this.loading = false;
-          });
-        }
-      }, 500);
-    },
-
-    resetDisplays() {
-      this.displayWasteReduction = false;
-      this.displayMood = false;
-      this.displaySuggestions = false;
-      this.displayDishes = false;
-      this.displayRecipe = false;
-    },
-  },
-  watch: {
-    selectedPrompt() {
-      this.selectedOption = "";
-      this.resetDisplays();
+      this.displayWasteReduction = this.displayMood = this.displaySuggestions = this.displayDishes = this.displayRecipe = false;
+      if (this.selectedPrompt === "foodWasteReduction") { this.displayWasteReduction = true; this.fetchData("gpt", "/food-waste-reduction-using-json", "foodWasteReductionSuggestions"); }
+      else if (this.selectedPrompt === "moodChanger") { this.displayMood = true; this.fetchData("gpt", "/mood-changer-using-json", "moodChangerSuggestions"); }
+      else if (this.selectedPrompt === "cusineSuggestion") { this.displaySuggestions = true; this.fetchData("gpt", "/fusion-cuisine-suggestions-using-json", "fusionSuggestions"); }
+      else if (this.selectedPrompt === "definedDishes") { this.displayDishes = true; this.fetchData("gpt", "/user-defined-dish-using-json", "definedDishes"); }
+      else if (this.selectedPrompt === "uniqueRecipes") { this.displayRecipe = true; this.fetchData("gpt", "/unique-recipes-using-json", "uniqueRecipes"); }
     },
   },
 };
 </script>
 
 <style scoped>
-/* Remove Element UI card chrome: keep only dropdown/title content visible */
-.prompt-card {
-  border: none !important;
-  box-shadow: none !important;
-  background-color: transparent !important;
-  border-radius: 0 !important;
-  overflow: visible !important;
-  color: #303133;
-  transition: 0.3s;
+.prompts-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 16px 48px;
 }
 
-/* Remove Element UI inner wrapper padding */
-:deep(.prompt-card .el-card__body) {
-  padding: 0 !important;
+/* ── Page header ── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: #606266;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: background 0.18s, color 0.18s;
+}
+.back-link:hover { background: rgba(103,194,58,0.1); color: #43a047; }
+.back-arrow { font-size: 16px; }
+.page-title { display: flex; align-items: center; gap: 8px; }
+.page-title h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #7b1fa2, #1565c0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.page-title span { font-size: 26px; }
+.header-badge {
+  background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ── Food strip ── */
+.food-strip { display: flex; justify-content: center; gap: 16px; padding: 8px 0; }
+.bottom-strip { padding: 20px 0 4px; }
+.fs-icon { font-size: 20px; animation: float 3s ease-in-out infinite; display: inline-block; }
+.fs-icon:nth-child(2) { animation-delay: .4s; }
+.fs-icon:nth-child(3) { animation-delay: .8s; }
+.fs-icon:nth-child(4) { animation-delay: 1.2s; }
+.fs-icon:nth-child(5) { animation-delay: 1.6s; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+/* ── Main prompt card ── */
+.prompt-card {
+  background: rgba(255,255,255,0.94);
+  border-radius: 22px;
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Select section ── */
+.select-section { display: flex; flex-direction: column; gap: 8px; }
+.select-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #606266;
+}
+.prompt-select { width: 100%; }
+:deep(.el-select .el-input__inner) {
+  border-radius: 12px;
+  height: 44px;
+  font-size: 14px;
+}
+.opt-icon { margin-right: 6px; }
+
+/* ── Input section ── */
+.input-section { display: flex; flex-direction: column; gap: 8px; }
+.input-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #606266;
+}
+.prompt-autocomplete { width: 100%; }
+:deep(.prompt-autocomplete .el-input__inner) { border-radius: 12px; height: 44px; font-size: 14px; }
+
+/* ── Loading ── */
+.loading-state {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: rgba(103,194,58,0.06);
+  border-radius: 14px;
+  font-size: 14px;
+  color: #606266;
+}
+.spinner {
+  width: 22px; height: 22px;
+  border: 2px solid rgba(103,194,58,0.2);
+  border-top-color: #43a047;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Results section ── */
+.results-section { display: flex; flex-direction: column; gap: 12px; }
+.results-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 8%, white);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.rh-icon { font-size: 22px; }
+.results-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ── Result card ── */
+.result-card {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.result-text {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #303133;
+}
+.result-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.result-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tc);
+  background: color-mix(in srgb, var(--tc) 10%, white);
+  border: 1px solid color-mix(in srgb, var(--tc) 20%, transparent);
+}
+.result-num { font-size: 12px; color: #c0c4cc; font-weight: 500; }
+
+/* ── Recipe blocks ── */
+.recipe-block { margin-bottom: 12px; }
+.recipe-block-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e53935;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.encourage-block {
+  background: rgba(255,243,224,0.6);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+}
+.encourage-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f57c00;
+  margin-bottom: 4px;
+}
+.encourage-text { color: #6d4c41 !important; }
+
+/* ── Global text formatting from v-html ── */
+:deep(.list-number) { font-weight: 700; color: #43a047; }
+:deep(.recipe-step) { font-weight: 700; color: #1565c0; display: block; margin-top: 8px; }
+:deep(.ingredients-title) { font-weight: 700; color: #e53935; display: block; margin-top: 8px; }
+:deep(.instructions-title) { font-weight: 700; color: #7b1fa2; display: block; margin-top: 8px; }
+:deep(.tip-title) { font-weight: 700; color: #ff9800; }
+
+.empty-alert { border-radius: 12px; }
+
+@media (max-width: 600px) {
+  .prompt-card { padding: 16px 14px; }
 }
 </style>
