@@ -1,6 +1,47 @@
 <template>
   <div class="footer-wrap">
 
+    <!-- Upload section — above main footer -->
+    <footer class="footer-upload">
+      <div class="upload-area">
+        <div class="upload-label">
+          <span class="upload-icon">📷</span>
+          <span>Upload Receipt Image (OCR)</span>
+        </div>
+
+        <div class="upload-controls">
+          <el-upload
+            class="upload-demo"
+            :action="uploadUrl"
+            ref="fileInput"
+            :auto-upload="false"
+            :on-change="onFileChange"
+            accept="image/*"
+            :show-file-list="false"
+          >
+            <el-button slot="trigger" size="small" type="primary" plain class="upload-btn">
+              <i class="el-icon-camera-solid"></i> Select Image
+            </el-button>
+          </el-upload>
+
+          <el-button class="upload-btn" size="small" type="success" plain @click="uploadImageProcess">
+            <i class="el-icon-upload2"></i> Upload &amp; Process
+          </el-button>
+        </div>
+
+        <div class="status-area">
+          <div v-if="showStatus" class="status-pill processing">
+            <span class="status-dot"></span>
+            <span>Processing image via OCR…</span>
+          </div>
+          <div v-if="completionStatus" class="status-pill success">
+            <span class="status-dot"></span>
+            <span>Image uploaded successfully ✓</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <!-- Main footer -->
     <footer class="footer-main">
       <div class="footer-grid">
@@ -51,53 +92,13 @@
       </div>
     </footer>
 
-    <!-- Upload footer -->
-    <footer class="footer-upload">
-      <div class="upload-area">
-        <div class="upload-label">
-          <span class="upload-icon">📷</span>
-          <span>Upload Receipt Image (OCR)</span>
-        </div>
-
-        <div class="upload-controls">
-          <el-upload
-            class="upload-demo"
-            :action="uploadUrl"
-            ref="fileInput"
-            :auto-upload="false"
-            :on-change="onFileChange"
-            accept="image/*"
-            :show-file-list="false"
-          >
-            <el-button slot="trigger" size="small" type="primary" plain class="upload-btn">
-              <i class="el-icon-camera-solid"></i> Select Image
-            </el-button>
-          </el-upload>
-
-          <el-button class="upload-btn" size="small" type="success" plain @click="uploadImageProcess">
-            <i class="el-icon-upload2"></i> Upload & Process
-          </el-button>
-        </div>
-
-        <div class="status-area">
-          <div v-if="showStatus" class="status-pill processing">
-            <span class="status-dot"></span>
-            <span>Processing image via OCR…</span>
-          </div>
-          <div v-if="completionStatus" class="status-pill success">
-            <span class="status-dot"></span>
-            <span>Image uploaded successfully ✓</span>
-          </div>
-        </div>
+    <!-- Copyright bar inside main footer -->
+    <div class="footer-bottom">
+      <span class="copyright">© {{ new Date().getFullYear() }} My Grocery Home</span>
+      <div class="footer-food-icons">
+        <span>🍓</span><span>🍍</span><span>🍇</span><span>🍉</span>
       </div>
-
-      <div class="footer-bottom">
-        <span class="copyright">© {{ new Date().getFullYear() }} My Grocery Home</span>
-        <div class="footer-food-icons">
-          <span>🍓</span><span>🍍</span><span>🍇</span><span>🍉</span>
-        </div>
-      </div>
-    </footer>
+    </div>
 
   </div>
 </template>
@@ -235,52 +236,53 @@ export default {
 .social-link.facebook:hover { background: rgba(66,103,178,0.3); }
 .social-link.instagram:hover{ background: rgba(193,53,132,0.3); }
 
-/* ── Upload footer ── */
+/* ── Upload section (above main footer) ── */
 .footer-upload {
   background: linear-gradient(135deg, rgba(243,251,240,0.98), rgba(237,246,255,0.98));
-  border-top: 1px solid rgba(103,194,58,0.15);
-  padding: 18px 32px 10px;
+  border-top: 1px solid rgba(103,194,58,0.18);
+  border-bottom: 1px solid rgba(103,194,58,0.12);
+  padding: 24px 32px 20px;
+  text-align: center;
 }
 
 .upload-area {
-  max-width: 960px;
-  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  gap: 14px;
 }
 
 .upload-label {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #606266;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #303133;
 }
-.upload-icon { font-size: 18px; }
+.upload-icon { font-size: 22px; }
 
 .upload-controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .upload-btn {
   border-radius: 20px;
   font-size: 13px;
+  min-width: 130px;
 }
 
 /* ── Status pills ── */
 .status-area {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
-  margin-left: auto;
 }
 .status-pill {
   display: flex;
@@ -331,8 +333,6 @@ export default {
 @media (max-width: 660px) {
   .footer-grid { grid-template-columns: 1fr; gap: 22px; }
   .footer-main { padding: 24px 20px 20px; }
-  .footer-upload { padding: 16px 16px 8px; }
-  .upload-area { flex-direction: column; align-items: flex-start; }
-  .status-area { margin-left: 0; }
+  .footer-upload { padding: 18px 16px 16px; }
 }
 </style>
