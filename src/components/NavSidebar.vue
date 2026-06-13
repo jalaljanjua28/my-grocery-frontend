@@ -1,21 +1,17 @@
 <template>
-  <div class="nav-wrapper">
-    <!-- MENU toggle button -->
-    <el-button
-      class="navbar-toggle"
-      @click="toggleNavbar"
-      :class="{ 'is-active': showNavbar }"
-      aria-label="Toggle navigation menu"
-    >
-      <span class="hamburger" :class="{ open: showNavbar }">
-        <span></span><span></span><span></span>
-      </span>
-      <span class="toggle-label">MENU</span>
-    </el-button>
+  <div class="nav-sidebar-root">
+    <!-- Backdrop -->
+    <transition name="fade">
+      <div
+        v-if="navState.showNavbar"
+        class="nav-backdrop"
+        @click="closeNavbar"
+      ></div>
+    </transition>
 
     <!-- Sidebar -->
     <transition name="nav-slide">
-      <div v-if="showNavbar" class="nav-sidebar">
+      <div v-if="navState.showNavbar" class="nav-sidebar">
         <!-- Sidebar header -->
         <div class="nav-header">
           <div class="nav-logo">
@@ -39,7 +35,7 @@
             <router-link
               to="/account-page"
               class="user-account-link"
-              @click.native="closeNav"
+              @click.native="closeNavbar"
               >My Account</router-link
             >
           </div>
@@ -47,44 +43,38 @@
 
         <!-- Menu items -->
         <nav class="nav-links">
-          <!-- Home -->
-          <router-link to="/" class="nav-item" @click.native="closeNav">
+          <router-link to="/" class="nav-item" @click.native="closeNavbar">
             <span class="nav-item-icon">🏠</span>
             <span>Home</span>
           </router-link>
 
-          <!-- Account & Shopping group -->
           <div class="nav-group">
             <div class="nav-group-label">
               <span class="nav-item-icon">👤</span>
-              <span>Account &amp; Shopping</span>
+              <span>Account & Shopping</span>
             </div>
             <div class="nav-group-children">
               <router-link
                 to="/account-page"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">⚙️</span> My Account</router-link
               >
-                <span class="child-icon">⚙️</span> My Account
-              </router-link>
               <router-link
                 to="/shopping-cart"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">🛒</span> Shopping Cart</router-link
               >
-                <span class="child-icon">🛒</span> Shopping Cart
-              </router-link>
               <router-link
                 to="/orders-history"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">📋</span> Orders History</router-link
               >
-                <span class="child-icon">📋</span> Orders History
-              </router-link>
             </div>
           </div>
 
-          <!-- Inventory group -->
           <div class="nav-group">
             <div class="nav-group-label">
               <span class="nav-item-icon">📦</span>
@@ -94,52 +84,45 @@
               <router-link
                 to="/items-inventory"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">🥫</span> My Inventory</router-link
               >
-                <span class="child-icon">🥫</span> My Inventory
-              </router-link>
               <router-link
                 to="/receipt-scan"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">📸</span> Receipt Scanner</router-link
               >
-                <span class="child-icon">📸</span> Receipt Scanner
-              </router-link>
             </div>
           </div>
 
-          <!-- AI & Insights group -->
           <div class="nav-group">
             <div class="nav-group-label">
               <span class="nav-item-icon">🤖</span>
-              <span>AI &amp; Insights</span>
+              <span>AI & Insights</span>
             </div>
             <div class="nav-group-children">
               <router-link
                 to="/recipes-page"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">🍳</span> Recipes</router-link
               >
-                <span class="child-icon">🍳</span> Recipes
-              </router-link>
               <router-link
                 to="/health-page"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">💚</span> Health</router-link
               >
-                <span class="child-icon">💚</span> Health
-              </router-link>
               <router-link
                 to="/user-defined-prompt"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">💬</span> Custom Prompts</router-link
               >
-                <span class="child-icon">💬</span> Custom Prompts
-              </router-link>
             </div>
           </div>
 
-          <!-- Information group -->
           <div class="nav-group">
             <div class="nav-group-label">
               <span class="nav-item-icon">ℹ️</span>
@@ -149,58 +132,44 @@
               <router-link
                 to="/about-us"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">🏢</span> About Us</router-link
               >
-                <span class="child-icon">🏢</span> About Us
-              </router-link>
               <router-link
                 to="/faqs-page"
                 class="nav-child"
-                @click.native="closeNav"
+                @click.native="closeNavbar"
+                ><span class="child-icon">❓</span> FAQs</router-link
               >
-                <span class="child-icon">❓</span> FAQs
-              </router-link>
             </div>
           </div>
         </nav>
 
-        <!-- Sidebar footer -->
         <div class="nav-footer">
           <div class="nav-footer-icons">
             <span>🍎</span><span>🥦</span><span>🍊</span><span>🥕</span>
           </div>
-          <div class="nav-copyright">
-            © {{ new Date().getFullYear() }} My Grocery Home
-          </div>
+          <div class="nav-copyright">© {{ year }} My Grocery Home</div>
         </div>
       </div>
-    </transition>
-
-    <!-- Backdrop -->
-    <transition name="fade">
-      <div v-if="showNavbar" class="nav-backdrop" @click="closeNav"></div>
     </transition>
   </div>
 </template>
 
 <script>
+import { navState, toggleNavbar, closeNavbar } from "@/store/navState.js";
+
 export default {
   data() {
-    return { showNavbar: false };
+    return { navState, year: new Date().getFullYear() };
   },
   methods: {
-    toggleNavbar() {
-      this.showNavbar = !this.showNavbar;
-      document.body.style.overflow = this.showNavbar ? "hidden" : "";
-    },
-    closeNav() {
-      this.showNavbar = false;
-      document.body.style.overflow = "";
-    },
+    toggleNavbar,
+    closeNavbar,
   },
   watch: {
     $route() {
-      this.closeNav();
+      closeNavbar();
     },
   },
   beforeDestroy() {
@@ -210,66 +179,12 @@ export default {
 </script>
 
 <style scoped>
-/* ── Toggle button ── */
-.navbar-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 14px !important;
-  border-radius: 20px !important;
-  border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
-  background: rgba(255, 255, 255, 0.85) !important;
-  color: #303133 !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  cursor: pointer;
-  transition: background 0.18s, border-color 0.18s, box-shadow 0.18s;
-  height: auto !important;
-}
-.navbar-toggle:hover,
-.navbar-toggle.is-active {
-  background: rgba(0, 0, 0, 0.04) !important;
-  border-color: rgba(0, 0, 0, 0.25) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Hamburger icon */
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 16px;
-  height: 12px;
-  flex-shrink: 0;
-}
-.hamburger span {
-  display: block;
-  height: 2px;
-  width: 100%;
-  background: currentColor;
-  border-radius: 2px;
-  transition: transform 0.22s, opacity 0.22s;
-}
-.hamburger.open span:nth-child(1) {
-  transform: translateY(5px) rotate(45deg);
-}
-.hamburger.open span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.open span:nth-child(3) {
-  transform: translateY(-5px) rotate(-45deg);
-}
-
-.toggle-label {
-  white-space: nowrap;
-}
-
 /* ── Backdrop ── */
 .nav-backdrop {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.38);
-  z-index: 1998;
+  z-index: 2998;
   backdrop-filter: blur(2px);
 }
 
@@ -287,13 +202,12 @@ export default {
     rgba(237, 246, 255, 0.97) 100%
   );
   box-shadow: -4px 0 28px rgba(0, 0, 0, 0.14);
-  z-index: 1999;
+  z-index: 2999;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* ── Sidebar header ── */
 .nav-header {
   display: flex;
   align-items: center;
@@ -343,7 +257,6 @@ export default {
   border-color: rgba(230, 57, 70, 0.2);
 }
 
-/* ── User strip ── */
 .nav-user {
   display: flex;
   align-items: center;
@@ -388,14 +301,12 @@ export default {
   text-decoration: underline;
 }
 
-/* ── Scrollable nav links ── */
 .nav-links {
   flex: 1;
   overflow-y: auto;
   padding: 10px 0 8px;
 }
 
-/* Top-level link */
 .nav-item {
   display: flex;
   align-items: center;
@@ -413,7 +324,6 @@ export default {
   color: #2e7d32;
 }
 
-/* Group label (non-clickable) */
 .nav-group-label {
   display: flex;
   align-items: center;
@@ -426,8 +336,6 @@ export default {
   letter-spacing: 0.4px;
   cursor: default;
 }
-
-/* Group children */
 .nav-group-children {
   padding-bottom: 4px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -459,7 +367,6 @@ export default {
   flex-shrink: 0;
 }
 
-/* ── Sidebar footer ── */
 .nav-footer {
   padding: 14px 18px;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -481,7 +388,7 @@ export default {
   color: #c0c4cc;
 }
 
-/* ── Transitions ── */
+/* Transitions */
 .nav-slide-enter-active,
 .nav-slide-leave-active {
   transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);

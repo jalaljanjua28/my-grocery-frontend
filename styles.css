@@ -870,27 +870,7 @@ h4 {
   z-index: 1000;
 }
 
-/* Toggle button styling */
-.navbar-toggle {
-  /* margin-left: 10px;
-  margin-top: 10px; */
-  /* position: absolute; */
-  /* top: -25px; */
-  width: 0;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  border: none;
-  padding: 13px 31px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1002;
-  color: #fff;
-}
+/* Toggle button styling - overridden by scoped styles in TheNav.vue */
 
 /* When navbar is open, move the toggle button to stay visible outside */
 /* Adjusted to not hide the toggle button, but move it */

@@ -6,7 +6,7 @@
     <div class="top-row">
       <header-logo class="logo-component"></header-logo>
 
-      <div class="right-actions">
+      <div class="right-actions" style="margin-left: auto">
         <the-menu></the-menu>
         <div class="vdivider"></div>
         <the-nav></the-nav>
@@ -73,10 +73,13 @@ export default {
       const { Food, NonFood } = await fetchShoppingListData();
       this.Food = Food;
       this.NonFood = NonFood;
-      const { Food_nonexpired, NonFood_nonexpired } = await fetchMasterNonexpiredData();
+      const { Food_nonexpired, NonFood_nonexpired } =
+        await fetchMasterNonexpiredData();
       this.Food_nonexpired = Food_nonexpired;
       this.NonFood_nonexpired = NonFood_nonexpired;
-      setTimeout(() => { if (this.$el) this.$el.classList.remove("loading"); }, 500);
+      setTimeout(() => {
+        if (this.$el) this.$el.classList.remove("loading");
+      }, 500);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -97,12 +100,12 @@ export default {
   gap: 0;
   background: linear-gradient(
     120deg,
-    rgba(255,255,255,0.97) 0%,
-    rgba(243,251,240,0.97) 50%,
-    rgba(237,246,255,0.97) 100%
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(243, 251, 240, 0.97) 50%,
+    rgba(237, 246, 255, 0.97) 100%
   );
-  border-bottom: 1px solid rgba(103,194,58,0.22);
-  box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+  border-bottom: 1px solid rgba(103, 194, 58, 0.22);
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.07);
   backdrop-filter: blur(12px);
   overflow: visible;
   box-sizing: border-box;
@@ -115,15 +118,31 @@ export default {
   inset: 0;
   pointer-events: none;
   opacity: 0.2;
-  background:
-    radial-gradient(circle at 5%  50%, rgba(103,194,58,0.28), transparent 36%),
-    radial-gradient(circle at 95% 50%, rgba(64,158,255,0.22), transparent 36%),
-    radial-gradient(circle at 50% 110%, rgba(232,114,12,0.16), transparent 40%);
+  background: radial-gradient(
+      circle at 5% 50%,
+      rgba(103, 194, 58, 0.28),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 95% 50%,
+      rgba(64, 158, 255, 0.22),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 50% 110%,
+      rgba(232, 114, 12, 0.16),
+      transparent 40%
+    );
   animation: headerWash 9s ease-in-out infinite;
 }
 @keyframes headerWash {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 /* ── Top row ── */
@@ -144,9 +163,10 @@ export default {
   gap: 10px;
   padding: 5px 12px;
   border-radius: 40px;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(64,158,255,0.15);
-  box-shadow: 0 1px 5px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(64, 158, 255, 0.15);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
 }
 
@@ -154,7 +174,13 @@ export default {
 .vdivider {
   width: 1px;
   height: 20px;
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.13) 30%, rgba(0,0,0,0.13) 70%, transparent);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.13) 30%,
+    rgba(0, 0, 0, 0.13) 70%,
+    transparent
+  );
   flex-shrink: 0;
 }
 
@@ -165,9 +191,9 @@ export default {
   background: linear-gradient(
     to right,
     transparent 0%,
-    rgba(103,194,58,0.35) 15%,
-    rgba(64,158,255,0.3) 50%,
-    rgba(232,114,12,0.25) 85%,
+    rgba(103, 194, 58, 0.35) 15%,
+    rgba(64, 158, 255, 0.3) 50%,
+    rgba(232, 114, 12, 0.25) 85%,
     transparent 100%
   );
   flex-shrink: 0;
@@ -183,7 +209,7 @@ export default {
   width: 100%;
   padding-top: 8px;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 .searchDev {
@@ -196,10 +222,10 @@ export default {
   position: relative;
   width: 22px;
   height: 22px;
-  border: 1.5px solid rgba(0,0,0,0.5);
-  background: rgba(255,255,255,0.8);
+  border: 1.5px solid rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 7px;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.07);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.07);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -212,7 +238,7 @@ export default {
   bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   color: #fff;
   padding: 3px 8px;
   border-radius: 6px;
@@ -224,7 +250,10 @@ export default {
   pointer-events: none;
   z-index: 20;
 }
-.food-icon:hover .icon-tooltip { opacity: 1; visibility: visible; }
+.food-icon:hover .icon-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
 
 /* ── Floating bg icons ── */
 .floating-food-icons {
@@ -238,27 +267,38 @@ export default {
   position: absolute;
   width: 13px;
   height: 13px;
-  border: 1.5px solid rgba(0,0,0,0.3);
-  background: rgba(255,255,255,0.45);
+  border: 1.5px solid rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.45);
   border-radius: 4px;
   animation: floatBg 8s ease-in-out infinite;
   opacity: 0.4;
 }
 @keyframes floatBg {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-7px) rotate(5deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(5deg);
+  }
 }
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
-  .header { padding: 8px 12px 6px; }
+  .header {
+    padding: 8px 12px 6px;
+  }
 
   .right-actions {
     gap: 8px;
     padding: 4px 10px;
   }
 
-  .floating-food-icons { display: none; }
-  .food-icon { display: none; }
+  .floating-food-icons {
+    display: none;
+  }
+  .food-icon {
+    display: none;
+  }
 }
 </style>

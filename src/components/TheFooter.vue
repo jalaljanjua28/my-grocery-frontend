@@ -1,6 +1,5 @@
 <template>
   <div class="footer-wrap">
-
     <!-- Upload section — above main footer -->
     <footer class="footer-upload">
       <div class="upload-area">
@@ -19,12 +18,24 @@
             accept="image/*"
             :show-file-list="false"
           >
-            <el-button slot="trigger" size="small" type="primary" plain class="upload-btn">
+            <el-button
+              slot="trigger"
+              size="small"
+              type="primary"
+              plain
+              class="upload-btn"
+            >
               <i class="el-icon-camera-solid"></i> Select Image
             </el-button>
           </el-upload>
 
-          <el-button class="upload-btn" size="small" type="success" plain @click="uploadImageProcess">
+          <el-button
+            class="upload-btn"
+            size="small"
+            type="success"
+            plain
+            @click="uploadImageProcess"
+          >
             <i class="el-icon-upload2"></i> Upload &amp; Process
           </el-button>
         </div>
@@ -45,7 +56,6 @@
     <!-- Main footer -->
     <footer class="footer-main">
       <div class="footer-grid">
-
         <!-- About -->
         <div class="footer-col">
           <div class="col-header">
@@ -53,7 +63,8 @@
             <h4>About Us</h4>
           </div>
           <p class="col-text">
-            A smart grocery management app helping you track, reduce waste, and eat better — powered by AI and built with care.
+            A smart grocery management app helping you track, reduce waste, and
+            eat better — powered by AI and built with care.
           </p>
         </div>
 
@@ -74,32 +85,48 @@
             <h4>Follow Us</h4>
           </div>
           <div class="social-links">
-            <a href="https://www.linkedin.com/company/your-company" target="_blank" class="social-link linkedin">
+            <a
+              href="https://www.linkedin.com/company/your-company"
+              target="_blank"
+              class="social-link linkedin"
+            >
               <i class="fab fa-linkedin"></i> LinkedIn
             </a>
-            <a href="https://twitter.com/your_handle" target="_blank" class="social-link twitter">
+            <a
+              href="https://twitter.com/your_handle"
+              target="_blank"
+              class="social-link twitter"
+            >
               <i class="fab fa-twitter"></i> Twitter
             </a>
-            <a href="https://www.facebook.com/your.page" target="_blank" class="social-link facebook">
+            <a
+              href="https://www.facebook.com/your.page"
+              target="_blank"
+              class="social-link facebook"
+            >
               <i class="fab fa-facebook"></i> Facebook
             </a>
-            <a href="https://www.instagram.com/your_account" target="_blank" class="social-link instagram">
+            <a
+              href="https://www.instagram.com/your_account"
+              target="_blank"
+              class="social-link instagram"
+            >
               <i class="fab fa-instagram"></i> Instagram
             </a>
           </div>
         </div>
-
       </div>
     </footer>
 
     <!-- Copyright bar inside main footer -->
     <div class="footer-bottom">
-      <span class="copyright">© {{ new Date().getFullYear() }} My Grocery Home</span>
+      <span class="copyright"
+        >© {{ new Date().getFullYear() }} My Grocery Home</span
+      >
       <div class="footer-food-icons">
         <span>🍓</span><span>🍍</span><span>🍇</span><span>🍉</span>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -140,21 +167,33 @@ export default {
       const formData = new FormData();
       formData.append("file", this.selectedFile);
       const currentUser = auth.currentUser;
-      if (!currentUser) { this.$message.error("Please log in first."); this.showStatus = false; return; }
+      if (!currentUser) {
+        this.$message.error("Please log in first.");
+        this.showStatus = false;
+        return;
+      }
       const idToken = await currentUser.getIdToken(true);
-      axiosInstance.post("/image-process-upload", formData, {
-        headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${idToken}` },
-        onUploadProgress: (e) => { this.uploadProgress = Math.round((e.loaded * 100) / e.total); },
-      }).then(() => {
-        this.showStatus = false;
-        this.completionStatus = true;
-        setTimeout(() => location.reload(), 1500);
-      }).catch((err) => {
-        console.error(err);
-        this.showStatus = false;
-        this.completionStatus = false;
-        this.$message.error("Upload failed. Please try again.");
-      });
+      axiosInstance
+        .post("/image-process-upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${idToken}`,
+          },
+          onUploadProgress: (e) => {
+            this.uploadProgress = Math.round((e.loaded * 100) / e.total);
+          },
+        })
+        .then(() => {
+          this.showStatus = false;
+          this.completionStatus = true;
+          setTimeout(() => location.reload(), 1500);
+        })
+        .catch((err) => {
+          console.error(err);
+          this.showStatus = false;
+          this.completionStatus = false;
+          this.$message.error("Upload failed. Please try again.");
+        });
     },
   },
 };
@@ -163,16 +202,16 @@ export default {
 <style scoped>
 .footer-wrap {
   margin-top: 40px;
-  border-top: 1px solid rgba(103,194,58,0.18);
+  border-top: 1px solid rgba(103, 194, 58, 0.18);
 }
 
 /* ── Main footer ── */
 .footer-main {
   background: linear-gradient(
     135deg,
-    rgba(27,94,32,0.92) 0%,
-    rgba(21,101,192,0.88) 60%,
-    rgba(74,20,140,0.85) 100%
+    rgba(27, 94, 32, 0.92) 0%,
+    rgba(21, 101, 192, 0.88) 60%,
+    rgba(74, 20, 140, 0.85) 100%
   );
   padding: 36px 40px 28px;
 }
@@ -183,9 +222,8 @@ export default {
   gap: 32px;
   max-width: 960px;
   margin: 0 auto;
+  justify-items: end;
 }
-
-.footer-col {}
 
 .col-header {
   display: flex;
@@ -193,19 +231,21 @@ export default {
   gap: 8px;
   margin-bottom: 12px;
 }
-.col-icon { font-size: 20px; }
+.col-icon {
+  font-size: 20px;
+}
 .col-header h4 {
   margin: 0;
   font-size: 15px;
   font-weight: 700;
-  color: rgba(255,255,255,0.95);
+  color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.3px;
 }
 
 .col-text {
   margin: 0 0 6px;
   font-size: 13px;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
   line-height: 1.6;
 }
 
@@ -221,26 +261,42 @@ export default {
   gap: 7px;
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   padding: 5px 12px;
   border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
   transition: background 0.18s, color 0.18s, border-color 0.18s;
   width: fit-content;
 }
-.social-link:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
-.social-link.linkedin:hover { background: rgba(0,119,181,0.3); }
-.social-link.twitter:hover  { background: rgba(29,161,242,0.3); }
-.social-link.facebook:hover { background: rgba(66,103,178,0.3); }
-.social-link.instagram:hover{ background: rgba(193,53,132,0.3); }
+.social-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.social-link.linkedin:hover {
+  background: rgba(0, 119, 181, 0.3);
+}
+.social-link.twitter:hover {
+  background: rgba(29, 161, 242, 0.3);
+}
+.social-link.facebook:hover {
+  background: rgba(66, 103, 178, 0.3);
+}
+.social-link.instagram:hover {
+  background: rgba(193, 53, 132, 0.3);
+}
 
 /* ── Upload section (above main footer) ── */
 .footer-upload {
-  background: linear-gradient(135deg, rgba(243,251,240,0.98), rgba(237,246,255,0.98));
-  border-top: 1px solid rgba(103,194,58,0.18);
-  border-bottom: 1px solid rgba(103,194,58,0.12);
+  background: linear-gradient(
+    135deg,
+    rgba(243, 251, 240, 0.98),
+    rgba(237, 246, 255, 0.98)
+  );
+  border-top: 1px solid rgba(103, 194, 58, 0.18);
+  border-bottom: 1px solid rgba(103, 194, 58, 0.12);
   padding: 24px 32px 20px;
   text-align: center;
 }
@@ -261,7 +317,9 @@ export default {
   font-weight: 700;
   color: #303133;
 }
-.upload-icon { font-size: 22px; }
+.upload-icon {
+  font-size: 22px;
+}
 
 .upload-controls {
   display: flex;
@@ -294,23 +352,32 @@ export default {
   font-weight: 500;
 }
 .status-pill.processing {
-  background: rgba(64,158,255,0.1);
+  background: rgba(64, 158, 255, 0.1);
   color: #409eff;
-  border: 1px solid rgba(64,158,255,0.25);
+  border: 1px solid rgba(64, 158, 255, 0.25);
 }
 .status-pill.success {
-  background: rgba(103,194,58,0.1);
+  background: rgba(103, 194, 58, 0.1);
   color: #67c23a;
-  border: 1px solid rgba(103,194,58,0.25);
+  border: 1px solid rgba(103, 194, 58, 0.25);
 }
 .status-dot {
-  width: 8px; height: 8px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: currentColor;
   flex-shrink: 0;
   animation: pulse 1.2s ease-in-out infinite;
 }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
 
 /* ── Footer bottom ── */
 .footer-bottom {
@@ -321,7 +388,10 @@ export default {
   justify-content: space-between;
   padding: 10px 0 4px;
 }
-.copyright { font-size: 12px; color: #c0c4cc; }
+.copyright {
+  font-size: 12px;
+  color: #c0c4cc;
+}
 .footer-food-icons {
   display: flex;
   gap: 10px;
@@ -331,8 +401,15 @@ export default {
 
 /* ── Responsive ── */
 @media (max-width: 660px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 22px; }
-  .footer-main { padding: 24px 20px 20px; }
-  .footer-upload { padding: 18px 16px 16px; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .footer-main {
+    padding: 24px 20px 20px;
+  }
+  .footer-upload {
+    padding: 18px 16px 16px;
+  }
 }
 </style>

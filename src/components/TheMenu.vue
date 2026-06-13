@@ -16,7 +16,7 @@
           type="danger"
           plain
           size="small"
-          style="width:100%;margin-top:8px"
+          style="width: 100%; margin-top: 8px"
           >Sign Out</el-button
         >
         <el-button
@@ -25,7 +25,7 @@
           type="primary"
           plain
           size="small"
-          style="width:100%;margin-top:8px"
+          style="width: 100%; margin-top: 8px"
           >Sign in with Google</el-button
         >
       </div>
@@ -136,14 +136,15 @@ export default {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
   white-space: nowrap;
   background: rgba(255, 255, 255, 0.7);
   color: #555;
 }
 
 .header-btn:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .user-btn {
