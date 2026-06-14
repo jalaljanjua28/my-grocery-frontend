@@ -726,7 +726,7 @@ export default {
 </script>
 
 <style scoped>
-/* Make the card invisible (no background/border/shadow), keep only inner content */
+/* Sharp + clean card chrome removal */
 .recipe-card {
   border: none !important;
   box-shadow: none !important;
@@ -734,11 +734,33 @@ export default {
   border-radius: 0 !important;
   overflow: visible !important;
   color: #303133;
-  transition: 0.3s;
+  transition: none !important;
 }
 
-/* Remove Element UI inner body padding so only header/collapse content shows */
+/* Remove inner wrapper padding */
 :deep(.recipe-card .el-card__body) {
   padding: 0 !important;
+}
+
+/* Hide extra decorative layers to keep the UI sharp */
+.recipe-decoration {
+  display: none !important;
+}
+.recipe-container .content-decoration {
+  display: none !important;
+}
+.fancy-divider {
+  opacity: 0.6;
+}
+
+/* Consistent spacing for suggestion blocks */
+.suggestion-item {
+  padding: 10px 0;
+}
+
+/* Improve rich text readability */
+:deep(.suggestion-content) {
+  line-height: 1.75;
+  color: #303133;
 }
 </style>

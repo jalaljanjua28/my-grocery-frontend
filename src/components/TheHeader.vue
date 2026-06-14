@@ -49,7 +49,7 @@ import {
   fetchMasterExpiredData,
   fetchShoppingListData,
   fetchMasterNonexpiredData,
-} from "@/plugins/Dataservice.js";
+} from "@/plugins/dataservice.js";
 import HeaderLogo from "./HeaderLogo.vue";
 
 export default {

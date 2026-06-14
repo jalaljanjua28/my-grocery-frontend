@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { deleteAllItems } from "../plugins/Dataservice.js";
+import { deleteAllItems } from "../plugins/dataservice.js";
 
 export default {
   name: "DeleteAll",

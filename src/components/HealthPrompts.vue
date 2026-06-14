@@ -1046,4 +1046,15 @@ export default {
 :deep(.health-card .el-card__body) {
   padding: 0 !important;
 }
+
+/* Hide extra decorative layers (keeps the UI sharp) */
+.health-decoration {
+  display: none !important;
+}
+
+/* Improve readability of generated content */
+:deep(.suggestion-content) {
+  line-height: 1.75;
+  color: #303133;
+}
 </style>

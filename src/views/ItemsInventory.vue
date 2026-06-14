@@ -290,7 +290,7 @@ import {
   fetchMasterExpiredData,
   fetchShoppingListData,
   fetchMasterNonexpiredData,
-} from "@/plugins/Dataservice.js";
+} from "@/plugins/dataservice.js";
 
 export default {
   components: {
@@ -397,6 +397,143 @@ export default {
 /* Remove inner wrapper padding so only the content (title/dropdown) shows without a boxed feel */
 :deep(.inventory-card .el-card__body),
 :deep(.frequency-card .el-card__body) {
-  padding: 0 !important;
+  padding: 18px !important;
+}
+
+/* Inventory page modern layout */
+.inventory-page-container {
+  padding: 18px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.main-content {
+  padding: 0;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.router_link {
+  text-decoration: none;
+}
+
+.inventory-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.inventory-card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(103, 194, 58, 0.14) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+.search-inventory {
+  margin: 12px 0 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(103, 194, 58, 0.08),
+    rgba(64, 158, 255, 0.06)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.search-inventory-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.search-inventory-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.custom-tabs {
+  margin-top: 6px;
+}
+
+:deep(.custom-tabs .el-tabs__item) {
+  font-weight: 700;
+}
+
+:deep(.inner-tabs .el-tabs__item) {
+  font-weight: 600;
+}
+
+.tab-content-container {
+  padding-top: 10px;
+}
+
+.frequency-card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(103, 194, 58, 0.14) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+  margin-top: 16px;
+}
+
+.frequency-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.frequency-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.frequency-description {
+  margin-bottom: 10px;
+}
+
+.add-item-container {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.add-item-button {
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 800;
+}
+
+/* Remove heavy decorative elements for a cleaner, uniform UI */
+.decorative-food-header,
+.decorative-food-footer,
+.card-decoration {
+  display: none !important;
+}
+
+/* Make sure delete-all section doesn't break spacing */
+:deep(delete-all) {
+  margin-top: 14px;
 }
 </style>

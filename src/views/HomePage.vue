@@ -1,6 +1,5 @@
 <template>
   <div class="home-page-container">
-
     <!-- Decorative food strip -->
     <div class="food-strip">
       <span class="fs-icon">🍎</span>
@@ -49,7 +48,11 @@
       </div>
 
       <section>
-        <el-tabs v-model="outerActiveTab" @tab-click="handleOuterTabClick" class="custom-tabs">
+        <el-tabs
+          v-model="outerActiveTab"
+          @tab-click="handleOuterTabClick"
+          class="custom-tabs"
+        >
           <el-tab-pane name="Food" label="Food">
             <span slot="label" class="tab-label">
               <span class="tab-icon">🍎</span> Food
@@ -104,7 +107,7 @@ import {
   fetchPurchasedListData,
   fetchMasterExpiredData,
   fetchShoppingListData,
-} from "@/plugins/Dataservice.js";
+} from "@/plugins/dataservice.js";
 import { auth } from "../Firebase.js";
 import { API_BASE_URL as baseUrl } from "@/config.js";
 
@@ -126,7 +129,8 @@ export default {
   },
   async mounted() {
     try {
-      const { Food_nonexpired, NonFood_nonexpired } = await fetchPurchasedListData();
+      const { Food_nonexpired, NonFood_nonexpired } =
+        await fetchPurchasedListData();
       this.Food_nonexpired = Food_nonexpired || [];
       this.NonFood_nonexpired = NonFood_nonexpired || [];
       this.items = [...(Food_nonexpired || []), ...(NonFood_nonexpired || [])];
@@ -137,7 +141,9 @@ export default {
       this.Food = Food || [];
       this.NonFood = NonFood || [];
       this.fetchJokesWithTimestamp();
-      setInterval(() => { this.fetchJokesWithTimestamp(); }, 3600000);
+      setInterval(() => {
+        this.fetchJokesWithTimestamp();
+      }, 3600000);
     } catch (error) {
       console.error("Error loading data:", error);
     }
@@ -155,23 +161,41 @@ export default {
   methods: {
     handlePriceUpdate(updateData) {
       if (this.Food_nonexpired) {
-        const i = this.Food_nonexpired.findIndex(item => (item.name || item.Name) === updateData.itemName);
-        if (i !== -1) { this.$set(this.Food_nonexpired[i], "price", updateData.newPrice); this.$set(this.Food_nonexpired[i], "Price", updateData.newPrice); }
+        const i = this.Food_nonexpired.findIndex(
+          (item) => (item.name || item.Name) === updateData.itemName,
+        );
+        if (i !== -1) {
+          this.$set(this.Food_nonexpired[i], "price", updateData.newPrice);
+          this.$set(this.Food_nonexpired[i], "Price", updateData.newPrice);
+        }
       }
       if (this.NonFood_nonexpired) {
-        const i = this.NonFood_nonexpired.findIndex(item => (item.name || item.Name) === updateData.itemName);
-        if (i !== -1) { this.$set(this.NonFood_nonexpired[i], "price", updateData.newPrice); this.$set(this.NonFood_nonexpired[i], "Price", updateData.newPrice); }
+        const i = this.NonFood_nonexpired.findIndex(
+          (item) => (item.name || item.Name) === updateData.itemName,
+        );
+        if (i !== -1) {
+          this.$set(this.NonFood_nonexpired[i], "price", updateData.newPrice);
+          this.$set(this.NonFood_nonexpired[i], "Price", updateData.newPrice);
+        }
       }
       if (this.items) {
-        const i = this.items.findIndex(item => (item.name || item.Name) === updateData.itemName);
-        if (i !== -1) { this.$set(this.items[i], "price", updateData.newPrice); this.$set(this.items[i], "Price", updateData.newPrice); }
+        const i = this.items.findIndex(
+          (item) => (item.name || item.Name) === updateData.itemName,
+        );
+        if (i !== -1) {
+          this.$set(this.items[i], "price", updateData.newPrice);
+          this.$set(this.items[i], "Price", updateData.newPrice);
+        }
       }
     },
     updateFilteredItems() {
-      this.items = [...(this.Food_nonexpired || []), ...(this.NonFood_nonexpired || [])];
+      this.items = [
+        ...(this.Food_nonexpired || []),
+        ...(this.NonFood_nonexpired || []),
+      ];
     },
     handleItemDeleted(itemToDelete) {
-      this.items = this.items.filter(item => item !== itemToDelete);
+      this.items = this.items.filter((item) => item !== itemToDelete);
     },
     handleOuterTabClick(tab) {
       localStorage.setItem("activeOuterTab", tab.name);
@@ -183,11 +207,18 @@ export default {
         if (!currentUser) throw new Error("User not authenticated");
         const idToken = await currentUser.getIdToken(true);
         const timestamp = Math.floor(Date.now() / 1000);
-        const response = await fetch(`${baseUrl}/jokes-with-timestamp/${timestamp}`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${idToken}` },
-        });
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const response = await fetch(
+          `${baseUrl}/jokes-with-timestamp/${timestamp}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${idToken}`,
+            },
+          },
+        );
+        if (!response.ok)
+          throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
         if (data.jokes && data.jokes.length > 0) {
           this.jokes = data.jokes[0];
@@ -215,19 +246,34 @@ export default {
   gap: 18px;
   padding: 10px 0 6px;
 }
-.bottom-strip { padding: 18px 0 6px; }
+.bottom-strip {
+  padding: 18px 0 6px;
+}
 .fs-icon {
   font-size: 22px;
   animation: floatIcon 3s ease-in-out infinite;
   display: inline-block;
 }
-.fs-icon:nth-child(2) { animation-delay: 0.4s; }
-.fs-icon:nth-child(3) { animation-delay: 0.8s; }
-.fs-icon:nth-child(4) { animation-delay: 1.2s; }
-.fs-icon:nth-child(5) { animation-delay: 1.6s; }
+.fs-icon:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.fs-icon:nth-child(3) {
+  animation-delay: 0.8s;
+}
+.fs-icon:nth-child(4) {
+  animation-delay: 1.2s;
+}
+.fs-icon:nth-child(5) {
+  animation-delay: 1.6s;
+}
 @keyframes floatIcon {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-5px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* ── Nav cards ── */
@@ -245,9 +291,9 @@ export default {
   gap: 6px;
   padding: 14px 22px;
   border-radius: 16px;
-  background: rgba(255,255,255,0.85);
-  border: 1px solid rgba(0,0,0,0.07);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
   text-decoration: none;
   color: #303133;
   font-weight: 500;
@@ -258,34 +304,42 @@ export default {
 }
 .nav-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.13);
-  background: rgba(103,194,58,0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.13);
+  background: rgba(103, 194, 58, 0.08);
   color: #4caf50;
 }
-.nav-icon { font-size: 26px; }
-.nav-label { white-space: nowrap; }
+.nav-icon {
+  font-size: 26px;
+}
+.nav-label {
+  white-space: nowrap;
+}
 
 /* ── Joke banner ── */
 .joke-banner {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: linear-gradient(135deg, rgba(255,236,153,0.7), rgba(255,213,79,0.35));
-  border: 1px solid rgba(255,193,7,0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 236, 153, 0.7),
+    rgba(255, 213, 79, 0.35)
+  );
+  border: 1px solid rgba(255, 193, 7, 0.35);
   border-radius: 14px;
   padding: 14px 18px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(255,193,7,0.12);
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.12);
 }
 .joke-badge {
   white-space: nowrap;
   font-weight: 700;
   font-size: 13px;
   color: #e65100;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   padding: 3px 10px;
   border-radius: 20px;
-  border: 1px solid rgba(230,81,0,0.18);
+  border: 1px solid rgba(230, 81, 0, 0.18);
   flex-shrink: 0;
 }
 .joke-text {
@@ -297,10 +351,10 @@ export default {
 
 /* ── Content card ── */
 .content-card {
-  background: rgba(255,255,255,0.88);
+  background: rgba(255, 255, 255, 0.88);
   border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.07);
-  box-shadow: 0 3px 18px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.08);
   padding: 20px 24px;
   margin-bottom: 22px;
   backdrop-filter: blur(8px);
@@ -308,10 +362,10 @@ export default {
 
 /* ── Prompts section ── */
 .prompts-section {
-  background: rgba(255,255,255,0.88);
+  background: rgba(255, 255, 255, 0.88);
   border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.07);
-  box-shadow: 0 3px 18px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.08);
   padding: 20px 24px;
   backdrop-filter: blur(8px);
 }
@@ -333,7 +387,9 @@ export default {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.card-title-emoji { font-size: 20px; }
+.card-title-emoji {
+  font-size: 20px;
+}
 
 /* ── Tabs ── */
 .tab-label {
@@ -342,21 +398,37 @@ export default {
   gap: 5px;
   font-size: 14px;
 }
-.tab-icon { font-size: 16px; }
+.tab-icon {
+  font-size: 16px;
+}
 
-:deep(.el-tabs__header) { margin-bottom: 14px; }
+:deep(.el-tabs__header) {
+  margin-bottom: 14px;
+}
 :deep(.el-tabs__item) {
   font-weight: 500;
   color: #606266;
   transition: color 0.18s;
 }
-:deep(.el-tabs__item.is-active) { color: #43a047; }
-:deep(.el-tabs__active-bar) { background-color: #43a047; }
+:deep(.el-tabs__item.is-active) {
+  color: #43a047;
+}
+:deep(.el-tabs__active-bar) {
+  background-color: #43a047;
+}
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
-  .nav-card { min-width: 70px; padding: 10px 14px; }
-  .nav-icon { font-size: 22px; }
-  .content-card, .prompts-section { padding: 14px 12px; }
+  .nav-card {
+    min-width: 70px;
+    padding: 10px 14px;
+  }
+  .nav-icon {
+    font-size: 22px;
+  }
+  .content-card,
+  .prompts-section {
+    padding: 14px 12px;
+  }
 }
 </style>
